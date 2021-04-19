@@ -96,6 +96,9 @@ class EmployeeController extends Controller
         $password = Str::random(8);
         $user = User::where('id', $request->user_id)->first();
 
+        if( empty($user) )
+            $this->response()->error()->setMessage('Пользователя не существует')->send();
+
         User::where('id', $request->user_id)->update([
             'password' => Hash::make($password)
         ]);
@@ -123,9 +126,14 @@ class EmployeeController extends Controller
      */
     public function archive(Archive $request)
     {
+        $user = User::where('id', $request->user_id)->first();
+
+        if(empty($user))
+            $this->response()->error()->setMessage('Пользователя не существует')->send();
+
         User::where('id', $request->user_id)->delete();
 
-        $this->response()->success()->setMessage('Сотрудник был архивирован')->send();
+        $this->response()->success()->setMessage('Сотрудник был архивирован')->setData($user)->send();
     }
 
     /**
@@ -135,8 +143,13 @@ class EmployeeController extends Controller
      */
     public function unarchive(Archive $request)
     {
+        $user = User::withTrashed()->where('id', $request->user_id)->first();
+
+        if(empty($user))
+            $this->response()->error()->setMessage('Пользователя не существует')->send();
+
         User::where('id', $request->user_id)->restore();
 
-        $this->response()->success()->setMessage('Сотрудник был разархивирован')->send();
+        $this->response()->success()->setMessage('Сотрудник был разархивирован')->setData($user)->send();
     }
 }
