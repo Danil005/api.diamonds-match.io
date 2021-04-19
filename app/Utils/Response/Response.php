@@ -14,7 +14,7 @@ class Response
 
     private ?bool $success = null;
     private ?string $message = null;
-    private mixed $data = null;
+    private mixed $data = [];
 
     /**
      * @return void
