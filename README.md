@@ -510,7 +510,6 @@ Authroization: Bearer <Token>
         "hair_length": "long",
         "eye_color": "blue"
     },
-    ...
 }
 ```
 
@@ -548,14 +547,12 @@ Authroization: Bearer <Token>
 Пример конечного варианта:
 ```json
 {
-    ...
     "personal_qualities_partner": [
         "calm", "happy", "purposeful", "self",
         "feminine", "live_here_now", "graceful", "sociable",
         "housewifely", "artistic", "stylish", "business",
         "sports", "playful"
     ],
-    ...
 }
 ```
 
@@ -586,7 +583,6 @@ Authroization: Bearer <Token>
 Пример конечного варианта:
 ```json
 {
-    ...
     "partner_information": {
         "age": [18, 25],
         "place_birth": "Ейск",
@@ -606,7 +602,6 @@ Authroization: Bearer <Token>
         "religion": "Православный",
         "sport": "Занимаюсь"
     },
-    ...
 }
 ```
 
@@ -643,7 +638,6 @@ Authroization: Bearer <Token>
 Пример конечного варианта:
 ```json
 {
-    ...
     "test": {
         "lies": 2,
         "intervention": 0,
@@ -667,8 +661,537 @@ Authroization: Bearer <Token>
         "clear_plan": 0,
         "conflict_behavior": 0
     },
-    ...
 }
+```
+
+
+###### my_appearance
+
+Моя внешность. То же самое, что что и `partner_appearance`
+
+Пример конечного варианта:
+```json
+{
+    "my_appearance": {
+        "sex": "male",
+        "ethnicity": "no_matter",
+        "hair_color": "blonde",
+        "eye_color": "blue",
+        "body_type": "athletic"
+    },
+}
+```
+
+###### my_personal_qualities
+
+Почти то же самое, что и `personal_qualities_partner`, за исключение того, 
+что передаются все параметры, которые там указаны с ключем и значение boolean.
+
+#### Кол-во значение `true` должно быть ровно 7!
+
+Пример конечного варианта:
+```json
+{
+    "my_personal_qualities": {
+        "calm": true,
+        "energetic": false,
+        "happy": true,
+        "modest": true,
+        "purposeful": true,
+        "weak-willed": true,
+        "self": true,
+        "dependent": true,
+        "feminine": true,
+        "courageous": false,
+        "confident": false,
+        "delicate": true,
+        "live_here_now": false,
+        "pragmatic": true,
+        "graceful": false,
+        "sociable": false,
+        "smiling": true,
+        "housewifely": false,
+        "ambitious": false,
+        "artistic": false,
+        "good": false,
+        "aristocratic": false,
+        "stylish": false,
+        "economical": false,
+        "business": false,
+        "sports": false,
+        "fearless": false,
+        "shy": false,
+        "playful": false
+    },
+}
+```
+
+###### my_information
+
+Информация обо мне включает то же самое, что и `partner_information`, но имеет еще доп.
+обязательные параметры и некоторые изменения других параметров, таких как:
+`height` и `weight`
+
+|Параметр|Тип|Описание|Обязательный|
+|--|--|--|--|
+|name|string|ФИО|Да
+|height|integer \| double | Мой Рост | Да
+|weight|integer \| double | Мой Вес | Да
+|education|string| Образование | Да
+|work|string|Моя работа | Да
+|salary|Зарплата|double /| integer| Да
+|health_problems|string|Проблемы со здоровьем | Да
+|allergies|string|Аллергии| Да
+|pets|string|Отношение к животным| Да
+|have_pets|string|Какие животные есть или нравятся| Да
+|films_or_books|string|Фильмы или книги?|Да
+|relax|string|Как отдыхаете|Да
+|countries_was|string|В каких странах были|Да
+|countries_dream|string|В какие страны бы хотели|Да
+|best_gift|string|Лучший подарок для вас|Да
+|hobbies|string|Ваши хобби|Да
+|kredo|string|Ваше кредо|Да
+|features_repel|string|Черты характера, которые отталкивают|Да
+|age_difference|string|Разница в возрасте|Да
+|films|string|Любимые фильмы|Да
+|songs|string|Любимые песни|Да
+|ideal_weekend|Идеальные выходные|Да
+|sleep|string|Сова или жаворонок|Да
+|doing_10|string|Занятия через 10 лет|Да
+|signature_dish|string|Ваше любимое блюдо|Да
+|clubs|string|Любите клубы?|Да
+|best_gift_received|string|Лучший подарок, который вы получали|Да
+|talents|string|Ваши таланты
+
+Пример конечного варианта:
+```json
+{
+    "my_information": {
+        "name": "Данил",
+        "place_birth": "Ейск",
+        "city": "Ростов-на-Дону",
+        "age": 21,
+        "zodiac_signs": "aries",
+        "height": 191.2,
+        "weight": 76,
+        "marital_status": "one",
+        "languages": ["Русский"],
+        "moving_city": true,
+        "moving_country": true,
+        "children": false,
+        "children_desire": "yes",
+        "smoking": "Иногда курю",
+        "alcohol": "Могу иногда выпить",
+        "religion": "Православный",
+        "sport": "Занимаюсь",
+        "education": "ЮФУ",
+        "work": "ЮФУ",
+        "salary": "100 000",
+        "health_problems": "Нет",
+        "allergies": "Нет",
+        "pets": "Люблю",
+        "have_pets": "Да",
+        "films_or_books": "Фильмы",
+        "relax": "гулять",
+        "countries_was": "Россия",
+        "countries_dream": "Все",
+        "best_gift": "Я",
+        "hobbies": "Бизнес",
+        "kredo": "Какое-то",
+        "features_repel": "Что-то отталкивает",
+        "age_difference": 4,
+        "films": "Какой-то фильм",
+        "songs": "Резать океаны",
+        "ideal_weekend": "Какой-то",
+        "sleep": "Сова",
+        "doing_10": "Что-то",
+        "signature_dish": "Бутеры с сыром",
+        "clubs": "Не люблю",
+        "best_gift_received": "Какой-то",
+        "talents": "Какие-то"
+    }
+}
+```
+
+
+### В случае, если допустили ошибку, программа скажет сама, чего не хватает или то, что вы сделали неверно.
+
+
+###### Пример полного Body:
+```json
+{
+    "partner_appearance": {
+       "sex": "female",
+       "ethnicity": "no_matter",
+       "body_type": "slim",
+       "chest": "any",
+       "hair_color": "blonde",
+       "hair_length": "long",
+       "eye_color": "blue"
+    },
+    "personal_qualities_partner": [
+        "calm", "happy", "purposeful", "self",
+        "feminine", "live_here_now", "graceful", "sociable",
+        "housewifely", "artistic", "stylish", "business",
+        "sports", "playful"
+    ],
+    "partner_information": {
+        "age": [18, 25],
+        "place_birth": "Ейск",
+        "city": "Ростов-на-Дону",
+        "zodiac_signs": "aries",
+        "height": [150, 190.00],
+        "weight": [45, 60],
+        "marital_status": "one",
+        "languages": ["Русский"],
+        "moving_country": true,
+        "moving_city": true,
+        "children": true,
+        "children_count": "1",
+        "children_desire": "yes",
+        "smoking": "Иногда курю",
+        "alcohol": "Могу иногда выпить",
+        "religion": "Православный",
+        "sport": "Занимаюсь"
+
+    },
+    "test": {
+        "lies": 0,
+        "intervention": 0,
+        "value": 0,
+        "life": 0,
+        "motive_marriage": 0,
+        "family_atmosphere": 0,
+        "position_sex": 0,
+        "books": 0,
+        "friends": 0,
+        "leisure": 0,
+        "discussion_feelings": 0,
+        "work_relationship": 0,
+        "family_decisions": 0,
+        "consent": 0,
+        "interests_partner": 0,
+        "first_place_relationship": 0,
+        "position_society": 0,
+        "conflicts": 0,
+        "cleanliness": 0,
+        "clear_plan": 0,
+        "conflict_behavior": 0
+    },
+    "my_appearance": {
+       "sex": "male",
+       "ethnicity": "no_matter",
+       "hair_color": "blonde",
+       "eye_color": "blue",
+       "body_type": "athletic"
+    },
+    "my_personal_qualities": {
+        "calm": true,
+        "energetic": false,
+        "happy": true,
+        "modest": true,
+        "purposeful": true,
+        "weak-willed": true,
+        "self": true,
+        "dependent": true,
+        "feminine": true,
+        "courageous": false,
+        "confident": false,
+        "delicate": true,
+        "live_here_now": false,
+        "pragmatic": true,
+        "graceful": false,
+        "sociable": false,
+        "smiling": true,
+        "housewifely": false,
+        "ambitious": false,
+        "artistic": false,
+        "good": false,
+        "aristocratic": false,
+        "stylish": false,
+        "economical": false,
+        "business": false,
+        "sports": false,
+        "fearless": false,
+        "shy": false,
+        "playful": false
+    },
+    "my_information": {
+        "name": "Данил",
+        "place_birth": "Ейск",
+        "city": "Ростов-на-Дону",
+        "age": 21,
+        "zodiac_signs": "aries",
+        "height": 191.2,
+        "weight": 76,
+        "marital_status": "one",
+        "languages": ["Русский"],
+        "moving_city": true,
+        "moving_country": true,
+        "children": false,
+        "children_desire": "yes",
+        "smoking": "Иногда курю",
+        "alcohol": "Могу иногда выпить",
+        "religion": "Православный",
+        "sport": "Занимаюсь",
+        "education": "ЮФУ",
+        "work": "ЮФУ",
+        "salary": "100 000",
+        "health_problems": "Нет",
+        "allergies": "Нет",
+        "pets": "Люблю",
+        "have_pets": "Да",
+        "films_or_books": "Фильмы",
+        "relax": "гулять",
+        "countries_was": "Россия",
+        "countries_dream": "Все",
+        "best_gift": "Я",
+        "hobbies": "Бизнес",
+        "kredo": "Какое-то",
+        "features_repel": "Что-то отталкивает",
+        "age_difference": 4,
+        "films": "Какой-то фильм",
+        "songs": "Резать океаны",
+        "ideal_weekend": "Какой-то",
+        "sleep": "Сова",
+        "doing_10": "Что-то",
+        "signature_dish": "Бутеры с сыром",
+        "clubs": "Не люблю",
+        "best_gift_received": "Какой-то",
+        "talents": "Какие-то"
+    }
+}
+```
+
+###### Возможные ошибки:
+
+Переданы неверные данные:
+```json
+{
+    "success": false,
+    "message": "Вы должны указать верные данные для поля SEX в 'partner_appearance'",
+    "data_need": [
+        "female",
+        "male"
+    ]
+}
+```
+
+Передан неверный тип:
+```json
+{
+    "success": false,
+    "message": "Неверный тип данных для 'age' в 'partner_information'",
+    "need_type": [
+        "type:integer",
+        "type:integer"
+    ]
+}
+```
+
+Указаны не все данные:
+
+```json
+{
+    "success": false,
+    "message": "Неверные данные для поля `partner_information`",
+    "field_need": [
+        "marital_status"
+    ]
+}
+```
+
+###### Карта типов и проверки полей:
+
+Адрес файла: `./config/app.php`
+
+`!required` - не обязательно
+
+```php
+return [
+    'questionnaire' => [
+        'fields' => [
+            'partner_appearance' => 'partner_appearance',
+            'personal_qualities_partner' => 'personal_qualities_partner',
+            'partner_information' => 'partner_information',
+            'test' => 'test',
+            'my_appearance' => 'my_appearance',
+            'my_personal_qualities' => 'my_personal_qualities',
+            'my_information' => 'my_information',
+        ],
+        'value' => [
+            'partner_appearance' => [
+                'sex' => ['female', 'male'],
+                'ethnicity' => [
+                    'no_matter', 'caucasoid', 'asian', 'dark_skinned',
+                    'hispanic', 'indian', 'native_middle_east', 'mestizo',
+                    'native_american', 'islands', 'other'
+                ],
+                'body_type' => ['any', 'athletic', 'slim', 'hourglass', 'full'],
+                'chest' => ['!required', 'any', 'big', 'middle', 'small'],
+                'booty' => ['!required', 'any', 'big', 'middle', 'small'],
+                'hair_color' => ['any', 'brunette', 'blonde', 'redhead', 'brown-haired'],
+                'hair_length' => ['!required', 'any', 'short', 'long'],
+                'eye_color' => ['any', 'blue', 'gray', 'green', 'brown']
+            ],
+            'personal_qualities_partner' => [
+                ['calm', 'energetic'],
+                ['happy', 'modest'],
+                ['purposeful', 'weak-willed'],
+                ['self', 'dependent'],
+                ['feminine', 'courageous', 'confident'],
+                ['delicate', 'live_here_now'],
+                ['pragmatic', 'graceful'],
+                ['sociable', 'smiling'],
+                ['housewifely', 'ambitious'],
+                ['artistic', 'good'],
+                ['aristocratic', 'stylish'],
+                ['economical', 'business'],
+                ['sports', 'fearless'],
+                ['shy', 'playful'],
+            ],
+            'partner_information' => [
+                'age' => ['type:integer', 'type:integer'],
+                'place_birth' => 'string|integer',
+                'city' => 'string|integer',
+                'zodiac_signs' => [
+                    'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
+                    'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',
+                    'fish'
+                ],
+                'height' => ['type:integer|double', 'type:integer|double'],
+                'weight' => ['type:integer|double', 'type:integer|double'],
+                'marital_status' => ['one', 'divorced', 'widow'],
+                'languages' => 'array(string|integer)',
+                'moving_country' => 'boolean',
+                'moving_city' => 'boolean',
+                'children' => 'boolean',
+                'children_count' => [...generateNumbers(), '!required'],
+                'children_desire' => ['yes', 'no', 'maybe'],
+                'smoking' => 'string',
+                'alcohol' => 'string',
+                'religion' => 'string',
+                'sport' => 'string'
+            ],
+            'test' => [
+                'lies' => [0, 1, 2, 3],
+                'intervention' => [0, 1, 2],
+                'value' => [0, 1, 2, 3, 4, 5, 6],
+                'life' => [0, 1, 2],
+                'motive_marriage' => [0, 1, 2],
+                'family_atmosphere' => [0, 1, 2],
+                'position_sex' => [0, 1, 2, 3],
+                'books' => [0, 1, 2, 3],
+                'friends' => [0, 1, 2],
+                'leisure' => [0, 1, 2],
+                'discussion_feelings' => [0, 1, 2],
+                'work_relationship' => [0, 1, 2, 3],
+                'family_decisions' => [0, 1, 2, 3],
+                'consent' => [0, 1, 2],
+                'interests_partner' => [0, 1, 2, 3],
+                'first_place_relationship' => [0, 1, 2, 3, 4],
+                'position_society' => [0, 1, 2, 3, 4, 5, 6],
+                'conflicts' => [0, 1, 2, 3, 4],
+                'cleanliness' => [0, 1, 2, 3],
+                'clear_plan' => [0, 1],
+                'conflict_behavior' => [0, 1, 2, 3],
+            ],
+            'my_appearance' => [
+                'ethnicity' => [
+                    'no_matter', 'caucasoid', 'asian', 'dark_skinned',
+                    'hispanic', 'indian', 'native_middle_east', 'mestizo',
+                    'native_american', 'islands', 'other'
+                ],
+                'body_type' => ['any', 'athletic', 'slim', 'hourglass', 'full'],
+                'chest' => ['!required', 'any', 'big', 'middle', 'small'],
+                'booty' => ['!required', 'any', 'big', 'middle', 'small'],
+                'hair_color' => ['any', 'brunette', 'blonde', 'redhead', 'brown-haired'],
+                'hair_length' => ['!required', 'any', 'short', 'long'],
+                'eye_color' => ['any', 'blue', 'gray', 'green', 'brown']
+            ],
+            'my_personal_qualities' => [
+                'calm' => 'boolean',
+                'energetic' => 'boolean',
+                'happy' => 'boolean',
+                'modest' => 'boolean',
+                'purposeful' => 'boolean',
+                'weak-willed' => 'boolean',
+                'self' => 'boolean',
+                'dependent' => 'boolean',
+                'feminine' => 'boolean',
+                'courageous' => 'boolean',
+                'confident' => 'boolean',
+                'delicate' => 'boolean',
+                'live_here_now' => 'boolean',
+                'pragmatic' => 'boolean',
+                'graceful' => 'boolean',
+                'sociable' => 'boolean',
+                'smiling' => 'boolean',
+                'housewifely' => 'boolean',
+                'ambitious' => 'boolean',
+                'artistic' => 'boolean',
+                'good' => 'boolean',
+                'aristocratic' => 'boolean',
+                'stylish' => 'boolean',
+                'economical' => 'boolean',
+                'business' => 'boolean',
+                'sports' => 'boolean',
+                'fearless' => 'boolean',
+                'shy' => 'boolean',
+                'playful' => 'boolean',
+            ],
+            'my_information' => [
+                'name' => 'string',
+                'place_birth' => 'string|integer',
+                'city' => 'string|integer',
+                'age' => 'integer',
+                'zodiac_signs' => [
+                    'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
+                    'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',
+                    'fish'
+                ],
+                'height' => 'integer|double',
+                'weight' => 'integer|double',
+                'marital_status' => ['one', 'divorced', 'widow'],
+                'languages' => 'array(string|integer)',
+                'moving_country' => 'boolean',
+                'moving_city' => 'boolean',
+                'children' => 'boolean',
+                'children_count' => [...generateNumbers(), '!required'],
+                'children_desire' => ['yes', 'no', 'maybe'],
+                'smoking' => 'string',
+                'alcohol' => 'string',
+                'religion' => 'string',
+                'sport' => 'string',
+                'education' => 'string',
+                'work' => 'string',
+                'salary' => 'string|double|integer',
+                'health_problems' => 'string',
+                'allergies' => 'string',
+                'pets' => 'string',
+                'have_pets' => 'string',
+                'films_or_books' => 'string',
+                'relax' => 'string',
+                'countries_was' => 'string',
+                'countries_dream' => 'string',
+                'best_gift' => 'string',
+                'hobbies' => 'string',
+                'kredo' => 'string',
+                'features_repel' => 'string',
+                'age_difference' => 'string|integer|double',
+                'films' => 'string',
+                'songs' => 'string',
+                'ideal_weekend' => 'string',
+                'sleep' => 'string',
+                'doing_10' => 'string',
+                'signature_dish' => 'string',
+                'clubs' => 'string',
+                'best_gift_received' => 'string',
+                'talents' => 'string'
+            ]
+        ]
+    ],
+];
 ```
 
 ---
