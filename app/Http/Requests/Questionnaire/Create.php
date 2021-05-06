@@ -26,7 +26,11 @@ class Create extends FormRequest
         return [
             config('app.questionnaire.fields.partner_appearance') => 'required|array',
             config('app.questionnaire.fields.personal_qualities_partner') => 'required|array',
-            config('app.questionnaire.fields.partner_information') => 'required|array'
+            config('app.questionnaire.fields.partner_information') => 'required|array',
+            config('app.questionnaire.fields.test') => 'required|array',
+            config('app.questionnaire.fields.my_appearance') => 'required|array',
+            config('app.questionnaire.fields.my_personal_qualities') => 'required|array',
+            config('app.questionnaire.fields.my_information') => 'required|array',
         ];
     }
 }

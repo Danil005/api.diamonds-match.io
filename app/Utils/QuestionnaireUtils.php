@@ -51,7 +51,7 @@ class QuestionnaireUtils extends Controller
                 $typeNeed = explode(':', $item)[1];
 
 
-                if( str_contains($typeNeed, '(') ) {
+                if (str_contains($typeNeed, '(')) {
                     $typeNeed = explode('(', $typeNeed);
 
                     if ($typeNeed[0] != getType($data[$key])) {
@@ -62,8 +62,8 @@ class QuestionnaireUtils extends Controller
 
                     $typeNeed = explode(')', $typeNeed[1]);
 
-                    foreach ($typeNeed as $key1=>$type) {
-                        if( empty($type) ) unset($typeNeed[$key1]);
+                    foreach ($typeNeed as $key1 => $type) {
+                        if (empty($type)) unset($typeNeed[$key1]);
                     }
 
                     $typeNeed = implode('|', array_values($typeNeed));
@@ -72,7 +72,7 @@ class QuestionnaireUtils extends Controller
                         $this->validTypeSimple($fieldsRequired, $datum, $fieldGlobal, $field, $typeNeed, $key, $isArray);
                     }
                 }
-                if( $isArray ) {
+                if ($isArray) {
                     $this->validTypeSimple($fieldsRequired, $data, $fieldGlobal, $field, $typeNeed, $key, $isArray);
                 }
             }
@@ -106,8 +106,17 @@ class QuestionnaireUtils extends Controller
                 )) {
 
                 if (getType($item) != 'integer') {
+                    $notGiven = [];
+                    foreach ($fieldsNeed as $need) {
+                        if (!in_array($need, $searchAt) && !in_array(
+                                '!required',
+                                !is_string($fieldsRequired[$need]) ? $fieldsRequired[$need] : ['type:' . $fieldsRequired[$need]]
+                            ))
+                            $notGiven[] = $need;
+                    }
+
                     $this->response()->error()->setMessage('Неверные данные для поля `' . $field . '`')
-                        ->setData($fieldsNeed, 'field_need')
+                        ->setData($notGiven, 'field_need')
                         ->send();
                 } else {
                     $this->response()->error()->setMessage('Неверные данные для поля `' . $field . '`')
@@ -137,7 +146,7 @@ class QuestionnaireUtils extends Controller
                         }
                     }
                 } else {
-                    $this->parseAndValidType(['type:'.$fieldsRequired[$item]], [$request[$field][$item]], $field, $item, false);
+                    $this->parseAndValidType(['type:' . $fieldsRequired[$item]], [$request[$field][$item]], $field, $item, false);
                 }
             }
         }
@@ -161,8 +170,55 @@ class QuestionnaireUtils extends Controller
         return $this->valid(request()->all(), 'personal_qualities_partner');
     }
 
+    /**
+     * Информация о партнере
+     *
+     * @return bool
+     */
     protected function partnerInformation(): bool
     {
         return $this->valid(request()->all(), 'partner_information');
     }
+
+    /**
+     * Психологический тест
+     *
+     * @return bool
+     */
+    protected function test(): bool
+    {
+        return $this->valid(request()->all(), 'test');
+    }
+
+    /**
+     * Моя внешность
+     *
+     * @return bool
+     */
+    protected function myAppearance(): bool
+    {
+        return $this->valid(request()->all(), 'my_appearance');
+    }
+
+    /**
+     * Мои личные качества
+     *
+     * @return bool
+     */
+    protected function myPersonalQualities(): bool
+    {
+        return $this->valid(request()->all(), 'my_personal_qualities');
+    }
+
+    /**
+     * Моя информация
+     *
+     * @return bool
+     */
+    protected function myInformation(): bool
+    {
+        return $this->valid(request()->all(), 'my_information');
+    }
+
+
 }

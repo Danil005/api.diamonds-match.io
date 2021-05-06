@@ -13,5 +13,9 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->partnerAppearance();
         $this->personalQualitiesPartner();
         $this->partnerInformation();
+        $this->test();
+        $this->myAppearance();
+        $this->myPersonalQualities();
+        $this->myInformation();
     }
 }

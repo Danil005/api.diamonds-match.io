@@ -1,5 +1,12 @@
 <?php
 
+function generateNumbers(): array
+{
+    $numbers = [];
+    for ($i = 0; $i < 101; $i++) $numbers[] = $i;
+    return $numbers;
+}
+
 return [
 
     /*
@@ -15,6 +22,10 @@ return [
             'partner_appearance' => 'partner_appearance',
             'personal_qualities_partner' => 'personal_qualities_partner',
             'partner_information' => 'partner_information',
+            'test' => 'test',
+            'my_appearance' => 'my_appearance',
+            'my_personal_qualities' => 'my_personal_qualities',
+            'my_information' => 'my_information',
         ],
         'value' => [
             'partner_appearance' => [
@@ -63,12 +74,128 @@ return [
                 'moving_country' => 'boolean',
                 'moving_city' => 'boolean',
                 'children' => 'boolean',
-                'children_count' => ['type:integer', '!required'],
+                'children_count' => [...generateNumbers(), '!required'],
                 'children_desire' => ['yes', 'no', 'maybe'],
                 'smoking' => 'string',
                 'alcohol' => 'string',
                 'religion' => 'string',
                 'sport' => 'string'
+            ],
+            'test' => [
+                'lies' => [0, 1, 2, 3],
+                'intervention' => [0, 1, 2],
+                'value' => [0, 1, 2, 3, 4, 5, 6],
+                'life' => [0, 1, 2],
+                'motive_marriage' => [0, 1, 2],
+                'family_atmosphere' => [0, 1, 2],
+                'position_sex' => [0, 1, 2, 3],
+                'books' => [0, 1, 2, 3],
+                'friends' => [0, 1, 2],
+                'leisure' => [0, 1, 2],
+                'discussion_feelings' => [0, 1, 2],
+                'work_relationship' => [0, 1, 2, 3],
+                'family_decisions' => [0, 1, 2, 3],
+                'consent' => [0, 1, 2],
+                'interests_partner' => [0, 1, 2, 3],
+                'first_place_relationship' => [0, 1, 2, 3, 4],
+                'position_society' => [0, 1, 2, 3, 4, 5, 6],
+                'conflicts' => [0, 1, 2, 3, 4],
+                'cleanliness' => [0, 1, 2, 3],
+                'clear_plan' => [0, 1],
+                'conflict_behavior' => [0, 1, 2, 3],
+            ],
+            'my_appearance' => [
+                'ethnicity' => [
+                    'no_matter', 'caucasoid', 'asian', 'dark_skinned',
+                    'hispanic', 'indian', 'native_middle_east', 'mestizo',
+                    'native_american', 'islands', 'other'
+                ],
+                'body_type' => ['any', 'athletic', 'slim', 'hourglass', 'full'],
+                'chest' => ['!required', 'any', 'big', 'middle', 'small'],
+                'booty' => ['!required', 'any', 'big', 'middle', 'small'],
+                'hair_color' => ['any', 'brunette', 'blonde', 'redhead', 'brown-haired'],
+                'hair_length' => ['!required', 'any', 'short', 'long'],
+                'eye_color' => ['any', 'blue', 'gray', 'green', 'brown']
+            ],
+            'my_personal_qualities' => [
+                'calm' => 'boolean',
+                'energetic' => 'boolean',
+                'happy' => 'boolean',
+                'modest' => 'boolean',
+                'purposeful' => 'boolean',
+                'weak-willed' => 'boolean',
+                'self' => 'boolean',
+                'dependent' => 'boolean',
+                'feminine' => 'boolean',
+                'courageous' => 'boolean',
+                'confident' => 'boolean',
+                'delicate' => 'boolean',
+                'live_here_now' => 'boolean',
+                'pragmatic' => 'boolean',
+                'graceful' => 'boolean',
+                'sociable' => 'boolean',
+                'smiling' => 'boolean',
+                'housewifely' => 'boolean',
+                'ambitious' => 'boolean',
+                'artistic' => 'boolean',
+                'good' => 'boolean',
+                'aristocratic' => 'boolean',
+                'stylish' => 'boolean',
+                'economical' => 'boolean',
+                'business' => 'boolean',
+                'sports' => 'boolean',
+                'fearless' => 'boolean',
+                'shy' => 'boolean',
+                'playful' => 'boolean',
+            ],
+            'my_information' => [
+                'name' => 'string',
+                'place_birth' => 'string|integer',
+                'city' => 'string|integer',
+                'age' => 'integer',
+                'zodiac_signs' => [
+                    'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
+                    'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',
+                    'fish'
+                ],
+                'height' => 'integer|double',
+                'weight' => 'integer|double',
+                'marital_status' => ['one', 'divorced', 'widow'],
+                'languages' => 'array(string|integer)',
+                'moving_country' => 'boolean',
+                'moving_city' => 'boolean',
+                'children' => 'boolean',
+                'children_count' => [...generateNumbers(), '!required'],
+                'children_desire' => ['yes', 'no', 'maybe'],
+                'smoking' => 'string',
+                'alcohol' => 'string',
+                'religion' => 'string',
+                'sport' => 'string',
+                'education' => 'string',
+                'work' => 'string',
+                'salary' => 'string|double|integer',
+                'health_problems' => 'string',
+                'allergies' => 'string',
+                'pets' => 'string',
+                'have_pets' => 'string',
+                'films_or_books' => 'string',
+                'relax' => 'string',
+                'countries_was' => 'string',
+                'countries_dream' => 'string',
+                'best_gift' => 'string',
+                'hobbies' => 'string',
+                'kredo' => 'string',
+                'features_repel' => 'string',
+                'age_difference' => 'string|integer|double',
+                'films' => 'string',
+                'songs' => 'string',
+                'ideal_weekend' => 'string',
+                'sleep' => 'string',
+                'doing_10' => 'string',
+                'signature_dish' => 'string',
+                'clubs' => 'string',
+                'best_gift_received' => 'string',
+                'talents' => 'string'
             ]
         ]
     ],
@@ -110,7 +237,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
