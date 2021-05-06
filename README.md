@@ -13,6 +13,8 @@
         3. [POST employee.newPassword (Выслать новый пароль)](#employee.newPassword)
         4. [DELETE employee.archive (Архивировать)](#employee.archive)
         5. [POST employee.unarchive (Разархивировать)](#employee.unarchive)
+    3. [Questionnaire](#m-questionnaire)
+        1. [PUT questionnaire.create (Создать анкетку)](#questionnaire.create)
 
 
 ## 1. С чего начать? <a name="getStart"></a>
@@ -435,3 +437,55 @@ Authroization: Bearer <Token>
     "data": []
 }
 ```
+
+---
+
+#### 3.2. Questionnaire <a name="m-questionnaire"></a>
+
+### Что-ж, самая сложная часть! Удачи в подключении <3
+
+Пример: ``http://domain.ru/api/v1/questionnaire/<method>``
+
+
+
+---
+##### 3.1.1. questionnaire.create <a name="questionnaire.create"></a>
+Авторизация: ``Нет``
+
+###### Тип: ``PUT``
+
+###### Переименования
+
+##### ! Если не удобные ГЛОБАЛЬНЫЕ переменные, можно их изменить!
+
+|Переменная|Что заменяет|
+|--|--|
+|X-PARTNER-APPEARANCE|partner_appearance
+|X-PERSONAL-QUALITIES-PARTNER|personal_qualities_partner
+|X-PARTNER-INFORMATION|partner_information
+|X-TEST|test
+|X-MY-APPEARANCE|my_appearance
+|X-MY-PERSONAL-QUALITIES|my_personal_qualities
+|X-MY-INFORMATION|my_information
+
+###### Параметры
+
+|Параметр|Тип|Описание|Обязательный|
+|--|--|--|--|
+|partner_appearance|Array|Глобальная переменная, внешний вид партнера|Да
+|personal_qualities_partner|Array|Глобальная переменная, качества партнера|Да
+|partner_information|Array|Глобальная переменная, информация по партнеру|Да
+|test|Array|Глобальная переменная, тест|Да
+|my_appearance|Array|Глобальная переменная, моя внешность|Да
+|my_personal_qualities|Array|Глобальная переменная, мои личные качества|Да
+|my_information|Array|Глобальная переменная, информация обо мне|Да
+
+### А теперь по порядку, что в глобальных :)
+
+###### partner_appearance
+
+|Параметр|Тип|Описание|Обязательный|
+|--|--|--|--|
+|sex| female\|male | Пол партнера | Да
+
+---
