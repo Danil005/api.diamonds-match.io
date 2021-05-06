@@ -15,6 +15,7 @@ class Response
     private ?bool $success = null;
     private ?string $message = null;
     private mixed $data = [];
+    private ?string $field = 'data';
 
     /**
      * @return void
@@ -24,7 +25,7 @@ class Response
         response()->json([
             'success' => $this->success,
             'message' => $this->message,
-            'data'=>  $this->data
+            $this->field => $this->data
         ])->throwResponse();
     }
 
@@ -63,9 +64,10 @@ class Response
      * @param mixed $data
      * @return $this
      */
-    public function setData(mixed $data): Response
+    public function setData(mixed $data, string $field = 'data'): Response
     {
         $this->data = $data;
+        $this->field = $field;
 
         return $this;
     }
@@ -73,15 +75,15 @@ class Response
     /**
      * Создать ответ
      */
-    public function send():void
+    public function send(): void
     {
-        if( $this->message == null ) {
+        if ($this->message == null) {
             $this->message = 'Сообщение не установлено';
             $this->success = false;
             $this->data = [];
         }
 
-        if( $this->success != false && $this->success != true ) {
+        if ($this->success != false && $this->success != true) {
             $this->message = 'Тип ответа не был задан';
             $this->success = false;
             $this->data = [];

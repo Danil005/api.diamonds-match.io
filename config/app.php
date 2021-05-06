@@ -4,6 +4,77 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Глобальные переменные для обработки анкет
+    |--------------------------------------------------------------------------
+    |
+    | Данные значение можно будет изменить при необходимости
+    |
+    */
+    'questionnaire' => [
+        'fields' => [
+            'partner_appearance' => 'partner_appearance',
+            'personal_qualities_partner' => 'personal_qualities_partner',
+            'partner_information' => 'partner_information',
+        ],
+        'value' => [
+            'partner_appearance' => [
+                'sex' => ['female', 'male'],
+                'ethnicity' => [
+                    'no_matter', 'caucasoid', 'asian', 'dark_skinned',
+                    'hispanic', 'indian', 'native_middle_east', 'mestizo',
+                    'native_american', 'islands', 'other'
+                ],
+                'body_type' => ['any', 'athletic', 'slim', 'hourglass', 'full'],
+                'chest' => ['!required', 'any', 'big', 'middle', 'small'],
+                'booty' => ['!required', 'any', 'big', 'middle', 'small'],
+                'hair_color' => ['any', 'brunette', 'blonde', 'redhead', 'brown-haired'],
+                'hair_length' => ['!required', 'any', 'short', 'long'],
+                'eye_color' => ['any', 'blue', 'gray', 'green', 'brown']
+            ],
+            'personal_qualities_partner' => [
+                ['calm', 'energetic'],
+                ['happy', 'modest'],
+                ['purposeful', 'weak-willed'],
+                ['self', 'dependent'],
+                ['feminine', 'courageous', 'confident'],
+                ['delicate', 'live_here_now'],
+                ['pragmatic', 'graceful'],
+                ['sociable', 'smiling'],
+                ['housewifely', 'ambitious'],
+                ['artistic', 'good'],
+                ['aristocratic', 'stylish'],
+                ['economical', 'business'],
+                ['sports', 'fearless'],
+                ['shy', 'playful'],
+            ],
+            'partner_information' => [
+                'age' => ['type:integer', 'type:integer'],
+                'place_birth' => 'string|integer',
+                'city' => 'string|integer',
+                'zodiac_signs' => [
+                    'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
+                    'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',
+                    'fish'
+                ],
+                'height' => ['type:integer|double', 'type:integer|double'],
+                'weight' => ['type:integer|double', 'type:integer|double'],
+                'marital_status' => ['one', 'divorced', 'widow'],
+                'languages' => 'array(string|integer)',
+                'moving_country' => 'boolean',
+                'moving_city' => 'boolean',
+                'children' => 'boolean',
+                'children_count' => ['type:integer', '!required'],
+                'children_desire' => ['yes', 'no', 'maybe'],
+                'smoking' => 'string',
+                'alcohol' => 'string',
+                'religion' => 'string',
+                'sport' => 'string'
+            ]
+        ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Name
     |--------------------------------------------------------------------------
     |

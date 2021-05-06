@@ -30,4 +30,8 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
         Route::delete('employee.archive', 'EmployeeController@archive')->name('employee.archive');
         Route::post('employee.unarchive', 'EmployeeController@unarchive')->name('employee.unarchive');
     });
+
+    Route::prefix('questionnaire')->group(function() {
+        Route::put('questionnaire.create', 'QuestionnaireController@create');
+    });
 });
