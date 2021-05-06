@@ -498,4 +498,37 @@ Authroization: Bearer <Token>
 |hair_length| any(Любая) \| short(Короткая) \| long(Длинная) | Длина волос | Нет
 |eye_color| any(Любой) \| blue(Голубой) \| gray(Серый) \| green(Зеленый) \| brown(Карий) | Цвет глаз | Да
 
+###### personal_qualities_partner
+
+Тут необходимо вводим массивом один из двух параметров. То есть по индексам.
+
+Нужно будет выбрать какой-то один из параметров. Например:
+
+Нам доступно calm или energetic, то выбираем что-то одно.
+
+`personal_qualities_partner: [calm, modest, purposeful]`
+
+Как видите, параметры были выбраны и внесены таким образом.
+
+##### А теперь доступные параметры:
+
+|Параметр|Тип|Описание|Обязательный|
+|--|--|--|--|
+|calm \| energetic|string|Спокойная или энергичный|Да
+|happy \| modest|string|Веселушка или Скромная|Да
+|purposeful \| weak-willed|string|Целеустремленная или Безвольная|Да
+|self \| dependent|string|Самостоятельная или Зависящая|Да
+|feminine \| courageous \| confident|string|Женственная или Мужественный или Уверенная в себе|Да
+|delicate \| live_here_now |string|Нежная или Умеющая жить здесь и сейчас|Да
+|pragmatic \| graceful |string|Прагматичная или Грациозная|Да
+|sociable \| smiling |string|Общительная или Улыбчивая|Да
+|housewifely \| ambitious |string|Хозяйственная или Амбициозная|Да
+|artistic \| good |string|Артистичная или Добрая|Да
+|aristocratic \| stylish |string|Аристократическая или Стильная|Да
+|economical \| business |string|Экономная или Деловая|Да
+|sports \| fearless |string|Спортивная или Бесстрашная|Да
+|shy \| playful |string|Застенчивая или Игривая|Да
+
+
+
 ---
