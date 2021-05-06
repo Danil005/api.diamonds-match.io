@@ -498,6 +498,22 @@ Authroization: Bearer <Token>
 |hair_length| any(Любая) \| short(Короткая) \| long(Длинная) | Длина волос | Нет
 |eye_color| any(Любой) \| blue(Голубой) \| gray(Серый) \| green(Зеленый) \| brown(Карий) | Цвет глаз | Да
 
+Пример конечного варианта:
+```json
+{
+    "partner_appearance": {
+        "sex": "female",
+        "ethnicity": "no_matter",
+        "body_type": "slim",
+        "chest": "any",
+        "hair_color": "blonde",
+        "hair_length": "long",
+        "eye_color": "blue"
+    },
+    ...
+}
+```
+
 ###### personal_qualities_partner
 
 Тут необходимо вводим массивом один из двух параметров. То есть по индексам.
@@ -529,6 +545,130 @@ Authroization: Bearer <Token>
 |sports \| fearless |string|Спортивная или Бесстрашная|Да
 |shy \| playful |string|Застенчивая или Игривая|Да
 
+Пример конечного варианта:
+```json
+{
+    ...
+    "personal_qualities_partner": [
+        "calm", "happy", "purposeful", "self",
+        "feminine", "live_here_now", "graceful", "sociable",
+        "housewifely", "artistic", "stylish", "business",
+        "sports", "playful"
+    ],
+    ...
+}
+```
 
+###### partner_information
+
+Информация о партнерше
+
+|Параметр|Тип|Описание|Обязательный|
+|--|--|--|--|
+|age|array[integer, integer]|Возраст от и до|Да
+|place_birth|string|Место рождения|Да
+|city|string|Город проживания|Да
+|zodiac_signs|string: aries(Овен) \| calf(Телец) \| twins(Близнецы) \| cancer(Рак) \| lion(Лев) \| virgo(Дева) \| libra(Весы) \| scorpio(Скорпион) \| sagittarius(Стрелец) \| capricorn(Козерог) \| aquarius(Водолей) \| fish(Рыба) |Знак зодиака|Да
+|height|array[integer\|double, integer|\double]|Рост от и до|Да
+|weight|array[integer\|double, integer|\double]|Вес от и до|Да
+|marital_status|string: one(Один) \| divorced(Разведен) \| widow(Вдова) |Семейное положение(Статус)|Да
+|languages|array[...string]|На каком языке говорит|Да
+|moving_country|boolean|Согласен ли переезжать в другую страну|Да
+|moving_city|boolean|Согласен ли переезжать в другой город|Да
+|children|boolean|Есть ли дети|Да
+|children_count|string|Кол-во детей|Нет
+|children_desire|string: yes(Да) \| no(Нет) \| maybe(Возможно)|Хотят ли детей|Да
+|smoking|string|Отношение к курение|Да
+|alcohol|string|Отношение к алкоголю|Да
+|religion|string|Религия и ее позиция|Да
+|sport|string|Отношение к спорту|Да
+
+Пример конечного варианта:
+```json
+{
+    ...
+    "partner_information": {
+        "age": [18, 25],
+        "place_birth": "Ейск",
+        "city": "Ростов-на-Дону",
+        "zodiac_signs": "aries",
+        "height": [150, 190.00],
+        "weight": [45, 60],
+        "marital_status": "one",
+        "languages": ["Русский"],
+        "moving_country": true,
+        "moving_city": true,
+        "children": true,
+        "children_count": "1",
+        "children_desire": "yes",
+        "smoking": "Иногда курю",
+        "alcohol": "Могу иногда выпить",
+        "religion": "Православный",
+        "sport": "Занимаюсь"
+    },
+    ...
+}
+```
+
+###### test
+
+Выполнение теста. Все ключи идут по порядку как в фигме.
+
+Нужно выбрать ответ от 0 до `(кол-во ответов - 1)`: lies имеет 4 ответ, можно выбрать от 0 до 3 (0,1,2,3)
+
+|Параметр|Описание по первому ответу|Кол-во ответов
+|--|--|--/
+|lies|Считаю необходимым говорить партнеру практически обо всем|4
+|intervention|Я не потреплю излишнего вмешательства партнера в мое личное пространство|3
+|value|Достижение, успех, богатство, статус|7
+|life|Удовольствие и праздник|3
+|motive_marriage|Дети, родительство, следование традициям, продолжение рода|3
+|family_atmosphere|Комфорт, спокойствие, понимание, «тихая гавань»|3
+|position_sex|Мне нравится находить то, что доставляет сексуальное удовольствие моему партнеру|4
+|books|Классику, философию, научную литературу|4
+|friends|Я считаю что с моим/моей избранником/ей наши друзья должны стать общими и встречаться с ними мы должны вместе|3
+|leisure|Шумные вечеринки, светские рауты, роскошные рестораны|3
+|discussion_feelings|Я считаю необходимым открыто проявлять и обсуждать с партнером свои и его/ее чувства|3
+|work_relationship|Муж полностью обеспечивает семью, а жена работать не должна|4
+|family_decisions|Муж принимает основные важные решения, жена соглашается|4
+|consent|Мне очень важно получать одобрение от моего партнера и согласие с моей точкой зрения|3
+|interests_partner|Мне важно разделять с партнером интересы друг друга|4
+|first_place_relationship|Прикосновения, объятия,  нежность, секс, ласка|5
+|position_society|Я всегда нуждаюсь быть в центре внимания, эпатировать, выделяться, восхищать. Я коммуникабельный и энергичный человек|7
+|conflicts|Я стараюсь уклоняться и избегать конфликтов|5
+|cleanliness|Для меня принципиально важны чистота и порядок, расположение вещей на своих местах. Мой партнер должен этот порядок соблюдать|4
+|clear_plan|Привлекает меня|2
+|conflict_behavior|Меня легко вывести из себя и вовлечь в конфликт. Я бываю вспыльчив, не люблю уступать и быстро  «загораюсь», но также быстро «остываю»|4
+
+Пример конечного варианта:
+```json
+{
+    ...
+    "test": {
+        "lies": 2,
+        "intervention": 0,
+        "value": 1,
+        "life": 2,
+        "motive_marriage": 0,
+        "family_atmosphere": 0,
+        "position_sex": 0,
+        "books": 0,
+        "friends": 3,
+        "leisure": 1,
+        "discussion_feelings": 0,
+        "work_relationship": 0,
+        "family_decisions": 0,
+        "consent": 1,
+        "interests_partner": 0,
+        "first_place_relationship": 0,
+        "position_society": 0,
+        "conflicts": 0,
+        "cleanliness": 0,
+        "clear_plan": 0,
+        "conflict_behavior": 0
+    },
+    ...
+}
+```
 
 ---
