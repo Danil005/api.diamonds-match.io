@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\Questionnaire\Create;
+use App\Http\Requests\Questionnaire\View;
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireMyAppearance;
 use App\Models\QuestionnaireMyInformation;
@@ -12,10 +13,13 @@ use App\Models\QuestionnairePartnerInformation;
 use App\Models\QuestionnairePersonalQualitiesPartner;
 use App\Models\QuestionnaireTest;
 use App\Utils\QuestionnaireUtils;
+use App\Utils\TranslateFields;
 use Illuminate\Http\Request;
 
 class QuestionnaireController extends QuestionnaireUtils
 {
+    use TranslateFields;
+
     public function create(Create $request)
     {
         # Сохраняем все данные
@@ -39,19 +43,35 @@ class QuestionnaireController extends QuestionnaireUtils
         $myPersonalQualities = $request->{config('app.questionnaire.fields.my_personal_qualities')};
         $myInformation = $request->{config('app.questionnaire.fields.my_information')};
 
-        foreach ($personalQualitiesPartner as $key=>$item) {
+        foreach ($personalQualitiesPartner as $key => $item) {
             $personalQualitiesPartner[$key] = true;
         }
 
-        foreach ($partnerInformation as $key=>$information) {
-            if( $key == 'age' || $key == 'height' || $key == 'weight' || $key == 'languages' ) {
+        foreach ($partnerInformation as $key => $information) {
+            if ($key == 'age' || $key == 'height' || $key == 'weight' || $key == 'languages') {
                 $partnerInformation[$key] = implode(',', $information);
+            }
+
+            if ($key == 'live_country') {
+                $myInformation[$key] = $information;
+            }
+
+            if ($key == 'live_city') {
+                $myInformation['live_country'] = $myInformation['live_country'] . ', ' . $information;
             }
         }
 
-        foreach ($myInformation as $key=>$information) {
-            if( $key == 'languages' ) {
+        foreach ($myInformation as $key => $information) {
+            if ($key == 'languages') {
                 $myInformation[$key] = implode(',', $information);
+            }
+
+            if ($key == 'live_country') {
+                $myInformation[$key] = $information;
+            }
+
+            if ($key == 'live_city') {
+                $myInformation['live_country'] = $myInformation['live_country'] . ', ' . $information;
             }
         }
 
@@ -77,5 +97,23 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->send();
+    }
+
+    /**
+     * @param View $request
+     */
+    public function view(View $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->id)
+            ->join('questionnaire_partner_appearance', 'questionnaire.partner_appearance_id', '=', 'questionnaire_partner_appearance.id');
+//            ->join('questionnaire_personal_qualities_partner', 'questionnaire_personal_qualities_partner.id', '=', 'questionnaire.personal_qualities_partner_id')
+//            ->join('questionnaire_partner_information', 'questionnaire_partner_information.id', '=', 'questionnaire.partner_information_id')
+//            ->join('questionnaire_test', 'questionnaire_test.id', '=', 'questionnaire.test_id')
+//            ->join('questionnaire_my_appearance', 'questionnaire_my_appearance.id', '=', 'questionnaire.questionnaire_my_appearance_id')
+//            ->join('questionnaire_my_personal_qualities', 'questionnaire_my_personal_qualities.id', '=', 'questionnaire.my_personal_qualities_id')
+//            ->join('questionnaire_my_information', 'v.id', '=', 'questionnaire.my_information_id');
+
+        dd($questionnaire->first());
+
     }
 }

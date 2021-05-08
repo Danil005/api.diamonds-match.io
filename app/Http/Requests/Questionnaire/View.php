@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Employee;
+namespace App\Http\Requests\Questionnaire;
 
 use App\Utils\Permissions;
 use App\Utils\Response;
 use Illuminate\Foundation\Http\FormRequest;
-use JetBrains\PhpStorm\ArrayShape;
 
-class Got extends FormRequest
+class View extends FormRequest
 {
     use Permissions, Response;
 
@@ -16,9 +15,9 @@ class Got extends FormRequest
      *
      * @return bool
      */
-    public function authorize(): bool
+    public function authorize()
     {
-        return $this->isAdmin();
+        return $this->isManager();
     }
 
     /**
@@ -26,14 +25,11 @@ class Got extends FormRequest
      *
      * @return array
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'limit' => 'integer',
-            'offset' => 'integer',
-            'fields' => 'string',
-            'only_archive' => 'boolean',
-            'search' => 'string'
+            'id' => 'required|integer',
+            'fields' => 'string'
         ];
     }
 

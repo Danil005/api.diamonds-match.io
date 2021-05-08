@@ -1,5 +1,6 @@
 <?php
 
+use Dejurin\GoogleTranslateForFree;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test', function() {
-    dd([1,2, ...[3, 4]]);
+Route::get('test', function () {
+    $langs = \App\Models\Langs::get();
+
+    foreach ($langs as $item) {
+        \App\Models\Langs::where('id', $item['id'])->update([
+            'nameRU' => mb_strtolower($item['nameRU']),
+            'nameEN' => mb_strtolower($item['nameEN']),
+        ]);
+    }
 });

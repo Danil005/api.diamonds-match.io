@@ -22,6 +22,9 @@ class CreateQuestionnairesTable extends Migration
             $table->unsignedBigInteger('my_appearance_id');
             $table->unsignedBigInteger('my_personal_qualities_id');
             $table->unsignedBigInteger('my_information_id');
+            $table->unsignedBigInteger('manager_id')->nullable();
+            $table->string('status_pay')->default('free');
+
 
             $table->foreign('partner_appearance_id')->references('id')->on('questionnaire_partner_appearances')->onDelete('cascade');
             $table->foreign('personal_qualities_partner_id')->references('id')->on('questionnaire_personal_qualities_partners')->onDelete('cascade');

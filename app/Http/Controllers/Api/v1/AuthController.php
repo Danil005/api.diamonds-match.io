@@ -47,9 +47,9 @@ class AuthController extends Controller
             role: $role
         ));
 
-        User::create($input);
+        $data = User::create($input);
 
-        $this->response()->success()->setMessage('Сотрудник был создан')->send();
+        $this->response()->success()->setMessage('Сотрудник был создан')->setData($data)->send();
     }
 
     /**

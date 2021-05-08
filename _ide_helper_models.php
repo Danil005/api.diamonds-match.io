@@ -12,6 +12,177 @@
 
 namespace App\Models{
 /**
+ * App\Models\Applications
+ *
+ * @property int $id
+ * @property string $client_name
+ * @property string $service_type
+ * @property string $responsibility
+ * @property int $status
+ * @property int|null $questionnaire_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereClientName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereResponsibility($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereServiceType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereUpdatedAt($value)
+ */
+	class Applications extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Cities
+ *
+ * @property int $city_id
+ * @property int $country_id
+ * @property bool $important
+ * @property int|null $region_id
+ * @property string|null $title_ru
+ * @property string|null $area_ru
+ * @property string|null $region_ru
+ * @property string|null $title_ua
+ * @property string|null $area_ua
+ * @property string|null $region_ua
+ * @property string|null $title_be
+ * @property string|null $area_be
+ * @property string|null $region_be
+ * @property string|null $title_en
+ * @property string|null $area_en
+ * @property string|null $region_en
+ * @property string|null $title_es
+ * @property string|null $area_es
+ * @property string|null $region_es
+ * @property string|null $title_pt
+ * @property string|null $area_pt
+ * @property string|null $region_pt
+ * @property string|null $title_de
+ * @property string|null $area_de
+ * @property string|null $region_de
+ * @property string|null $title_fr
+ * @property string|null $area_fr
+ * @property string|null $region_fr
+ * @property string|null $title_it
+ * @property string|null $area_it
+ * @property string|null $region_it
+ * @property string|null $title_pl
+ * @property string|null $area_pl
+ * @property string|null $region_pl
+ * @property string|null $title_ja
+ * @property string|null $area_ja
+ * @property string|null $region_ja
+ * @property string|null $title_lt
+ * @property string|null $area_lt
+ * @property string|null $region_lt
+ * @property string|null $title_lv
+ * @property string|null $area_lv
+ * @property string|null $region_lv
+ * @property string|null $title_cz
+ * @property string|null $area_cz
+ * @property string|null $region_cz
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaBe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaCz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaDe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaEs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaFr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaIt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaJa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaLt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaLv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaPl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaPt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereAreaUa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereCityId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereImportant($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionBe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionCz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionDe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionEs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionFr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionIt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionJa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionLt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionLv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionPl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionPt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereRegionUa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleBe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleCz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleDe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleEs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleFr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleIt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleJa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleLt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleLv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitlePl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitlePt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Cities whereTitleUa($value)
+ */
+	class Cities extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Countries
+ *
+ * @property int $country_id
+ * @property string|null $title_ru
+ * @property string|null $title_ua
+ * @property string|null $title_be
+ * @property string|null $title_en
+ * @property string|null $title_es
+ * @property string|null $title_pt
+ * @property string|null $title_de
+ * @property string|null $title_fr
+ * @property string|null $title_it
+ * @property string|null $title_pl
+ * @property string|null $title_ja
+ * @property string|null $title_lt
+ * @property string|null $title_lv
+ * @property string|null $title_cz
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleBe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleCz($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleDe($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleEs($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleFr($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleIt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleJa($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleLt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleLv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitlePl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitlePt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Countries whereTitleUa($value)
+ */
+	class Countries extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Interpretation
  *
  * @method static \Illuminate\Database\Eloquent\Builder|Interpretation newModelQuery()
@@ -19,6 +190,31 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Interpretation query()
  */
 	class Interpretation extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Langs
+ *
+ * @property int $id
+ * @property string $code
+ * @property string $nameRU
+ * @property string $nameEN
+ * @property string $nativeName
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs whereNameEN($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs whereNameRU($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs whereNativeName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Langs whereUpdatedAt($value)
+ */
+	class Langs extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -37,6 +233,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Questionnaire onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire query()
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereId($value)
@@ -48,6 +245,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire wherePersonalQualitiesPartnerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereTestId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Questionnaire withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Questionnaire withoutTrashed()
  */
 	class Questionnaire extends \Eloquent {}
 }
@@ -477,6 +676,33 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireTest whereWorkRelationship($value)
  */
 	class QuestionnaireTest extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\QuestionsTest
+ *
+ * @property int $id
+ * @property string $field
+ * @property string $question_ru
+ * @property string $question_en
+ * @property string $answers_ru
+ * @property string $answers_en
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereAnswersEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereAnswersRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereField($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereQuestionEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereQuestionRu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereUpdatedAt($value)
+ */
+	class QuestionsTest extends \Eloquent {}
 }
 
 namespace App\Models{

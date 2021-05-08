@@ -152,7 +152,8 @@ return [
             'my_information' => [
                 'name' => 'string',
                 'place_birth' => 'string|integer',
-                'city' => 'string|integer',
+                'live_city' => 'string|integer',
+                'live_country' => 'string|integer',
                 'age' => 'integer',
                 'zodiac_signs' => [
                     'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
