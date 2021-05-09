@@ -109,14 +109,17 @@ class EmployeeController extends Controller
             default => 'Клиент',
         };
 
-        Mail::to($user['email'])->send(new CreateEmployee(
-            email: $user['email'],
-            password: $password,
-            role: $role,
-            isNewPassword: true
-        ));
+//        Mail::to($user['email'])->send(new CreateEmployee(
+//            email: $user['email'],
+//            password: $password,
+//            role: $role,
+//            isNewPassword: true
+//        ));
 
-        $this->response()->success()->setMessage('Новый пароль был выслан на почту')->send();
+        $this->response()->success()->setMessage('Новый пароль был выслан на почту')->setData([
+            'password' => $password,
+            'email' => $user['email']
+        ])->send();
     }
 
     /**
