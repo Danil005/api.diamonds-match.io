@@ -26,7 +26,8 @@ $app = new Illuminate\Foundation\Application(
 |
 */
 
-$app->loadEnvironmentFrom('./../.env');
+$app->loadEnvironmentFrom('./.env');
+//dd($app->loadEnvironmentFrom('./.env'));
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
