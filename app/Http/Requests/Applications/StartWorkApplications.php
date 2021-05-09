@@ -5,7 +5,7 @@ namespace App\Http\Requests\Applications;
 use App\Utils\Permissions;
 use Illuminate\Foundation\Http\FormRequest;
 
-class Create extends FormRequest
+class StartWorkApplications extends FormRequest
 {
     use Permissions;
     /**
@@ -15,7 +15,7 @@ class Create extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->isManager();
     }
 
     /**
@@ -26,12 +26,7 @@ class Create extends FormRequest
     public function rules()
     {
         return [
-            'client_name' => 'required|string',
-            'service_type' => 'required|string',
-            'responsibility' => 'string|nullable',
-            'questionnaire_id' => 'integer|nullable',
-            'email' => 'required|email',
-            'phone' => 'required|phone:RU,US,',
+            'id' => 'required|integer'
         ];
     }
 }

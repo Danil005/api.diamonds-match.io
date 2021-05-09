@@ -13,15 +13,18 @@ class CreateApplicationsTable extends Migration
      */
     public function up()
     {
-//        Schema::create('applications', function (Blueprint $table) {
-//            $table->id();
-//            $table->string('client_name');
-//            $table->string('service_type');
-//            $table->string('responsibility');
-//            $table->unsignedBigInteger('status')->default(0);
-//            $table->unsignedBigInteger('questionnaire_id')->nullable();
-//            $table->timestamps();
-//        });
+        Schema::create('applications', function (Blueprint $table) {
+            $table->id();
+            $table->string('client_name');
+            $table->string('service_type');
+            $table->string('responsibility')->nullable();
+            $table->unsignedBigInteger('status')->default(0);
+            $table->unsignedBigInteger('questionnaire_id')->nullable();
+            $table->string('link')->nullable();
+            $table->boolean('link_active')->nullable();
+            $table->softDeletes();
+            $table->timestamps();
+        });
     }
 
     /**

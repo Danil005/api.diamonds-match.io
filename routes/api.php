@@ -39,6 +39,17 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
         });
     });
 
+    Route::prefix('applications')->group(function() {
+        Route::put('applications.createFromOthers', 'ApplicationsController@create');
+
+        Route::middleware('auth:api')->group(function() {
+            Route::put('applications.create', 'ApplicationsController@create');
+            Route::get('applications.get', 'ApplicationsController@get');
+            Route::post('applications.change', 'ApplicationsController@change');
+            Route::post('applications.startWork', 'ApplicationsController@startWork');
+        });
+    });
+
     Route::prefix('utils')->group(function() {
         Route::get('utils.cities', 'UtilsController@getCities');
         Route::get('utils.countries', 'UtilsController@getCountry');

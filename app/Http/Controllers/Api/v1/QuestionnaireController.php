@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\Questionnaire\Create;
 use App\Http\Requests\Questionnaire\View;
+use App\Models\Applications;
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireMyAppearance;
 use App\Models\QuestionnaireMyInformation;
@@ -57,7 +58,7 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'live_city') {
-                $myInformation['live_country'] = $myInformation['live_country'] . ', ' . $information;
+                $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
             }
         }
 
@@ -71,7 +72,7 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'live_city') {
-                $myInformation['live_country'] = $myInformation['live_country'] . ', ' . $information;
+                $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
             }
         }
 

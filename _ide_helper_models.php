@@ -17,22 +17,31 @@ namespace App\Models{
  * @property int $id
  * @property string $client_name
  * @property string $service_type
- * @property string $responsibility
+ * @property string|null $responsibility
  * @property int $status
  * @property int|null $questionnaire_id
+ * @property string|null $link
+ * @property bool|null $link_active
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newQuery()
+ * @method static \Illuminate\Database\Query\Builder|Applications onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Applications query()
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereClientName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereLinkActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereQuestionnaireId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereResponsibility($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereServiceType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|Applications withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|Applications withoutTrashed()
  */
 	class Applications extends \Eloquent {}
 }
