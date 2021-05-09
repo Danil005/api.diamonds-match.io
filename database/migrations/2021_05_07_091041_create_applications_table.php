@@ -22,6 +22,8 @@ class CreateApplicationsTable extends Migration
             $table->unsignedBigInteger('questionnaire_id')->nullable();
             $table->string('link')->nullable();
             $table->boolean('link_active')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -22,6 +22,8 @@ namespace App\Models{
  * @property int|null $questionnaire_id
  * @property string|null $link
  * @property bool|null $link_active
+ * @property string|null $email
+ * @property string|null $phone
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -32,9 +34,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereClientName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereLink($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereLinkActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications wherePhone($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereQuestionnaireId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereResponsibility($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereServiceType($value)

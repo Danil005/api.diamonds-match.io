@@ -12,6 +12,6 @@ class Applications extends Model
 
     protected $fillable = [
         'client_name', 'service_type', 'status', 'questionnaire_id', 'responsibility',
-        'link', 'link_active'
+        'link', 'link_active', 'email', 'phone'
     ];
 }

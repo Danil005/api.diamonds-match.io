@@ -55,6 +55,10 @@ class ApplicationsController extends Controller
             $applications = $applications->withTrashed()->whereNotNull('deleted_at');
         }
 
+        if( $request->has('responsibility') ) {
+
+        }
+
         if ($request->has('search')) {
             $search = $request->search;
             $applications = $applications->where(function (Builder $query) use ($search) {
@@ -100,6 +104,8 @@ class ApplicationsController extends Controller
                 'client_name' => $application['client_name'],
                 'responsibility' => User::where('id', explode(',', $application['responsibility']))->first(['id', 'name', 'avatar', 'role']),
                 'service_type' => $application['service_type'],
+                'email' => $application['email'],
+
                 'created_at' => $time
             ];
         }
