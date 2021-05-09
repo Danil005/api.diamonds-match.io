@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\Questionnaire\Create;
+use App\Http\Requests\Questionnaire\DeletePhotoQuestionnaire;
+use App\Http\Requests\Questionnaire\UploadPhotoQuestionnaire;
 use App\Http\Requests\Questionnaire\View;
 use App\Models\Applications;
 use App\Models\Questionnaire;
@@ -13,10 +15,13 @@ use App\Models\QuestionnairePartnerAppearance;
 use App\Models\QuestionnairePartnerInformation;
 use App\Models\QuestionnairePersonalQualitiesPartner;
 use App\Models\QuestionnaireTest;
+use App\Models\QuestionnaireUploadPhoto;
 use App\Utils\QuestionnaireUtils;
 use App\Utils\TranslateFields;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Str;
 
 class QuestionnaireController extends QuestionnaireUtils
 {
@@ -184,7 +189,47 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['my_appearance']['eye_color'] = $this->colorEye($result['my_appearance']['eye_color']);
         $result['my_appearance']['sex'] = $result['my_appearance']['sex'] === 'female' ? 'Женщина' : 'Мужчина';
 
+        $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaire->id)->get(['id', 'path']);
+        $result['files'] = [
+            'photos' => $photos
+        ];
+
 
         $this->response()->success()->setMessage('Анкета получена')->setData($result)->send();
+    }
+
+    public function uploadPhoto(UploadPhotoQuestionnaire $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $file = $request->file('file');
+        $path = 'public/questionnaire/photos/sign_' . $questionnaire->sign;
+
+        $upload = $file->storePubliclyAs($path, md5(Str::random(16)).'.'.$file->getClientOriginalExtension());
+
+        $path = str_replace('public/', 'storage/', $upload);
+
+        QuestionnaireUploadPhoto::create([
+            'path' => $path,
+            'questionnaire_id' => $request->questionnaire_id
+        ]);
+
+        $this->response()->setMessage('Файл загружен')->setData([
+            'path' => env('APP_URL').'/'. $path
+        ])->send();
+    }
+
+    public function deletePhoto(DeletePhotoQuestionnaire $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $photo = QuestionnaireUploadPhoto::where('id', $request->photo_id)->first();
+
+        dd($photo['path']);
+        Storage::disk('public')->delete($photo['path']);
     }
 }

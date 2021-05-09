@@ -11,6 +11,7 @@ use App\Mail\CreateEmployee;
 use App\Models\User;
 use App\Utils\Phone;
 use App\Utils\Response;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -68,7 +69,11 @@ class EmployeeController extends Controller
             });
         }
 
-        $model = $model->get($fields);
+        $model = $model->get($fields)->toArray();
+
+        foreach ($model as $key=>$item) {
+            $model[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y H:i');
+        }
 
 
         $this->response()->success()->setMessage('Сотрудники получены')->setData([

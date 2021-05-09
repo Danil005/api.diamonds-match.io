@@ -27,6 +27,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $from
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newQuery()
  * @method static \Illuminate\Database\Query\Builder|Applications onlyTrashed()
@@ -35,6 +36,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereFrom($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereLink($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereLinkActive($value)
@@ -354,6 +356,8 @@ namespace App\Models{
  * @property string $talents
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $name
+ * @property string|null $birthday
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation query()
@@ -363,6 +367,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereAllergies($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereBestGift($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereBestGiftReceived($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereBirthday($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereChildren($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereChildrenCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereChildrenDesire($value)
@@ -387,6 +392,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereMaritalStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereMovingCity($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereMovingCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation wherePets($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation wherePlaceBirth($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation whereRelax($value)
@@ -697,6 +703,27 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireTest whereWorkRelationship($value)
  */
 	class QuestionnaireTest extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\QuestionnaireUploadPhoto
+ *
+ * @property int $id
+ * @property int $questionnaire_id
+ * @property string $path
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireUploadPhoto whereUpdatedAt($value)
+ */
+	class QuestionnaireUploadPhoto extends \Eloquent {}
 }
 
 namespace App\Models{
