@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Utils\Response;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -9,6 +10,7 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    use Response;
     /**
      * A list of the exception types that are not reported.
      *
@@ -32,27 +34,7 @@ class Handler extends ExceptionHandler
     public function render($request, Exception|Throwable $e): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
     {
         if ($this->isHttpException($e)) {
-            switch ($e->getStatusCode()) {
-
-                // not authorized
-                case '403':
-                    return response()->json($e);
-                    break;
-
-                // not found
-                case '404':
-                    return response()->json($e);
-                    break;
-
-                // internal error
-                case '500':
-                    return response()->json($e);
-                    break;
-
-                default:
-                    return $this->renderHttpException($e);
-                    break;
-            }
+            $this->response()->error()->setData($e->getTrace())->setMessage($e->getMessage())->setStatus($e->getStatusCode())->send();
         } else {
             return parent::render($request, $e);
         }

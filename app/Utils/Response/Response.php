@@ -16,6 +16,7 @@ class Response
     private ?string $message = null;
     private mixed $data = [];
     private ?string $field = 'data';
+    private mixed $status = 200;
 
     /**
      * @return void
@@ -26,7 +27,7 @@ class Response
             'success' => $this->success,
             'message' => $this->message,
             $this->field => $this->data
-        ])->throwResponse();
+        ], $this->status)->throwResponse();
     }
 
     /**
@@ -35,6 +36,13 @@ class Response
     public function success(): Response
     {
         $this->success = true;
+
+        return $this;
+    }
+
+    public function setStatus(mixed $status): Response
+    {
+        $this->status = $status;
 
         return $this;
     }
