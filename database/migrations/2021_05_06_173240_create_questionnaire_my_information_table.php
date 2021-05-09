@@ -17,6 +17,7 @@ class CreateQuestionnaireMyInformationTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('age');
+            $table->string('birthday');
             $table->string('place_birth');
             $table->string('city');
             $table->string('zodiac_signs');

@@ -5,6 +5,7 @@ namespace App\Http\Requests\Questionnaire;
 use App\Utils\Permissions;
 use App\Utils\Response;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Cache;
 
 class View extends FormRequest
 {
@@ -17,6 +18,18 @@ class View extends FormRequest
      */
     public function authorize()
     {
+        $headers = request()->headers;
+
+        if( Cache::get('lang') == null ) {
+            Cache::add('lang', 'ru');
+        }
+
+        if( $headers->has('x-lang') ) {
+            Cache::set('lang', $headers->get('x-lang'));
+        } else {
+            Cache::set('lang', 'ru');
+        }
+
         return $this->isManager();
     }
 
