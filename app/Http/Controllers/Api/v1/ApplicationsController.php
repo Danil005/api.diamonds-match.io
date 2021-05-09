@@ -5,15 +5,20 @@ namespace App\Http\Controllers\Api\v1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Applications\ChangeApplications;
 use App\Http\Requests\Applications\Create;
+use App\Http\Requests\Applications\DeleteApplication;
 use App\Http\Requests\Applications\StartWorkApplications;
+use App\Http\Requests\Applications\UnarchiveApplication;
 use App\Http\Requests\Applications\UpdateApplications;
 use App\Models\Applications;
+use App\Models\Questionnaire;
+use App\Models\SignQuestionnaire;
 use App\Models\User;
 use App\Utils\Response;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ApplicationsController extends Controller
 {
@@ -45,6 +50,10 @@ class ApplicationsController extends Controller
     public function get(Request $request)
     {
         $applications = new Applications();
+
+        if( $request->has('archive_only') ) {
+            $applications = $applications->withTrashed()->whereNotNull('deleted_at');
+        }
 
         if ($request->has('search')) {
             $search = $request->search;
@@ -100,10 +109,36 @@ class ApplicationsController extends Controller
 
     public function change(ChangeApplications $request)
     {
+        $application = Applications::where('id', $request->id)->first();
+
+        if($request->status == 3) {
+            if( empty($application->link) ) {
+                $sign = md5(Str::random(16));
+                $questionnaire = Questionnaire::create([
+                    'sign' => $sign
+                ]);
+
+                SignQuestionnaire::create([
+                    'application_id' => $request->id,
+                    'questionnaire_id' => $questionnaire->id,
+                    'sign' => $sign,
+                    'active' => true
+                ]);
+
+                Applications::where('id', $request->id)->update([
+                    'link' => env('APP_QUESTIONNAIRE_URL').'/sign/'.$sign,
+                    'link_active' => true
+                ]);
+            }
+        } else {
+            Applications::where('id', $request->id)->update([
+                'link_active' => false
+            ]);
+        }
+
         Applications::where('id', $request->id)->update([
             'status' => $request->status
         ]);
-
 
         $this->response()->setMessage('Статус изменен')->send();
     }
@@ -123,5 +158,21 @@ class ApplicationsController extends Controller
         Applications::where('id', $request->id)->update($request->all());
 
         $this->response()->setMessage('Настройки сохранены')->send();
+    }
+
+    public function delete(DeleteApplication $request)
+    {
+        Applications::where('id', $request->id)->delete();
+
+        $this->response()->setMessage('Анкета была архивирована')->send();
+    }
+
+    public function unarchive(UnarchiveApplication $request)
+    {
+        Applications::withTrashed()->where('id', $request->id)->update([
+            'deleted_at' => null
+        ]);
+
+        $this->response()->setMessage('Анкета была разархивирована')->send();
     }
 }

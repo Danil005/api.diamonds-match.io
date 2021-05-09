@@ -11,6 +11,7 @@ class Applications extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'client_name', 'service_type', 'status', 'questionnaire_id', 'responsibility'
+        'client_name', 'service_type', 'status', 'questionnaire_id', 'responsibility',
+        'link', 'link_active'
     ];
 }

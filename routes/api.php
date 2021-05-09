@@ -48,6 +48,8 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::post('applications.change', 'ApplicationsController@change');
             Route::post('applications.startWork', 'ApplicationsController@startWork');
             Route::post('applications.update', 'ApplicationsController@update');
+            Route::delete('applications.delete', 'ApplicationsController@delete');
+            Route::post('applications.unarchive', 'ApplicationsController@unarchive');
         });
     });
 

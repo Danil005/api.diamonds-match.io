@@ -87,7 +87,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $myInformation = QuestionnaireMyInformation::create($myInformation);
 
         # Объединяем ответы в общую базу
-        Questionnaire::create([
+        Questionnaire::where('sign', $request->sign)->update([
             'partner_appearance_id' => $partnerAppearance->id,
             'personal_qualities_partner_id' => $personalQualitiesPartner->id,
             'partner_information_id' => $partnerInformation->id,

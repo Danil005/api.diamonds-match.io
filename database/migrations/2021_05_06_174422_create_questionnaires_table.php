@@ -15,13 +15,14 @@ class CreateQuestionnairesTable extends Migration
     {
         Schema::create('questionnaires', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('partner_appearance_id');
-            $table->unsignedBigInteger('personal_qualities_partner_id');
-            $table->unsignedBigInteger('partner_information_id');
-            $table->unsignedBigInteger('test_id');
-            $table->unsignedBigInteger('my_appearance_id');
-            $table->unsignedBigInteger('my_personal_qualities_id');
-            $table->unsignedBigInteger('my_information_id');
+            $table->string('sign')->nullable();
+            $table->unsignedBigInteger('partner_appearance_id')->nullable();
+            $table->unsignedBigInteger('personal_qualities_partner_id')->nullable();
+            $table->unsignedBigInteger('partner_information_id')->nullable();
+            $table->unsignedBigInteger('test_id')->nullable();
+            $table->unsignedBigInteger('my_appearance_id')->nullable();
+            $table->unsignedBigInteger('my_personal_qualities_id')->nullable();
+            $table->unsignedBigInteger('my_information_id')->nullable();
             $table->unsignedBigInteger('manager_id')->nullable();
             $table->string('status_pay')->default('free');
 

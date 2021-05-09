@@ -231,13 +231,17 @@ namespace App\Models{
  * App\Models\Questionnaire
  *
  * @property int $id
- * @property int $partner_appearance_id
- * @property int $personal_qualities_partner_id
- * @property int $partner_information_id
- * @property int $test_id
- * @property int $my_appearance_id
- * @property int $my_personal_qualities_id
- * @property int $my_information_id
+ * @property string|null $sign
+ * @property int|null $partner_appearance_id
+ * @property int|null $personal_qualities_partner_id
+ * @property int|null $partner_information_id
+ * @property int|null $test_id
+ * @property int|null $my_appearance_id
+ * @property int|null $my_personal_qualities_id
+ * @property int|null $my_information_id
+ * @property int|null $manager_id
+ * @property string $status_pay
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire newModelQuery()
@@ -245,13 +249,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Query\Builder|Questionnaire onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire query()
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereManagerId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereMyAppearanceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereMyInformationId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereMyPersonalQualitiesId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire wherePartnerAppearanceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire wherePartnerInformationId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire wherePersonalQualitiesPartnerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereSign($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereStatusPay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereTestId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Questionnaire whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Questionnaire withTrashed()
