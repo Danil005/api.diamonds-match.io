@@ -475,6 +475,7 @@ Authroization: Bearer <Token>
 
 |Параметр|Тип|Описание|Обязательный|
 |--|--|--|--|
+|sign|String|Параметр Hash-ссылки анкеты (/sign/1b05cb8478ff30441ad99f975d413e7b)|Да
 |partner_appearance|Array|Глобальная переменная, внешний вид партнера|Да
 |personal_qualities_partner|Array|Глобальная переменная, качества партнера|Да
 |partner_information|Array|Глобальная переменная, информация по партнеру|Да
@@ -564,7 +565,8 @@ Authroization: Bearer <Token>
 |--|--|--|--|
 |age|array[integer, integer]|Возраст от и до|Да
 |place_birth|string|Место рождения|Да
-|city|string|Город проживания|Да
+|live_city|string|Город проживания|Да
+|live_country|string|Страна проживания|Да
 |zodiac_signs|string: aries(Овен) \| calf(Телец) \| twins(Близнецы) \| cancer(Рак) \| lion(Лев) \| virgo(Дева) \| libra(Весы) \| scorpio(Скорпион) \| sagittarius(Стрелец) \| capricorn(Козерог) \| aquarius(Водолей) \| fish(Рыба) |Знак зодиака|Да
 |height|array[integer\|double, integer|\double]|Рост от и до|Да
 |weight|array[integer\|double, integer|\double]|Вес от и до|Да
