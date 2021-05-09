@@ -75,6 +75,7 @@ class EmployeeController extends Controller
             $model[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y в H:i');
         }
 
+        $model = collect($model);
 
         $this->response()->success()->setMessage('Сотрудники получены')->setData([
             'count' => $model->count(),
