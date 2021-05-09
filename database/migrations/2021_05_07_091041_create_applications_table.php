@@ -24,6 +24,7 @@ class CreateApplicationsTable extends Migration
             $table->boolean('link_active')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->string('from')->default('email');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -15,6 +15,7 @@ class CreateQuestionnaireMyInformationTable extends Migration
     {
         Schema::create('questionnaire_my_information', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->string('age');
             $table->string('place_birth');
             $table->string('city');

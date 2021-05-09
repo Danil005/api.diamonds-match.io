@@ -29,11 +29,12 @@ class Got extends FormRequest
     public function rules(): array
     {
         return [
-            'limit' => 'integer',
-            'offset' => 'integer',
-            'fields' => 'string',
-            'only_archive' => 'boolean',
-            'search' => 'string'
+            'limit' => 'integer|nullable',
+            'offset' => 'integer|nullable',
+            'fields' => 'string|nullable',
+            'only_archive' => 'boolean|nullable',
+            'search' => 'string|nullable',
+            'role' => 'integer|nullable'
         ];
     }
 

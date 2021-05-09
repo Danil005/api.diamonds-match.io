@@ -55,15 +55,23 @@ class ApplicationsController extends Controller
             $applications = $applications->withTrashed()->whereNotNull('deleted_at');
         }
 
-        if( $request->has('responsibility') ) {
+        if( $request->has('responsibility_id') ) {
+            $user = User::where('id', $request->responsibility_id)->first();
 
+            if( empty($user) )
+                $this->response()->error()->setMessage('Сотрудник не найден')->send();
+
+
+            $applications = $applications->where('responsibility', $user->id.','.$user->name);
         }
 
         if ($request->has('search')) {
             $search = $request->search;
             $applications = $applications->where(function (Builder $query) use ($search) {
                 $query->where('responsibility', 'LIKE', '%' . $search . '%')
-                    ->orWhere('client_name', 'LIKE', '%' . $search . '%');
+                    ->orWhere('client_name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%');
             });
         }
 
@@ -105,7 +113,7 @@ class ApplicationsController extends Controller
                 'responsibility' => User::where('id', explode(',', $application['responsibility']))->first(['id', 'name', 'avatar', 'role']),
                 'service_type' => $application['service_type'],
                 'email' => $application['email'],
-
+                'phone' => $application['phone'],
                 'created_at' => $time
             ];
         }

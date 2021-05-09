@@ -34,10 +34,15 @@ class EmployeeController extends Controller
             $model = $model::withTrashed();
             $model = $model->whereNotNull('deleted_at');
         }
+        if( $request->has('role') ) {
+            $model = $model->where('role', $request->role);
+        } else {
+            $model = $model->where(function(Builder $query) {
+                $query->where('role', 1)->orWhere('role', 2);
+            });
+        }
 
-        $model = $model->where(function(Builder $query) {
-            $query->where('role', 1)->orWhere('role', 2);
-        });
+
 
         if ($request->has('fields')) {
             $fields = trim($request->fields);

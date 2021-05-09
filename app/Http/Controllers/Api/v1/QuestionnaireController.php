@@ -54,11 +54,11 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'live_country') {
-                $myInformation[$key] = $information;
+                $partnerInformation[$key] = $information;
             }
 
             if ($key == 'live_city') {
-                $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+                $partnerInformation['city'] = $myInformation['live_country'] . ', ' . $information;
             }
         }
 
@@ -105,8 +105,9 @@ class QuestionnaireController extends QuestionnaireUtils
      */
     public function view(View $request)
     {
-        $questionnaire = Questionnaire::where('id', $request->id)
+        $questionnaire = Questionnaire::where('id', $request->id)->whereNotNUll('questionnaire_partner_appearance')
             ->join('questionnaire_partner_appearance', 'questionnaire.partner_appearance_id', '=', 'questionnaire_partner_appearance.id');
+//            ->join('questionnaire_partner_appearance', 'questionnaire.partner_appearance_id', '=', 'questionnaire_partner_appearance.id');
 //            ->join('questionnaire_personal_qualities_partner', 'questionnaire_personal_qualities_partner.id', '=', 'questionnaire.personal_qualities_partner_id')
 //            ->join('questionnaire_partner_information', 'questionnaire_partner_information.id', '=', 'questionnaire.partner_information_id')
 //            ->join('questionnaire_test', 'questionnaire_test.id', '=', 'questionnaire.test_id')
