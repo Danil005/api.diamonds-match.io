@@ -72,7 +72,7 @@ class EmployeeController extends Controller
         $model = $model->get($fields)->toArray();
 
         foreach ($model as $key=>$item) {
-            $model[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y H:i');
+            $model[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y в H:i');
         }
 
 
