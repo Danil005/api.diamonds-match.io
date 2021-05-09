@@ -17,17 +17,22 @@ class Response
     private mixed $data = [];
     private ?string $field = 'data';
     private mixed $status = 200;
+    private mixed $additional = [];
 
     /**
      * @return void
      */
     private function createRequest(): void
     {
-        response()->json([
+        $input = [
             'success' => $this->success,
             'message' => $this->message,
             $this->field => $this->data
-        ], $this->status)->throwResponse();
+        ];
+        if( !empty($this->additional) ) {
+            $input['additional'] = $this->additional;
+        }
+        response()->json($input, $this->status)->throwResponse();
     }
 
     /**
@@ -43,6 +48,13 @@ class Response
     public function setStatus(mixed $status): Response
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function setAdditional(mixed $additional): Response
+    {
+        $this->additional = $additional;
 
         return $this;
     }

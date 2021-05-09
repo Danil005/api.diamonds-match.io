@@ -122,7 +122,13 @@ class ApplicationsController extends Controller
             ];
         }
 
-        $this->response()->setMessage('Данные анкет получены')->setData($result)->send();
+        $resp = $this->response()->success()->setMessage('Данные анкет получены')->setData($result);
+
+        if( $request->has('archive_only') ) {
+            $resp->setAdditional(['is_archived' => true])->send();
+        } else {
+            $resp->send();
+        }
     }
 
     public function change(ChangeApplications $request)
