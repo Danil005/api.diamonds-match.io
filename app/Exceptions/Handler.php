@@ -36,17 +36,17 @@ class Handler extends ExceptionHandler
 
                 // not authorized
                 case '403':
-                    return \Response::view('errors.403',array(),403);
+                    return response()->json($e);
                     break;
 
                 // not found
                 case '404':
-                    return \Response::view('errors.404',array(),404);
+                    return response()->json($e);
                     break;
 
                 // internal error
                 case '500':
-                    return \Response::view('errors.500',array(),500);
+                    return response()->json($e);
                     break;
 
                 default:
