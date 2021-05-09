@@ -110,6 +110,7 @@ class ApplicationsController extends Controller
 
 
             $result[] = [
+                'id' => $application['id'],
                 'status' => $application['status'],
                 'client_name' => $application['client_name'],
                 'responsibility' => User::where('id', explode(',', $application['responsibility']))->first(['id', 'name', 'avatar', 'role']),
