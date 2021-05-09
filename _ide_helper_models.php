@@ -716,6 +716,31 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\SignQuestionnaire
+ *
+ * @property int $id
+ * @property int $questionnaire_id
+ * @property int $application_id
+ * @property string $sign
+ * @property bool $active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire query()
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire whereActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire whereApplicationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire whereSign($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|SignQuestionnaire whereUpdatedAt($value)
+ */
+	class SignQuestionnaire extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id

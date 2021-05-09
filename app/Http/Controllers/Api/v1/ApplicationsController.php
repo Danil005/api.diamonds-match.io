@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Applications\ChangeApplications;
 use App\Http\Requests\Applications\Create;
 use App\Http\Requests\Applications\StartWorkApplications;
+use App\Http\Requests\Applications\UpdateApplications;
 use App\Models\Applications;
 use App\Models\User;
 use App\Utils\Response;
@@ -103,6 +104,7 @@ class ApplicationsController extends Controller
             'status' => $request->status
         ]);
 
+
         $this->response()->setMessage('Статус изменен')->send();
     }
 
@@ -116,8 +118,10 @@ class ApplicationsController extends Controller
         $this->response()->setMessage('Статус изменен')->send();
     }
 
-//    public function update()
-//    {
-//        Applications::where('id', $request->id)->update($request->all());
-//    }
+    public function update(UpdateApplications $request)
+    {
+        Applications::where('id', $request->id)->update($request->all());
+
+        $this->response()->setMessage('Настройки сохранены')->send();
+    }
 }

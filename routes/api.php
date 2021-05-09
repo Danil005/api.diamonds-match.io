@@ -47,6 +47,7 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::get('applications.get', 'ApplicationsController@get');
             Route::post('applications.change', 'ApplicationsController@change');
             Route::post('applications.startWork', 'ApplicationsController@startWork');
+            Route::post('applications.update', 'ApplicationsController@update');
         });
     });
 
