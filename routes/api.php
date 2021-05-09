@@ -36,8 +36,15 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
 
         Route::middleware('auth:api')->group(function() {
             Route::get('questionnaire.view', 'QuestionnaireController@view');
+
             Route::post('questionnaire.uploadPhoto', 'QuestionnaireController@uploadPhoto');
             Route::delete('questionnaire.deletePhoto', 'QuestionnaireController@deletePhoto');
+
+            Route::post('questionnaire.uploadFile', 'QuestionnaireController@uploadFile');
+            Route::post('questionnaire.downloadFile', 'QuestionnaireController@openFile');
+            Route::delete('questionnaire.deleteFile', 'QuestionnaireController@deleteFile');
+
+            Route::post('questionnaire.makeDate', 'QuestionnaireController@makeDate');
         });
     });
 

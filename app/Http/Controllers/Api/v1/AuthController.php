@@ -29,7 +29,7 @@ class AuthController extends Controller
             'name' => trim($request->name),
             'role' => $request->role,
             'email' => $request->email,
-            'phone' => $this->phoneFormatting($request->phone),
+            'phone' => $request->phone,
             'password' => Hash::make($password)
         ];
 

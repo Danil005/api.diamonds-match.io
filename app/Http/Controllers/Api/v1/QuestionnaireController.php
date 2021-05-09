@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Requests\Questionnaire\Create;
+use App\Http\Requests\Questionnaire\DeleteFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\DeletePhotoQuestionnaire;
+use App\Http\Requests\Questionnaire\FilesQuestionnaire;
+use App\Http\Requests\Questionnaire\MakeDateQuestionnaire;
+use App\Http\Requests\Questionnaire\OpenFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\UploadPhotoQuestionnaire;
 use App\Http\Requests\Questionnaire\View;
 use App\Models\Applications;
 use App\Models\Questionnaire;
+use App\Models\QuestionnaireAppointedDate;
+use App\Models\QuestionnaireFiles;
 use App\Models\QuestionnaireMyAppearance;
 use App\Models\QuestionnaireMyInformation;
 use App\Models\QuestionnaireMyPersonalQualities;
@@ -18,9 +24,12 @@ use App\Models\QuestionnaireTest;
 use App\Models\QuestionnaireUploadPhoto;
 use App\Utils\QuestionnaireUtils;
 use App\Utils\TranslateFields;
+use Hash;
+use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use SoareCostin\FileVault\Facades\FileVault;
 use Str;
 
 class QuestionnaireController extends QuestionnaireUtils
@@ -190,8 +199,10 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['my_appearance']['sex'] = $result['my_appearance']['sex'] === 'female' ? 'Женщина' : 'Мужчина';
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaire->id)->get(['id', 'path']);
+        $files = QuestionnaireFiles::where('questionnaire_id', $questionnaire->id)->get(['id', 'type', 'name', 'size']);
         $result['files'] = [
-            'photos' => $photos
+            'photos' => $photos,
+            'files' => $files
         ];
 
 
@@ -229,7 +240,112 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $photo = QuestionnaireUploadPhoto::where('id', $request->photo_id)->first();
 
-        dd($photo['path']);
-        Storage::disk('public')->delete($photo['path']);
+        Storage::disk('public')->delete(str_replace('storage/', '', $photo['path']));
+
+        QuestionnaireUploadPhoto::where('id', $request->photo_id)->delete();
+
+        $this->response()->setMessage('Фотография была удалена')->send();
+    }
+
+    public function uploadFile(FilesQuestionnaire $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        if( !in_array($request->type, ['passport', 'agree', 'offer']) )
+            $this->response()->error()->setMessage('Неверный тип загрузки файла')->send();
+
+        $file = $request->file('file');
+        $path = 'public/questionnaire/files/'.$request->type.'/sign_' . $questionnaire->sign;
+
+        $key = substr(md5($path), 6,12);
+        $name = $request->type.'-encrypted{'.$key.'}.'.$file->getClientOriginalExtension();
+        $filename = Storage::putFileAs($path, $file, $name);
+
+        if ($filename) {
+            FileVault::encrypt($filename);
+        }
+
+        $path = $path.'/'.str_replace('{'.$key.'}', '{hidden}', $name);
+
+        $name = match ($request->type) {
+            'passport' => 'passport-'.$request->questionnaire_id.'.pdf',
+            'agree' => 'consent-data-processing-'.$request->questionnaire_id.'.pdf',
+            'offer' => 'contract-copy-'.$request->questionnaire_id.'.pdf'
+        };
+
+        QuestionnaireFiles::create([
+            'path' => $path,
+            'type' => $request->type,
+            'questionnaire_id' => $request->questionnaire_id,
+            'name' => $name,
+            'size' => round($file->getSize() / 1024 / 1024, 2) . ' mb',
+            'key' => $key
+        ]);
+
+        $this->response()->setMessage('Файл загружен')->setData([
+            'path' => env('APP_URL').'/'. $path,
+            'encrypted' => true
+        ])->send();
+    }
+
+    public function openFile(OpenFilesQuestionnaire $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $file = QuestionnaireFiles::where('id', $request->file_id)->first();
+
+        if( empty($file) )
+            $this->response()->setMessage('Данный файл не был найден')->send();
+
+        $path = str_replace('{hidden}', '{'.$file['key'].'}', $file['path']).'.enc';
+
+        return response()->streamDownload(function () use ($path) {
+            FileVault::streamDecrypt($path);
+        }, $file['name']);
+    }
+
+    public function deleteFile(DeleteFilesQuestionnaire $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $file = QuestionnaireFiles::where('id', $request->file_id)->first();
+
+        Storage::disk('public')->delete(
+            str_replace('public/', '', str_replace('{hidden}', '{'.$file['key'].'}', $file['path'])).'.enc'
+        );
+
+        QuestionnaireFiles::where('id', $request->file_id)->delete();
+
+        $this->response()->success()->setMessage('Файл был удалена')->send();
+    }
+
+    public function makeDate(MakeDateQuestionnaire $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $withQuestionnaire = Questionnaire::where('id', $request->with_questionnaire_id)->first();
+        if (empty($withQuestionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $dateValidation = explode('.', $request->date);
+        $timeValidation = explode(':', $request->time);
+
+        if( count($dateValidation) != 3 || strlen($dateValidation[0]) != 2 || strlen($dateValidation[1]) != 2 || strlen($dateValidation[2]) != 4)
+            $this->response()->error()->setMessage('Неверный формат даты. Необходимо: dd.mm.YYYY')->send();
+
+        if( count($timeValidation) != 2 || strlen($timeValidation[0]) != 2 || strlen($timeValidation[1]) != 2)
+            $this->response()->error()->setMessage('Неверный формат времени. Необходимо: HH:MM')->send();
+
+        QuestionnaireAppointedDate::create($request->all());
+
+        $this->response()->success()->setMessage("Дата свидания была назначена на {$request->date} в {$request->time}. Удачи!")->send();
     }
 }

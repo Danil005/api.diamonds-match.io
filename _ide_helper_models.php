@@ -276,6 +276,60 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\QuestionnaireAppointedDate
+ *
+ * @property int $id
+ * @property int $questionnaire_id
+ * @property int $with_questionnaire_id
+ * @property string $date
+ * @property string $time
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate whereTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireAppointedDate whereWithQuestionnaireId($value)
+ */
+	class QuestionnaireAppointedDate extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\QuestionnaireFiles
+ *
+ * @property int $id
+ * @property int $questionnaire_id
+ * @property string $type
+ * @property string $key
+ * @property string $path
+ * @property string $name
+ * @property string $size
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles wherePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireFiles whereUpdatedAt($value)
+ */
+	class QuestionnaireFiles extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\QuestionnaireMyAppearance
  *
  * @property int $id

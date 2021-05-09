@@ -5,7 +5,7 @@ namespace App\Http\Requests\Questionnaire;
 use App\Utils\Permissions;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeletePhotoQuestionnaire extends FormRequest
+class MakeDateQuestionnaire extends FormRequest
 {
     use Permissions;
 
@@ -28,7 +28,9 @@ class DeletePhotoQuestionnaire extends FormRequest
     {
         return [
             'questionnaire_id' => 'required|integer',
-            'file_id' => 'required|integer'
+            'with_questionnaire_id' => 'required|integer',
+            'date' => 'required|string',
+            'time' => 'required|string'
         ];
     }
 }

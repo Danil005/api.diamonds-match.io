@@ -5,10 +5,9 @@ namespace App\Http\Requests\Questionnaire;
 use App\Utils\Permissions;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeletePhotoQuestionnaire extends FormRequest
+class OpenFilesQuestionnaire extends FormRequest
 {
     use Permissions;
-
     /**
      * Determine if the user is authorized to make this request.
      *

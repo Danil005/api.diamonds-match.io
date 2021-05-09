@@ -18,6 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('match', function() {
+   $match = new \App\Services\MatchProcessor();
+
+   $match->start(new \App\Models\Questionnaire);
+});
+
 Route::get('test', function () {
     $langs = \App\Models\Langs::get();
 

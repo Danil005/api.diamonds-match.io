@@ -47,6 +47,13 @@ class ApplicationsController extends Controller
         $this->response()->success()->setMessage('Заявка успешно создана')->send();
     }
 
+    private function declOfNum($number, $titles)
+    {
+        $cases = array(2, 0, 1, 1, 1, 2);
+        $format = $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
+        return sprintf($format, $number);
+    }
+
     public function get(Request $request)
     {
         $applications = new Applications();
@@ -87,18 +94,13 @@ class ApplicationsController extends Controller
 
             $titles_hours = ['%d час назад', '%d часа назад', '%d часов назад'];
             $titles_min = ['%d минуту назад', '%d минуты назад', '%d минут назад'];
-            function declOfNum($number, $titles)
-            {
-                $cases = array(2, 0, 1, 1, 1, 2);
-                $format = $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
-                return sprintf($format, $number);
-            }
+
 
             if ($diff->days == 0) {
                 if( $diff->h == 0 ) {
-                    $time = declOfNum($diff->i, $titles_min);
+                    $time = $this->declOfNum($diff->i, $titles_min);
                 } else {
-                    $time = declOfNum($diff->h, $titles_hours);
+                    $time = $this->declOfNum($diff->h, $titles_hours);
                 }
             } else if ($diff->days == 1) {
                 $time = 'вчера';
@@ -114,6 +116,8 @@ class ApplicationsController extends Controller
                 'service_type' => $application['service_type'],
                 'email' => $application['email'],
                 'phone' => $application['phone'],
+                'link' => $application['link'],
+                'link_active' => $application['link_active'],
                 'created_at' => $time
             ];
         }

@@ -5,10 +5,9 @@ namespace App\Http\Requests\Questionnaire;
 use App\Utils\Permissions;
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeletePhotoQuestionnaire extends FormRequest
+class FilesQuestionnaire extends FormRequest
 {
     use Permissions;
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,7 +27,7 @@ class DeletePhotoQuestionnaire extends FormRequest
     {
         return [
             'questionnaire_id' => 'required|integer',
-            'file_id' => 'required|integer'
+            'file' => 'required|file'
         ];
     }
 }
