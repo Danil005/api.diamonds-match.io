@@ -29,6 +29,12 @@ class MatchProcessor
 
         # Получаем внешность свою
         $myAppearance = QuestionnaireMyAppearance::where('id', $myAppearanceId)->first();
+
+        if( $partnerAppearance->sex != $myAppearance->sex )
+            return false;
+
+        # Получаем параметры для сравнения
+        $matchParams = array_keys(config('app.questionnaire.value.partner_appearance'));
     }
 
     /**
@@ -63,7 +69,10 @@ class MatchProcessor
                 $this->matched[] = [$currentKey, $mathKey];
 
                 # Сравниваем внешность
-                $this->matchPartnerAppearance($currentItem->partner_appearance_id, $match->my_appearance_id);
+                $matchAppearance = $this->matchPartnerAppearance($currentItem->partner_appearance_id, $match->my_appearance_id);
+
+                # Если мы сразу говорим нет, то идем к следующей итерации
+                if( $matchAppearance === false ) continue;
             }
         }
     }
