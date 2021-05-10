@@ -525,7 +525,7 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         if( $request->has('status') ) {
-            $qa = $qa->where
+//            $qa = $qa->where
         }
 
 
