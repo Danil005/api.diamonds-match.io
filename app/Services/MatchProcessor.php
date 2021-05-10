@@ -255,7 +255,7 @@ class MatchProcessor
      */
     private function getQuestionnaire(): void
     {
-        $this->collection = $this->questionnaire->get();
+        $this->collection = $this->questionnaire->whereNotNull('partner_appearance_id')->get();
     }
 
     private function make()
