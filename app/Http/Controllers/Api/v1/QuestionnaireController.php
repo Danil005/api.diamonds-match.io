@@ -25,8 +25,10 @@ use App\Models\QuestionnairePersonalQualitiesPartner;
 use App\Models\QuestionnaireTest;
 use App\Models\QuestionnaireUploadPhoto;
 use App\Models\SignQuestionnaire;
+use App\Models\User;
 use App\Utils\QuestionnaireUtils;
 use App\Utils\TranslateFields;
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Illuminate\Database\Eloquent\Model;
@@ -274,6 +276,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaire = $questionnaire->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
 
+        $application = Applications::where('link', env('APP_QUESTIONNAIRE_URL') .'/sign'.$questionnaire->sign)->first();
+
         $result = [
             'partner_appearance' => collect(QuestionnairePartnerAppearance::where('id', $questionnaire->partner_appearance_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'personal_qualities_partner' => collect(QuestionnairePersonalQualitiesPartner::where('id', $questionnaire->personal_qualities_partner_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
@@ -281,7 +285,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'test' => collect(QuestionnaireTest::where('id', $questionnaire->test_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'my_appearance' => collect(QuestionnaireMyAppearance::where('id', $questionnaire->my_appearance_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'my_personal_qualities' => collect(QuestionnaireMyPersonalQualities::where('id', $questionnaire->my_personal_qualities_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
-            'my_information' => collect(QuestionnaireMyInformation::where('id', $questionnaire->my_information_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray()
+            'my_information' => collect(QuestionnaireMyInformation::where('id', $questionnaire->my_information_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
+            'application' => $application
         ];
 
         $zodiac = $this->zodiacSigns();
@@ -498,15 +503,63 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage("Дата свидания была назначена на {$request->date} в {$request->time}. Удачи!")->send();
     }
 
+    private function declOfNum($number, $titles)
+    {
+        $cases = array(2, 0, 1, 1, 1, 2);
+        $format = $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
+        return sprintf($format, $number);
+    }
+
     public function get(GetQuestionnaire $request)
     {
+        if( $request->has('to_age') && $request->has('from_age') ) {
+            $qmi = QuestionnaireMyInformation::whereBetween('age', [(int)$request->from_age, (int)$request->to_age]);
+        }
+
+        if( $request->has('sex') && $request->sex != 'all' ) {
+            $qma = QuestionnaireMyAppearance::where('sex', $request->sex);
+        }
+
+        if( $request->has('responsibility') ) {
+            $qa = Applications::where('responsibility', $request->responsibility);
+        }
+
+        if( $request->has('status') ) {
+            $qa = $qa->where
+        }
+
+
         $questionnaire = Questionnaire::whereNotNull('personal_qualities_partner_id')->get();
 
         $result = [];
 
         foreach ($questionnaire as $item) {
-            $appearance = QuestionnaireMyInformation::where('id', $item->my_appearance_id)->first();
-            $myInformation = QuestionnaireMyInformation::where('id', $item->my_information_id)->first();
+            $appearance = QuestionnaireMyAppearance::where('id', $item['my_appearance_id'])->first();
+            $myInformation = QuestionnaireMyInformation::where('id', $item['my_information_id'])->first();
+
+            $applications = collect(Applications::where('link', env('APP_QUESTIONNAIRE_URL') . '/sign/'.$item->sign)->first());
+
+            $time = Carbon::createFromTimeString($item['created_at']);
+
+            $now = Carbon::now();
+            $then = Carbon::createFromTimeString($item['created_at']);
+            $diff = $now->diff($then);
+
+            $titles_hours = ['%d час назад', '%d часа назад', '%d часов назад'];
+            $titles_min = ['%d минуту назад', '%d минуты назад', '%d минут назад'];
+
+
+            if ($diff->days == 0) {
+                if( $diff->h == 0 ) {
+                    $time = $this->declOfNum($diff->i, $titles_min);
+                } else {
+                    $time = $this->declOfNum($diff->h, $titles_hours);
+                }
+            } else if ($diff->days == 1) {
+                $time = 'вчера';
+            } else if ($diff->days == 2) {
+                $time = 'позавчера';
+            }
 
             $city = explode(',', $myInformation['city']);
             $country = trim($city[0]);
@@ -515,13 +568,18 @@ class QuestionnaireController extends QuestionnaireUtils
             $age = $myInformation['age'];
 
             $result[] = [
-                'application' => Applications::where('link', env('APP_QUESTIONNAIRE_URL') . '/sign/'.$item->sign)->first(),
+                'application' => $applications->except(['responsibility'])->toArray(),
                 'city' => $city,
                 'country' => $country,
                 'age' => $this->years($age),
                 'nationality' => $this->ethnicity($appearance['ethnicity']),
-                'responsibility' => ''
+                'responsibility' => User::where('id', explode(',', $applications['responsibility'])[0])->first(),
+                'status' => $item['status_pay'] == 'free' ? 'На оплате' : $applications['service_type'],
+                'time' => $time,
+                'timestamp' => Carbon::createFromTimeString($item['created_at'])->timestamp
             ];
         }
+
+        $this->response()->setMessage('Данные получены')->setData($result)->send();
     }
 }

@@ -28,7 +28,13 @@ class GetQuestionnaire extends FormRequest
     {
         return [
             'search' => 'string|nullable',
-            ''
+            'sex' => 'string|nullable|in:female,male,all',
+            'from_age' => 'integer|nullable|required_with:to_age',
+            'to_age' => 'integer|nullable|required_with:from_age',
+            'status' => 'string|nullable',
+            'city' => 'string|nullable',
+            'country' => 'string|nullable',
+            'responsibility' => 'string|nullable'
         ];
     }
 }

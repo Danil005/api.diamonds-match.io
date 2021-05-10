@@ -47,6 +47,8 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::delete('questionnaire.deleteFile', 'QuestionnaireController@deleteFile');
 
             Route::post('questionnaire.makeDate', 'QuestionnaireController@makeDate');
+
+            Route::get('questionnaire.get', 'QuestionnaireController@get');
         });
     });
 
