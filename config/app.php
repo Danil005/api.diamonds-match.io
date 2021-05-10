@@ -156,7 +156,6 @@ return [
                 'live_city' => 'string|integer',
                 'live_country' => 'string|integer',
                 'age' => 'integer',
-                'birthday' => 'string',
                 'zodiac_signs' => [
                     'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
                     'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',
