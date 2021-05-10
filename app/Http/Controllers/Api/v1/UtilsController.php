@@ -24,7 +24,7 @@ class UtilsController extends Controller
             $query->where('title_ru', 'LIKE', '%'.$data['title'].'%')
                 ->orWhere('title_en', 'LIKE', '%'.$data['title'].'%');
 
-        })->limit(5)->get(['title_ru', 'title_en']);
+        })->limit(25)->get(['title_ru', 'title_en']);
 
         $result = [];
 
