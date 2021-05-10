@@ -646,7 +646,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $result[] = [
                 'name' => $myInformation->name,
                 'city' => $myInformation->city,
-                'photo' => $photos['path'],
+                'photo' => (isset($photos['path'])) ? $photos['path'] : null,
                 'match' => [
                     'total' => $item->total,
                     'appearance' => $item->appearance,
