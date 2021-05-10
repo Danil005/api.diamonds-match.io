@@ -16,6 +16,7 @@ use App\Models\Langs;
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireAppointedDate;
 use App\Models\QuestionnaireFiles;
+use App\Models\QuestionnaireHistory;
 use App\Models\QuestionnaireMyAppearance;
 use App\Models\QuestionnaireMyInformation;
 use App\Models\QuestionnaireMyPersonalQualities;
@@ -581,5 +582,16 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         $this->response()->setMessage('Данные получены')->setData($result)->send();
+    }
+
+    public function getHistory(Request $request)
+    {
+        if( !$request->has('questionnaire_id') )
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        $history = QuestionnaireHistory::where('questionnaire_id', $request->questionnaire_id)->get();
+
+
+        $this->response()->success()->setMessage('Успешно найдено')->setData($history)->send();
     }
 }

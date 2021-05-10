@@ -330,6 +330,29 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\QuestionnaireHistory
+ *
+ * @property int $id
+ * @property int $questionnaire_id
+ * @property string $from
+ * @property string $comment
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereComment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereFrom($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereUpdatedAt($value)
+ */
+	class QuestionnaireHistory extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\QuestionnaireMatch
  *
  * @property int $id

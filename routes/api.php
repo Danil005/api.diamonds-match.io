@@ -49,6 +49,7 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::post('questionnaire.makeDate', 'QuestionnaireController@makeDate');
 
             Route::get('questionnaire.get', 'QuestionnaireController@get');
+            Route::get('questionnaire.getHistory', 'QuestionnaireController@getHistory');
         });
     });
 
