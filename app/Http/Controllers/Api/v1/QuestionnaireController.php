@@ -6,6 +6,7 @@ use App\Http\Requests\Questionnaire\Create;
 use App\Http\Requests\Questionnaire\DeleteFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\DeletePhotoQuestionnaire;
 use App\Http\Requests\Questionnaire\FilesQuestionnaire;
+use App\Http\Requests\Questionnaire\GetQuestionnaire;
 use App\Http\Requests\Questionnaire\MakeDateQuestionnaire;
 use App\Http\Requests\Questionnaire\OpenFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\UploadPhotoQuestionnaire;
@@ -22,6 +23,7 @@ use App\Models\QuestionnairePartnerInformation;
 use App\Models\QuestionnairePersonalQualitiesPartner;
 use App\Models\QuestionnaireTest;
 use App\Models\QuestionnaireUploadPhoto;
+use App\Models\SignQuestionnaire;
 use App\Utils\QuestionnaireUtils;
 use App\Utils\TranslateFields;
 use Hash;
@@ -113,6 +115,111 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->send();
+    }
+
+    public function createFromSite(Create $request)
+    {
+        # Сохраняем все данные
+        $data = [];
+
+        # Делаем проверки на все поля
+        $this->partnerAppearance();
+        $this->personalQualitiesPartner();
+        $this->partnerInformation();
+        $this->test();
+        $this->myAppearance();
+        $this->myPersonalQualities();
+        $this->myInformation();
+
+
+        $partnerAppearance = $request->{config('app.questionnaire.fields.partner_appearance')};
+        $personalQualitiesPartner = array_flip($request->{config('app.questionnaire.fields.personal_qualities_partner')});
+        $partnerInformation = $request->{config('app.questionnaire.fields.partner_information')};
+        $test = $request->{config('app.questionnaire.fields.test')};
+        $myAppearance = $request->{config('app.questionnaire.fields.my_appearance')};
+        $myPersonalQualities = $request->{config('app.questionnaire.fields.my_personal_qualities')};
+        $myInformation = $request->{config('app.questionnaire.fields.my_information')};
+
+        foreach ($personalQualitiesPartner as $key => $item) {
+            $personalQualitiesPartner[$key] = true;
+        }
+
+        foreach ($partnerInformation as $key => $information) {
+            if ($key == 'age' || $key == 'height' || $key == 'weight' || $key == 'languages') {
+                $partnerInformation[$key] = implode(',', $information);
+            }
+
+            if ($key == 'live_country') {
+                $partnerInformation[$key] = $information;
+            }
+
+            if ($key == 'live_city') {
+                $partnerInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+            }
+        }
+
+        foreach ($myInformation as $key => $information) {
+            if ($key == 'languages') {
+                $myInformation[$key] = implode(',', $information);
+            }
+
+            if ($key == 'live_country') {
+                $myInformation[$key] = $information;
+            }
+
+            if ($key == 'live_city') {
+                $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+            }
+        }
+
+
+        # Заносим все в базу данных
+        $partnerAppearance = QuestionnairePartnerAppearance::create($partnerAppearance);
+        $personalQualitiesPartner = QuestionnairePersonalQualitiesPartner::create($personalQualitiesPartner);
+        $partnerInformation = QuestionnairePartnerInformation::create($partnerInformation);
+        $test = QuestionnaireTest::create($test);
+        $myAppearance = QuestionnaireMyAppearance::create($myAppearance);
+        $myPersonalQualities = QuestionnaireMyPersonalQualities::create($myPersonalQualities);
+        $myInformation = QuestionnaireMyInformation::create($myInformation);
+
+        $application = Applications::create([
+            'client_name' => $myInformation->name,
+            'service_type' => 'free',
+            'status' => 0,
+            'questionnaire_id' => null,
+            'responsibility' => null,
+            'link' => null,
+            'link_active' => true,
+            'email' => null,
+            'phone' => null
+        ]);
+
+        # Объединяем ответы в общую базу
+        $questionnaire = Questionnaire::create([
+            'partner_appearance_id' => $partnerAppearance->id,
+            'personal_qualities_partner_id' => $personalQualitiesPartner->id,
+            'partner_information_id' => $partnerInformation->id,
+            'test_id' => $test->id,
+            'my_appearance_id' => $myAppearance->id,
+            'my_personal_qualities_id' => $myPersonalQualities->id,
+            'my_information_id' => $myInformation->id
+        ]);
+
+        $sign = md5(\Illuminate\Support\Str::random(16));
+
+        SignQuestionnaire::create([
+            'application_id' => $application->id,
+            'questionnaire_id' => $questionnaire->id,
+            'sign' => $sign,
+            'active' => true
+        ]);
+        $link = env('APP_QUESTIONNAIRE_URL') .'/sign/'.$sign;
+        Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
+        Applications::where('id', $application->id)->update(['link' => $link]);
+
+        $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->setData([
+            'link_questionnaire' => $link
+        ])->send();
     }
 
     /**
@@ -347,5 +454,10 @@ class QuestionnaireController extends QuestionnaireUtils
         QuestionnaireAppointedDate::create($request->all());
 
         $this->response()->success()->setMessage("Дата свидания была назначена на {$request->date} в {$request->time}. Удачи!")->send();
+    }
+
+    public function get(GetQuestionnaire $request)
+    {
+
     }
 }

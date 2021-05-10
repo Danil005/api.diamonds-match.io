@@ -24,7 +24,7 @@ class Create extends FormRequest
     public function rules()
     {
         return [
-            'sign' => 'required|string',
+            'sign' => 'string|nullable',
             config('app.questionnaire.fields.partner_appearance') => 'required|array',
             config('app.questionnaire.fields.personal_qualities_partner') => 'required|array',
             config('app.questionnaire.fields.partner_information') => 'required|array',

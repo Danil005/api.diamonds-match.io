@@ -34,6 +34,7 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
 
     Route::prefix('questionnaire')->group(function() {
         Route::put('questionnaire.create', 'QuestionnaireController@create');
+        Route::put('questionnaire.createFromSite', 'QuestionnaireController@createFromSite');
 
         Route::middleware('auth:api')->group(function() {
             Route::get('questionnaire.view', 'QuestionnaireController@view');

@@ -12,6 +12,7 @@ use App\Models\QuestionnairePartnerInformation;
 use App\Models\QuestionnairePersonalQualitiesPartner;
 use App\Models\QuestionnaireTest;
 use EZAMA\similar_text;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
 
 class MatchProcessor
@@ -266,6 +267,14 @@ class MatchProcessor
 
             # Проходимся по всем остальным анкетам
             foreach ($this->collection as $mathKey => $match) {
+                $currentId = $currentItem->id;
+                $matchId = $match->id;
+                if( QuestionnaireMatch::where(function(Builder $query) use ($currentId, $matchId){
+                    $query->where('questionnaire_id', $currentId)->where('with_questionnaire_id', $matchId);
+                })->orWhere(function(Builder $query) use($currentId, $matchId) {
+                    $query->where('questionnaire_id', $matchId)->where('with_questionnaire_id', $currentId);
+                })->exists() ) continue;
+
                 # Если эта анкета совпадает с текущей, то пропускаем
                 if ($currentKey == $mathKey) continue;
 
