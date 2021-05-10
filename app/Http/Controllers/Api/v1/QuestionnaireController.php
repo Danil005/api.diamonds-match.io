@@ -12,6 +12,7 @@ use App\Http\Requests\Questionnaire\OpenFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\UploadPhotoQuestionnaire;
 use App\Http\Requests\Questionnaire\View;
 use App\Models\Applications;
+use App\Models\Langs;
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireAppointedDate;
 use App\Models\QuestionnaireFiles;
@@ -28,6 +29,7 @@ use App\Utils\QuestionnaireUtils;
 use App\Utils\TranslateFields;
 use Hash;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -145,8 +147,22 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($partnerInformation as $key => $information) {
-            if ($key == 'age' || $key == 'height' || $key == 'weight' || $key == 'languages') {
+            if ($key == 'age' || $key == 'height' || $key == 'weight') {
                 $partnerInformation[$key] = implode(',', $information);
+            }
+
+            if ($key == 'languages') {
+                $langs = new Langs();
+                foreach ($information as $item) {
+                    $langs = $langs->orWhere('code', $item);
+                }
+                $langs = $langs->get()->toArray();
+
+                $temp = '';
+                foreach ($langs as $item) {
+                    $temp .= $item['nameRU'] . ',';
+                }
+                $partnerInformation[$key] = trim($temp, ',');
             }
 
             if ($key == 'live_country') {
@@ -160,7 +176,17 @@ class QuestionnaireController extends QuestionnaireUtils
 
         foreach ($myInformation as $key => $information) {
             if ($key == 'languages') {
-                $myInformation[$key] = implode(',', $information);
+                $langs = new Langs();
+                foreach ($information as $item) {
+                    $langs = $langs->orWhere('code', $item);
+                }
+                $langs = $langs->get()->toArray();
+
+                $temp = '';
+                foreach ($langs as $item) {
+                    $temp .= $item['nameRU'] . ',';
+                }
+                $myInformation[$key] = trim($temp, ',');
             }
 
             if ($key == 'live_country') {
@@ -213,7 +239,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'sign' => $sign,
             'active' => true
         ]);
-        $link = env('APP_QUESTIONNAIRE_URL') .'/sign/'.$sign;
+        $link = env('APP_QUESTIONNAIRE_URL') . '/sign/' . $sign;
         Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
         Applications::where('id', $application->id)->update(['link' => $link]);
 
@@ -325,7 +351,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $file = $request->file('file');
         $path = 'public/questionnaire/photos/sign_' . $questionnaire->sign;
 
-        $upload = $file->storePubliclyAs($path, md5(Str::random(16)).'.'.$file->getClientOriginalExtension());
+        $upload = $file->storePubliclyAs($path, md5(Str::random(16)) . '.' . $file->getClientOriginalExtension());
 
         $path = str_replace('public/', 'storage/', $upload);
 
@@ -335,7 +361,7 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
         $this->response()->setMessage('Файл загружен')->setData([
-            'path' => env('APP_URL').'/'. $path
+            'path' => env('APP_URL') . '/' . $path
         ])->send();
     }
 
@@ -360,26 +386,26 @@ class QuestionnaireController extends QuestionnaireUtils
         if (empty($questionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
-        if( !in_array($request->type, ['passport', 'agree', 'offer']) )
+        if (!in_array($request->type, ['passport', 'agree', 'offer']))
             $this->response()->error()->setMessage('Неверный тип загрузки файла')->send();
 
         $file = $request->file('file');
-        $path = 'public/questionnaire/files/'.$request->type.'/sign_' . $questionnaire->sign;
+        $path = 'public/questionnaire/files/' . $request->type . '/sign_' . $questionnaire->sign;
 
-        $key = substr(md5($path), 6,12);
-        $name = $request->type.'-encrypted{'.$key.'}.'.$file->getClientOriginalExtension();
+        $key = substr(md5($path), 6, 12);
+        $name = $request->type . '-encrypted{' . $key . '}.' . $file->getClientOriginalExtension();
         $filename = Storage::putFileAs($path, $file, $name);
 
         if ($filename) {
             FileVault::encrypt($filename);
         }
 
-        $path = $path.'/'.str_replace('{'.$key.'}', '{hidden}', $name);
+        $path = $path . '/' . str_replace('{' . $key . '}', '{hidden}', $name);
 
         $name = match ($request->type) {
-            'passport' => 'passport-'.$request->questionnaire_id.'.pdf',
-            'agree' => 'consent-data-processing-'.$request->questionnaire_id.'.pdf',
-            'offer' => 'contract-copy-'.$request->questionnaire_id.'.pdf'
+            'passport' => 'passport-' . $request->questionnaire_id . '.pdf',
+            'agree' => 'consent-data-processing-' . $request->questionnaire_id . '.pdf',
+            'offer' => 'contract-copy-' . $request->questionnaire_id . '.pdf'
         };
 
         QuestionnaireFiles::create([
@@ -392,7 +418,7 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
         $this->response()->setMessage('Файл загружен')->setData([
-            'path' => env('APP_URL').'/'. $path,
+            'path' => env('APP_URL') . '/' . $path,
             'encrypted' => true
         ])->send();
     }
@@ -405,10 +431,10 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $file = QuestionnaireFiles::where('id', $request->file_id)->first();
 
-        if( empty($file) )
+        if (empty($file))
             $this->response()->setMessage('Данный файл не был найден')->send();
 
-        $path = str_replace('{hidden}', '{'.$file['key'].'}', $file['path']).'.enc';
+        $path = str_replace('{hidden}', '{' . $file['key'] . '}', $file['path']) . '.enc';
 
         return response()->streamDownload(function () use ($path) {
             FileVault::streamDecrypt($path);
@@ -424,7 +450,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $file = QuestionnaireFiles::where('id', $request->file_id)->first();
 
         Storage::disk('public')->delete(
-            str_replace('public/', '', str_replace('{hidden}', '{'.$file['key'].'}', $file['path'])).'.enc'
+            str_replace('public/', '', str_replace('{hidden}', '{' . $file['key'] . '}', $file['path'])) . '.enc'
         );
 
         QuestionnaireFiles::where('id', $request->file_id)->delete();
@@ -445,10 +471,10 @@ class QuestionnaireController extends QuestionnaireUtils
         $dateValidation = explode('.', $request->date);
         $timeValidation = explode(':', $request->time);
 
-        if( count($dateValidation) != 3 || strlen($dateValidation[0]) != 2 || strlen($dateValidation[1]) != 2 || strlen($dateValidation[2]) != 4)
+        if (count($dateValidation) != 3 || strlen($dateValidation[0]) != 2 || strlen($dateValidation[1]) != 2 || strlen($dateValidation[2]) != 4)
             $this->response()->error()->setMessage('Неверный формат даты. Необходимо: dd.mm.YYYY')->send();
 
-        if( count($timeValidation) != 2 || strlen($timeValidation[0]) != 2 || strlen($timeValidation[1]) != 2)
+        if (count($timeValidation) != 2 || strlen($timeValidation[0]) != 2 || strlen($timeValidation[1]) != 2)
             $this->response()->error()->setMessage('Неверный формат времени. Необходимо: HH:MM')->send();
 
         QuestionnaireAppointedDate::create($request->all());
