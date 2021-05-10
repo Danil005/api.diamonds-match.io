@@ -30,7 +30,7 @@ class UtilsController extends Controller
         $dup = [];
 
         foreach ($cities as $key=>$item) {
-            if( !in_array($item, $dup) ) {
+            if( !in_array($item['title_ru'], $dup) ) {
                 $result[] = ['value_ru' => $item['title_ru'], 'value_en' => $item['title_en']];
                 $dup[] = $item['title_ru'];
             }
