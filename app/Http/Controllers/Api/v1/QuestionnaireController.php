@@ -500,6 +500,28 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function get(GetQuestionnaire $request)
     {
+        $questionnaire = Questionnaire::whereNotNull('personal_qualities_partner_id')->get();
 
+        $result = [];
+
+        foreach ($questionnaire as $item) {
+            $appearance = QuestionnaireMyInformation::where('id', $item->my_appearance_id)->first();
+            $myInformation = QuestionnaireMyInformation::where('id', $item->my_information_id)->first();
+
+            $city = explode(',', $myInformation['city']);
+            $country = trim($city[0]);
+            $city = trim($city[1]);
+
+            $age = $myInformation['age'];
+
+            $result[] = [
+                'application' => Applications::where('link', env('APP_QUESTIONNAIRE_URL') . '/sign/'.$item->sign)->first(),
+                'city' => $city,
+                'country' => $country,
+                'age' => $this->years($age),
+                'nationality' => $this->ethnicity($appearance['ethnicity']),
+                'responsibility' => ''
+            ];
+        }
     }
 }

@@ -27,9 +27,13 @@ class UtilsController extends Controller
         })->limit(25)->get(['title_ru', 'title_en']);
 
         $result = [];
+        $dup = [];
 
         foreach ($cities as $key=>$item) {
-            $result[] = ['value_ru' => $item['title_ru'], 'value_en' => $item['title_en']];
+            if( !in_array($item, $dup) ) {
+                $result[] = ['value_ru' => $item['title_ru'], 'value_en' => $item['title_en']];
+                $dup[] = $item['title_ru'];
+            }
         }
 
         $this->response()->success()->setMessage('Города получены')->setData($result)->send();
