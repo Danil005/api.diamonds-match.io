@@ -137,7 +137,9 @@ class ApplicationsController extends Controller
     {
         $application = Applications::where('id', $request->id)->first();
 
+        $isLink = false;
         if($request->status == 3) {
+            $isLink = true;
             if( empty($application->link) ) {
                 $sign = md5(Str::random(16));
                 $questionnaire = Questionnaire::create([
@@ -166,7 +168,9 @@ class ApplicationsController extends Controller
             'status' => $request->status
         ]);
 
-        $this->response()->setMessage('Статус изменен')->send();
+        $this->response()->setMessage('Статус изменен')->setData([
+            'link' => $isLink ? $application->link : null
+        ])->send();
     }
 
     public function startWork(StartWorkApplications $applications)
