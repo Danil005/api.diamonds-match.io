@@ -601,7 +601,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
         if( !$request->has('comment') )
-            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+            $this->response()->setMessage('Комментарий не указан')->error()->send();
 
         $history = QuestionnaireHistory::create([
             'questionnaire_id' => $request->questionnaire_id,
@@ -610,5 +610,20 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
         $this->response()->success()->setMessage('История обновлена')->setData($history)->send();
+    }
+
+    public function removeHistory(Request $request)
+    {
+        if( !$request->has('questionnaire_id') )
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        if( !$request->has('history_id') )
+            $this->response()->setMessage('ID-истории не указан')->error()->send();
+
+
+
+        $history = QuestionnaireHistory::where('id', $request->history_id)->delete();
+
+        $this->response()->success()->setMessage('История удалена')->setData($history)->send();
     }
 }

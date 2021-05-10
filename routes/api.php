@@ -51,6 +51,7 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::get('questionnaire.get', 'QuestionnaireController@get');
             Route::get('questionnaire.getHistory', 'QuestionnaireController@getHistory');
             Route::post('questionnaire.addHistory', 'QuestionnaireController@addHistory');
+            Route::delete('questionnaire.removeHistory', 'QuestionnaireController@removeHistory');
         });
     });
 
