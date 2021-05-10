@@ -17,6 +17,7 @@ use App\Models\Questionnaire;
 use App\Models\QuestionnaireAppointedDate;
 use App\Models\QuestionnaireFiles;
 use App\Models\QuestionnaireHistory;
+use App\Models\QuestionnaireMatch;
 use App\Models\QuestionnaireMyAppearance;
 use App\Models\QuestionnaireMyInformation;
 use App\Models\QuestionnaireMyPersonalQualities;
@@ -625,5 +626,37 @@ class QuestionnaireController extends QuestionnaireUtils
         $history = QuestionnaireHistory::where('id', $request->history_id)->delete();
 
         $this->response()->success()->setMessage('История удалена')->setData($history)->send();
+    }
+
+    public function getMatch(Request $request)
+    {
+        if( !$request->has('questionnaire_id') )
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        $qm = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)->get();
+
+        $result = [];
+
+        $with_questionnaire = null;
+        foreach ($qm as $item) {
+            $with_questionnaire = Questionnaire::where('id', $item->with_questionnaire_id)->first();
+            $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $item->with_questionnaire_id)->first();
+            $myInformation = QuestionnaireMyInformation::where('id', $with_questionnaire->my_information_id)->first();
+
+            $result[] = [
+                'name' => $myInformation->name,
+                'city' => $myInformation->city,
+                'photo' => $photos['path'],
+                'match' => [
+                    'total' => $item->total,
+                    'appearance' => $item->appearance,
+                    'personal_qualities' => $item->personal_qualities,
+                    'about_me' => $item->information,
+                    'test' => $item->test,
+                ]
+            ];
+        }
+
+        $this->response()->success()->setMessage('Подходящие анкеты')->setData($result)->send();
     }
 }
