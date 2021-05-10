@@ -56,12 +56,20 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
         $partnerAppearance = $request->{config('app.questionnaire.fields.partner_appearance')};
-        $personalQualitiesPartner = array_flip($request->{config('app.questionnaire.fields.personal_qualities_partner')});
+        $personalQualitiesPartner = $request->{config('app.questionnaire.fields.personal_qualities_partner')};
         $partnerInformation = $request->{config('app.questionnaire.fields.partner_information')};
         $test = $request->{config('app.questionnaire.fields.test')};
         $myAppearance = $request->{config('app.questionnaire.fields.my_appearance')};
         $myPersonalQualities = $request->{config('app.questionnaire.fields.my_personal_qualities')};
         $myInformation = $request->{config('app.questionnaire.fields.my_information')};
+
+        foreach ($personalQualitiesPartner as $key => $item) {
+            if( $item == null ) {
+                unset($personalQualitiesPartner[$key]);
+            }
+        }
+
+        $personalQualitiesPartner = array_flip(array_values($personalQualitiesPartner));
 
         foreach ($personalQualitiesPartner as $key => $item) {
             $personalQualitiesPartner[$key] = true;
@@ -135,12 +143,20 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
         $partnerAppearance = $request->{config('app.questionnaire.fields.partner_appearance')};
-        $personalQualitiesPartner = array_flip($request->{config('app.questionnaire.fields.personal_qualities_partner')});
+        $personalQualitiesPartner = $request->{config('app.questionnaire.fields.personal_qualities_partner')};
         $partnerInformation = $request->{config('app.questionnaire.fields.partner_information')};
         $test = $request->{config('app.questionnaire.fields.test')};
         $myAppearance = $request->{config('app.questionnaire.fields.my_appearance')};
         $myPersonalQualities = $request->{config('app.questionnaire.fields.my_personal_qualities')};
         $myInformation = $request->{config('app.questionnaire.fields.my_information')};
+
+        foreach ($personalQualitiesPartner as $key => $item) {
+            if( $item == null ) {
+                unset($personalQualitiesPartner[$key]);
+            }
+        }
+
+        $personalQualitiesPartner = array_flip(array_values($personalQualitiesPartner));
 
         foreach ($personalQualitiesPartner as $key => $item) {
             $personalQualitiesPartner[$key] = true;
