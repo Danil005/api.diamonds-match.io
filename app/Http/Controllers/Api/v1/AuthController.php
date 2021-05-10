@@ -71,4 +71,9 @@ class AuthController extends Controller
             $this->response()->error()->setMessage('Неверный логин или пароль')->setData([])->send();
         }
     }
+
+    public function getMe()
+    {
+        $this->response()->success()->setMessage('Моя информация')->setData(\Auth::user())->send();
+    }
 }

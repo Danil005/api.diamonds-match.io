@@ -330,6 +330,37 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\QuestionnaireMatch
+ *
+ * @property int $id
+ * @property int $questionnaire_id
+ * @property int $with_questionnaire_id
+ * @property float $appearance
+ * @property float $personal_qualities
+ * @property float $information
+ * @property float $test
+ * @property float $total
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereAppearance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereInformation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch wherePersonalQualities($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereTest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereTotal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereWithQuestionnaireId($value)
+ */
+	class QuestionnaireMatch extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\QuestionnaireMyAppearance
  *
  * @property int $id

@@ -20,6 +20,7 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
 
         Route::middleware('auth:api')->group(function() {
             Route::put('auth.create', 'AuthController@create')->name('auth.create');
+            Route::get('auth.me', 'AuthController@getMe')->name('auth.me');
         });
     });
 
