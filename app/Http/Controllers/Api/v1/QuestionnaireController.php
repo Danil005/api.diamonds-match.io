@@ -594,4 +594,21 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $this->response()->success()->setMessage('Успешно найдено')->setData($history)->send();
     }
+
+    public function addHistory(Request $request)
+    {
+        if( !$request->has('questionnaire_id') )
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        if( !$request->has('comment') )
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        $history = QuestionnaireHistory::create([
+            'questionnaire_id' => $request->questionnaire_id,
+            'comment' => $request->comment
+        ]);
+
+
+        $this->response()->success()->setMessage('История обновлена')->setData($history)->send();
+    }
 }
