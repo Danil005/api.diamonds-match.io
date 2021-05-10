@@ -119,7 +119,8 @@ class ApplicationsController extends Controller
                 'phone' => $application['phone'],
                 'link' => $application['link'],
                 'link_active' => $application['link_active'],
-                'created_at' => $time
+                'created_at' => $time,
+                'created_at_timestamp' => Carbon::createFromTimeString($application['created_at'])->timestamp
             ];
         }
 
