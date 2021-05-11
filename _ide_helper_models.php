@@ -353,6 +353,27 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\QuestionnaireMailing
+ *
+ * @property int $id
+ * @property int $questionnaire_id
+ * @property int $added_questionnaire_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing whereAddedQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing whereQuestionnaireId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMailing whereUpdatedAt($value)
+ */
+	class QuestionnaireMailing extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\QuestionnaireMatch
  *
  * @property int $id

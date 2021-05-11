@@ -205,4 +205,17 @@ class ApplicationsController extends Controller
 
         $this->response()->setMessage('Анкета была разархивирована')->send();
     }
+
+    public function view(Request $request)
+    {
+        if( !$request->has('id') )
+            $this->response()->error()->setMessage('ID-не указан')->send();
+
+        $application = Applications::where('id', $request->id)->first();
+
+        if( empty($application) )
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $this->response()->success()->setMessage('Данные анкеты')->setData($application)->send();
+    }
 }

@@ -63,6 +63,7 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
         Route::middleware('auth:api')->group(function() {
             Route::put('applications.create', 'ApplicationsController@create');
             Route::get('applications.get', 'ApplicationsController@get');
+            Route::get('applications.view', 'ApplicationsController@view');
             Route::post('applications.change', 'ApplicationsController@change');
             Route::post('applications.startWork', 'ApplicationsController@startWork');
             Route::post('applications.update', 'ApplicationsController@update');

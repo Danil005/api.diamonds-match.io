@@ -17,6 +17,7 @@ use App\Models\Questionnaire;
 use App\Models\QuestionnaireAppointedDate;
 use App\Models\QuestionnaireFiles;
 use App\Models\QuestionnaireHistory;
+use App\Models\QuestionnaireMailing;
 use App\Models\QuestionnaireMatch;
 use App\Models\QuestionnaireMyAppearance;
 use App\Models\QuestionnaireMyInformation;
@@ -659,4 +660,21 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $this->response()->success()->setMessage('Подходящие анкеты')->setData($result)->send();
     }
+
+    public function addQuestionnaireMalling(Request $request)
+    {
+        if( !$request->has('questionnaire_id') )
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        if( !$request->has('add_questionnaire_id') )
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        QuestionnaireMailing::create([
+            'questionnaire_id' => $request->questionnaire_id,
+            'added_questionnaire_id' => $request->add_questionnaire_id
+        ]);
+
+        $this->response()->setMessage('Анкета добавлена в рассылку');
+    }
+
 }

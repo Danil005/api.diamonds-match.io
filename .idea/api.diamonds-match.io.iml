@@ -145,6 +145,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/giggsey/locale" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/soarecostin/file-vault" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/manuwhat/similar-text" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/common" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phppresentation" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/pclzip/pclzip" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

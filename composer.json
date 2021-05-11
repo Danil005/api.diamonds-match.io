@@ -18,6 +18,7 @@
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "manuwhat/similar-text": "dev-master",
+        "phpoffice/phppresentation": "^0.9.0",
         "propaganistas/laravel-phone": "^4.3",
         "soarecostin/file-vault": "^1.2"
     },

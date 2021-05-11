@@ -18,10 +18,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('match', function() {
-   $match = new \App\Services\MatchProcessor();
+Route::get('match', function () {
+    $match = new \App\Services\MatchProcessor();
 
-   $match->start(new \App\Models\Questionnaire);
+    $match->start(new \App\Models\Questionnaire);
+});
+
+Route::get('join', function () {
+//    $questionnaire = \App\Models\Questionnaire::getData(function(\Illuminate\Database\Eloquent\Builder $query) {
+//        return $query->where('sex', 'female');
+//    });
 });
 
 Route::get('test', function () {
