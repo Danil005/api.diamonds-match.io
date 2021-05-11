@@ -591,9 +591,36 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
 
+
         foreach ($questionnaires as $key => $item) {
             $photo = QuestionnaireUploadPhoto::where('questionnaire_id', $item->id)->first(['path']);
             $questionnaires[$key]['photo'] = $photo == null ? null : $photo->path;
+
+            $timestamp = Carbon::createFromTimeString($item['created_at'])->timestamp;
+            $now = Carbon::now();
+            $then = Carbon::createFromTimeString($item['created_at']);
+            $diff = $now->diff($then);
+
+            $titles_hours = ['%d час назад', '%d часа назад', '%d часов назад'];
+            $titles_min = ['%d минуту назад', '%d минуты назад', '%d минут назад'];
+
+
+            if ($diff->days == 0) {
+                if( $diff->h == 0 ) {
+                    $time = $this->declOfNum($diff->i, $titles_min);
+                } else {
+                    $time = $this->declOfNum($diff->h, $titles_hours);
+                }
+            } else if ($diff->days == 1) {
+                $time = 'вчера';
+            } else if ($diff->days == 2) {
+                $time = 'позавчера';
+            } else {
+                $time = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y');
+            }
+
+            $questionnaires[$key]['time'] = $time;
+            $questionnaires[$key]['timestamp'] = $timestamp;
         }
 
         $result['questionnaires'] = $questionnaires->toArray();
