@@ -211,7 +211,7 @@ class ApplicationsController extends Controller
         if( !$request->has('id') )
             $this->response()->error()->setMessage('ID-не указан')->send();
 
-        $application = Applications::where('id', $request->id)->first();
+        $application = Applications::where('id', (int)$request->id)->first();
 
         if( empty($application) )
             $this->response()->error()->setMessage('Анкета не найдена')->send();
