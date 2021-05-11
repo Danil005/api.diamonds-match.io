@@ -581,7 +581,8 @@ class QuestionnaireController extends QuestionnaireUtils
             $result['pagination'] = [
                 'total' => $total,
                 'offset' => $offset + 1,
-                'limit' => (int)$request->limit
+                'limit' => (int)$request->limit,
+                'page_available' => ceil($total / (int) $request->limit)
             ];
         }
 
