@@ -568,7 +568,7 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         if( !$filter ) {
-            $total = Questionnaire::count();
+            $total = Questionnaire::whereNotNull('my_personal_qualities_id')->count();
         } else {
             $total = $myQuestionnaire->count();
         }
