@@ -598,7 +598,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $result['questionnaires'] = $questionnaires->toArray();
 
-        $this->response()->setMessage('Данные получены')->setData($result)->send();
+        $this->response()->success()->setMessage('Данные получены')->setData($result)->send();
     }
 
     public function getHistory(Request $request)
