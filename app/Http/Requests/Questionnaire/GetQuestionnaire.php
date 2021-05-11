@@ -31,10 +31,12 @@ class GetQuestionnaire extends FormRequest
             'sex' => 'string|nullable|in:female,male,all',
             'from_age' => 'integer|nullable|required_with:to_age',
             'to_age' => 'integer|nullable|required_with:from_age',
-            'status' => 'string|nullable|in:not_paid,paid,vip',
+            'service_type' => 'string|nullable|in:free,pay,wait,vip',
             'city' => 'string|nullable',
             'country' => 'string|nullable',
-            'responsibility' => 'string|nullable'
+            'responsibility' => 'string|nullable',
+            'page' => 'integer|nullable|required_with:limit',
+            'limit' => 'integer|nullable|required_with:page'
         ];
     }
 }

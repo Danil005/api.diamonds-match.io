@@ -155,7 +155,8 @@ class ApplicationsController extends Controller
 
                 Applications::where('id', $request->id)->update([
                     'link' => env('APP_QUESTIONNAIRE_URL').'/sign/'.$sign,
-                    'link_active' => true
+                    'link_active' => true,
+                    'questionnaire_id' => $questionnaire->id
                 ]);
             }
         } else {
@@ -168,7 +169,7 @@ class ApplicationsController extends Controller
             'status' => $request->status
         ]);
 
-        $this->response()->setMessage('Статус изменен')->setData([
+        $this->response()->success()->setMessage('Статус изменен')->setData([
             'link' => $isLink ? $application->link : null
         ])->send();
     }

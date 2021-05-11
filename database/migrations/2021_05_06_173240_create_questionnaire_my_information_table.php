@@ -16,19 +16,19 @@ class CreateQuestionnaireMyInformationTable extends Migration
         Schema::create('questionnaire_my_information', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('age');
+            $table->integer('age');
             $table->string('birthday');
             $table->string('place_birth');
             $table->string('city');
             $table->string('zodiac_signs');
-            $table->string('height');
-            $table->string('weight');
+            $table->integer('height');
+            $table->integer('weight');
             $table->string('marital_status');
             $table->string('languages');
             $table->boolean('moving_country');
             $table->boolean('moving_city');
             $table->boolean('children');
-            $table->string('children_count')->nullable();
+            $table->integer('children_count')->nullable();
             $table->string('children_desire');
             $table->string('smoking');
             $table->string('alcohol');

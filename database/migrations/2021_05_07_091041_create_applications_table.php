@@ -20,11 +20,14 @@ class CreateApplicationsTable extends Migration
             $table->string('responsibility')->nullable();
             $table->unsignedBigInteger('status')->default(0);
             $table->unsignedBigInteger('questionnaire_id')->nullable();
+            $table->string('sing')->nullable();
             $table->string('link')->nullable();
             $table->boolean('link_active')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('from')->default('email');
+
+            $table->foreign('questionnaire_id')->references('id')->on('questionnaires')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

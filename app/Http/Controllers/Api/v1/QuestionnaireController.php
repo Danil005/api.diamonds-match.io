@@ -34,6 +34,7 @@ use App\Utils\TranslateFields;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -69,7 +70,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $myInformation = $request->{config('app.questionnaire.fields.my_information')};
 
         foreach ($personalQualitiesPartner as $key => $item) {
-            if( $item == null ) {
+            if ($item == null) {
                 unset($personalQualitiesPartner[$key]);
             }
         }
@@ -156,7 +157,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $myInformation = $request->{config('app.questionnaire.fields.my_information')};
 
         foreach ($personalQualitiesPartner as $key => $item) {
-            if( $item == null ) {
+            if ($item == null) {
                 unset($personalQualitiesPartner[$key]);
             }
         }
@@ -262,7 +263,7 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
         $link = env('APP_QUESTIONNAIRE_URL') . '/sign/' . $sign;
         Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
-        Applications::where('id', $application->id)->update(['link' => $link]);
+        Applications::where('id', $application->id)->update(['link' => $link, 'questionnaire_id' => $questionnaire->id]);
 
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->setData([
             'link_questionnaire' => $link
@@ -279,7 +280,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaire = $questionnaire->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
 
-        $application = Applications::where('link', env('APP_QUESTIONNAIRE_URL') .'/sign'.$questionnaire->sign)->first();
+        $application = Applications::where('link', env('APP_QUESTIONNAIRE_URL') . '/sign' . $questionnaire->sign)->first();
 
         $result = [
             'partner_appearance' => collect(QuestionnairePartnerAppearance::where('id', $questionnaire->partner_appearance_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
@@ -515,80 +516,94 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function get(GetQuestionnaire $request)
     {
-        if( $request->has('to_age') && $request->has('from_age') ) {
-            $qmi = QuestionnaireMyInformation::whereBetween('age', [(int)$request->from_age, (int)$request->to_age]);
+        $myQuestionnaire = new Questionnaire();
+        $myQuestionnaire = $myQuestionnaire->my()
+            ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
+
+        $filter = false;
+
+        if ($request->has('sex')) {
+            $filter = true;
+            $myQuestionnaire = $myQuestionnaire->where('sex', $request->sex);
         }
 
-        if( $request->has('sex') && $request->sex != 'all' ) {
-            $qma = QuestionnaireMyAppearance::where('sex', $request->sex);
+        if ($request->has('to_age') && $request->has('from_age')) {
+            $filter = true;
+            $myQuestionnaire = $myQuestionnaire->whereBetween('age', [(int)$request->from_age, (int)$request->to_age]);
         }
 
-        if( $request->has('responsibility') ) {
-            $qa = Applications::where('responsibility', $request->responsibility);
+        if ($request->has('country')) {
+            $filter = true;
+            $myQuestionnaire = $myQuestionnaire->where('city', 'LIKE', '%' . $request->country . '%');
         }
 
-        if( $request->has('status') ) {
-//            $qa = $qa->where
+        if ($request->has('city')) {
+            $filter = true;
+            $myQuestionnaire = $myQuestionnaire->where('city', 'LIKE', '%' . $request->city . '%');
         }
 
+        if ($request->has('service_type')) {
+            $filter = true;
+            $serviceType = match ($request->service_type) {
+                'free' => 'Бесплатно',
+                'pay' => 'Платные услуги',
+                'wait' => 'На оплате',
+                default => 'Услуги VIP'
+            };
 
-        $questionnaire = Questionnaire::whereNotNull('personal_qualities_partner_id')->get();
+            $myQuestionnaire = $myQuestionnaire->where('service_type', 'LIKE', '%' . $serviceType . '%');
+        }
 
+        if ($request->has('responsibility')) {
+            $filter = true;
+            $myQuestionnaire = $myQuestionnaire->where('responsibility', 'LIKE', '%' . $request->responsibility . '%');
+        }
+
+        if ($request->has('search')) {
+            $filter = true;
+            $search = $request->search;
+            $myQuestionnaire = $myQuestionnaire->where(function (Builder $query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            });
+        }
+
+        if( !$filter ) {
+            $total = Questionnaire::count();
+        } else {
+            $total = $myQuestionnaire->count();
+        }
         $result = [];
-
-        foreach ($questionnaire as $item) {
-            $appearance = QuestionnaireMyAppearance::where('id', $item['my_appearance_id'])->first();
-            $myInformation = QuestionnaireMyInformation::where('id', $item['my_information_id'])->first();
-
-            $applications = collect(Applications::where('link', env('APP_QUESTIONNAIRE_URL') . '/sign/'.$item->sign)->first());
-
-            $time = Carbon::createFromTimeString($item['created_at']);
-
-            $now = Carbon::now();
-            $then = Carbon::createFromTimeString($item['created_at']);
-            $diff = $now->diff($then);
-
-            $titles_hours = ['%d час назад', '%d часа назад', '%d часов назад'];
-            $titles_min = ['%d минуту назад', '%d минуты назад', '%d минут назад'];
-
-
-            if ($diff->days == 0) {
-                if( $diff->h == 0 ) {
-                    $time = $this->declOfNum($diff->i, $titles_min);
-                } else {
-                    $time = $this->declOfNum($diff->h, $titles_hours);
-                }
-            } else if ($diff->days == 1) {
-                $time = 'вчера';
-            } else if ($diff->days == 2) {
-                $time = 'позавчера';
-            }
-
-            $city = explode(',', $myInformation['city']);
-            $country = trim($city[0]);
-            $city = trim($city[1]);
-
-            $age = $myInformation['age'];
-
-            $result[] = [
-                'application' => $applications->except(['responsibility'])->toArray(),
-                'city' => $city,
-                'country' => $country,
-                'age' => $this->years($age),
-                'nationality' => $this->ethnicity($appearance['ethnicity']),
-                'responsibility' => User::where('id', explode(',', $applications['responsibility'])[0])->first(),
-                'status' => $item['status_pay'] == 'free' ? 'На оплате' : $applications['service_type'],
-                'time' => $time,
-                'timestamp' => Carbon::createFromTimeString($item['created_at'])->timestamp
+        if ($request->has('page')) {
+            $offset = (int)$request->page - 1;
+            $offset = ($offset == 0) ? 0 : $offset + (int)$request->limit;
+            $myQuestionnaire = $myQuestionnaire->offset($offset);
+            $myQuestionnaire = $myQuestionnaire->limit((int)$request->limit);
+            $result['pagination'] = [
+                'total' => $total,
+                'offset' => $offset + 1,
+                'limit' => (int)$request->limit
             ];
         }
+
+
+        $questionnaires = $myQuestionnaire->get([
+            'questionnaires.id', 'name', 'ethnicity', 'service_type', 'age', 'city', 'responsibility', 'questionnaires.created_at'
+        ]);
+
+
+        foreach ($questionnaires as $key => $item) {
+            $photo = QuestionnaireUploadPhoto::where('questionnaire_id', $item->id)->first(['path']);
+            $questionnaires[$key]['photo'] = $photo == null ? null : $photo->path;
+        }
+
+        $result['questionnaires'] = $questionnaires->toArray();
 
         $this->response()->setMessage('Данные получены')->setData($result)->send();
     }
 
     public function getHistory(Request $request)
     {
-        if( !$request->has('questionnaire_id') )
+        if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
         $history = QuestionnaireHistory::where('questionnaire_id', $request->questionnaire_id)->get();
@@ -599,10 +614,10 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function addHistory(Request $request)
     {
-        if( !$request->has('questionnaire_id') )
+        if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
-        if( !$request->has('comment') )
+        if (!$request->has('comment'))
             $this->response()->setMessage('Комментарий не указан')->error()->send();
 
         $history = QuestionnaireHistory::create([
@@ -616,12 +631,11 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function removeHistory(Request $request)
     {
-        if( !$request->has('questionnaire_id') )
+        if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
-        if( !$request->has('history_id') )
+        if (!$request->has('history_id'))
             $this->response()->setMessage('ID-истории не указан')->error()->send();
-
 
 
         $history = QuestionnaireHistory::where('id', $request->history_id)->delete();
@@ -631,7 +645,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function getMatch(Request $request)
     {
-        if( !$request->has('questionnaire_id') )
+        if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
         $qm = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)->get();
@@ -663,10 +677,10 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function addQuestionnaireMalling(Request $request)
     {
-        if( !$request->has('questionnaire_id') )
+        if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
-        if( !$request->has('add_questionnaire_id') )
+        if (!$request->has('add_questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
         QuestionnaireMailing::create([
