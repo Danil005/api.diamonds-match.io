@@ -107,6 +107,19 @@ class QuestionnaireController extends QuestionnaireUtils
             if ($key == 'live_city') {
                 $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
             }
+
+            if ($key == 'place_birth') {
+                $place_birth = '';
+
+                if (isset($myInformation[$key][0])) {
+                    foreach ($myInformation[$key] as $item) {
+                        $place_birth .= $item . ',';
+                    }
+                    $myInformation[$key] = trim($place_birth, ',');
+                } else {
+                    $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
+                }
+            }
         }
 
 
@@ -217,6 +230,20 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($key == 'live_city') {
                 $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+            }
+
+            if ($key == 'place_birth') {
+                $place_birth = '';
+
+                if (isset($myInformation[$key][0])) {
+                    foreach ($myInformation[$key] as $item) {
+                        $place_birth .= $item . ',';
+                    }
+
+                    $myInformation[$key] = trim($place_birth, ',');
+                } else {
+                    $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
+                }
             }
         }
 
@@ -567,7 +594,7 @@ class QuestionnaireController extends QuestionnaireUtils
             });
         }
 
-        if( !$filter ) {
+        if (!$filter) {
             $total = Questionnaire::whereNotNull('my_personal_qualities_id')->count();
         } else {
             $total = $myQuestionnaire->count();
@@ -582,7 +609,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 'total' => $total,
                 'offset' => $offset + 1,
                 'limit' => (int)$request->limit,
-                'page_available' => ceil($total / (int) $request->limit)
+                'page_available' => ceil($total / (int)$request->limit)
             ];
         }
 
@@ -590,7 +617,6 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaires = $myQuestionnaire->get([
             'questionnaires.id', 'name', 'ethnicity', 'service_type', 'age', 'city', 'responsibility', 'questionnaires.created_at'
         ]);
-
 
 
         foreach ($questionnaires as $key => $item) {
@@ -607,7 +633,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
             if ($diff->days == 0) {
-                if( $diff->h == 0 ) {
+                if ($diff->h == 0) {
                     $time = $this->declOfNum($diff->i, $titles_min);
                 } else {
                     $time = $this->declOfNum($diff->h, $titles_hours);

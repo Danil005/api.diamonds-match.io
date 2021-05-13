@@ -10,12 +10,11 @@ class QuestionnairePersonalQualitiesPartner extends Model
     use HasFactory;
 
     protected $fillable = [
-        'calm', 'energetic', 'happy', 'modest',
-        'purposeful', 'weak-willed', 'self', 'dependent',
-        'feminine', 'courageous', 'confident', 'delicate',
-        'live_here_now', 'pragmatic', 'graceful', 'sociable',
-        'smiling', 'housewifely', 'ambitious', 'artistic',
-        'good', 'aristocratic', 'stylish', 'economical', 'business',
-        'sports', 'fearless', 'shy', 'playful'
+        'calm', 'energetic', 'indifferent_life',
+        'live_in_moment', 'pragmatic', 'ambitious', 'modest', 'self', 'need_support',
+        'housewifely', 'lover_going_out', 'home', 'adventuress', 'rational',
+        'aristocratic', 'strong-willed', 'soft', 'lark', 'owl', 'humanitarian', 'mathematical',
+        'mature', 'sport', 'simple', 'indifferent_sport', 'cautious', 'extrovert', 'open',
+        'infantile', 'introvert'
     ];
 }

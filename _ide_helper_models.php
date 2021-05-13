@@ -20,14 +20,15 @@ namespace App\Models{
  * @property string|null $responsibility
  * @property int $status
  * @property int|null $questionnaire_id
+ * @property string|null $sing
  * @property string|null $link
  * @property bool|null $link_active
  * @property string|null $email
  * @property string|null $phone
+ * @property string $from
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $from
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Applications newQuery()
  * @method static \Illuminate\Database\Query\Builder|Applications onlyTrashed()
@@ -44,6 +45,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereQuestionnaireId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereResponsibility($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereServiceType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Applications whereSing($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Applications whereUpdatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|Applications withTrashed()
@@ -441,18 +443,20 @@ namespace App\Models{
  * App\Models\QuestionnaireMyInformation
  *
  * @property int $id
- * @property string $age
+ * @property string $name
+ * @property int $age
+ * @property string $birthday
  * @property string $place_birth
  * @property string $city
  * @property string $zodiac_signs
- * @property string $height
- * @property string $weight
+ * @property int $height
+ * @property int $weight
  * @property string $marital_status
  * @property string $languages
  * @property bool $moving_country
  * @property bool $moving_city
  * @property bool $children
- * @property string|null $children_count
+ * @property int|null $children_count
  * @property string $children_desire
  * @property string $smoking
  * @property string $alcohol
@@ -485,8 +489,6 @@ namespace App\Models{
  * @property string $talents
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $name
- * @property string|null $birthday
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyInformation query()
@@ -548,70 +550,72 @@ namespace App\Models{
  * @property int $id
  * @property bool $calm
  * @property bool $energetic
- * @property bool $happy
- * @property bool $modest
- * @property bool $purposeful
- * @property bool $weak-willed
- * @property bool $self
- * @property bool $dependent
- * @property bool $feminine
- * @property bool $courageous
- * @property bool $confident
- * @property bool $delicate
- * @property bool $live_here_now
+ * @property bool $live_in_moment
  * @property bool $pragmatic
- * @property bool $graceful
- * @property bool $sociable
- * @property bool $smiling
- * @property bool $housewifely
  * @property bool $ambitious
- * @property bool $artistic
- * @property bool $good
+ * @property bool $modest
+ * @property bool $self
+ * @property bool $need_support
+ * @property bool $housewifely
+ * @property bool $indifferent_life
  * @property bool $aristocratic
- * @property bool $stylish
- * @property bool $economical
- * @property bool $business
- * @property bool $sports
- * @property bool $fearless
- * @property bool $shy
- * @property bool $playful
+ * @property bool $simple
+ * @property bool $sport
+ * @property bool $indifferent_sport
+ * @property bool $lover_going_out
+ * @property bool $home
+ * @property bool $adventuress
+ * @property bool $rational
+ * @property bool $strong-willed
+ * @property bool $soft
+ * @property bool $lark
+ * @property bool $owl
+ * @property bool $humanitarian
+ * @property bool $mathematical
+ * @property bool $open
+ * @property bool $cautious
+ * @property bool $extrovert
+ * @property bool $introvert
+ * @property bool $infantile
+ * @property bool $mature
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereAdventuress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereAmbitious($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereAristocratic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereArtistic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereBusiness($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereCalm($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereConfident($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereCourageous($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereCautious($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereDelicate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereDependent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereEconomical($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereEnergetic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereFearless($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereFeminine($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereGood($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereGraceful($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereHappy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereExtrovert($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereHome($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereHousewifely($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereHumanitarian($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereLiveHereNow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereIndifferentLife($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereIndifferentSport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereInfantile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereIntrovert($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereLark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereLiveInMoment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereLoverGoingOut($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereMathematical($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereMature($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereModest($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities wherePlayful($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereNeedSupport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereOpen($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereOwl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities wherePragmatic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities wherePurposeful($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereRational($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereSelf($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereShy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereSmiling($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereSociable($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereSports($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereStylish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereSimple($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereSoft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereSport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereStrongWilled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMyPersonalQualities whereWeakWilled($value)
  */
 	class QuestionnaireMyPersonalQualities extends \Eloquent {}
 }
@@ -707,70 +711,72 @@ namespace App\Models{
  * @property int $id
  * @property bool $calm
  * @property bool $energetic
- * @property bool $happy
- * @property bool $modest
- * @property bool $purposeful
- * @property bool $weak-willed
- * @property bool $self
- * @property bool $dependent
- * @property bool $feminine
- * @property bool $courageous
- * @property bool $confident
- * @property bool $delicate
- * @property bool $live_here_now
+ * @property bool $live_in_moment
  * @property bool $pragmatic
- * @property bool $graceful
- * @property bool $sociable
- * @property bool $smiling
- * @property bool $housewifely
  * @property bool $ambitious
- * @property bool $artistic
- * @property bool $good
+ * @property bool $modest
+ * @property bool $self
+ * @property bool $need_support
+ * @property bool $housewifely
+ * @property bool $indifferent_life
  * @property bool $aristocratic
- * @property bool $stylish
- * @property bool $economical
- * @property bool $business
- * @property bool $sports
- * @property bool $fearless
- * @property bool $shy
- * @property bool $playful
+ * @property bool $simple
+ * @property bool $sport
+ * @property bool $indifferent_sport
+ * @property bool $lover_going_out
+ * @property bool $home
+ * @property bool $adventuress
+ * @property bool $rational
+ * @property bool $strong-willed
+ * @property bool $soft
+ * @property bool $lark
+ * @property bool $owl
+ * @property bool $humanitarian
+ * @property bool $mathematical
+ * @property bool $open
+ * @property bool $cautious
+ * @property bool $extrovert
+ * @property bool $introvert
+ * @property bool $infantile
+ * @property bool $mature
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereAdventuress($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereAmbitious($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereAristocratic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereArtistic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereBusiness($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereCalm($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereConfident($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereCourageous($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereCautious($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereDelicate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereDependent($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereEconomical($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereEnergetic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereFearless($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereFeminine($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereGood($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereGraceful($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereHappy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereExtrovert($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereHome($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereHousewifely($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereHumanitarian($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereLiveHereNow($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereIndifferentLife($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereIndifferentSport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereInfantile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereIntrovert($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereLark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereLiveInMoment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereLoverGoingOut($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereMathematical($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereMature($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereModest($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner wherePlayful($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereNeedSupport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereOpen($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereOwl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner wherePragmatic($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner wherePurposeful($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereRational($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereSelf($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereShy($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereSmiling($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereSociable($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereSports($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereStylish($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereSimple($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereSoft($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereSport($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereStrongWilled($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionnairePersonalQualitiesPartner whereWeakWilled($value)
  */
 	class QuestionnairePersonalQualitiesPartner extends \Eloquent {}
 }
@@ -859,25 +865,9 @@ namespace App\Models{
 /**
  * App\Models\QuestionsTest
  *
- * @property int $id
- * @property string $field
- * @property string $question_ru
- * @property string $question_en
- * @property string $answers_ru
- * @property string $answers_en
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest query()
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereAnswersEn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereAnswersRu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereField($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereQuestionEn($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereQuestionRu($value)
- * @method static \Illuminate\Database\Eloquent\Builder|QuestionsTest whereUpdatedAt($value)
  */
 	class QuestionsTest extends \Eloquent {}
 }
