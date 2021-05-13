@@ -30,6 +30,11 @@ Route::get('join', function () {
 //    });
 });
 
+Route::get('/countries.json', function() {
+   $countries = \App\Models\Countries::get();
+
+   return response()->json($countries);
+});
 Route::get('test', function () {
     $langs = \App\Models\Langs::get();
 
