@@ -74,6 +74,12 @@ class AuthController extends Controller
 
     public function getMe()
     {
-        $this->response()->success()->setMessage('Моя информация')->setData(\Auth::user())->send();
+        $user = \Auth::user();
+
+        if( !$user ) {
+            User::where('id', $user->id)->update(['online' => true]);
+        }
+
+        $this->response()->success()->setMessage('Моя информация')->setData($user)->send();
     }
 }

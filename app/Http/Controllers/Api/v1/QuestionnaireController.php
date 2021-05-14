@@ -644,7 +644,7 @@ class QuestionnaireController extends QuestionnaireUtils
     public function get(GetQuestionnaire $request)
     {
         $myQuestionnaire = new Questionnaire();
-        
+
         if( $request->has('is_archive') ) {
             $myQuestionnaire = $myQuestionnaire->withTrashed();
         }
