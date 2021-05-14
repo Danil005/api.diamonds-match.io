@@ -45,8 +45,8 @@ class UtilsController extends Controller
         if($request->has('title')) {
             $countries = Countries::where(function (Builder $query) use ($data) {
 
-                $query->where('title_ru', 'LIKE', '%' . $data['title'] . '%')
-                    ->orWhere('title_en', 'LIKE', '%' . $data['title'] . '%');
+                $query->where('title_ru', 'ILIKE', '%' . $data['title'] . '%')
+                    ->orWhere('title_en', 'ILIKE', '%' . $data['title'] . '%');
 
             })->limit(5)->get(['title_ru', 'title_en']);
         } else {
