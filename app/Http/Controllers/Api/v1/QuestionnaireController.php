@@ -694,6 +694,8 @@ class QuestionnaireController extends QuestionnaireUtils
             });
         }
 
+        if( $request->has('archive') )
+
         if (!$filter) {
             $total = Questionnaire::whereNotNull('my_personal_qualities_id')->count();
         } else {
