@@ -21,7 +21,7 @@ class UtilsController extends Controller
 
         $cities = Cities::where(function(Builder $query) use ($data){
 
-            $query->where('LOWER(title_ru)', 'LIKE', '%'.$data['title'].'%');
+            $query->where('title_ru', 'ILIKE', '%'.$data['title'].'%');
 
         })->limit(25)->get(['title_ru', 'title_en']);
 
