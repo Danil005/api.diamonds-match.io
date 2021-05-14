@@ -56,6 +56,8 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::get('questionnaire.getMatch', 'QuestionnaireController@getMatch');
             Route::get('questionnaire.getMakeDate', 'QuestionnaireController@getMakeDate');
             Route::get('questionnaire.getAppointedDate', 'QuestionnaireController@getAppointedDate');
+
+            Route::post('questionnaire.setStatus', 'QuestionnaireController@setStatus');
         });
     });
 

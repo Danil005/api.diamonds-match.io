@@ -871,7 +871,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('status'))
             $this->response()->setMessage('Статус не указан')->error()->send();
 
-        if( in_array($request->status, ['vip', 'pay', 'free']) )
+        if( !in_array($request->status, ['vip', 'pay', 'free']) )
             $this->response()->setMessage('Такого статуса не существует. Доступные: vip, pay, free')->error()->send();
 
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
@@ -886,6 +886,10 @@ class QuestionnaireController extends QuestionnaireUtils
 
         Questionnaire::where('id', $request->questionnaire_id)->update([
             'status_pay' => $request->status
+        ]);
+
+        Applications::where('questionnaire_id', $request->questionnaire_id)->update([
+            'service_type' => $service_type
         ]);
 
         $this->response()->success()->setMessage('Статус изменен')->send();
