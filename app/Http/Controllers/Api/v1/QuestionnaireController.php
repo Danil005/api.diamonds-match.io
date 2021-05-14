@@ -645,14 +645,13 @@ class QuestionnaireController extends QuestionnaireUtils
     {
         $myQuestionnaire = new Questionnaire();
 
-        if( $request->has('is_archive') ) {
-            $myQuestionnaire = $myQuestionnaire->withTrashed();
-        }
-
         $myQuestionnaire = $myQuestionnaire->my()
             ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
         $filter = false;
+        if( $request->has('is_archive') ) {
+            $myQuestionnaire = $myQuestionnaire->whereNotNull('deleted_at');
+        }
 
 
         if ($request->has('sex')) {
