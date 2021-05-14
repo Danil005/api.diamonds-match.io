@@ -106,6 +106,8 @@ class ApplicationsController extends Controller
                 $time = 'вчера';
             } else if ($diff->days == 2) {
                 $time = 'позавчера';
+            } else {
+                $time = $time->format('d.m.Y');
             }
 
 
