@@ -113,7 +113,8 @@ class ApplicationsController extends Controller
                 'id' => $application['id'],
                 'status' => $application['status'],
                 'client_name' => $application['client_name'],
-                'responsibility' => User::where('id', explode(',', $application['responsibility']))->first(['id', 'name', 'avatar', 'role']),
+                'responsibility' => $application['responsibility'] ??
+                    User::where('id', explode(',', $application['responsibility']))->first(['id', 'name', 'avatar', 'role']),
                 'service_type' => $application['service_type'],
                 'email' => $application['email'],
                 'phone' => $application['phone'],

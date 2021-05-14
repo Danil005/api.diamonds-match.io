@@ -314,7 +314,7 @@ trait TranslateFields
         try {
             return $data[$quality];
         } catch (\Exception $exception) {
-            dd($quality);
+            return $quality;
         }
     }
 }

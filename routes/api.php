@@ -54,6 +54,8 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::delete('questionnaire.removeHistory', 'QuestionnaireController@removeHistory');
 
             Route::get('questionnaire.getMatch', 'QuestionnaireController@getMatch');
+            Route::get('questionnaire.getMakeDate', 'QuestionnaireController@getMakeDate');
+            Route::get('questionnaire.getAppointedDate', 'QuestionnaireController@getAppointedDate');
         });
     });
 
@@ -69,6 +71,12 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::post('applications.update', 'ApplicationsController@update');
             Route::delete('applications.delete', 'ApplicationsController@delete');
             Route::post('applications.unarchive', 'ApplicationsController@unarchive');
+        });
+    });
+
+    Route::prefix('analytics')->group(function() {
+        Route::middleware('auth:api')->group(function() {
+            Route::get('analytics.get', 'AnalyticsController@get');
         });
     });
 

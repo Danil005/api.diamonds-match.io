@@ -332,7 +332,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaire = $questionnaire->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
 
-        $application = Applications::where('link', env('APP_QUESTIONNAIRE_URL') . '/sign' . $questionnaire->sign)->first();
+        $application = Applications::where('questionnaire_id', $request->id)->first();
 
         $result = [
             'partner_appearance' => collect(QuestionnairePartnerAppearance::where('id', $questionnaire->partner_appearance_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
@@ -342,7 +342,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'my_appearance' => collect(QuestionnaireMyAppearance::where('id', $questionnaire->my_appearance_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'my_personal_qualities' => collect(QuestionnaireMyPersonalQualities::where('id', $questionnaire->my_personal_qualities_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'my_information' => collect(QuestionnaireMyInformation::where('id', $questionnaire->my_information_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
-            'application' => $application
+            'application' => $application,
+            'appointed_data' => QuestionnaireAppointedDate::where('questionnaire_id', $request->id)->first(),
         ];
 
         $zodiac = $this->zodiacSigns();
@@ -361,8 +362,12 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['personal_qualities_partner'] = $temp;
 
         foreach ($result['my_personal_qualities'] as $key => $item) {
-            $result['my_personal_qualities'][$this->personalQuality($key, $result['my_appearance']['sex'])] = $item;
-            unset($result['my_personal_qualities'][$key]);
+            try {
+                $result['my_personal_qualities'][$this->personalQuality($key, $result['my_appearance']['sex'])] = $item;
+                unset($result['my_personal_qualities'][$key]);
+            } catch (\Exception) {
+
+            }
         }
 
         // Партнер
@@ -560,6 +565,75 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage("Дата свидания была назначена на {$request->date} в {$request->time}. Удачи!")->send();
     }
 
+    public function getMakeDate(Request $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $matching = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)
+            ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.questionnaire_id')
+            ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaire_matches.questionnaire_id')
+            ->get(['questionnaire_id', 'with_questionnaire_id', 'name']);
+
+        $this->response()->success()->setMessage('Доступные свидания')->setData($matching)->send();
+    }
+
+    public function getAppointedDate(Request $request)
+    {
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $makeDate = QuestionnaireAppointedDate::where('questionnaire_id', $request->questionnaire_id)->first();
+        if (empty($makeDate))
+            $this->response()->error()->setMessage('Дата не найдена')->send();
+
+        $matching = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)
+            ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.questionnaire_id')
+            ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaire_matches.questionnaire_id')
+            ->first(['questionnaire_id', 'with_questionnaire_id', 'name', 'total', 'appearance', 'information', 'about_me', 'test', 'personal_qualities']);
+
+        $partner = QuestionnaireMatch::where('with_questionnaire_id', $makeDate->with_questionnaire_id)
+            ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.with_questionnaire_id')
+            ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaire_matches.with_questionnaire_id')
+            ->first(['name']);
+
+        $questionnaire = new Questionnaire();
+
+        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
+            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except(['sex'])->toArray()
+        )->toArray();
+
+        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $makeDate->with_questionnaire_id)->first(
+            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except(['sex'])->toArray()
+        )->toArray();
+
+        $requirements = [];
+
+        foreach ($myAppearance as $key=>$item) {
+            if( $key == 'sex' ) continue;
+
+            if( $item == $partnerAppearance[$key] || $item == null || $partnerAppearance[$key] == null )
+                $requirements[$key] = true;
+            else
+                $requirements[$key] = false;
+        }
+
+        $result = [
+            'matching_as' => $matching->total,
+            'partner_questionnaire_id' => $makeDate->with_questionnaire_id,
+            'matching' => $matching->toArray(),
+            'requirements' => $requirements,
+            'names' => [
+                'me' => $matching->name,
+                'partner' => $partner->name
+            ]
+        ];
+
+        $this->response()->success()->setMessage('Доступные свидания')->setData($result)->send();
+    }
+
     private function declOfNum($number, $titles)
     {
         $cases = array(2, 0, 1, 1, 1, 2);
@@ -743,11 +817,12 @@ class QuestionnaireController extends QuestionnaireUtils
                 'city' => $myInformation->city,
                 'photo' => (isset($photos['path'])) ? $photos['path'] : null,
                 'match' => [
-                    'total' => $item->total,
-                    'appearance' => $item->appearance,
-                    'personal_qualities' => $item->personal_qualities,
-                    'about_me' => $item->information,
-                    'test' => $item->test,
+                    'total' => (float)$item->total,
+                    'appearance' => (float)$item->appearance,
+                    'personal_qualities' => (float)$item->personal_qualities,
+                    'form' => (float)$item->information,
+                    'about_me' => (float)$item->about_me,
+                    'test' => (float)$item->test,
                 ]
             ];
         }

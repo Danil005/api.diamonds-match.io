@@ -11,6 +11,6 @@ class QuestionnaireMatch extends Model
 
     protected $fillable = [
         'questionnaire_id', 'with_questionnaire_id', 'total',
-        'test', 'appearance', 'personal_qualities', 'information'
+        'test', 'appearance', 'personal_qualities', 'information', 'about_me'
     ];
 }
