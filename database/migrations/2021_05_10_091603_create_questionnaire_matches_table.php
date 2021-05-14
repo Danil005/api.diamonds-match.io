@@ -21,6 +21,7 @@ class CreateQuestionnaireMatchesTable extends Migration
             $table->float('personal_qualities')->default(0);
             $table->float('information')->default(0);
             $table->float('test')->default(0);
+            $table->float('about_me')->default(0);
             $table->float('total')->default(0);
 
             $table->foreign('questionnaire_id')->on('questionnaires')->references('id')->onDelete('cascade');

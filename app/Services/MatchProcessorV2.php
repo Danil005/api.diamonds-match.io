@@ -6,6 +6,7 @@ use App\Models\Questionnaire;
 use App\Models\QuestionnaireMatch;
 use App\Utils\Match\AboutMeMatch;
 use App\Utils\Match\AppearancesMatch;
+use App\Utils\Match\FormMatch;
 use App\Utils\Match\ProcessCore;
 use App\Utils\Match\QualitiesMatch;
 use App\Utils\Match\TestMatch;
@@ -25,7 +26,10 @@ class MatchProcessorV2
     # Подключаем модуль проверки теста
     use TestMatch;
 
-    # Подключаем модуль о себе
+    # Подключаем модуль проверки анкеты
+    use FormMatch;
+
+    # Подключаем модуль проверки о себе
     use AboutMeMatch;
 
     /**
@@ -66,11 +70,24 @@ class MatchProcessorV2
     protected int $currentPartnerId;
 
     /**
-     * Глобальные переменные
+     * ID-мой
+     *
+     * @var int
+     */
+    protected int $currentMyId;
+
+    /**
+     * Функции для матча
      *
      * @var array
      */
-    protected array $fieldsGlobal = [];
+    protected array $matchFunctions = [
+        'matchAppearances',
+        'matchQualities',
+        'matchTest',
+        'matchForm',
+        'matchAboutMe'
+    ];
 
     /**
      * Удалить стандартные поля
@@ -80,7 +97,8 @@ class MatchProcessorV2
     private array $defaultExcept = [
         'sign', 'partner_appearance_id', 'personal_qualities_partner_id', 'partner_information_id',
         'test_id', 'my_appearance_id', 'my_personal_qualities_id', 'my_information_id',
-        'manager_id', 'status_pay', 'deleted_at', 'created_at', 'updated_at'
+        'manager_id', 'status_pay', 'deleted_at', 'created_at', 'updated_at',
+        'application_id'
     ];
 
     /**
@@ -89,6 +107,13 @@ class MatchProcessorV2
      * @var Collection
      */
     private Collection $matchResult;
+
+    /**
+     * Финальный результат с инвертированием
+     *
+     * @var array
+     */
+    private array $matchResultFinal;
 
 
     /**
@@ -143,14 +168,6 @@ class MatchProcessorV2
      */
     private function handler()
     {
-        $this->fieldsGlobal = [
-            ...array_keys(config('app.questionnaire.value.partner_appearance')),
-            ...array_keys(config('app.questionnaire.value.my_personal_qualities')),
-            ...array_keys(config('app.questionnaire.value.test')),
-            ...array_keys(config('app.questionnaire.value.my_information'))
-        ];
-        dd($this->fieldsGlobal);
-
         # Получаем все данные по партнеру
         $partner = $this->partner->get();
 
@@ -164,6 +181,8 @@ class MatchProcessorV2
             # Очищаем лишние поля
             $this->except($this->currentMy);
 
+            $this->currentMyId = $this->currentMy['questionnaire_id'];
+
             foreach ($partner as $keyPartner => $partnerItem) {
                 # Устанавливаем текущего
                 $this->currentPartner = collect($partnerItem);
@@ -175,27 +194,37 @@ class MatchProcessorV2
                 # Проверяем, подходит ли нам данный пол или нет
                 if (!$this->isSex()) continue;
 
-                $this->currentPartnerId = $this->currentPartner['id'];
+                $this->currentPartnerId = $this->currentPartner['questionnaire_id'];
 
                 $this->matchResult = collect([
-                    'currentMeId' => $meItem->id,
-                    'currentPartnerId' => $partnerItem->id
+                    'currentMeId' => $this->currentMyId,
+                    'currentPartnerId' => $this->currentPartnerId
                 ]);
 
                 # Проверяем, что эта связка уже не была проверена
-                if (!$this->validNotMatch($meItem->id, $partnerItem->id)) continue;
+                if (!$this->validNotMatch($this->currentMyId, $this->currentPartnerId)) continue;
 
                 # Выполнить все матчи
-                $this->doMatch([
-                    'matchAppearances',
-                    'matchQualities',
-                    'matchTest',
-                    'matchAboutMe'
+                $result = $this->doMatch($this->matchFunctions);
+
+                # Добавляем в базу матча
+                QuestionnaireMatch::create([
+                    'questionnaire_id' => $result['currentMeId'],
+                    'with_questionnaire_id' => $result['currentPartnerId'],
+                    'about_me' => $result['about_me'],
+                    'appearance' => $result['appearances'],
+                    'test' => $result['test'],
+                    'information' => $result['form'],
+                    'personal_qualities' => $result['qualities'],
+                    'total' => $result['total']
                 ]);
             }
         }
     }
 
+    /**
+     *
+     */
     /**
      * Запустить
      *
@@ -206,10 +235,10 @@ class MatchProcessorV2
         $this->questionnaire = $questionnaire;
 
         # Получаем модель запроса для моих данных
-        $this->my = $this->questionnaire->my(true);
+        $this->my = $this->questionnaire->my(true)->whereNotNull('my_appearance_id');
 
         # Получаем модель запроса для партнеров
-        $this->partner = $this->questionnaire->partner(true);
+        $this->partner = $this->questionnaire->partner(true)->whereNotNull('my_appearance_id');
 
         # Выполнить обработчик
         $this->handler();

@@ -28,7 +28,8 @@ class Questionnaire extends Model
         $builder = $this
             ->join('questionnaire_my_appearances as appearances', 'appearances.id', '=', 'questionnaires.my_appearance_id')
             ->join('questionnaire_my_personal_qualities as personal_qualities', 'personal_qualities.id', '=', 'questionnaires.my_personal_qualities_id')
-            ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaires.my_information_id');
+            ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaires.my_information_id')
+            ->join('sign_questionnaires as sign', 'sign.id', '=', 'questionnaires.id');
 
         return !$withTest ? $builder : $builder->join('questionnaire_tests as test', 'test.id', '=', 'questionnaires.test_id');
 
@@ -42,7 +43,8 @@ class Questionnaire extends Model
     public function partner(bool $withTest = false, bool $myInformation = false): Builder|\Illuminate\Database\Query\Builder
     {
         $builder = $this->join('questionnaire_partner_appearances as appearances', 'appearances.id', '=', 'questionnaires.partner_appearance_id')
-            ->join('questionnaire_personal_qualities_partners as personal_qualities', 'personal_qualities.id', '=', 'questionnaires.personal_qualities_partner_id');
+            ->join('questionnaire_personal_qualities_partners as personal_qualities', 'personal_qualities.id', '=', 'questionnaires.personal_qualities_partner_id')
+            ->join('sign_questionnaires as sign', 'sign.id', '=', 'questionnaires.id');
 
         if (!$myInformation) {
             $builder = $builder->join('questionnaire_partner_information as information', 'information.id', '=', 'questionnaires.partner_information_id');
