@@ -2,35 +2,36 @@
 
 namespace App\Events;
 
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use JetBrains\PhpStorm\Pure;
 
 class NotifyPushed
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    private string $date = '';
+    private string $message = '';
+    private mixed $payload = [];
+
+    public function __construct(string $message, mixed $payload = [])
     {
-        //
+        $this->date = Carbon::now()->format('d.m.Y H:i');
+        $this->message = $message;
+        $this->payload = $payload;
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return \Illuminate\Broadcasting\Channel
      */
-    public function broadcastOn()
+    #[Pure] public function broadcastOn(): Channel
     {
-        return new PrivateChannel('channel-name');
+        return new Channel('notify');
     }
 }

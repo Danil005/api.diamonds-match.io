@@ -59,7 +59,7 @@ class ApplicationsController extends Controller
         $applications = new Applications();
 
         if( $request->has('archive_only') ) {
-            $applications = $applications->withTrashed()->whereNotNull('deleted_at');
+            $applications = $applications->withTrashed()->whereNotNull('applications.deleted_at');
         }
 
         if( $request->has('responsibility_id') ) {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\NotifyPushed;
 use Dejurin\GoogleTranslateForFree;
 use Illuminate\Support\Facades\Route;
 
@@ -16,6 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('fire', function() {
+    event(new NotifyPushed('Появилась новая заявка', [
+        'application_id' => 1,
+    ]));
 });
 
 Route::get('match', function () {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\v1;
 
+use App\Events\NotifyPushed;
 use App\Http\Requests\Questionnaire\Create;
 use App\Http\Requests\Questionnaire\DeleteFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\DeletePhotoQuestionnaire;
@@ -316,6 +317,14 @@ class QuestionnaireController extends QuestionnaireUtils
         $link = env('APP_QUESTIONNAIRE_URL') . '/sign/' . $sign;
         Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
         Applications::where('id', $application->id)->update(['link' => $link, 'questionnaire_id' => $questionnaire->id]);
+
+        event(new NotifyPushed('Появилась новая заявка', [
+            'application_id' => $application->id,
+        ]));
+
+        event(new NotifyPushed('Появилась новая анкета', [
+            'questionnaire_id' => $questionnaire->id,
+        ]));
 
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->setData([
             'link_questionnaire' => $link
