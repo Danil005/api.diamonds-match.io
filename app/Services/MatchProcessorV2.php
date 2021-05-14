@@ -4,11 +4,13 @@ namespace App\Services;
 
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireMatch;
+use App\Utils\Match\AboutMeMatch;
 use App\Utils\Match\AppearancesMatch;
 use App\Utils\Match\ProcessCore;
+use App\Utils\Match\QualitiesMatch;
+use App\Utils\Match\TestMatch;
 use Illuminate\Database\Eloquent\Builder as Query;
 use Illuminate\Support\Collection;
-use JetBrains\PhpStorm\ArrayShape;
 
 class MatchProcessorV2
 {
@@ -16,6 +18,15 @@ class MatchProcessorV2
 
     # Подключаем модуль проверки внешности
     use AppearancesMatch;
+
+    # Подключаем модуль проверки личных качеств
+    use QualitiesMatch;
+
+    # Подключаем модуль проверки теста
+    use TestMatch;
+
+    # Подключаем модуль о себе
+    use AboutMeMatch;
 
     /**
      * Получить Query для меня
@@ -48,6 +59,20 @@ class MatchProcessorV2
     protected Collection $currentPartner;
 
     /**
+     * ID-партнера
+     *
+     * @var int
+     */
+    protected int $currentPartnerId;
+
+    /**
+     * Глобальные переменные
+     *
+     * @var array
+     */
+    protected array $fieldsGlobal = [];
+
+    /**
      * Удалить стандартные поля
      *
      * @var array|string[]
@@ -72,7 +97,9 @@ class MatchProcessorV2
      */
     public function __construct(
         private ?Questionnaire $questionnaire = null
-    ) {}
+    )
+    {
+    }
 
 
     /**
@@ -103,9 +130,9 @@ class MatchProcessorV2
      */
     private function validNotMatch(int $meId, int $partnerId): bool
     {
-        return !QuestionnaireMatch::where(function(Query $query) use($meId, $partnerId) {
+        return !QuestionnaireMatch::where(function (Query $query) use ($meId, $partnerId) {
             $query->where('questionnaire_id', $meId)->where('with_questionnaire_id', $partnerId);
-        })->orWhere(function(Query $query) use ($meId, $partnerId) {
+        })->orWhere(function (Query $query) use ($meId, $partnerId) {
             $query->where('questionnaire_id', $partnerId)->where('with_questionnaire_id', $meId);
         })->exists();
     }
@@ -116,6 +143,14 @@ class MatchProcessorV2
      */
     private function handler()
     {
+        $this->fieldsGlobal = [
+            ...array_keys(config('app.questionnaire.value.partner_appearance')),
+            ...array_keys(config('app.questionnaire.value.my_personal_qualities')),
+            ...array_keys(config('app.questionnaire.value.test')),
+            ...array_keys(config('app.questionnaire.value.my_information'))
+        ];
+        dd($this->fieldsGlobal);
+
         # Получаем все данные по партнеру
         $partner = $this->partner->get();
 
@@ -123,28 +158,40 @@ class MatchProcessorV2
         $me = $this->my->get();
 
         # Начинаем искать сходства
-        foreach ($me as $keyMe=>$meItem) {
+        foreach ($me as $keyMe => $meItem) {
             # Устанавливаем текущего
             $this->currentMy = collect($meItem);
             # Очищаем лишние поля
             $this->except($this->currentMy);
 
-            foreach ($partner as $keyPartner=>$partnerItem) {
+            foreach ($partner as $keyPartner => $partnerItem) {
                 # Устанавливаем текущего
                 $this->currentPartner = collect($partnerItem);
+                # Очищаем лишние поля
                 $this->except($this->currentPartner);
                 # Пропускаем первый элемент, чтобы не проверяли одну и ту же анкету.
-                if( $keyPartner == $keyMe ) continue;
+                if ($keyPartner == $keyMe) continue;
 
                 # Проверяем, подходит ли нам данный пол или нет
-                if( !$this->isSex() ) continue;
+                if (!$this->isSex()) continue;
 
-                # Очищаем лишние поля
+                $this->currentPartnerId = $this->currentPartner['id'];
+
+                $this->matchResult = collect([
+                    'currentMeId' => $meItem->id,
+                    'currentPartnerId' => $partnerItem->id
+                ]);
 
                 # Проверяем, что эта связка уже не была проверена
-                if( !$this->validNotMatch($meItem->id, $partnerItem->id) ) continue;
+                if (!$this->validNotMatch($meItem->id, $partnerItem->id)) continue;
 
-                $this->matchAppearances();
+                # Выполнить все матчи
+                $this->doMatch([
+                    'matchAppearances',
+                    'matchQualities',
+                    'matchTest',
+                    'matchAboutMe'
+                ]);
             }
         }
     }

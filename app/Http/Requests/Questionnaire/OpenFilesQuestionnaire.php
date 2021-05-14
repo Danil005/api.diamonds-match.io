@@ -26,8 +26,8 @@ class OpenFilesQuestionnaire extends FormRequest
     public function rules()
     {
         return [
-            'questionnaire_id' => 'required|integer',
-            'file_id' => 'required|integer'
+            'questionnaire_id' => 'nullable|integer',
+            'file_id' => 'nullable|integer'
         ];
     }
 }

@@ -36,13 +36,19 @@ class Questionnaire extends Model
 
     /**
      * @param bool $withTest
+     * @param bool $myInformation
      * @return Builder|\Illuminate\Database\Query\Builder
      */
-    public function partner(bool $withTest = false): Builder|\Illuminate\Database\Query\Builder
+    public function partner(bool $withTest = false, bool $myInformation = false): Builder|\Illuminate\Database\Query\Builder
     {
         $builder = $this->join('questionnaire_partner_appearances as appearances', 'appearances.id', '=', 'questionnaires.partner_appearance_id')
-            ->join('questionnaire_personal_qualities_partners as personal_qualities', 'personal_qualities.id', '=', 'questionnaires.personal_qualities_partner_id')
-            ->join('questionnaire_partner_information as information', 'information.id', '=', 'questionnaires.partner_information_id');
+            ->join('questionnaire_personal_qualities_partners as personal_qualities', 'personal_qualities.id', '=', 'questionnaires.personal_qualities_partner_id');
+
+        if (!$myInformation) {
+            $builder = $builder->join('questionnaire_partner_information as information', 'information.id', '=', 'questionnaires.partner_information_id');
+        } else {
+            $builder = $builder->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaires.my_information_id');
+        }
 
         return !$withTest ? $builder : $builder->join('questionnaire_tests as test', 'test.id', '=', 'questionnaires.test_id');
     }
@@ -77,7 +83,7 @@ class Questionnaire extends Model
             $migrationQuestionnaire[]['my'] = $item;
         }
 
-        foreach ($partnerQuestionnaire as $key=>$item) {
+        foreach ($partnerQuestionnaire as $key => $item) {
             $migrationQuestionnaire[$key]['partner'] = $item;
         }
 

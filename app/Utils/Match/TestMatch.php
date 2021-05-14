@@ -2,20 +2,20 @@
 
 namespace App\Utils\Match;
 
-trait AppearancesMatch
+trait TestMatch
 {
     /**
      * Получить отношение внешности
      */
-    private function matchAppearances()
+    private function matchTest()
     {
         # Устанавливаем нулевое значение процента
         $percent = 0;
 
         # Делаем простой матч
-        $this->simpleMatch($percent, 'partner_appearance');
+        $this->simpleMatch($percent, 'test');
 
         # Добавляем в коллекцию результат
-        $this->matchResult = $this->matchResult->put('appearances', $percent);
+        $this->matchResult = $this->matchResult->put('test', $percent);
     }
 }
