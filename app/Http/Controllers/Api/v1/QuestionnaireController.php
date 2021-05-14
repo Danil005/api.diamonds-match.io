@@ -644,10 +644,16 @@ class QuestionnaireController extends QuestionnaireUtils
     public function get(GetQuestionnaire $request)
     {
         $myQuestionnaire = new Questionnaire();
+        
+        if( $request->has('is_archive') ) {
+            $myQuestionnaire = $myQuestionnaire->withTrashed();
+        }
+
         $myQuestionnaire = $myQuestionnaire->my()
             ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
         $filter = false;
+
 
         if ($request->has('sex')) {
             $filter = true;
@@ -693,8 +699,6 @@ class QuestionnaireController extends QuestionnaireUtils
                 $query->where('name', 'LIKE', '%' . $search . '%');
             });
         }
-
-        if( $request->has('archive') )
 
         if (!$filter) {
             $total = Questionnaire::whereNotNull('my_personal_qualities_id')->count();
