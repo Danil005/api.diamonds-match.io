@@ -182,7 +182,13 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($partnerInformation as $key => $information) {
-            if ($key == 'age' || $key == 'height' || $key == 'weight') {
+            if ($key == 'age' ) {
+                $partnerInformation[$key] = implode(',', $information);
+            }
+
+            if( $key == 'height' || $key == 'weight' ) {
+                $partnerInformation[$key][0] = (int)$information;
+                $partnerInformation[$key][1] = (int)$information;
                 $partnerInformation[$key] = implode(',', $information);
             }
 
@@ -206,6 +212,20 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($key == 'live_city') {
                 $partnerInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+            }
+
+            if ($key == 'place_birth') {
+                $place_birth = '';
+
+                if (isset($partnerInformation[$key][0])) {
+                    foreach ($partnerInformation[$key] as $item) {
+                        $place_birth .= $item . ',';
+                    }
+
+                    $partnerInformation[$key] = trim($place_birth, ',');
+                } else {
+                    $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
+                }
             }
         }
 
@@ -235,6 +255,7 @@ class QuestionnaireController extends QuestionnaireUtils
             if ($key == 'place_birth') {
                 $place_birth = '';
 
+
                 if (isset($myInformation[$key][0])) {
                     foreach ($myInformation[$key] as $item) {
                         $place_birth .= $item . ',';
@@ -244,6 +265,10 @@ class QuestionnaireController extends QuestionnaireUtils
                 } else {
                     $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
                 }
+            }
+
+            if( $key == 'height' || $key == 'weight' ) {
+                $myInformation[$key] = (int) $myInformation[$key];
             }
         }
 
@@ -438,7 +463,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if (empty($questionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
-        if (!in_array($request->type, ['passport', 'agree', 'offer']))
+        if (!in_array($request->type, ['passport', 'agree', 'offer', 'founder']))
             $this->response()->error()->setMessage('Неверный тип загрузки файла')->send();
 
         $file = $request->file('file');
@@ -457,7 +482,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $name = match ($request->type) {
             'passport' => 'passport-' . $request->questionnaire_id . '.pdf',
             'agree' => 'consent-data-processing-' . $request->questionnaire_id . '.pdf',
-            'offer' => 'contract-copy-' . $request->questionnaire_id . '.pdf'
+            'offer' => 'contract-copy-' . $request->questionnaire_id . '.pdf',
+            'founder' => 'contract-founder-' . $request->questionnaire_id . '.pdf'
         };
 
         QuestionnaireFiles::create([

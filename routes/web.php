@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('match', function () {
-    $match = new \App\Services\MatchProcessor();
+    $match = new \App\Services\MatchProcessorV2();
 
     $match->start(new \App\Models\Questionnaire);
 });

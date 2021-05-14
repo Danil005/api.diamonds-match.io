@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string('phone');
             $table->integer('role')->default(0); # Client
+            $table->boolean('online')->default(false);
             $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
