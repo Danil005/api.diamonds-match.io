@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\v1;
 
 use App\Events\NotifyPushed;
+use App\Http\Requests\Employee\Update;
 use App\Http\Requests\Questionnaire\Create;
 use App\Http\Requests\Questionnaire\DeleteFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\DeletePhotoQuestionnaire;
@@ -659,7 +660,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $filter = false;
         if( $request->has('is_archive') ) {
-            $myQuestionnaire = $myQuestionnaire->whereNotNull('deleted_at');
+            $myQuestionnaire = $myQuestionnaire->whereNotNull('questionnaires.deleted_at');
         }
 
 
@@ -729,7 +730,8 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
         $questionnaires = $myQuestionnaire->get([
-            'questionnaires.id', 'name', 'ethnicity', 'service_type', 'age', 'city', 'responsibility', 'questionnaires.created_at'
+            'questionnaires.id', 'name', 'ethnicity', 'service_type', 'age', 'city', 'responsibility', 'questionnaires.created_at',
+            'questionnaires.deleted_at'
         ]);
 
 
@@ -860,4 +862,32 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->setMessage('Анкета добавлена в рассылку');
     }
 
+    public function setStatus(Request $request)
+    {
+        if (!$request->has('questionnaire_id'))
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+
+        if (!$request->has('status'))
+            $this->response()->setMessage('Статус не указан')->error()->send();
+
+        if( in_array($request->status, ['vip', 'pay', 'free']) )
+            $this->response()->setMessage('Такого статуса не существует. Доступные: vip, pay, free')->error()->send();
+
+        $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
+
+        $service_type = match ($request->status) {
+            'free' => 'Бесплатно',
+            'pay' => 'Платные услуги',
+            default => 'Услуги VIP'
+        };
+
+        Questionnaire::where('id', $request->questionnaire_id)->update([
+            'status_pay' => $request->status
+        ]);
+
+        $this->response()->success()->setMessage('Статус изменен')->send();
+    }
 }
