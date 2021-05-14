@@ -34,6 +34,6 @@ trait AppearancesMatch
         # Внешность партнера
         $partnerAppearances = $this->currentPartner->only($this->appearancesFields);
 
-        $myAppearances->filter(fn($item) => );
+//        $myAppearances->filter(fn($item) => );
     }
 }
