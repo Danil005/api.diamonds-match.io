@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class NotificationRead extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'notification_id', 'user_id'
+    ];
+
+    public function notification()
+    {
+        $this->belongsTo('notifications', 'notification_id', 'id');
+    }
 }

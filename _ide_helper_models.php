@@ -236,6 +236,50 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\Notification
+ *
+ * @property int $id
+ * @property string $type
+ * @property string $message
+ * @property string $payload
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification wherePayload($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification whereUpdatedAt($value)
+ */
+	class Notification extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\NotificationRead
+ *
+ * @property int $id
+ * @property int $notification_id
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead query()
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead whereNotificationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|NotificationRead whereUserId($value)
+ */
+	class NotificationRead extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Questionnaire
  *
  * @property int $id
@@ -340,6 +384,7 @@ namespace App\Models{
  * @property string $comment
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int|null $user
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory query()
@@ -349,6 +394,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereQuestionnaireId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireHistory whereUser($value)
  */
 	class QuestionnaireHistory extends \Eloquent {}
 }
@@ -388,9 +434,11 @@ namespace App\Models{
  * @property float $total
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property float|null $about_me
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch query()
+ * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereAboutMe($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereAppearance($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|QuestionnaireMatch whereId($value)
