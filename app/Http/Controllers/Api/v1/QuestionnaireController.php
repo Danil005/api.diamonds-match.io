@@ -814,8 +814,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 $time = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y');
             }
 
-
-            };
+          
 
             $questionnaires[$key]['time'] = $time;
             $questionnaires[$key]['timestamp'] = $timestamp;
