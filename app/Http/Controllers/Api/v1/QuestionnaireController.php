@@ -912,7 +912,7 @@ class QuestionnaireController extends QuestionnaireUtils
             ];
         }
 
-        $qm = $qm->get();
+        $qm = $qm->orderBy('total', 'DESC')->get();
 
 
         $with_questionnaire = null;
