@@ -814,13 +814,8 @@ class QuestionnaireController extends QuestionnaireUtils
                 $time = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y');
             }
 
-            $serviceType = match ($item['service_type']) {
-                'free' => 'Бесплатно',
-                'paid' => 'Платные услуги',
-                'pay' => 'На оплате',
-                default => 'Услуги VIP'
+
             };
-            $questionnaires[$key]['service_type'] = $serviceType;
 
             $questionnaires[$key]['time'] = $time;
             $questionnaires[$key]['timestamp'] = $timestamp;
