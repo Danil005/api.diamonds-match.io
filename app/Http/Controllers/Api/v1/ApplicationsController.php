@@ -121,6 +121,8 @@ class ApplicationsController extends Controller
             ];
         }
 
+        $result = array_values(collect($result)->sortByDesc('created_at_timestamp')->toArray());
+
         $resp = $this->response()->success()->setMessage('Данные анкет получены')->setData($result);
 
         if( $request->has('archive_only') ) {
