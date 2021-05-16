@@ -937,7 +937,12 @@ class QuestionnaireController extends QuestionnaireUtils
             'added_questionnaire_id' => $request->add_questionnaire_id
         ]);
 
-        $this->response()->setMessage('Анкета добавлена в рассылку');
+        $this->response()->success()->setMessage('Анкета добавлена в рассылку')->send();
+    }
+
+    public function removeQuestionnaireMalling(Request $request)
+    {
+
     }
 
     public function setStatus(Request $request)
