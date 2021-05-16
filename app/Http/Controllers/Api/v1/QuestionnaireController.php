@@ -890,12 +890,30 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function getMatch(Request $request)
     {
+        $result = [];
+
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
-        $qm = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)->get();
+        $qm = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id);
+        $total = $qm->count();
 
-        $result = [];
+        if ($request->has('page')) {
+            $offset = (int)$request->page - 1;
+            $offset = ($offset == 0) ? 0 : $offset + (int)$request->limit;
+            $qm = $qm->offset($offset);
+            $qm = $qm->limit((int)$request->limit);
+            $total = $qm->count();
+            $pagination = [
+                'total' => $total,
+                'offset' => $offset + 1,
+                'limit' => (int)$request->limit,
+                'page_available' => ceil($total / (int)$request->limit)
+            ];
+        }
+
+        $qm = $qm->get();
+
 
         $with_questionnaire = null;
         foreach ($qm as $item) {
@@ -922,7 +940,7 @@ class QuestionnaireController extends QuestionnaireUtils
             ];
         }
 
-        $this->response()->success()->setMessage('Подходящие анкеты')->setData($result)->send();
+        $this->response()->success()->setMessage('Подходящие анкеты')->setData($result)->setAdditional($pagination ?? [])->send();
     }
 
     public function addQuestionnaireMalling(Request $request)
