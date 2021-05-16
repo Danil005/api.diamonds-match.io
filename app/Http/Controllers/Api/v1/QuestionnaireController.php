@@ -619,22 +619,22 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Доступные свидания')->setData($matching)->send();
     }
 
-    public function getAppointedDate(Request $request)
+    public function viewMatch(Request $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
-        $makeDate = QuestionnaireAppointedDate::where('questionnaire_id', $request->questionnaire_id)->first();
-        if (empty($makeDate))
-            $this->response()->error()->setMessage('Дата не найдена')->send();
+        $withQuestionnaire = Questionnaire::where('id', $request->with_questionnaire_id)->first();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage('Анкета не найдена')->send();
 
         $matching = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)
             ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.questionnaire_id')
             ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaire_matches.questionnaire_id')
             ->first(['questionnaire_id', 'with_questionnaire_id', 'name', 'total', 'appearance', 'information', 'about_me', 'test', 'personal_qualities']);
 
-        $partner = QuestionnaireMatch::where('with_questionnaire_id', $makeDate->with_questionnaire_id)
+        $partner = QuestionnaireMatch::where('with_questionnaire_id', $withQuestionnaire->id)
             ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.with_questionnaire_id')
             ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaire_matches.with_questionnaire_id')
             ->first(['name']);
@@ -645,7 +645,7 @@ class QuestionnaireController extends QuestionnaireUtils
             collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except(['sex'])->toArray()
         )->toArray();
 
-        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $makeDate->with_questionnaire_id)->first(
+        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
             collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except(['sex'])->toArray()
         )->toArray();
 
@@ -662,7 +662,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $result = [
             'matching_as' => $matching->total,
-            'partner_questionnaire_id' => $makeDate->with_questionnaire_id,
+            'partner_questionnaire_id' => $withQuestionnaire->id,
             'matching' => $matching->toArray(),
             'requirements' => $requirements,
             'names' => [
@@ -860,6 +860,8 @@ class QuestionnaireController extends QuestionnaireUtils
             $myInformation = QuestionnaireMyInformation::where('id', $with_questionnaire->my_information_id)->first();
 
             $result[] = [
+                'questionnaire_id' => (int)$request->questionnaire_id,
+                'with_questionnaire_id' => $with_questionnaire->id,
                 'name' => $myInformation->name,
                 'city' => $myInformation->city,
                 'photo' => (isset($photos['path'])) ? $photos['path'] : null,
