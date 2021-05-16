@@ -901,6 +901,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $with_questionnaire = Questionnaire::where('id', $item->with_questionnaire_id)->first();
             $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $item->with_questionnaire_id)->first();
             $myInformation = QuestionnaireMyInformation::where('id', $with_questionnaire->my_information_id)->first();
+            $q = QuestionnaireMailing::where('questionnaire_id', $item->questionnaire_id)->where('added_questionnaire_id', $with_questionnaire->id)->exists();
 
             $result[] = [
                 'questionnaire_id' => (int)$request->questionnaire_id,
@@ -915,7 +916,8 @@ class QuestionnaireController extends QuestionnaireUtils
                     'form' => (float)$item->information,
                     'about_me' => (float)$item->about_me,
                     'test' => (float)$item->test,
-                ]
+                ],
+                'in_mailing' => $q
             ];
         }
 
