@@ -41,6 +41,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
+use Jenssegers\Date\Date;
 use SoareCostin\FileVault\Facades\FileVault;
 use Str;
 
@@ -826,9 +827,12 @@ class QuestionnaireController extends QuestionnaireUtils
                 'questionnaire_histories.id', 'from', 'comment', 'questionnaire_histories.created_at',
                 'name'
             ]);
+        Date::setlocale(config('app.locale'));
 
-        foreach ($history as $item) {
-            $history['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y');
+        $history = $history->toArray();
+
+        foreach ($history as $key=>$item) {
+            $history[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('j F Y');
         }
 
         $this->response()->success()->setMessage('Успешно найдено')->setData($history)->send();
