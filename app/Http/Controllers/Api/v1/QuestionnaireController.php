@@ -667,6 +667,7 @@ class QuestionnaireController extends QuestionnaireUtils
             ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaire_matches.with_questionnaire_id')
             ->first(['name']);
 
+        dd($matching, $partner);
         $questionnaire = new Questionnaire();
 
         $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
