@@ -153,7 +153,7 @@ return [
             ],
             'my_information' => [
                 'name' => 'string',
-                'place_birth' => 'array(string)',
+                'place_birth' => 'string',
                 'live_city' => 'string|integer',
                 'live_country' => 'string|integer',
                 'age' => 'integer',
