@@ -59,7 +59,9 @@ Route::prefix('v1')->middleware('api')->namespace('App\Http\Controllers\Api\v1')
             Route::get('questionnaire.getMakeDate', 'QuestionnaireController@getMakeDate');
 
             Route::post('questionnaire.setStatus', 'QuestionnaireController@setStatus');
+
             Route::post('questionnaire.addMalling', 'QuestionnaireController@addQuestionnaireMalling');
+            Route::delete('questionnaire.removeMalling', 'QuestionnaireController@removeQuestionnaireMalling');
         });
     });
 

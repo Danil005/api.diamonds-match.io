@@ -942,7 +942,15 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function removeQuestionnaireMalling(Request $request)
     {
+        if (!$request->has('questionnaire_id'))
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
+        if (!$request->has('added_questionnaire_id'))
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        QuestionnaireMailing::where('questionnaire_id', $request->questionnaire_id)->where('added_questionnaire_id', $request->added_questionnaire_id)->delete();
+
+        $this->response()->success()->setMessage('Анкета была удалена из рассылки')->send();
     }
 
     public function setStatus(Request $request)
