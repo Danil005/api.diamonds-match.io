@@ -5,6 +5,8 @@ namespace App\Http\Requests\Applications;
 use App\Utils\Permissions;
 use App\Utils\Response;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\Validator;
 
 class ChangeApplications extends FormRequest
 {

@@ -828,6 +828,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 'name'
             ]);
         Date::setlocale(config('app.locale'));
+        Carbon::setLocale(config('app.locale'));
 
         $history = $history->toArray();
 

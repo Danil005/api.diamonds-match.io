@@ -1,0 +1,131 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Validation Language Lines
+|--------------------------------------------------------------------------
+|
+| The following language lines contain the default error messages used by
+| the validator class. Some of these rules have multiple versions such
+| as the size rules. Feel free to tweak each of these messages here.
+|
+*/
+
+return [
+    'accepted'             => 'Tämä kenttä on hyväksyttävä.',
+    'active_url'           => 'Tämä ei ole kelvollinen URL.',
+    'after'                => 'Tämä on vuoden :date jälkeen.',
+    'after_or_equal'       => 'Tämä on päivämäärä jälkeen tai yhtä suuri kuin :date.',
+    'alpha'                => 'Tämä kenttä voi sisältää vain kirjaimia.',
+    'alpha_dash'           => 'Tämä kenttä voi sisältää vain kirjaimia, numeroita, viivoja ja alaviivoja.',
+    'alpha_num'            => 'Tämä kenttä voi sisältää vain kirjaimia ja numeroita.',
+    'array'                => 'Tämän kentän täytyy olla array.',
+    'attached'             => 'Tämä kenttä on jo liitetty.',
+    'before'               => 'Sen on täytynyt olla ennen vuotta :date.',
+    'before_or_equal'      => 'Tämä on päivämäärä ennen tai yhtä suuri kuin :date.',
+    'between'              => [
+        'array'   => 'This content must have between :min and :max items.',
+        'file'    => 'This file must be between :min and :max kilobytes.',
+        'numeric' => 'This value must be between :min and :max.',
+        'string'  => 'This string must be between :min and :max characters.',
+    ],
+    'boolean'              => 'Tämän kentän on oltava tosi tai epätosi.',
+    'confirmed'            => 'Vahvistus ei täsmää.',
+    'date'                 => 'Tämä ei ole pätevä päivämäärä.',
+    'date_equals'          => 'Tämän päivämäärän on oltava :date.',
+    'date_format'          => 'Tämä ei vastaa muotoa :format.',
+    'different'            => 'Tämän arvon on oltava eri kuin :other.',
+    'digits'               => 'Tämän täytyy olla :digits numeroa.',
+    'digits_between'       => 'Numeron on oltava :min-:max numeroa.',
+    'dimensions'           => 'Tässä kuvassa on Virheelliset mitat.',
+    'distinct'             => 'Tällä kentällä on kaksoisarvo.',
+    'email'                => 'Tämän on oltava voimassa oleva sähköpostiosoite.',
+    'ends_with'            => 'Tämän on päätyttävä johonkin seuraavista: :values.',
+    'exists'               => 'Valittu arvo on virheellinen.',
+    'file'                 => 'Sisällön on oltava tiedosto.',
+    'filled'               => 'Tällä kentällä täytyy olla arvoa.',
+    'gt'                   => [
+        'array'   => 'The content must have more than :value items.',
+        'file'    => 'The file size must be greater than :value kilobytes.',
+        'numeric' => 'The value must be greater than :value.',
+        'string'  => 'The string must be greater than :value characters.',
+    ],
+    'gte'                  => [
+        'array'   => 'The content must have :value items or more.',
+        'file'    => 'The file size must be greater than or equal :value kilobytes.',
+        'numeric' => 'The value must be greater than or equal :value.',
+        'string'  => 'The string must be greater than or equal :value characters.',
+    ],
+    'image'                => 'Tämän täytyy olla mielikuva.',
+    'in'                   => 'Valittu arvo on virheellinen.',
+    'in_array'             => 'Tätä arvoa ei ole vuonna :other.',
+    'integer'              => 'Tämän on oltava kokonaisluku.',
+    'ip'                   => 'Tämän täytyy olla kelvollinen IP-osoite.',
+    'ipv4'                 => 'Tämän on oltava kelvollinen IPv4-osoite.',
+    'ipv6'                 => 'Tämän on oltava kelvollinen IPv6-osoite.',
+    'json'                 => 'Tämän täytyy olla voimassa oleva JSON-merkkijono.',
+    'lt'                   => [
+        'array'   => 'The content must have less than :value items.',
+        'file'    => 'The file size must be less than :value kilobytes.',
+        'numeric' => 'The value must be less than :value.',
+        'string'  => 'The string must be less than :value characters.',
+    ],
+    'lte'                  => [
+        'array'   => 'The content must not have more than :value items.',
+        'file'    => 'The file size must be less than or equal :value kilobytes.',
+        'numeric' => 'The value must be less than or equal :value.',
+        'string'  => 'The string must be less than or equal :value characters.',
+    ],
+    'max'                  => [
+        'array'   => 'The content may not have more than :max items.',
+        'file'    => 'The file size may not be greater than :max kilobytes.',
+        'numeric' => 'The value may not be greater than :max.',
+        'string'  => 'The string may not be greater than :max characters.',
+    ],
+    'mimes'                => 'Tämän täytyy olla tiedosto tyyppi: :values.',
+    'mimetypes'            => 'Tämän täytyy olla tiedosto tyyppi: :values.',
+    'min'                  => [
+        'array'   => 'The value must have at least :min items.',
+        'file'    => 'The file size must be at least :min kilobytes.',
+        'numeric' => 'The value must be at least :min.',
+        'string'  => 'The string must be at least :min characters.',
+    ],
+    'multiple_of'          => 'Arvon on oltava :value: n kerrannainen',
+    'not_in'               => 'Valittu arvo on virheellinen.',
+    'not_regex'            => 'Tämä muoto on virheellinen.',
+    'numeric'              => 'Tämän täytyy olla numero.',
+    'password'             => 'Salasana on väärä.',
+    'present'              => 'Tämä kenttä on oltava läsnä.',
+    'prohibited'           => 'Tämä kenttä on kielletty.',
+    'prohibited_if'        => 'Tämä kenttä on kielletty, kun :other on :value.',
+    'prohibited_unless'    => 'Tämä kenttä on kielletty, ellei :other ole :values.',
+    'regex'                => 'Tämä muoto on virheellinen.',
+    'relatable'            => 'Tämä kenttä ei välttämättä liity tähän resurssiin.',
+    'required'             => 'Tämä kenttä on pakollinen.',
+    'required_if'          => 'Tämä kenttä vaaditaan, kun :other on :value.',
+    'required_unless'      => 'Tämä kenttä vaaditaan, ellei :other ole kohdassa :values.',
+    'required_with'        => 'Tämä kenttä vaaditaan, kun :values on läsnä.',
+    'required_with_all'    => 'Tämä kenttä vaaditaan, kun :values on läsnä.',
+    'required_without'     => 'Tämä kenttä vaaditaan, kun :values ei ole käytössä.',
+    'required_without_all' => 'Tämä kenttä on pakollinen, jos yhtään :values: stä ei ole.',
+    'same'                 => 'Tämän kentän arvon on vastattava vuoden :other arvoa.',
+    'size'                 => [
+        'array'   => 'The content must contain :size items.',
+        'file'    => 'The file size must be :size kilobytes.',
+        'numeric' => 'The value must be :size.',
+        'string'  => 'The string must be :size characters.',
+    ],
+    'starts_with'          => 'Tämä on aloitettava jommastakummasta seuraavista: :values.',
+    'string'               => 'Tämän täytyy olla naru.',
+    'timezone'             => 'Tämän täytyy olla kelvollinen alue.',
+    'unique'               => 'Tämä on jo otettu.',
+    'uploaded'             => 'Tämän lataus epäonnistui.',
+    'url'                  => 'Tämä muoto on virheellinen.',
+    'uuid'                 => 'Tämän on oltava voimassa oleva UUID.',
+    'custom'               => [
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
+        ],
+    ],
+    'attributes'           => [],
+];
