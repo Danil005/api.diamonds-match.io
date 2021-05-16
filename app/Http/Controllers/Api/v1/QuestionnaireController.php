@@ -814,7 +814,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 $time = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y');
             }
 
-          
+
 
             $questionnaires[$key]['time'] = $time;
             $questionnaires[$key]['timestamp'] = $timestamp;
@@ -923,12 +923,12 @@ class QuestionnaireController extends QuestionnaireUtils
                 'city' => $myInformation->city,
                 'photo' => (isset($photos['path'])) ? $photos['path'] : null,
                 'match' => [
-                    'total' => (float)$item->total,
-                    'appearance' => (float)$item->appearance,
-                    'personal_qualities' => (float)$item->personal_qualities,
-                    'form' => (float)$item->information,
-                    'about_me' => (float)$item->about_me,
-                    'test' => (float)$item->test,
+                    'total' => round((float)$item->total),
+                    'appearance' => round((float)$item->appearance),
+                    'personal_qualities' => round((float)$item->personal_qualities),
+                    'form' => round((float)$item->information),
+                    'about_me' => round((float)$item->about_me),
+                    'test' => round((float)$item->test),
                 ],
                 'in_mailing' => $q
             ];
