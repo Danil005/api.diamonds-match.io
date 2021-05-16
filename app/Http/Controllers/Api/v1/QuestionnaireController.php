@@ -824,6 +824,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
             $questionnaires[$key]['time'] = $time;
             $questionnaires[$key]['timestamp'] = $timestamp;
+            $questionnaires[$key]['ethnicity'] = $this->ethnicity($questionnaires[$key]['ethnicity']);
         }
 
         $result['questionnaires'] = $questionnaires->toArray();
