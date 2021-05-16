@@ -84,22 +84,73 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($partnerInformation as $key => $information) {
-            if ($key == 'age' || $key == 'height' || $key == 'weight' || $key == 'languages') {
+            if ($key == 'age' ) {
                 $partnerInformation[$key] = implode(',', $information);
             }
 
+            if( $key == 'height' || $key == 'weight' ) {
+                $partnerInformation[$key][0] = (int)$information;
+                $partnerInformation[$key][1] = (int)$information;
+                $partnerInformation[$key] = implode(',', $information);
+            }
+
+            if ($key == 'languages') {
+                $langs = new Langs();
+                foreach ($information as $item) {
+                    $langs = $langs->orWhere('code', $item);
+                }
+                $langs = $langs->get()->toArray();
+
+                $temp = '';
+                foreach ($langs as $item) {
+                    $temp .= $item['nameRU'] . ',';
+                }
+                $partnerInformation[$key] = trim($temp, ',');
+            }
+
+            $liveCountry = '';
             if ($key == 'live_country') {
-                $partnerInformation[$key] = $information;
+                foreach ($information as $country) {
+                    $liveCountry .= $country . ',';
+                }
             }
 
             if ($key == 'live_city') {
-                $partnerInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+                $liveCity = '';
+                foreach ($information as $city) {
+                    $liveCity .= $city . ',';
+                }
+                $partnerInformation['city'] = $liveCountry . '|' . $liveCity;
+            }
+
+            if ($key == 'place_birth') {
+                $place_birth = '';
+
+                if (isset($partnerInformation[$key][0])) {
+                    foreach ($partnerInformation[$key] as $item) {
+                        $place_birth .= $item . ',';
+                    }
+
+                    $partnerInformation[$key] = trim($place_birth, ',');
+                } else {
+                    $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
+                }
             }
         }
 
         foreach ($myInformation as $key => $information) {
             if ($key == 'languages') {
-                $myInformation[$key] = implode(',', $information);
+                $langs = new Langs();
+                foreach ($information as $item) {
+                    $langs = $langs->orWhere('code', $item);
+                }
+                $langs = $langs->get()->toArray();
+
+                $temp = '';
+                foreach ($langs as $item) {
+                    $temp .= $item['nameRU'] . ',';
+                }
+                $myInformation[$key] = trim($temp, ',');
             }
 
             if ($key == 'live_country') {
@@ -113,14 +164,20 @@ class QuestionnaireController extends QuestionnaireUtils
             if ($key == 'place_birth') {
                 $place_birth = '';
 
+
                 if (isset($myInformation[$key][0])) {
                     foreach ($myInformation[$key] as $item) {
                         $place_birth .= $item . ',';
                     }
+
                     $myInformation[$key] = trim($place_birth, ',');
                 } else {
                     $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
                 }
+            }
+
+            if( $key == 'height' || $key == 'weight' ) {
+                $myInformation[$key] = (int) $myInformation[$key];
             }
         }
 
@@ -208,12 +265,19 @@ class QuestionnaireController extends QuestionnaireUtils
                 $partnerInformation[$key] = trim($temp, ',');
             }
 
+            $liveCountry = '';
             if ($key == 'live_country') {
-                $partnerInformation[$key] = $information;
+                foreach ($information as $country) {
+                    $liveCountry .= $country . ',';
+                }
             }
 
             if ($key == 'live_city') {
-                $partnerInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+                $liveCity = '';
+                foreach ($information as $city) {
+                    $liveCity .= $city . ',';
+                }
+                $partnerInformation['city'] = $liveCountry . '|' . $liveCity;
             }
 
             if ($key == 'place_birth') {
@@ -447,13 +511,14 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $path = str_replace('public/', 'storage/', $upload);
 
-        QuestionnaireUploadPhoto::create([
+        $q = QuestionnaireUploadPhoto::create([
             'path' => $path,
             'questionnaire_id' => $request->questionnaire_id
         ]);
 
-        $this->response()->setMessage('Файл загружен')->setData([
-            'path' => env('APP_URL') . '/' . $path
+        $this->response()->success()->setMessage('Файл загружен')->setData([
+            'path' => env('APP_URL') . '/' . $path,
+            'id' => $q->id
         ])->send();
     }
 
@@ -792,7 +857,8 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $history = QuestionnaireHistory::create([
             'questionnaire_id' => $request->questionnaire_id,
-            'comment' => $request->comment
+            'comment' => $request->comment,
+            'from' => 'message',
         ]);
 
 
