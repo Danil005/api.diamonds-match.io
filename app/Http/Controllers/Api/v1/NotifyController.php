@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Notification;
 use App\Models\NotificationRead;
 use App\Utils\Response;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class NotifyController extends Controller
@@ -25,6 +26,7 @@ class NotifyController extends Controller
                 unset($notify[$key]);
             else {
                 $notify[$key]['payload'] = json_decode($item['payload'], true);
+                $notify[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y H:i');
             }
         }
 
