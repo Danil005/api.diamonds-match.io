@@ -63,8 +63,7 @@ return [
             'partner_information' => [
                 'age' => ['type:integer', 'type:integer'],
                 'place_birth' => 'array(string)',
-                'live_city' => 'array(string)',
-                'live_country' => 'array(string)',
+                'live_place' => 'array(string)',
                 'zodiac_signs' => [
                     'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
                     'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',

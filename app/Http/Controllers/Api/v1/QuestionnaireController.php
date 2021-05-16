@@ -109,19 +109,13 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             $liveCountry = '';
-            if ($key == 'live_country') {
+            if ($key == 'live_place') {
                 foreach ($information as $country) {
                     $liveCountry .= $country . ',';
                 }
+                $partnerInformation['city'] = trim($liveCountry, ',');
             }
 
-            if ($key == 'live_city') {
-                $liveCity = '';
-                foreach ($information as $city) {
-                    $liveCity .= $city . ',';
-                }
-                $partnerInformation['city'] = $liveCountry . '|' . $liveCity;
-            }
 
             if ($key == 'place_birth') {
                 $place_birth = '';
@@ -266,18 +260,11 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             $liveCountry = '';
-            if ($key == 'live_country') {
+            if ($key == 'live_place') {
                 foreach ($information as $country) {
                     $liveCountry .= $country . ',';
                 }
-            }
-
-            if ($key == 'live_city') {
-                $liveCity = '';
-                foreach ($information as $city) {
-                    $liveCity .= $city . ',';
-                }
-                $partnerInformation['city'] = $liveCountry . '|' . $liveCity;
+                $partnerInformation['city'] = trim($liveCountry, ',');
             }
 
             if ($key == 'place_birth') {
