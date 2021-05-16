@@ -29,11 +29,6 @@ class ApplicationsController extends Controller
     {
         $service_type = $create->service_type;
 
-        $service_type = match ($service_type) {
-            'free' => 'Бесплатно',
-            'pay' => 'Платные услуги',
-            default => 'Услуги VIP'
-        };
         $data = $create->all();
 
         $data['service_type'] = $service_type;
@@ -109,7 +104,6 @@ class ApplicationsController extends Controller
             } else {
                 $time = $time->format('d.m.Y');
             }
-
 
             $result[] = [
                 'id' => $application['id'],

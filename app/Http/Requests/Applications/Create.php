@@ -27,7 +27,7 @@ class Create extends FormRequest
     {
         return [
             'client_name' => 'required|string',
-            'service_type' => 'required|string',
+            'service_type' => 'required|string|in:pay,free,vip,paid',
             'responsibility' => 'string|nullable',
             'questionnaire_id' => 'integer|nullable',
             'email' => 'required|email',

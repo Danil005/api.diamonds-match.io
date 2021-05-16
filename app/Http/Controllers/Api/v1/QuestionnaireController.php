@@ -330,7 +330,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $application = Applications::create([
             'client_name' => $myInformation->name,
-            'service_type' => 'free',
+            'service_type' => 'pay',
             'status' => 0,
             'questionnaire_id' => null,
             'responsibility' => null,
@@ -372,7 +372,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'questionnaire_id' => $questionnaire->id,
         ]);
 
-        
+
         event(new NotifyPushed('Появилась новая заявка', [
             'application_id' => $application->id,
         ]));
@@ -741,14 +741,8 @@ class QuestionnaireController extends QuestionnaireUtils
 
         if ($request->has('service_type')) {
             $filter = true;
-            $serviceType = match ($request->service_type) {
-                'free' => 'Бесплатно',
-                'pay' => 'Платные услуги',
-                'wait' => 'На оплате',
-                default => 'Услуги VIP'
-            };
 
-            $myQuestionnaire = $myQuestionnaire->where('service_type', 'LIKE', '%' . $serviceType . '%');
+            $myQuestionnaire = $myQuestionnaire->where('service_type', 'LIKE', '%' . $request->get('service_type') . '%');
         }
 
         if ($request->has('responsibility')) {
@@ -816,6 +810,14 @@ class QuestionnaireController extends QuestionnaireUtils
             } else {
                 $time = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y');
             }
+
+            $serviceType = match ($item['service_type']) {
+                'free' => 'Бесплатно',
+                'paid' => 'Платные услуги',
+                'pay' => 'На оплате',
+                default => 'Услуги VIP'
+            };
+            $questionnaires[$key]['service_type'] = $serviceType;
 
             $questionnaires[$key]['time'] = $time;
             $questionnaires[$key]['timestamp'] = $timestamp;
@@ -942,25 +944,19 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('status'))
             $this->response()->setMessage('Статус не указан')->error()->send();
 
-        if( !in_array($request->status, ['vip', 'pay', 'free']) )
-            $this->response()->setMessage('Такого статуса не существует. Доступные: vip, pay, free')->error()->send();
+        if( !in_array($request->status, ['vip', 'pay', 'free', 'paid']) )
+            $this->response()->setMessage('Такого статуса не существует. Доступные: vip, pay, free, paid')->error()->send();
 
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
-
-        $service_type = match ($request->status) {
-            'free' => 'Бесплатно',
-            'pay' => 'Платные услуги',
-            default => 'Услуги VIP'
-        };
 
         Questionnaire::where('id', $request->questionnaire_id)->update([
             'status_pay' => $request->status
         ]);
 
         Applications::where('questionnaire_id', $request->questionnaire_id)->update([
-            'service_type' => $service_type
+            'service_type' => $request->status
         ]);
 
         $this->response()->success()->setMessage('Статус изменен')->send();
