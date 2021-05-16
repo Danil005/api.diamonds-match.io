@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\NotifyPushed;
+use Carbon\Carbon;
 use Dejurin\GoogleTranslateForFree;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('fire', function() {
+Route::get('test1', function () {
+    $information = '15.4.2000';
+    $birthday = Carbon::createFromTimeString($information . ' 0:0');
+    $now = Carbon::now();
+
+    dd($birthday->diffInYears($now));
+});
+
+Route::get('fire', function () {
     event(new NotifyPushed('Появилась новая заявка', [
         'application_id' => 1,
     ]));
@@ -37,10 +46,10 @@ Route::get('join', function () {
 //    });
 });
 
-Route::get('/countries.json', function() {
-   $countries = \App\Models\Countries::get();
+Route::get('/countries.json', function () {
+    $countries = \App\Models\Countries::get();
 
-   return response()->json($countries);
+    return response()->json($countries);
 });
 Route::get('test', function () {
     $langs = \App\Models\Langs::get();

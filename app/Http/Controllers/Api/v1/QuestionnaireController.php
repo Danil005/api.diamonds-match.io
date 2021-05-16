@@ -133,6 +133,13 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($myInformation as $key => $information) {
+            if( $key == 'birthday' ) {
+                $birthday = Carbon::createFromTimeString($information . ' 0:0');
+                $now = Carbon::now();
+
+                $myInformation['age'] = $birthday->diffInYears($now);
+            }
+
             if ($key == 'languages') {
                 $langs = new Langs();
                 foreach ($information as $item) {
@@ -272,6 +279,13 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($myInformation as $key => $information) {
+            if( $key == 'birthday' ) {
+                $birthday = Carbon::createFromTimeString($information . ' 0:0');
+                $now = Carbon::now();
+
+                $myInformation['age'] = $birthday->diffInYears($now);
+            }
+
             if ($key == 'languages') {
                 $langs = new Langs();
                 foreach ($information as $item) {
