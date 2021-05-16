@@ -534,7 +534,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         QuestionnaireUploadPhoto::where('id', $request->photo_id)->delete();
 
-        $this->response()->setMessage('Фотография была удалена')->send();
+        $this->response()->success()->setMessage('Фотография была удалена')->send();
     }
 
     public function uploadFile(FilesQuestionnaire $request)
@@ -575,7 +575,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'key' => $key
         ]);
 
-        $this->response()->setMessage('Файл загружен')->setData([
+        $this->response()->success()->setMessage('Файл загружен')->setData([
             'path' => env('APP_URL') . '/' . $path,
             'encrypted' => true
         ])->send();

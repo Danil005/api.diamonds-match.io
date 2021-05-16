@@ -28,7 +28,7 @@ class DeletePhotoQuestionnaire extends FormRequest
     {
         return [
             'questionnaire_id' => 'required|integer',
-            'file_id' => 'required|integer'
+            'photo_id' => 'required|integer'
         ];
     }
 }
