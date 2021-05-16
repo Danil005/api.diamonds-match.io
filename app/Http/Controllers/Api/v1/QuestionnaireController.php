@@ -688,10 +688,16 @@ class QuestionnaireController extends QuestionnaireUtils
                 $requirements[$key] = false;
         }
 
+        $rs = $matching->toArray();
+
+        foreach ($rs as $key => $item) {
+            $rs[$key] = round($item);
+        }
+
         $result = [
             'matching_as' => $matching?->total,
             'partner_questionnaire_id' => $withQuestionnaire->id,
-            'matching' => $matching->toArray(),
+            'matching' => $rs,
             'requirements' => $requirements,
             'names' => [
                 'me' => $matching->name,
