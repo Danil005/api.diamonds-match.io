@@ -363,6 +363,16 @@ class QuestionnaireController extends QuestionnaireUtils
         Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
         Applications::where('id', $application->id)->update(['link' => $link, 'questionnaire_id' => $questionnaire->id]);
 
+
+        $this->createNotify('application', 'Появилась новая заявка.', [
+            'application_id' => $application->id,
+        ]);
+
+        $this->createNotify('questionnaire', 'Появилась новая анкета.', [
+            'questionnaire_id' => $questionnaire->id,
+        ]);
+
+        
         event(new NotifyPushed('Появилась новая заявка', [
             'application_id' => $application->id,
         ]));

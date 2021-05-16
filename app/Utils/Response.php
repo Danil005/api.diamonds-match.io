@@ -2,6 +2,7 @@
 
 namespace App\Utils;
 
+use App\Models\Notification;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Validator;
 use JetBrains\PhpStorm\Pure;
@@ -25,5 +26,21 @@ trait Response
         ];
 
         throw new HttpResponseException(response()->json($response, 422));
+    }
+
+    /**
+     * Создать уведомление
+     *
+     * @param string $type
+     * @param string $message
+     * @param string $payload
+     */
+    public function createNotify(string $type, string $message, string $payload)
+    {
+        Notification::create([
+            'type' => $type,
+            'message' => $message,
+            'payload' => json_encode($payload)
+        ]);
     }
 }
