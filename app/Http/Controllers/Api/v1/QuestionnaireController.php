@@ -689,7 +689,7 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         $result = [
-            'matching_as' => $matching->total,
+            'matching_as' => $matching?->total,
             'partner_questionnaire_id' => $withQuestionnaire->id,
             'matching' => $matching->toArray(),
             'requirements' => $requirements,
