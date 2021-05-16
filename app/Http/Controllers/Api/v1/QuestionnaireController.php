@@ -119,16 +119,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($key == 'place_birth') {
                 $place_birth = '';
-
-                if (isset($partnerInformation[$key][0])) {
-                    foreach ($partnerInformation[$key] as $item) {
-                        $place_birth .= $item . ',';
-                    }
-
-                    $partnerInformation[$key] = trim($place_birth, ',');
-                } else {
-                    $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
-                }
+                $myInformation[$key] = $place_birth;
             }
         }
 
@@ -307,17 +298,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($key == 'place_birth') {
                 $place_birth = '';
-
-
-                if (isset($myInformation[$key][0])) {
-                    foreach ($myInformation[$key] as $item) {
-                        $place_birth .= $item . ',';
-                    }
-
-                    $myInformation[$key] = trim($place_birth, ',');
-                } else {
-                    $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
-                }
+                $myInformation[$key] = $place_birth;
             }
 
             if( $key == 'height' || $key == 'weight' ) {
