@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionnaireHistoriesTable extends Migration
+class CreateNotificationReadsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateQuestionnaireHistoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('questionnaire_histories', function (Blueprint $table) {
+        Schema::create('notification_reads', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('questionnaire_id');
-            $table->string('from');
-            $table->string('comment');
-            $table->string('user');
+            $table->
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateQuestionnaireHistoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questionnaire_histories');
+        Schema::dropIfExists('notification_reads');
     }
 }

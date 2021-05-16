@@ -820,8 +820,16 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
-        $history = QuestionnaireHistory::where('questionnaire_id', $request->questionnaire_id)->get();
+        $history = QuestionnaireHistory::where('questionnaire_id', $request->questionnaire_id)
+            ->join('users', 'users.id', '=', 'questionnaire_histories.user')
+            ->get([
+                'questionnaire_histories.id', 'from', 'comment', 'questionnaire_histories.created_at',
+                'name'
+            ]);
 
+        foreach ($history as $item) {
+            $history['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y');
+        }
 
         $this->response()->success()->setMessage('Успешно найдено')->setData($history)->send();
     }
@@ -838,6 +846,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'questionnaire_id' => $request->questionnaire_id,
             'comment' => $request->comment,
             'from' => 'message',
+            'user' => \Auth::user()->id
         ]);
 
 

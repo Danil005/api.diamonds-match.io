@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class QuestionnaireHistory extends Model
+class Notification extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'from', 'comment', 'questionnaire_id',
-        'user'
-    ];
 }
