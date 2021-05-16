@@ -477,13 +477,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['my_appearance']['eye_color'] = $this->colorEye($result['my_appearance']['eye_color']);
         $result['my_appearance']['sex'] = $result['my_appearance']['sex'] === 'female' ? 'Женщина' : 'Мужчина';
 
-        $serviceType = match ($result['application']['service_type']) {
-            'free' => 'Бесплатно',
-            'paid' => 'Платные услуги',
-            'pay' => 'На оплате',
-            default => 'Услуги VIP'
-        };
-        $result['application']['service_type'] = $serviceType;
+
+//        $result['application']['service_type'] = $serviceType;
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaire->id)->get(['id', 'path']);
         $files = QuestionnaireFiles::where('questionnaire_id', $questionnaire->id)->get(['id', 'type', 'name', 'size']);
