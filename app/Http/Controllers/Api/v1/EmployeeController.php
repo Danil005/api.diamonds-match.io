@@ -92,8 +92,6 @@ class EmployeeController extends Controller
     public function update(Update $request)
     {
         $input = $request->except('user_id');
-        if( isset($input['phone']) )
-            $input['phone'] = $this->phoneFormatting($input['phone']);
 
         $updated = User::where('id', $request->user_id)->update($input);
 
