@@ -85,11 +85,11 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($partnerInformation as $key => $information) {
-            if ($key == 'age' ) {
+            if ($key == 'age') {
                 $partnerInformation[$key] = implode(',', $information);
             }
 
-            if( $key == 'height' || $key == 'weight' ) {
+            if ($key == 'height' || $key == 'weight') {
                 $partnerInformation[$key][0] = (int)$information;
                 $partnerInformation[$key][1] = (int)$information;
                 $partnerInformation[$key] = implode(',', $information);
@@ -134,7 +134,7 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($myInformation as $key => $information) {
-            if( $key == 'birthday' ) {
+            if ($key == 'birthday') {
                 $birthday = Carbon::createFromTimeString($information . ' 0:0');
                 $now = Carbon::now();
 
@@ -167,8 +167,8 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myInformation[$key] = $information;
             }
 
-            if( $key == 'height' || $key == 'weight' ) {
-                $myInformation[$key] = (int) $myInformation[$key];
+            if ($key == 'height' || $key == 'weight') {
+                $myInformation[$key] = (int)$myInformation[$key];
             }
         }
 
@@ -232,11 +232,11 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($partnerInformation as $key => $information) {
-            if ($key == 'age' ) {
+            if ($key == 'age') {
                 $partnerInformation[$key] = implode(',', $information);
             }
 
-            if( $key == 'height' || $key == 'weight' ) {
+            if ($key == 'height' || $key == 'weight') {
                 $partnerInformation[$key][0] = (int)$information;
                 $partnerInformation[$key][1] = (int)$information;
                 $partnerInformation[$key] = implode(',', $information);
@@ -280,7 +280,7 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($myInformation as $key => $information) {
-            if( $key == 'birthday' ) {
+            if ($key == 'birthday') {
                 $birthday = Carbon::createFromTimeString($information . ' 0:0');
                 $now = Carbon::now();
 
@@ -313,8 +313,8 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myInformation[$key] = $information;
             }
 
-            if( $key == 'height' || $key == 'weight' ) {
-                $myInformation[$key] = (int) $myInformation[$key];
+            if ($key == 'height' || $key == 'weight') {
+                $myInformation[$key] = (int)$myInformation[$key];
             }
         }
 
@@ -421,7 +421,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $temp = [];
 
         foreach ($result['personal_qualities_partner'] as $key => $item) {
-            $temp[] = $this->personalQuality($key, $result['partner_appearance']['sex']);
+            if ($item)
+                $temp[] = $this->personalQuality($key, $result['partner_appearance']['sex']);
         }
         $result['personal_qualities_partner'] = $temp;
 
@@ -679,10 +680,10 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $requirements = [];
 
-        foreach ($myAppearance as $key=>$item) {
-            if( $key == 'sex' ) continue;
+        foreach ($myAppearance as $key => $item) {
+            if ($key == 'sex') continue;
 
-            if( $item == $partnerAppearance[$key] || $item == null || $partnerAppearance[$key] == null )
+            if ($item == $partnerAppearance[$key] || $item == null || $partnerAppearance[$key] == null)
                 $requirements[$key] = true;
             else
                 $requirements[$key] = false;
@@ -726,7 +727,7 @@ class QuestionnaireController extends QuestionnaireUtils
             ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
         $filter = false;
-        if( $request->has('is_archive') ) {
+        if ($request->has('is_archive')) {
             $myQuestionnaire = $myQuestionnaire->whereNotNull('questionnaires.deleted_at');
         }
 
@@ -824,7 +825,6 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
 
-
             $questionnaires[$key]['time'] = $time;
             $questionnaires[$key]['timestamp'] = $timestamp;
             $questionnaires[$key]['ethnicity'] = $this->ethnicity($questionnaires[$key]['ethnicity']);
@@ -851,7 +851,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $history = $history->toArray();
 
-        foreach ($history as $key=>$item) {
+        foreach ($history as $key => $item) {
             $history[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('j F Y');
         }
 
@@ -984,7 +984,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('status'))
             $this->response()->setMessage('Статус не указан')->error()->send();
 
-        if( !in_array($request->status, ['vip', 'pay', 'free', 'paid']) )
+        if (!in_array($request->status, ['vip', 'pay', 'free', 'paid']))
             $this->response()->setMessage('Такого статуса не существует. Доступные: vip, pay, free, paid')->error()->send();
 
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();

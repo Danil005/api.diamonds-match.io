@@ -150,6 +150,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/pclzip/pclzip" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jenssegers/date" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/laravel-lang/lang" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/setasign/fpdi" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/setasign/fpdi-fpdf" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/setasign/fpdf" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

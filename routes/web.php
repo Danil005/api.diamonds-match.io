@@ -4,6 +4,8 @@ use App\Events\NotifyPushed;
 use Carbon\Carbon;
 use Dejurin\GoogleTranslateForFree;
 use Illuminate\Support\Facades\Route;
+use PhpOffice\PhpPresentation\IOFactory;
+use setasign\Fpdi\Fpdi;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,10 +42,21 @@ Route::get('match', function () {
     $match->start(new \App\Models\Questionnaire);
 });
 
-Route::get('join', function () {
-//    $questionnaire = \App\Models\Questionnaire::getData(function(\Illuminate\Database\Eloquent\Builder $query) {
-//        return $query->where('sex', 'female');
-//    });
+Route::get('pptx', function () {
+//    $oReader = IOFactory::createReader('PowerPoint2007');
+    $file = Storage::disk('public')->path('pptx/questinnaire.pdf');
+    $pdf = new FPDI('l');
+    $pagecount = $pdf->setSourceFile($file);
+    $tpl = $pdf->importPage(1);
+    $pdf->AddPage();
+    $pdf->useTemplate($tpl);
+    $pdf->SetFont('Helvetica');
+    $pdf->SetFontSize('30'); // set font size
+    $pdf->SetXY(10, 89); // set the position of the box
+    $pdf->Cell(0, 10, 'Niraj Shah', 1, 0, 'C');
+
+    $pdf->Output();
+//    $oReader->load($file);
 });
 
 Route::get('/countries.json', function () {
