@@ -31,7 +31,7 @@ class GetQuestionnaire extends FormRequest
             'sex' => 'string|nullable|in:female,male,all',
             'from_age' => 'integer|nullable|required_with:to_age',
             'to_age' => 'integer|nullable|required_with:from_age',
-            'service_type' => 'string|nullable|in:free,pay,wait,vip',
+            'service_type' => 'string|nullable|in:free,pay,paid,vip',
             'city' => 'string|nullable',
             'country' => 'string|nullable',
             'responsibility' => 'string|nullable',

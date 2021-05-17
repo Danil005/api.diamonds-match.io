@@ -196,18 +196,6 @@ Route::get('pptx', function () {
             'age' => '21 год',
             'photo' => 'pptx/70f86bf6abaa314e43fb142f6c0b5957.jpg',
         ],
-        [
-            'id' => 5,
-            'name' => 'Екатерина',
-            'age' => '23 год',
-            'photo' => 'pptx/70f86bf6abaa314e43fb142f6c0b5957.jpg',
-        ],
-        [
-            'id' => 6,
-            'name' => 'Екатерина',
-            'age' => '25 год',
-            'photo' => 'pptx/70f86bf6abaa314e43fb142f6c0b5957.jpg',
-        ]
     ];
 
     $forPhoto = Storage::disk('public')->path('pptx/forPhoto.png');
