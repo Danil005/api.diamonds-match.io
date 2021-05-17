@@ -670,7 +670,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $questionnaire = new Questionnaire();
 
-        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
+        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
             collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except(['sex'])->toArray()
         )->toArray();
 
@@ -683,7 +683,7 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($myAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if ($item == $partnerAppearance[$key] || $item == null || $partnerAppearance[$key] == null)
+            if ($item == $partnerAppearance[$key] && $item != null && $partnerAppearance[$key] != null)
                 $requirements[$key] = true;
             else
                 $requirements[$key] = false;

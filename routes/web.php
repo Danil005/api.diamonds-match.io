@@ -45,15 +45,17 @@ Route::get('match', function () {
 Route::get('pptx', function () {
 //    $oReader = IOFactory::createReader('PowerPoint2007');
     $file = Storage::disk('public')->path('pptx/questinnaire.pdf');
-    $pdf = new FPDI('l');
+    $pdf = new FPDI('p');
     $pagecount = $pdf->setSourceFile($file);
     $tpl = $pdf->importPage(1);
     $pdf->AddPage();
     $pdf->useTemplate($tpl);
-    $pdf->SetFont('Helvetica');
-    $pdf->SetFontSize('30'); // set font size
-    $pdf->SetXY(10, 89); // set the position of the box
-    $pdf->Cell(0, 10, 'Niraj Shah', 1, 0, 'C');
+
+    $tpl = $pdf->importPage(2);
+    $pdf->AddPage();
+    $pdf->useTemplate($tpl);
+
+
 
     $pdf->Output();
 //    $oReader->load($file);
