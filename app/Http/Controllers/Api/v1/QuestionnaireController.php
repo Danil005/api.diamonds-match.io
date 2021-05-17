@@ -671,22 +671,48 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaire = new Questionnaire();
 
         $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
-            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except(['sex'])->toArray()
+            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
         )->toArray();
 
         $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
-            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except(['sex'])->toArray()
+            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
         )->toArray();
 
-        $requirements = [];
+        $requirements = [
+            'my' => [],
+            'partner' => []
+        ];
 
         foreach ($myAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if ($item == $partnerAppearance[$key] && $item != null && $partnerAppearance[$key] != null)
-                $requirements[$key] = true;
-            else
-                $requirements[$key] = false;
+            if(  $item == null ) continue;
+
+            if ($item == $partnerAppearance[$key] && $item != null && $partnerAppearance[$key] != null) {
+                $requirements['my'][$key] = true;
+            } else {
+                $requirements['my'][$key] = false;
+            }
+        }
+
+        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
+            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
+        )->toArray();
+
+        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first(
+            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
+        )->toArray();
+
+        foreach ($partnerAppearance as $key => $item) {
+            if ($key == 'sex') continue;
+
+            if(  $item == null ) continue;
+
+            if ($item == $myAppearance[$key]) {
+                $requirements['partner'][$key] = true;
+            } else {
+                $requirements['partner'][$key] = false;
+            }
         }
 
         $rs = $matching->toArray();
