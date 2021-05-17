@@ -690,9 +690,12 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $rs = $matching->toArray();
 
-        foreach ($rs as $key => $item) {
-            $rs[$key] = round($item);
-        }
+        $rs['total'] = round($rs['total']);
+        $rs['appearance'] = round($rs['appearance']);
+        $rs['information'] = round($rs['information']);
+        $rs['about_me'] = round($rs['about_me']);
+        $rs['test'] = round($rs['test']);
+        $rs['personal_qualities'] = round($rs['personal_qualities']);
 
         $result = [
             'matching_as' => $matching?->total,
