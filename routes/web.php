@@ -5,6 +5,7 @@ use Carbon\Carbon;
 use Dejurin\GoogleTranslateForFree;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
 use PhpOffice\PhpPresentation\DocumentLayout;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpPresentation\PhpPresentation;
@@ -224,11 +225,24 @@ Route::get('pptx', function () {
 
 Route::get('circle', function() {
 
-    $image = Storage::disk('public')->path('pptx/BackgroundFirst.jpg');
+    $image1 = Storage::disk('public')->path('pptx/BackgroundFirst.jpg');
 
-    $img = Image::make($image)->resize(300, 200);
+    $manager = new ImageManager(array('driver' => 'imagick'));
 
-    return $img->response('jpg');
+    $image = $manager->make($image1);
+    $image->encode('png');
+
+    $width = $image->getWidth();
+    $height = $image->getHeight();
+    $mask = $manager->canvas($width, $height);
+
+    $mask->circle($width, $width/2, $height/2, function ($draw) {
+        $draw->background('#fff');
+    });
+
+    $image->mask($mask, false);
+
+    return $image->response('png');
 });
 
 Route::get('/countries.json', function () {
