@@ -732,7 +732,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         foreach ($myAppearance as $key => $item) {
             if ($myAppearance[$key] == $partnerAppearance[$key]) {
-                $qualities[] = $key;
+                $qualities[] = $this->personalQuality($key, 'male');
             }
         }
 
