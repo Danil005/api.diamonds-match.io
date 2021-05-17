@@ -715,6 +715,29 @@ class QuestionnaireController extends QuestionnaireUtils
             }
         }
 
+
+        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
+            [
+                ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
+                ...['personal_qualities.sport']
+            ]
+        )->toArray();
+
+        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first([
+            ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
+            ...['personal_qualities.sport']
+        ])->toArray();
+
+        $qualities = [];
+
+        foreach ($myAppearance as $key => $item) {
+            if ($myAppearance[$key] == $partnerAppearance[$key]) {
+                $qualities[] = $key;
+            } else {
+                continue;
+            }
+        }
+
         $rs = $matching->toArray();
 
         $rs['total'] = round($rs['total']);
@@ -729,6 +752,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'partner_questionnaire_id' => $withQuestionnaire->id,
             'matching' => $rs,
             'requirements' => $requirements,
+            'qualities' => $qualities,
             'names' => [
                 'me' => $matching->name,
                 'partner' => $partner->name
