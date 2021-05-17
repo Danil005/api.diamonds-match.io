@@ -733,8 +733,6 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($myAppearance as $key => $item) {
             if ($myAppearance[$key] == $partnerAppearance[$key]) {
                 $qualities[] = $key;
-            } else {
-                continue;
             }
         }
 
@@ -952,8 +950,9 @@ class QuestionnaireController extends QuestionnaireUtils
         $total = $qm->count();
 
         if ($request->has('page')) {
+            $limit = (int)$request->limit == 0 ? 1 : (int)$request->limit;
             $offset = (int)$request->page - 1;
-            $offset = ($offset == 0) ? 0 : $offset + (int)$request->limit;
+            $offset = ($offset == 0) ? 0 : $offset + $limit;
             $qm = $qm->offset($offset);
             $qm = $qm->limit((int)$request->limit);
             $total = $qm->count();
@@ -961,7 +960,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 'total' => $total,
                 'offset' => $offset + 1,
                 'limit' => (int)$request->limit,
-                'page_available' => ceil($total / (int)$request->limit)
+                'page_available' => ceil($total / $limit)
             ];
         }
 
