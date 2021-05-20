@@ -287,6 +287,10 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myInformation['age'] = $birthday->diffInYears($now);
             }
 
+            if( $key == 'countries_was' || $key == 'countries_dream') {
+                $myInformation[$key] = implode(',', $information);
+            }
+
             if ($key == 'languages') {
                 $langs = new Langs();
                 foreach ($information as $item) {

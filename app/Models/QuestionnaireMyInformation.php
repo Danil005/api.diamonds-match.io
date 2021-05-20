@@ -18,6 +18,7 @@ class QuestionnaireMyInformation extends Model
         'films_or_books', 'relax', 'countries_was', 'countries_dream',
         'best_gift', 'hobbies', 'kredo', 'features_repel', 'age_difference',
         'films', 'songs', 'ideal_weekend', 'sleep', 'doing_10', 'signature_dish',
-        'clubs', 'best_gift_received', 'talents', 'name', 'birthday'
+        'clubs', 'best_gift_received', 'talents', 'name', 'birthday',
+        'work_name', 'education_name'
     ];
 }

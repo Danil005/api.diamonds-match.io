@@ -35,7 +35,9 @@ class CreateQuestionnaireMyInformationTable extends Migration
             $table->string('religion');
             $table->string('sport');
             $table->string('education');
+            $table->string('education_name');
             $table->string('work');
+            $table->string('work_name');
             $table->string('salary');
             $table->string('health_problems');
             $table->string('allergies');
