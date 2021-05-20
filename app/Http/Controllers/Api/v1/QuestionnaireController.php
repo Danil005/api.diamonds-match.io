@@ -736,13 +736,17 @@ class QuestionnaireController extends QuestionnaireUtils
             ...['personal_qualities.sport']
         ])->toArray();
 
-        $qualities = [];
+        $qualities = [
+            'my' => [],
+            'partner' => []
+        ];
 
         foreach ($myAppearance as $key => $item) {
             if ($myAppearance[$key] == $partnerAppearance[$key]) {
                 $qualities['my'][] = $this->personalQuality($key, $a['sex']);
             }
         }
+
 
 
         $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
@@ -757,16 +761,15 @@ class QuestionnaireController extends QuestionnaireUtils
             ...['personal_qualities.sport']
         ])->toArray();
 
-        $qualities = [];
 
-        foreach ($myAppearance as $key => $item) {
-            if ($myAppearance[$key] == $partnerAppearance[$key]) {
+        foreach ($partnerAppearance as $key => $item) {
+            if ($partnerAppearance[$key] == $myAppearance[$key]) {
                 $qualities['partner'][] = $this->personalQuality($key, $a['sex']);
             }
         }
 
 
-        $rs = $matching->toArray();
+        $rs = $matching?->toArray();
 
         $rs['total'] = round($rs['total']);
         $rs['appearance'] = round($rs['appearance']);
