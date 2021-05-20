@@ -33,9 +33,9 @@ trait Response
      *
      * @param string $type
      * @param string $message
-     * @param string $payload
+     * @param array $payload
      */
-    public function createNotify(string $type, string $message, string $payload)
+    public function createNotify(string $type, string $message, array $payload)
     {
         Notification::create([
             'type' => $type,
