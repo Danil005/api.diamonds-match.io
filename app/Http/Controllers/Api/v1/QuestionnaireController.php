@@ -411,7 +411,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'my_personal_qualities' => collect(QuestionnaireMyPersonalQualities::where('id', $questionnaire->my_personal_qualities_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'my_information' => collect(QuestionnaireMyInformation::where('id', $questionnaire->my_information_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'application' => $application,
-            'histories' => QuestionnaireHistory::where('questionnaire_id', $questionnaire->id)->first()?->toArray(),
+            'histories' => QuestionnaireHistory::where('questionnaire_id', $questionnaire->id)->get()?->toArray(),
             'appointed_data' => QuestionnaireAppointedDate::where('questionnaire_id', $request->id)->first(),
             'matched_count' => QuestionnaireMatch::where('questionnaire_id', $request->id)->count()
         ];
@@ -740,9 +740,31 @@ class QuestionnaireController extends QuestionnaireUtils
 
         foreach ($myAppearance as $key => $item) {
             if ($myAppearance[$key] == $partnerAppearance[$key]) {
-                $qualities[] = $this->personalQuality($key, $a['sex']);
+                $qualities['my'][] = $this->personalQuality($key, $a['sex']);
             }
         }
+
+
+        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
+            [
+                ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
+                ...['personal_qualities.sport']
+            ]
+        )->toArray();
+
+        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first([
+            ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
+            ...['personal_qualities.sport']
+        ])->toArray();
+
+        $qualities = [];
+
+        foreach ($myAppearance as $key => $item) {
+            if ($myAppearance[$key] == $partnerAppearance[$key]) {
+                $qualities['partner'][] = $this->personalQuality($key, $a['sex']);
+            }
+        }
+
 
         $rs = $matching->toArray();
 
