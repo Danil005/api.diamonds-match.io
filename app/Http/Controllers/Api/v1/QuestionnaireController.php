@@ -407,6 +407,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'my_personal_qualities' => collect(QuestionnaireMyPersonalQualities::where('id', $questionnaire->my_personal_qualities_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'my_information' => collect(QuestionnaireMyInformation::where('id', $questionnaire->my_information_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'application' => $application,
+            'histories' => QuestionnaireHistory::where('questionnaire_id', $questionnaire->id)->first()?->toArray(),
             'appointed_data' => QuestionnaireAppointedDate::where('questionnaire_id', $request->id)->first(),
         ];
 
