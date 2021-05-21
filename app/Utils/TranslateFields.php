@@ -650,12 +650,16 @@ trait TranslateFields
 
     public function salary(string $salary)
     {
-
+        $temp = $salary;
         $salary = explode(',', $salary);
 
-        return ($salary[1] != "-1") ? 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2]
-            . ' до ' . number_format($salary[1], 0, '.', ' ') . $salary[2] :
-            'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2];
+        try {
+            return ($salary[1] != "-1") ? 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2]
+                . ' до ' . number_format($salary[1], 0, '.', ' ') . $salary[2] :
+                'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2];
+        } catch (\Exception) {
+            return $temp;
+        }
     }
 
     public function maritalStatus(string $quality, string $sex)

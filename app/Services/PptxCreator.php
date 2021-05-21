@@ -294,7 +294,7 @@ class PptxCreator
 
         $myInformation = [
             'country' => explode(', ', $questionnaire['city'])[0],
-            'ethnicity' => $questionnaire['ethnicity'],
+            'ethnicity' => $this->ethnicity($questionnaire['ethnicity']),
             'life_in' => explode(', ', $questionnaire['city'])[1],
             'birth_city' => $questionnaire['place_birth'],
             'moving' => empty($moving) ? 'Все равно' : implode(', ', $moving),
@@ -778,18 +778,19 @@ class PptxCreator
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
 
+        $zodiac = $this->zodiacSigns();
         /**
          * Данные
          */
         $info = [
-            'zodiac' => $questionnaire['zodiac_signs'],
+            'zodiac' => $zodiac[$questionnaire['zodiac_signs']],
             'height' => $questionnaire['height'],
             'weight' => $questionnaire['weight'],
-            'body_type' => $questionnaire['body_type'],
-            'hair_color' => $questionnaire['hair_color'],
-            'eye_color' => $questionnaire['eye_color'],
-            'status' => $questionnaire['marital_status'],
-            'children' => $questionnaire['children'],
+            'body_type' => $this->bodyType($questionnaire['body_type']),
+            'hair_color' => $this->hairColor($questionnaire['hair_color']),
+            'eye_color' => $this->colorEye($questionnaire['eye_color']),
+            'status' => $this->maritalStatus($questionnaire['marital_status'], $questionnaire['sex']),
+            'children' => $questionnaire['children'] ? 'Да' : 'Нет',
             'want_children' => $questionnaire['children_desire'],
             'smoking' => $questionnaire['smoking'],
             'alcohol' => $questionnaire['alcohol'],
