@@ -559,6 +559,64 @@ class QuestionnaireController extends QuestionnaireUtils
             }
         }
 
+        foreach ($result['partner_information'] as $key=>$item) {
+            if( $key == 'smoking' ) {
+                $result['partner_information']['smoking'] = $this->smoking($result['partner_information']['smoking'], 'male');
+            }
+
+            if( $key == 'alcohol' ) {
+                $result['partner_information']['alcohol'] = $this->alcohol($result['partner_information']['alcohol'], 'male');
+            }
+
+            if( $key == 'religion' ) {
+                $result['partner_information']['religion'] = $this->religion($result['partner_information']['religion'], 'male');
+            }
+
+            if( $key == 'sport' ) {
+                $result['partner_information']['sport'] = $this->sport($result['partner_information']['sport'], 'male');
+            }
+
+            if( $key == 'education' ) {
+                $result['partner_information']['education'] = $this->education($result['partner_information']['education'], 'male');
+            }
+
+            if( $key == 'work' ) {
+                $result['partner_information']['work'] = $this->work($result['partner_information']['work'], 'male');
+            }
+
+            if( $key == 'pets' ) {
+                $result['partner_information']['pets'] = $this->pets($result['partner_information']['pets'], 'male');
+            }
+
+            if( $key == 'films_or_books' ) {
+                $result['partner_information']['films_or_books'] = $this->fm($result['partner_information']['films_or_books'], 'male');
+            }
+
+            if( $key == 'relax' ) {
+                $result['partner_information']['relax'] = $this->relax($result['partner_information']['relax'], 'male');
+            }
+
+            if( $key == 'sleep' ) {
+                $result['partner_information']['sleep'] = $this->sleep($result['partner_information']['sleep'], 'male');
+            }
+
+            if( $key == 'clubs' ) {
+                $result['partner_information']['clubs'] = $this->clubs($result['partner_information']['clubs'], 'male');
+            }
+
+            if( $key == 'salary' ) {
+                $result['partner_information']['salary'] = $this->salary($result['partner_information']['salary']);
+            }
+
+            if( $key == 'marital_status' ) {
+                $result['partner_information']['marital_status'] = $this->maritalStatus($result['partner_information']['marital_status'], $result['my_appearance']['sex']);
+            }
+
+            if( $key == 'children_desire' ) {
+                $result['partner_information']['children_desire'] = $this->childrenDesire($result['partner_information']['children_desire'], $result['my_appearance']['sex']);
+            }
+        }
+
 //        $result['application']['service_type'] = $serviceType;
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaire->id)->get(['id', 'path']);
