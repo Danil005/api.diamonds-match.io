@@ -790,15 +790,15 @@ class PptxCreator
             'hair_color' => $this->hairColor($questionnaire['hair_color']),
             'eye_color' => $this->colorEye($questionnaire['eye_color']),
             'status' => $this->maritalStatus($questionnaire['marital_status'], $questionnaire['sex']),
-            'children' => $questionnaire['children'] ? 'Да' : 'Нет',
-            'want_children' => $questionnaire['children_desire'],
-            'smoking' => $questionnaire['smoking'],
-            'alcohol' => $questionnaire['alcohol'],
-            'faith' => $questionnaire['religion'],
+            'children' => $questionnaire['children_desire'] ? 'Есть' : 'Нет',
+            'want_children' => $this->childrenDesire($questionnaire['children_desire']),
+            'smoking' => $this->smoking($questionnaire['smoking']),
+            'alcohol' => $this->alcohol($questionnaire['alcohol']),
+            'faith' => $this->religion($questionnaire['religion']),
             'langs' => $questionnaire['languages'],
             'education' => $questionnaire['education_name'],
             'work' => $questionnaire['work_name'],
-            'salary' => $questionnaire['salary'],
+            'salary' => $this->salary($questionnaire['salary']),
             'problem_healthy' => $questionnaire['health_problems'],
             'allergy' => $questionnaire['allergies']
         ];
@@ -984,10 +984,10 @@ class PptxCreator
          * Данные
          */
         $info2 = [
-            'like_pets' => $questionnaire['pets'],
+            'like_pets' => $this->pets($questionnaire['pets']),
             'have_pets' => $questionnaire['have_pets'],
-            'book_or_films' => $questionnaire['films_or_books'],
-            'relax' => $questionnaire['relax'],
+            'book_or_films' => $this->fm($questionnaire['films_or_books']),
+            'relax' => $this->relax($questionnaire['relax']),
             'was_be_country' => $questionnaire['countries_was'],
             'dream_country' => $questionnaire['countries_dream'],
             'best_gift' => $questionnaire['best_gift'],

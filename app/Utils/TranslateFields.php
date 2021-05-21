@@ -241,7 +241,7 @@ trait TranslateFields
         }
     }
 
-    public function personalQuality(string $quality, string $sex)
+    public function personalQuality(string $quality, string $sex = 'male')
     {
         $lang = Cache::get('lang');
 
@@ -337,7 +337,7 @@ trait TranslateFields
         }
     }
 
-    public function pets(string $quality, string $sex)
+    public function pets(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -366,7 +366,7 @@ trait TranslateFields
         }
     }
 
-    public function fm(string $quality, string $sex)
+    public function fm(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -391,7 +391,7 @@ trait TranslateFields
         }
     }
 
-    public function relax(string $quality, string $sex)
+    public function relax(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -416,7 +416,7 @@ trait TranslateFields
         }
     }
 
-    public function smoking(string $quality, string $sex)
+    public function smoking(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -443,7 +443,7 @@ trait TranslateFields
         }
     }
 
-    public function alcohol(string $quality, string $sex)
+    public function alcohol(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -472,7 +472,7 @@ trait TranslateFields
         }
     }
 
-    public function religion(string $quality, string $sex)
+    public function religion(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -507,7 +507,7 @@ trait TranslateFields
         }
     }
 
-    public function sport(string $quality, string $sex)
+    public function sport(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -534,7 +534,7 @@ trait TranslateFields
         }
     }
 
-    public function education(string $quality, string $sex)
+    public function education(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -569,7 +569,7 @@ trait TranslateFields
         }
     }
 
-    public function work(string $quality, string $sex)
+    public function work(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -598,7 +598,7 @@ trait TranslateFields
         }
     }
 
-    public function sleep(string $quality, string $sex)
+    public function sleep(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -623,7 +623,7 @@ trait TranslateFields
         }
     }
 
-    public function clubs(string $quality, string $sex)
+    public function clubs(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
@@ -662,7 +662,7 @@ trait TranslateFields
         }
     }
 
-    public function maritalStatus(string $quality, string $sex)
+    public function maritalStatus(string $quality, string $sex = 'male')
     {
         $lang = Cache::get('lang');
 
@@ -687,7 +687,7 @@ trait TranslateFields
         }
     }
 
-    public function childrenDesire(string $quality, string $sex)
+    public function childrenDesire(string $quality, string $sex = '')
     {
         $lang = Cache::get('lang');
 
