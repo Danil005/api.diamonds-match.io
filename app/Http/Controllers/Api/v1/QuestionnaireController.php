@@ -551,7 +551,7 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if( $key == 'marital_status' ) {
-                $result['my_information']['marital_status'] = $this->maritalStatus($result['my_information']['marital_status']);
+                $result['my_information']['marital_status'] = $this->maritalStatus($result['my_information']['marital_status'], $result['my_appearance']['sex']);
             }
         }
 
