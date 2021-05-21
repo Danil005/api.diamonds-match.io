@@ -653,7 +653,8 @@ trait TranslateFields
 
         $salary = explode(',', $salary);
 
-        return ($salary[1] != '-1') ? 'От ' . number_format($salary[0], 2, '.', ' ') . $salary[2] . ' до ' . number_format($salary[0], 2, '.', ' ') . $salary[2] :
-            'От ' . number_format($salary[0], 2, '.', ' ') . $salary[2];
+        return ($salary[1] != '-1') ? 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2
+            ] . ' до ' . number_format($salary[0], 0, '.', ' ') . $salary[2] :
+            'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2];
     }
 }
