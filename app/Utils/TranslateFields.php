@@ -657,4 +657,29 @@ trait TranslateFields
             . ' до ' . number_format($salary[1], 0, '.', ' ') . $salary[2] :
             'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2];
     }
+
+    public function maritalStatus(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'one' => $this->fem($sex, '', ['Одна', 'Один']),
+                'divorced' => $this->fem($sex, '', ['Разведена', 'Разведен']),
+                'widow' => $this->fem($sex, '', ['Вдова', 'Вдов']),
+            ];
+        } else {
+            $data = [
+                'one' => $this->fem($sex, '', ['Одна', 'Один']),
+                'divorced' => $this->fem($sex, '', ['Разведена', 'Разведен']),
+                'widow' => $this->fem($sex, '', ['Вдова', 'Вдов']),
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
 }
