@@ -651,11 +651,10 @@ trait TranslateFields
     public function salary(string $salary)
     {
 
-        return $salary;
         $salary = explode(',', $salary);
 
-        return ($salary[1] != -1) ? 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2
-            ] . ' до ' . number_format($salary[0], 0, '.', ' ') . $salary[2] :
+        return ($salary[1] != -1) ? 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2]
+            . ' до ' . number_format($salary[1], 0, '.', ' ') . $salary[2] :
             'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2];
     }
 }
