@@ -249,7 +249,7 @@ trait TranslateFields
             $data = [
                 'calm' => $this->fem($sex, 'Спокойн'),
                 'energetic' => $this->fem($sex, 'Энергичн'),
-                'live_in_moment' => $this->fem($sex, 'Живущ', ['ая', 'ий']) . ' в момент',
+                'live_in_moment' => $this->fem($sex, 'Живущ', ['ая', 'ий']) . ' в моменте',
                 'pragmatic' => $this->fem($sex, 'Прагматичн'),
                 'ambitious' => $this->fem($sex, 'Амбициозн'),
                 'modest' => $this->fem($sex, 'Скромн'),
@@ -645,6 +645,31 @@ trait TranslateFields
             return $data[$quality];
         } catch (\Exception $exception) {
             return $quality;
+        }
+    }
+
+    public function salary(string $salary)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'yes' => 'Да',
+                'no' => 'Нет',
+                'sometimes' => 'Иногда',
+            ];
+        } else {
+            $data = [
+                'yes' => 'Да',
+                'no' => 'Нет',
+                'sometimes' => 'Иногда',
+            ];
+        }
+
+        try {
+            return $data[$salary];
+        } catch (\Exception $exception) {
+            return $salary;
         }
     }
 }
