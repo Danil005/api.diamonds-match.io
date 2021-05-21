@@ -336,4 +336,315 @@ trait TranslateFields
             return $quality;
         }
     }
+
+    public function pets(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'have_pets' => 'Есть животные',
+                'no_pets' => 'Нет животных',
+                'love_not_home' => 'Люблю, но нет дома',
+                'not_love' => 'Не люблю',
+                'neutral' => 'Нейтрально'
+            ];
+        } else {
+            $data = [
+                'have_pets' => 'Есть животные',
+                'no_pets' => 'Нет животных',
+                'love_not_home' => 'Люблю, но нет дома',
+                'not_love' => 'Не люблю',
+                'neutral' => 'Нейтрально'
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function fm(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'film' => 'Фильмы',
+                'book' => 'Книги',
+                'film,book' => 'Книги и фильмы',
+            ];
+        } else {
+            $data = [
+                'film' => 'Фильмы',
+                'book' => 'Книги',
+                'film,book' => 'Книги и фильмы',
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function relax(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'beach' => 'Пляж',
+                'extreme' => 'Экстремальный',
+                'calm' => 'Спокойный',
+            ];
+        } else {
+            $data = [
+                'beach' => 'Пляж',
+                'extreme' => 'Экстремальный',
+                'calm' => 'Спокойный',
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function smoking(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'dont_smoking' => 'Не курю',
+                'rarely' => 'Редко',
+                'smoking' => 'Курю',
+                'no_matter' => 'Не важно'
+            ];
+        } else {
+            $data = [
+                'dont_smoking' => 'Не курю',
+                'rarely' => 'Редко',
+                'smoking' => 'Курю',
+                'no_matter' => 'Не важно'
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function alcohol(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'no' => 'Не пью',
+                'rarely' => 'Редко',
+                'often' => 'Часто',
+                'very_often' => 'Очень часто',
+                'no_matter' => 'Не важно'
+            ];
+        } else {
+            $data = [
+                'no' => 'Не пью',
+                'rarely' => 'Редко',
+                'often' => 'Часто',
+                'very_often' => 'Очень часто',
+                'no_matter' => 'Не важно'
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function religion(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'christianity' => 'Христианство',
+                'judaism' => 'Иудаизм',
+                'catholicism' => 'Католицизм',
+                'islam' => 'Ислам',
+                'buddhism' => 'Буддизм',
+                'atheism' => 'Атеизм',
+                'hinduism' => 'Индуизм',
+                'no_matter' => 'Не важно'
+            ];
+        } else {
+            $data = [
+                'christianity' => 'Христианство',
+                'judaism' => 'Иудаизм',
+                'catholicism' => 'Католицизм',
+                'islam' => 'Ислам',
+                'buddhism' => 'Буддизм',
+                'atheism' => 'Атеизм',
+                'hinduism' => 'Индуизм',
+                'no_matter' => 'Не важно'
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function sport(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'playing_sports' => 'Активно занимаюсь',
+                'sometimes' => 'Иногда',
+                'not_engaged' => 'Не занимаюсь',
+                'no_matter' => 'Не важно'
+            ];
+        } else {
+            $data = [
+                'playing_sports' => 'Активно занимаюсь',
+                'sometimes' => 'Иногда',
+                'not_engaged' => 'Не занимаюсь',
+                'no_matter' => 'Не важно'
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function education(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'middle' => 'Среднее',
+                'college' => 'Колледж',
+                'unfinished_higher' => 'Не законченное высшее',
+                'specialist' => 'Специалист',
+                'bachelor' => 'Бакалавриат',
+                'master' => 'Магистр',
+                'phd' => 'Доктор наук',
+                'no_matter' => 'Не важно'
+            ];
+        } else {
+            $data = [
+                'middle' => 'Среднее',
+                'college' => 'Колледж',
+                'unfinished_higher' => 'Не законченное высшее',
+                'specialist' => 'Специалист',
+                'bachelor' => 'Бакалавриат',
+                'master' => 'Магистр',
+                'phd' => 'Доктор наук',
+                'no_matter' => 'Не важно'
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function work(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'work' => 'Работаю',
+                'temp_no_work' => 'Временно без работы',
+                'no_work' => 'Нет работы',
+                'study' => 'Учусь',
+                'pensioner' => 'Пенсионер',
+            ];
+        } else {
+            $data = [
+                'work' => 'Работаю',
+                'temp_no_work' => 'Временно без работы',
+                'no_work' => 'Нет работы',
+                'study' => 'Учусь',
+                'pensioner' => 'Пенсионер',
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function sleep(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'owl' => 'Сова',
+                'lark' => 'Жаворонок',
+                'differently' => 'По-разному',
+            ];
+        } else {
+            $data = [
+                'owl' => 'Сова',
+                'lark' => 'Жаворонок',
+                'differently' => 'По-разному',
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
+
+    public function clubs(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'yes' => 'Да',
+                'no' => 'Нет',
+                'sometimes' => 'Иногда',
+            ];
+        } else {
+            $data = [
+                'yes' => 'Да',
+                'no' => 'Нет',
+                'sometimes' => 'Иногда',
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
 }

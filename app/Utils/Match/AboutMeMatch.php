@@ -20,9 +20,8 @@ trait AboutMeMatch
 
         # Делаем простой матч
         $this->similarMatch($percent, fn() => [
-            'education', 'work', 'salary', 'health_problems',
-            'allergies', 'pets', 'have_pets', 'films_or_books', 'relax',
-            'countries_was', 'countries_dream', 'best_gift', 'hobbies',
+            'education_name', 'work_name', 'health_problems',
+            'allergies', 'have_pets', 'best_gift', 'hobbies',
             'kredo', 'features_repel', 'age_difference', 'films',
             'songs', 'ideal_weekend', 'sleep', 'doing_10', 'signature_dish',
             'clubs', 'best_gift_received', 'talents'

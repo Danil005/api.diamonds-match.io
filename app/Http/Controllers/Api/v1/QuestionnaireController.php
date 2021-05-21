@@ -31,6 +31,7 @@ use App\Models\QuestionnaireTest;
 use App\Models\QuestionnaireUploadPhoto;
 use App\Models\SignQuestionnaire;
 use App\Models\User;
+use App\Services\PptxCreator;
 use App\Utils\QuestionnaireUtils;
 use App\Utils\TranslateFields;
 use Carbon\Carbon;
@@ -131,6 +132,22 @@ class QuestionnaireController extends QuestionnaireUtils
                     $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
                 }
             }
+
+            if( $key == 'smoking' ) {
+                $partnerInformation['smoking'] = $this->smoking($partnerInformation['smoking'], 'male');
+            }
+
+            if( $key == 'alcohol' ) {
+                $partnerInformation['alcohol'] = $this->smoking($partnerInformation['alcohol'], 'male');
+            }
+
+            if( $key == 'religion' ) {
+                $partnerInformation['religion'] = $this->smoking($partnerInformation['religion'], 'male');
+            }
+
+            if( $key == 'sport' ) {
+                $partnerInformation['sport'] = $this->smoking($partnerInformation['sport'], 'male');
+            }
         }
 
         foreach ($myInformation as $key => $information) {
@@ -169,6 +186,51 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($key == 'height' || $key == 'weight') {
                 $myInformation[$key] = (int)$myInformation[$key];
+            }
+
+
+            if( $key == 'smoking' ) {
+                $partnerInformation['smoking'] = $this->smoking($partnerInformation['smoking'], 'male');
+            }
+
+            if( $key == 'alcohol' ) {
+                $partnerInformation['alcohol'] = $this->alcohol($partnerInformation['alcohol'], 'male');
+            }
+
+            if( $key == 'religion' ) {
+                $partnerInformation['religion'] = $this->religion($partnerInformation['religion'], 'male');
+            }
+
+            if( $key == 'sport' ) {
+                $partnerInformation['sport'] = $this->sport($partnerInformation['sport'], 'male');
+            }
+
+            if( $key == 'education' ) {
+                $partnerInformation['education'] = $this->education($partnerInformation['education'], 'male');
+            }
+
+            if( $key == 'work' ) {
+                $partnerInformation['work'] = $this->work($partnerInformation['work'], 'male');
+            }
+
+            if( $key == 'pets' ) {
+                $partnerInformation['pets'] = $this->pets($partnerInformation['pets'], 'male');
+            }
+
+            if( $key == 'films_or_books' ) {
+                $partnerInformation['films_or_books'] = $this->fm($partnerInformation['films_or_books'], 'male');
+            }
+
+            if( $key == 'relax' ) {
+                $partnerInformation['relax'] = $this->relax($partnerInformation['relax'], 'male');
+            }
+
+            if( $key == 'sleep' ) {
+                $partnerInformation['sleep'] = $this->sleep($partnerInformation['sleep'], 'male');
+            }
+
+            if( $key == 'clubs' ) {
+                $partnerInformation['clubs'] = $this->clubs($partnerInformation['clubs'], 'male');
             }
         }
 
@@ -1097,5 +1159,17 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
         $this->response()->success()->setMessage('Статус изменен')->send();
+    }
+
+    public function createPresentation(Request $request)
+    {
+        if (!$request->has('questionnaire_id'))
+            $this->response()->setMessage('ID анкеты не указан')->error()->send();
+
+        $create = (new PptxCreator())->create(new Questionnaire(), $request->questionnaire_id);
+
+        $this->response()->success()->setMessage('Презентация была создана')->setData([
+           'download_link' => env('APP_URL').'/storage/questionnaire'.explode('/questionnaire', $create)[1]
+        ])->send();
     }
 }

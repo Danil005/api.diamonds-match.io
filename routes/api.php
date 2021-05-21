@@ -62,6 +62,9 @@ Route::prefix('v1')->middleware(['api', 'throttle:10000000000000000000000,1'])->
 
             Route::post('questionnaire.addMalling', 'QuestionnaireController@addQuestionnaireMalling');
             Route::delete('questionnaire.removeMalling', 'QuestionnaireController@removeQuestionnaireMalling');
+
+
+            Route::post('questionnaire.createPresentation', 'QuestionnaireController@createPresentation');
         });
     });
 

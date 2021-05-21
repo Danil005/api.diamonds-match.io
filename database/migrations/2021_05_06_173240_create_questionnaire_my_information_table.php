@@ -42,7 +42,7 @@ class CreateQuestionnaireMyInformationTable extends Migration
             $table->string('health_problems');
             $table->string('allergies');
             $table->string('pets');
-            $table->string('have_pets');
+            $table->string('have_pets')->nullable();
             $table->string('films_or_books');
             $table->string('relax');
             $table->string('countries_was');

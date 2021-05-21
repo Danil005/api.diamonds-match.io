@@ -14,7 +14,8 @@ trait FormMatch
 
         # Делаем простой матч
         $this->simpleMatch($percent, 'partner_information', [
-            'smoking', 'alcohol', 'religion', 'sport'
+            "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
+            "smoking", "alcohol", "religion", "sport", "children", "children_desire"
         ]);
 
         # Добавляем в коллекцию результат
