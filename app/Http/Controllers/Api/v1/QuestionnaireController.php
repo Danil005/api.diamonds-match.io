@@ -402,6 +402,21 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $application = Applications::where('questionnaire_id', $request->id)->first();
 
+        $history = QuestionnaireHistory::where('questionnaire_id', $questionnaire->id)
+            ->join('users', 'users.id', '=', 'questionnaire_histories.user')
+            ->get([
+                'questionnaire_histories.id', 'from', 'comment', 'questionnaire_histories.created_at',
+                'name'
+            ]);
+        Date::setlocale(config('app.locale'));
+        Carbon::setLocale(config('app.locale'));
+
+        $history = $history->toArray();
+
+        foreach ($history as $key => $item) {
+            $history[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('j F Y');
+        }
+
         $result = [
             'partner_appearance' => collect(QuestionnairePartnerAppearance::where('id', $questionnaire->partner_appearance_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'personal_qualities_partner' => collect(QuestionnairePersonalQualitiesPartner::where('id', $questionnaire->personal_qualities_partner_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
@@ -411,7 +426,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'my_personal_qualities' => collect(QuestionnaireMyPersonalQualities::where('id', $questionnaire->my_personal_qualities_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'my_information' => collect(QuestionnaireMyInformation::where('id', $questionnaire->my_information_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'application' => $application,
-            'histories' => QuestionnaireHistory::where('questionnaire_id', $questionnaire->id)->get()?->toArray(),
+            'histories' => $history,
             'appointed_data' => QuestionnaireAppointedDate::where('questionnaire_id', $request->id)->first(),
             'matched_count' => QuestionnaireMatch::where('questionnaire_id', $request->id)->count()
         ];
