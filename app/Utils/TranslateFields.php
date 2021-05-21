@@ -651,6 +651,7 @@ trait TranslateFields
     public function salary(string $salary)
     {
 
+        return $salary;
         $salary = explode(',', $salary);
 
         return ($salary[1] != -1) ? 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2
