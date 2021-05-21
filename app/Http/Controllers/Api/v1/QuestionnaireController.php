@@ -546,6 +546,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 $result['my_information']['clubs'] = $this->clubs($result['my_information']['clubs'], 'male');
             }
         }
+
 //        $result['application']['service_type'] = $serviceType;
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaire->id)->get(['id', 'path']);

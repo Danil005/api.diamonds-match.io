@@ -249,7 +249,7 @@ trait TranslateFields
             $data = [
                 'calm' => $this->fem($sex, 'Спокойн'),
                 'energetic' => $this->fem($sex, 'Энергичн'),
-                'live_in_moment' => $this->fem($sex, 'Жевущ', ['ая', 'ий']) . ' в момент',
+                'live_in_moment' => $this->fem($sex, 'Живущ', ['ая', 'ий']) . ' в момент',
                 'pragmatic' => $this->fem($sex, 'Прагматичн'),
                 'ambitious' => $this->fem($sex, 'Амбициозн'),
                 'modest' => $this->fem($sex, 'Скромн'),
