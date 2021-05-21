@@ -650,26 +650,10 @@ trait TranslateFields
 
     public function salary(string $salary)
     {
-        $lang = Cache::get('lang');
 
-        if ($lang == 'ru') {
-            $data = [
-                'yes' => 'Да',
-                'no' => 'Нет',
-                'sometimes' => 'Иногда',
-            ];
-        } else {
-            $data = [
-                'yes' => 'Да',
-                'no' => 'Нет',
-                'sometimes' => 'Иногда',
-            ];
-        }
+        $salary = explode(',', $salary);
 
-        try {
-            return $data[$salary];
-        } catch (\Exception $exception) {
-            return $salary;
-        }
+        return ($salary[1] != '-1') ? 'От ' . $salary[0] . $salary[2] . ' до ' . $salary[1] . $salary[2] :
+            'От ' . $salary[0] . $salary[2];
     }
 }

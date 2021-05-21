@@ -545,6 +545,10 @@ class QuestionnaireController extends QuestionnaireUtils
             if( $key == 'clubs' ) {
                 $result['my_information']['clubs'] = $this->clubs($result['my_information']['clubs'], 'male');
             }
+
+            if( $key == 'salary' ) {
+                $result['my_information']['salary'] = $this->salary($result['my_information']['salary']);
+            }
         }
 
 //        $result['application']['service_type'] = $serviceType;
