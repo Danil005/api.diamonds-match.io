@@ -132,22 +132,6 @@ class QuestionnaireController extends QuestionnaireUtils
                     $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
                 }
             }
-
-            if( $key == 'smoking' ) {
-                $partnerInformation['smoking'] = $this->smoking($partnerInformation['smoking'], 'male');
-            }
-
-            if( $key == 'alcohol' ) {
-                $partnerInformation['alcohol'] = $this->smoking($partnerInformation['alcohol'], 'male');
-            }
-
-            if( $key == 'religion' ) {
-                $partnerInformation['religion'] = $this->smoking($partnerInformation['religion'], 'male');
-            }
-
-            if( $key == 'sport' ) {
-                $partnerInformation['sport'] = $this->smoking($partnerInformation['sport'], 'male');
-            }
         }
 
         foreach ($myInformation as $key => $information) {
@@ -186,51 +170,6 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($key == 'height' || $key == 'weight') {
                 $myInformation[$key] = (int)$myInformation[$key];
-            }
-
-
-            if( $key == 'smoking' ) {
-                $partnerInformation['smoking'] = $this->smoking($partnerInformation['smoking'], 'male');
-            }
-
-            if( $key == 'alcohol' ) {
-                $partnerInformation['alcohol'] = $this->alcohol($partnerInformation['alcohol'], 'male');
-            }
-
-            if( $key == 'religion' ) {
-                $partnerInformation['religion'] = $this->religion($partnerInformation['religion'], 'male');
-            }
-
-            if( $key == 'sport' ) {
-                $partnerInformation['sport'] = $this->sport($partnerInformation['sport'], 'male');
-            }
-
-            if( $key == 'education' ) {
-                $partnerInformation['education'] = $this->education($partnerInformation['education'], 'male');
-            }
-
-            if( $key == 'work' ) {
-                $partnerInformation['work'] = $this->work($partnerInformation['work'], 'male');
-            }
-
-            if( $key == 'pets' ) {
-                $partnerInformation['pets'] = $this->pets($partnerInformation['pets'], 'male');
-            }
-
-            if( $key == 'films_or_books' ) {
-                $partnerInformation['films_or_books'] = $this->fm($partnerInformation['films_or_books'], 'male');
-            }
-
-            if( $key == 'relax' ) {
-                $partnerInformation['relax'] = $this->relax($partnerInformation['relax'], 'male');
-            }
-
-            if( $key == 'sleep' ) {
-                $partnerInformation['sleep'] = $this->sleep($partnerInformation['sleep'], 'male');
-            }
-
-            if( $key == 'clubs' ) {
-                $partnerInformation['clubs'] = $this->clubs($partnerInformation['clubs'], 'male');
             }
         }
 
@@ -562,6 +501,51 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['my_appearance']['sex'] = $result['my_appearance']['sex'] === 'female' ? 'Женщина' : 'Мужчина';
 
 
+        foreach ($result['my_information'] as $key=>$item) {
+            if( $key == 'smoking' ) {
+                $result['my_information']['smoking'] = $this->smoking($result['my_information']['smoking'], 'male');
+            }
+
+            if( $key == 'alcohol' ) {
+                $result['my_information']['alcohol'] = $this->alcohol($result['my_information']['alcohol'], 'male');
+            }
+
+            if( $key == 'religion' ) {
+                $result['my_information']['religion'] = $this->religion($result['my_information']['religion'], 'male');
+            }
+
+            if( $key == 'sport' ) {
+                $result['my_information']['sport'] = $this->sport($result['my_information']['sport'], 'male');
+            }
+
+            if( $key == 'education' ) {
+                $result['my_information']['education'] = $this->education($result['my_information']['education'], 'male');
+            }
+
+            if( $key == 'work' ) {
+                $result['my_information']['work'] = $this->work($result['my_information']['work'], 'male');
+            }
+
+            if( $key == 'pets' ) {
+                $result['my_information']['pets'] = $this->pets($result['my_information']['pets'], 'male');
+            }
+
+            if( $key == 'films_or_books' ) {
+                $result['my_information']['films_or_books'] = $this->fm($result['my_information']['films_or_books'], 'male');
+            }
+
+            if( $key == 'relax' ) {
+                $result['my_information']['relax'] = $this->relax($result['my_information']['relax'], 'male');
+            }
+
+            if( $key == 'sleep' ) {
+                $result['my_information']['sleep'] = $this->sleep($result['my_information']['sleep'], 'male');
+            }
+
+            if( $key == 'clubs' ) {
+                $result['my_information']['clubs'] = $this->clubs($result['my_information']['clubs'], 'male');
+            }
+        }
 //        $result['application']['service_type'] = $serviceType;
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaire->id)->get(['id', 'path']);
