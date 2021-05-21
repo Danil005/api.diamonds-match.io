@@ -682,4 +682,29 @@ trait TranslateFields
             return $quality;
         }
     }
+
+    public function childrenDesire(string $quality, string $sex)
+    {
+        $lang = Cache::get('lang');
+
+        if ($lang == 'ru') {
+            $data = [
+                'yes' => 'Да',
+                'no' => 'Нет',
+                'maybe' => 'Возможно'
+            ];
+        } else {
+            $data = [
+                'yes' => 'Да',
+                'no' => 'Нет',
+                'maybe' => 'Возможно'
+            ];
+        }
+
+        try {
+            return $data[$quality];
+        } catch (\Exception $exception) {
+            return $quality;
+        }
+    }
 }
