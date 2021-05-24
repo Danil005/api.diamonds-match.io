@@ -315,11 +315,19 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'place_birth') {
-                $myInformation[$key] = $information;
+                $myInformation[$key] = implode(',', $information);
             }
 
             if ($key == 'height' || $key == 'weight') {
                 $myInformation[$key] = (int)$myInformation[$key];
+            }
+
+            if( $key == 'countries_was' ) {
+                $myInformation[$key] = implode(',', $information);
+            }
+
+            if( $key == 'countries_dream' ) {
+                $myInformation[$key] = implode(',', $information);
             }
         }
 
