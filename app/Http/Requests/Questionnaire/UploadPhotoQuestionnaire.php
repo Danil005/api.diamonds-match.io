@@ -28,7 +28,7 @@ class UploadPhotoQuestionnaire extends FormRequest
     {
         return [
             'questionnaire_id' => 'required|integer',
-            'file' => 'required|file'
+            'file' => 'required|image'
         ];
     }
 }
