@@ -414,7 +414,7 @@ class QuestionnaireController extends QuestionnaireUtils
             ->whereNotNUll('partner_appearance_id')->first();
 
         print_r($questionnaire->id);
-        $this->response()->setMessage('1')->send();
+        $this->response()->setMessage('1')->setData($questionnaire->id)->send();
         $application = Applications::where('questionnaire_id', $request->id)->first();
 
 
