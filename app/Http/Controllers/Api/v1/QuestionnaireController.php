@@ -1233,11 +1233,11 @@ class QuestionnaireController extends QuestionnaireUtils
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
-
-        sleep(10);
-        $this->response()->setMessage('Презентация была создана')->setData([
-            'download_link' => 'https://google.com/',
-        ])->send();
+//
+//        sleep(10);
+//        $this->response()->setMessage('Презентация была создана')->setData([
+//            'download_link' => 'https://google.com/',
+//        ])->send();
 
         $create = (new PptxCreator())->create(new Questionnaire(), $request->questionnaire_id);
 
