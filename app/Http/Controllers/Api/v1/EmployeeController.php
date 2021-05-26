@@ -8,6 +8,8 @@ use App\Http\Requests\Employee\Got;
 use App\Http\Requests\Employee\NewPassword;
 use App\Http\Requests\Employee\Update;
 use App\Mail\CreateEmployee;
+use App\Models\Applications;
+use App\Models\Questionnaire;
 use App\Models\User;
 use App\Utils\Phone;
 use App\Utils\Response;
@@ -92,8 +94,14 @@ class EmployeeController extends Controller
     public function update(Update $request)
     {
         $input = $request->except('user_id');
-
+        $user = User::where('id', $request->user_id)->first();
         $updated = User::where('id', $request->user_id)->update($input);
+
+        if( $request->has('name') ) {
+            Applications::where('responsibility', 'LIKE', '%' . $user->id . ',' . $user->name . '%')->update([
+                'responsibility' => $user->id .','.$request->name
+            ]);
+        }
 
         $this->response()->success()->setMessage('Настройки сотрудника сохранены')->send();
     }
