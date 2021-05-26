@@ -147,6 +147,10 @@ class EmployeeController extends Controller
      */
     public function archive(Archive $request)
     {
+        if( auth()->user()->id == $request->user_id )
+            $this->response()->error()->setMessage('Невозможно удалить самого себя')->send();
+
+        
         $user = User::where('id', $request->user_id)->first();
 
         if(empty($user))
