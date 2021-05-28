@@ -31,6 +31,7 @@ class Got extends FormRequest
         return [
             'limit' => 'integer|nullable',
             'offset' => 'integer|nullable',
+            'page' => 'integer|nullable',
             'fields' => 'string|nullable',
             'only_archive' => 'boolean|nullable',
             'search' => 'string|nullable',

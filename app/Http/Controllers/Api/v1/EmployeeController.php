@@ -87,6 +87,84 @@ class EmployeeController extends Controller
     }
 
     /**
+     * Получить всех пользователей
+     *
+     * @param Got $request
+     */
+    public function getV2(Got $request)
+    {
+        $fields = ['*'];
+        $model = new User();
+        $filter = false;
+
+        if ($request->has('only_archive') && $request->only_archive) {
+            $model = $model::withTrashed();
+            $model = $model->whereNotNull('deleted_at');
+        }
+        if( $request->has('role') ) {
+            $filter = true;
+            $model = $model->where('role', $request->role);
+        } else {
+            $model = $model->where(function(Builder $query) {
+                $query->where('role', 1)->orWhere('role', 2);
+            });
+        }
+
+
+
+        if ($request->has('fields')) {
+            $fields = trim($request->fields);
+            $fields = preg_replace('/\s+/', '', $fields);
+            $fields = explode(',', $fields);
+        }
+
+        if( !$request->has('search') || empty($request->search) ) {
+
+        } else {
+            $filter = true;
+            $search = $request->search;
+            $model = $model->where(function(Builder $query) use ($search){
+                $query
+                    ->where('name', 'LIKE', '%'.$search.'%')
+                    ->orWhere('phone', 'LIKE', '%'.$search.'%')
+                ;
+            });
+        }
+
+        if (!$filter) {
+            $total = User::count();
+        } else {
+            $total = $model->count();
+        }
+        $result = [];
+        if ($request->has('page')) {
+            $offset = (int)$request->page - 1;
+            $offset = ($offset == 0) ? 0 : $offset + (int)$request->limit;
+            $model = $model->offset($offset);
+            $model = $model->limit((int)$request->limit);
+            $result['pagination'] = [
+                'total' => $total,
+                'offset' => $offset + 1,
+                'limit' => (int)$request->limit,
+                'page_available' => ceil($total / (int)$request->limit)
+            ];
+        }
+
+        $model = $model->get($fields)->toArray();
+
+        foreach ($model as $key=>$item) {
+            $model[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('d.m.Y в H:i');
+            $model[$key]['created_at_timestamp'] = Carbon::createFromTimeString($item['created_at'])->timestamp;
+        }
+
+        $model = collect($model);
+        $result['data'] = $model;
+
+
+        $this->response()->success()->setMessage('Сотрудники получены')->setData($result)->send();
+    }
+
+    /**
      * Редактировать сотрудника
      *
      * @param Update $request
@@ -150,7 +228,7 @@ class EmployeeController extends Controller
         if( auth()->user()->id == $request->user_id )
             $this->response()->error()->setMessage('Невозможно удалить самого себя')->send();
 
-        
+
         $user = User::where('id', $request->user_id)->first();
 
         if(empty($user))

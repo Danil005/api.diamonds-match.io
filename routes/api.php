@@ -26,6 +26,7 @@ Route::prefix('v1')->middleware(['api', 'throttle:10000000000000000000000,1'])->
 
     Route::prefix('employee')->middleware('auth:api')->group(function() {
         Route::get('employee.get', 'EmployeeController@get')->name('employee.get');
+        Route::get('employee.get_2', 'EmployeeController@getV2')->name('employee.get2');
         Route::post('employee.update', 'EmployeeController@update')->name('employee.update');
         Route::post('employee.newPassword', 'EmployeeController@newPassword')->name('employee.newPassword');
         Route::delete('employee.archive', 'EmployeeController@archive')->name('employee.archive');
