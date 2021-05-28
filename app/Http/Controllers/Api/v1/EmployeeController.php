@@ -110,6 +110,10 @@ class EmployeeController extends Controller
             });
         }
 
+        if( $request->has('sort') ) {
+            $model = $model->orderBy('created_at', $request->sort == 1 ? 'DESC' : 'ASC');
+        }
+
 
 
         if ($request->has('fields')) {
