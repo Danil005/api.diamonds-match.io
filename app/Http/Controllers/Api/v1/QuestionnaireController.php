@@ -1005,7 +1005,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $result = [];
         if ($request->has('page')) {
             $offset = (int)$request->page - 1;
-            $offset = ($offset == 0) ? 0 : $offset + (int)$request->limit;
+            $offset = ($offset == 0) ? 0 : $offset + ((int)$request->limit - 1);
             $myQuestionnaire = $myQuestionnaire->offset($offset);
             $myQuestionnaire = $myQuestionnaire->limit((int)$request->limit);
             $result['pagination'] = [
