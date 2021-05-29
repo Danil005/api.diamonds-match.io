@@ -136,6 +136,13 @@ class ApplicationsController extends Controller
     {
         $application = Applications::where('id', $request->id)->first();
 
+        if( $request->status != 0) {
+            $user = auth()->user();
+            Applications::where('id', $request->id)->update([
+                'responsibility' => $user->id .','.$user->name
+            ]);
+        }
+
         $isLink = false;
         if($request->status == 3) {
             $isLink = true;
