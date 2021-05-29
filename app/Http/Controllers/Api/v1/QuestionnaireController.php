@@ -413,7 +413,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaire = $questionnaire->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
 
-        $application = Applications::where('questionnaire_id', $request->id)->first();
+        $application = Applications::withTrashed()->where('questionnaire_id', $request->id)->first();
 
 
         $history = QuestionnaireHistory::where('questionnaire_histories.questionnaire_id', (int)$questionnaire->id)
