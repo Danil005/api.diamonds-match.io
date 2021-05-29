@@ -997,6 +997,10 @@ class QuestionnaireController extends QuestionnaireUtils
             });
         }
 
+        if($request->has('sort')) {
+            $myQuestionnaire = $myQuestionnaire->orderBy('questionnaires.id',  $request->sort == 1 ? 'DESC' : 'ASC');
+        }
+
         if (!$filter) {
             $total = Questionnaire::whereNotNull('my_personal_qualities_id')->count();
         } else {
