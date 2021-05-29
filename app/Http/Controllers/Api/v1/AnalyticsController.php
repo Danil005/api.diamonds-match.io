@@ -31,7 +31,7 @@ class AnalyticsController extends Controller
         $applicationsCountAll = Applications::count();
         $applicationsCountNew = Applications::whereNull('responsibility')->whereDate('created_at', Carbon::today())->count();
         $onlineCount = User::where('online', true)->count();
-        $questionnairesCountAllWithout = $questionnaire = my()->whereNull('responsibility')->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id')->get();
+        $questionnairesCountAllWithout = $questionnaire->my()->whereNull('responsibility')->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id')->get();
 
         foreach ($questionnairesCountAllWithout as $key => $item) {
             $photo = QuestionnaireUploadPhoto::where('questionnaire_id', $item->id)->first(['path']);
