@@ -79,6 +79,8 @@ trait ProcessCore
         # Если есть поля, которые нужно проверить для совместимости
         if (!empty($similarFields)) {
             foreach ($similarFields as $key) {
+                if( !isset($my[$key]) || !isset($partner[$key]) ) continue;
+                
                 if (similar_text::similarText($my[$key], $partner[$key]) > 40)
                     $result += 1;
             }
