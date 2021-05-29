@@ -970,30 +970,30 @@ class QuestionnaireController extends QuestionnaireUtils
 
         if ($request->has('country')) {
             $filter = true;
-            $myQuestionnaire = $myQuestionnaire->where('city', 'LIKE', '%' . $request->country . '%');
+            $myQuestionnaire = $myQuestionnaire->where('city', 'ILIKE', '%' . $request->country . '%');
         }
 
         if ($request->has('city')) {
             $filter = true;
-            $myQuestionnaire = $myQuestionnaire->where('city', 'LIKE', '%' . $request->city . '%');
+            $myQuestionnaire = $myQuestionnaire->where('city', 'ILIKE', '%' . $request->city . '%');
         }
 
         if ($request->has('service_type')) {
             $filter = true;
 
-            $myQuestionnaire = $myQuestionnaire->where('service_type', 'LIKE', '%' . $request->get('service_type') . '%');
+            $myQuestionnaire = $myQuestionnaire->where('service_type', 'ILIKE', '%' . $request->get('service_type') . '%');
         }
 
         if ($request->has('responsibility')) {
             $filter = true;
-            $myQuestionnaire = $myQuestionnaire->where('responsibility', 'LIKE', '%' . $request->responsibility . '%');
+            $myQuestionnaire = $myQuestionnaire->where('responsibility', 'ILIKE', '%' . $request->responsibility . '%');
         }
 
         if ($request->has('search')) {
             $filter = true;
             $search = $request->search;
             $myQuestionnaire = $myQuestionnaire->where(function (Builder $query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%');
+                $query->where('name', 'ILIKE', '%' . $search . '%');
             });
         }
 

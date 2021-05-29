@@ -70,10 +70,10 @@ class ApplicationsController extends Controller
         if ($request->has('search')) {
             $search = $request->search;
             $applications = $applications->where(function (Builder $query) use ($search) {
-                $query->where('responsibility', 'LIKE', '%' . $search . '%')
-                    ->orWhere('client_name', 'LIKE', '%' . $search . '%')
-                    ->orWhere('phone', 'LIKE', '%' . $search . '%')
-                    ->orWhere('email', 'LIKE', '%' . $search . '%');
+                $query->where('responsibility', 'ILIKE', '%' . $search . '%')
+                    ->orWhere('client_name', 'ILIKE', '%' . $search . '%')
+                    ->orWhere('phone', 'ILIKE', '%' . $search . '%')
+                    ->orWhere('email', 'ILIKE', '%' . $search . '%');
             });
         }
 

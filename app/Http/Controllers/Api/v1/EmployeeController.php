@@ -65,8 +65,8 @@ class EmployeeController extends Controller
             $search = $request->search;
             $model = $model->where(function(Builder $query) use ($search){
                 $query
-                    ->where('name', 'LIKE', '%'.$search.'%')
-                    ->orWhere('phone', 'LIKE', '%'.$search.'%')
+                    ->where('name', 'ILIKE', '%'.$search.'%')
+                    ->orWhere('phone', 'ILIKE', '%'.$search.'%')
                 ;
             });
         }
@@ -129,8 +129,8 @@ class EmployeeController extends Controller
             $search = $request->search;
             $model = $model->where(function(Builder $query) use ($search){
                 $query
-                    ->where('name', 'LIKE', '%'.$search.'%')
-                    ->orWhere('phone', 'LIKE', '%'.$search.'%')
+                    ->where('name', 'ILIKE', '%'.$search.'%')
+                    ->orWhere('phone', 'ILIKE', '%'.$search.'%')
                 ;
             });
         }
