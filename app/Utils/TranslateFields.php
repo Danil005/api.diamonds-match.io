@@ -49,7 +49,7 @@ trait TranslateFields
                 'no_matter' => 'Не важно',
                 'caucasoid' => 'Европеоид',
                 'asian' => 'Азиат',
-                'dark_skinned' => 'Темнокожей',
+                'dark_skinned' => 'Темнокожий',
                 'hispanic' => 'Латиноамериканец',
                 'indian' => 'Индиец',
                 'native_middle_east' => 'Выходец из стран Ближнего Востока',
