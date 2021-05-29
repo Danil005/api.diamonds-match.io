@@ -13,7 +13,7 @@ trait QualitiesMatch
         $percent = 0;
 
         # Делаем простой матч
-        $this->simpleMatch($percent, 'my_personal_qualities');
+        $this->simpleMatch($percent, 'my_personal_qualities', count: 7);
 
         # Добавляем в коллекцию результат
         $this->matchResult = $this->matchResult->put('qualities', $percent);
