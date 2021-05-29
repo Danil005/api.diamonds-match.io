@@ -116,11 +116,13 @@ trait ProcessCore
         }
 
         if( $count == null ) {
-            $count = count($fields);
+            $r = count($fields);
+        } else {
+            $r = $count;
         }
 
         # Вычисляем процент
-        $percent = round($result * 100 / $count, 2);
+        $percent = round($result * 100 / $r, 2);
     }
 
     /**
