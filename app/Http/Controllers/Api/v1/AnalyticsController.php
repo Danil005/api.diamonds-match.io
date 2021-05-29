@@ -21,7 +21,7 @@ class AnalyticsController extends Controller
         $applicationsCountAll = Applications::count();
         $applicationsCountNew = Applications::whereNull('responsibility')->whereDate('created_at', Carbon::today())->count();
         $onlineCount = User::where('online', true)->count();
-        $questionnairesCountAllWithout = Questionnaire::join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
+        $questionnairesCountAllWithout = Questionnaire::join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id')->count();
 
         $lastApplications = Applications::orderBy('created_at', 'DESC')->whereNull('responsibility')->limit(5)->get();
 
