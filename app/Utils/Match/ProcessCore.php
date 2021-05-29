@@ -56,7 +56,7 @@ trait ProcessCore
      * @param string|callable $field
      * @param array $similarFields
      */
-    public function simpleMatch(float &$percent, string|callable $field, array $similarFields = [])
+    public function simpleMatch(float &$percent, string|callable $field, array $similarFields = [], ?int $count = null)
     {
         # Проверяем, что это строка
         if (gettype($field) == 'string') {
@@ -80,7 +80,7 @@ trait ProcessCore
         if (!empty($similarFields)) {
             foreach ($similarFields as $key) {
                 if( !isset($my[$key]) || !isset($partner[$key]) ) continue;
-                
+
                 if (similar_text::similarText($my[$key], $partner[$key]) > 40)
                     $result += 1;
             }
@@ -115,9 +115,12 @@ trait ProcessCore
             }
         }
 
+        if( $count == null ) {
+            $count = count($fields);
+        }
 
         # Вычисляем процент
-        $percent = round($result * 100 / count($fields), 2);
+        $percent = round($result * 100 / $count, 2);
     }
 
     /**
