@@ -76,7 +76,7 @@ class AuthController extends Controller
     {
         $user = \Auth::user();
 
-        if( !$user ) {
+        if( $user ) {
             User::where('id', $user->id)->update(['online' => true]);
         }
 
