@@ -412,8 +412,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
-        
-        if(empty($questionnaire)) 
+
+        if(empty($questionnaire))
            $this->response()->error()->setMessage("Анкета не существует")->setData(["error" => 404])->send();
 
         $application = Applications::withTrashed()->where('questionnaire_id', $request->id)->first();
@@ -1251,5 +1251,15 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Презентация была создана')->setData([
            'download_link' => env('APP_URL').'/storage/questionnaire'.explode('/questionnaire', $create)[1]
         ])->send();
+    }
+
+    public function sign(Request $request)
+    {
+        if( !$request->has('sign') )
+            $this->response()->error()->setMessage('Вы не указали SIGN хеш.')->send();
+
+        $exist = SignQuestionnaire::where('sign', $request->sign)->exists();
+
+        $this->response()->success()->setMessage('Валидация')->setData(['exist' => $exist])->send();
     }
 }
