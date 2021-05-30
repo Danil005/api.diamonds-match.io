@@ -33,7 +33,7 @@ Route::get('/', function () {
 });
 
 Route::get('/online', function() {
-    User::update(['online' => false]);
+    User::where('online', true)->update(['online' => false]);
 });
 
 Route::get('test1', function () {
