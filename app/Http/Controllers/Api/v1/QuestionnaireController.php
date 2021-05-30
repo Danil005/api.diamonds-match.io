@@ -412,6 +412,9 @@ class QuestionnaireController extends QuestionnaireUtils
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
+        
+        if(empty($questionnaire)) 
+           $this->response()->error()->setMessage("Анкета не существует")->setData(["error" => 404])->send();
 
         $application = Applications::withTrashed()->where('questionnaire_id', $request->id)->first();
 
