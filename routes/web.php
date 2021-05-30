@@ -1,6 +1,7 @@
 <?php
 
 use App\Events\NotifyPushed;
+use App\Models\User;
 use Carbon\Carbon;
 use Dejurin\GoogleTranslateForFree;
 use Illuminate\Support\Facades\Route;
