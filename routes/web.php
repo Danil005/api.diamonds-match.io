@@ -31,6 +31,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/online', function() {
+    User::update(['online' => false]);
+});
+
 Route::get('test1', function () {
     $information = '15.4.2000';
     $birthday = Carbon::createFromTimeString($information . ' 0:0');
