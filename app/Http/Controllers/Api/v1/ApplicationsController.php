@@ -141,6 +141,10 @@ class ApplicationsController extends Controller
             Applications::where('id', $request->id)->update([
                 'responsibility' => $user->id .','.$user->name
             ]);
+        } else {
+            Applications::where('id', $request->id)->update([
+                'responsibility' => null
+            ]);
         }
 
         $isLink = false;
