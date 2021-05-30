@@ -128,6 +128,7 @@ class EmployeeController extends Controller
                 $query
                     ->where('name', 'ILIKE', '%'.$search.'%')
                     ->orWhere('phone', 'ILIKE', '%'.$search.'%')
+                    ->orWhere('email', 'ILIKE', '%'.$search.'%')
                 ;
             });
         }
