@@ -965,7 +965,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         if ($request->has('to_age') || $request->has('from_age')) {
             $filter = true;
-            $myQuestionnaire = $myQuestionnaire->whereBetween('age', [((int)$request->from_age == null ? -100 : (int)$request->from_age) , ((int)$request->to_age == null ? 1000 : (int) $request->to_age) ) ]);
+            $myQuestionnaire = $myQuestionnaire->whereBetween('age', [(int)$request->from_age == null ? -100 : (int)$request->from_age, (int)$request->to_age == null ? 1000 : (int) $request->to_age]);
         }
 
         if ($request->has('country')) {
