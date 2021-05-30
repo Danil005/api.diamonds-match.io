@@ -80,7 +80,7 @@ return [
                 'children_desire' => ['yes', 'no', 'maybe'],
                 'smoking' => ['dont_smoking', 'rarely', 'smoking', 'no_matter'],
                 'alcohol' => ['no', 'rarely', 'often', 'very_often', 'no_matter'],
-                'religion' => ['no_matter', 'christianity', 'judaism', 'catholicism', 'islam', 'buddhism', 'atheism'],
+                'religion' => ['no_matter', 'christianity', 'judaism', 'catholicism', 'islam', 'buddhism', 'atheism', 'hinduism'],
                 'sport' => ['no_matter', 'playing_sports', 'sometimes', 'not_engaged'],
             ],
             'test' => [
