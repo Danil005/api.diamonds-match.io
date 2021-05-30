@@ -17,6 +17,20 @@ class Img
     public function __construct($img = null)
     {
         if (!empty($img)) {
+            $ext = explode('.', $img)[1];
+            if( $ext == 'png' ) {
+                $image = imagecreatefrompng($img);
+                $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
+                imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
+                imagealphablending($bg, TRUE);
+                imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+                imagedestroy($image);
+                $quality = 50; // 0 = worst / smaller file, 100 = better / bigger file
+                imagejpeg($this->img, storage_path('app/public/pptx/temp.png'), $quality);
+                sleep(3);
+
+                $img = \Storage::disk('public')->path('pptx/temp.png');
+            }
             $this->img = imagecreatefromjpeg($img);
             $this->width = imagesx($this->img);
             $this->height = imagesy($this->img);
