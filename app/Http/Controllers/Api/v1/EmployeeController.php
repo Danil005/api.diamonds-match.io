@@ -66,7 +66,6 @@ class EmployeeController extends Controller
             $model = $model->where(function(Builder $query) use ($search){
                 $query
                     ->where('name', 'ILIKE', '%'.$search.'%')
-                    ->orWhere('phone', 'ILIKE', '%'.$search.'%')
                 ;
             });
         }
