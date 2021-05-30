@@ -29,7 +29,7 @@ class AnalyticsController extends Controller
         $questionnairesCountAll = Questionnaire::count();
         $questionnairesCountToday = Questionnaire::whereDate('created_at', Carbon::today())->count();
         $applicationsCountAll = Applications::count();
-        $applicationsCountNew = Applications::whereNull('responsibility')->whereDate('created_at', Carbon::today())->count();
+        $applicationsCountNew = Applications::whereNull('responsibility')->count();
         $onlineCount = User::where('online', true)->count();
         $questionnairesCountAllWithout = $questionnaire->my()->whereNull('responsibility')->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
@@ -76,7 +76,7 @@ class AnalyticsController extends Controller
             'online_count' => $onlineCount,
             'questionnaires_all_count' => $questionnairesCountAll,
             'applications_all_count' => $applicationsCountAll,
-            'questionnaires_new_count' => $questionnairesCountToday,
+            'questionnaires_new_count' => count($questionnairesCountAllWithout),
             'applications_new_count' => $applicationsCountNew,
             'questionnaires_without_employee' => $questionnairesCountAllWithout,
             'last_applications' => $lastApplications
