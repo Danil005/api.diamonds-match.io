@@ -31,7 +31,7 @@ class Create extends FormRequest
             'responsibility' => 'string|nullable',
             'questionnaire_id' => 'integer|nullable',
             'email' => 'required|email',
-            'phone' => 'required|phone:RU,US,',
+            'phone' => 'required|nullable',
         ];
     }
 }

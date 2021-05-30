@@ -57,6 +57,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if( !$request->has('sign') || $request->sign == null )
             $this->response()->error()->setMessage('SIGN должна быть задана')->send();
 
+
         # Делаем проверки на все поля
         $this->partnerAppearance();
         $this->personalQualitiesPartner();
