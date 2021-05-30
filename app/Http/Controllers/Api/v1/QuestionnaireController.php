@@ -118,7 +118,6 @@ class QuestionnaireController extends QuestionnaireUtils
                 $partnerInformation['city'] = trim($liveCountry, ',');
             }
 
-
             if ($key == 'place_birth') {
                 $place_birth = '';
 
@@ -140,6 +139,10 @@ class QuestionnaireController extends QuestionnaireUtils
                 $now = Carbon::now();
 
                 $myInformation['age'] = $birthday->diffInYears($now);
+            }
+
+            if( $key == 'countries_was' || $key == 'countries_dream') {
+                $myInformation[$key] = implode(',', $information);
             }
 
             if ($key == 'languages') {
@@ -165,11 +168,23 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'place_birth') {
-                $myInformation[$key] = $information;
+                if( is_string($information) ) {
+                    $myInformation[$key] = $information;
+                } else {
+                    $myInformation[$key] = implode(',', $information);
+                }
             }
 
             if ($key == 'height' || $key == 'weight') {
                 $myInformation[$key] = (int)$myInformation[$key];
+            }
+
+            if( $key == 'countries_was' ) {
+                $myInformation[$key] = implode(',', $information);
+            }
+
+            if( $key == 'countries_dream' ) {
+                $myInformation[$key] = implode(',', $information);
             }
         }
 
