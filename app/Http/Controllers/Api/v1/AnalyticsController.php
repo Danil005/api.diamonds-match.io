@@ -23,6 +23,11 @@ class AnalyticsController extends Controller
         return sprintf($format, $number);
     }
 
+    public function getOnline()
+    {
+
+    }
+
     public function get(Request $request)
     {
         $questionnaire = new Questionnaire();

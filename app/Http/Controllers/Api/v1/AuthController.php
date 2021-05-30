@@ -41,11 +41,11 @@ class AuthController extends Controller
             default => 'Клиент',
         };
 
-//        Mail::to($request->email)->send(new CreateEmployee(
-//            email: $request->email,
-//            password: $password,
-//            role: $role
-//        ));
+        Mail::to($request->email)->send(new CreateEmployee(
+            email: $request->email,
+            password: $password,
+            role: $role
+        ));
 
         $data = User::create($input);
 
