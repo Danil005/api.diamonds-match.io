@@ -202,7 +202,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $myInformation = QuestionnaireMyInformation::create($myInformation);
 
         # Объединяем ответы в общую базу
-        $q = Questionnaire::where('sign', $request->sign)->update([
+        Questionnaire::where('sign', $request->sign)->update([
             'partner_appearance_id' => $partnerAppearance->id,
             'personal_qualities_partner_id' => $personalQualitiesPartner->id,
             'partner_information_id' => $partnerInformation->id,
@@ -212,6 +212,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'my_information_id' => $myInformation->id
         ]);
 
+        $q = Questionnaire::where('sign', $request->sign)->first();
+        
         $resp = Applications::where('questionnaire_id', $q->id)->first(['responsibility']);
 
         $this->createNotify('questionnaire', 'Ваш клиент '.$myInformation->name.' заполнил анкету.', [

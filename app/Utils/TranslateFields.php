@@ -658,7 +658,7 @@ trait TranslateFields
                 . ' до ' . number_format($salary[1], 0, '.', ' ') . $salary[2] :
                 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2];
         } catch (\Exception) {
-            return $temp;
+            return $temp == 0 ? 'Не указана' : $temp;
         }
     }
 
