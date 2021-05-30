@@ -814,7 +814,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $matching = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)
             ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.with_questionnaire_id')
-            ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaire_matches.questionnaire_id')
+            ->join('questionnaire_my_information as information', 'information.id', '=', 'q.my_information_id')
             ->get(['questionnaire_id', 'with_questionnaire_id', 'name']);
 
         $this->response()->success()->setMessage('Доступные свидания')->setData($matching)->send();
