@@ -213,7 +213,7 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
         $q = Questionnaire::where('sign', $request->sign)->first();
-        
+
         $resp = Applications::where('questionnaire_id', $q->id)->first(['responsibility']);
 
         $this->createNotify('questionnaire', 'Ваш клиент '.$myInformation->name.' заполнил анкету.', [
@@ -374,7 +374,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $application = Applications::create([
             'client_name' => $myInformation->name,
-            'service_type' => 'pay',
+            'service_type' => 'free',
             'status' => 0,
             'questionnaire_id' => null,
             'responsibility' => null,
