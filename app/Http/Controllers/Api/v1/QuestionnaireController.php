@@ -214,7 +214,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $resp = Applications::where('questionnaire_id', $q->id)->first(['responsibility']);
 
-        $this->createNotify('questionnaire', 'Ваш клиент отправил анкету', [
+        $this->createNotify('questionnaire', 'Ваш клиент '.$myInformation->name.' заполнил анкету.', [
             'questionnaire_id' => $q->id,
             'employee' => $resp != null ? explode(',', $resp['responsibility'])[0] : null
         ]);
