@@ -64,7 +64,7 @@ class EmployeeController extends Controller
         } else {
             $search = $request->search;
             $model = $model->where(function(Builder $query) use ($search){
-                $query->where('name', 'ILIKE', '%'.$search);
+                $query->where('name', 'ILIKE', '%'.$search.'%');
             });
         }
 
