@@ -29,7 +29,7 @@ class Questionnaire extends Model
             ->join('questionnaire_my_appearances as appearances', 'appearances.id', '=', 'questionnaires.my_appearance_id')
             ->join('questionnaire_my_personal_qualities as personal_qualities', 'personal_qualities.id', '=', 'questionnaires.my_personal_qualities_id')
             ->join('questionnaire_my_information as information', 'information.id', '=', 'questionnaires.my_information_id')
-            ->join('sign_questionnaires as sign', 'sign.id', '=', 'questionnaires.id');
+            ->join('sign_questionnaires as sign', 'sign.questionnaire_id', '=', 'questionnaires.id');
 
         return !$withTest ? $builder : $builder->join('questionnaire_tests as test', 'test.id', '=', 'questionnaires.test_id');
 
