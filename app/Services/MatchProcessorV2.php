@@ -247,7 +247,7 @@ class MatchProcessorV2
             $q = QuestionnaireMatch::where(function (Builder $builder) use($my, $partner) {
                 $builder->where('questionnaire_id', $my)->where('with_questionnaire_id', $partner);
             })->orWhere(function (Builder $builder) use($my, $partner) {
-                $builder->where('questionnaire_id', $my)->where('with_questionnaire_id', $partner);
+                $builder->where('questionnaire_id', $partner)->where('with_questionnaire_id', $my);
             });
 
             dd($q->get()->toArray());
