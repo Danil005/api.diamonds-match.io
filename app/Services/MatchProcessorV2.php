@@ -157,8 +157,6 @@ class MatchProcessorV2
     {
         return !QuestionnaireMatch::where(function (Query $query) use ($meId, $partnerId) {
             $query->where('questionnaire_id', $meId)->where('with_questionnaire_id', $partnerId);
-        })->orWhere(function (Query $query) use ($meId, $partnerId) {
-            $query->where('questionnaire_id', $partnerId)->where('with_questionnaire_id', $meId);
         })->exists();
     }
 
