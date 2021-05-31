@@ -44,7 +44,7 @@ class Questionnaire extends Model
     {
         $builder = $this->join('questionnaire_partner_appearances as appearances', 'appearances.id', '=', 'questionnaires.partner_appearance_id')
             ->join('questionnaire_personal_qualities_partners as personal_qualities', 'personal_qualities.id', '=', 'questionnaires.personal_qualities_partner_id')
-            ->join('sign_questionnaires as sign', 'sign.id', '=', 'questionnaires.id');
+            ->join('sign_questionnaires as sign', 'sign.questionnaire_id', '=', 'questionnaires.id');
 
         if (!$myInformation) {
             $builder = $builder->join('questionnaire_partner_information as information', 'information.id', '=', 'questionnaires.partner_information_id');
