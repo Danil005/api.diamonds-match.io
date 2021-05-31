@@ -1072,7 +1072,7 @@ class QuestionnaireController extends QuestionnaireUtils
                     return false !== stristr($item, $search);
                 });
 
-                $findSmoking = collect($ethnicity)->filter(function ($item) use ($search) {
+                $findSmoking = collect($smoking)->filter(function ($item) use ($search) {
                     return false !== stristr($item, $search);
                 });
 
