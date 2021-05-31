@@ -237,7 +237,6 @@ class MatchProcessorV2
 
     private function makeTotal()
     {
-        dd($this->added);
         foreach ($this->added as $my=>$partner) {
             $q = QuestionnaireMatch::where(function(Builder $builder) {
 
