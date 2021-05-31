@@ -183,7 +183,7 @@ class ApplicationsController extends Controller
             'responsibility' => Auth::user()->id.','.Auth::user()->name,
         ]);
 
-        $this->response()->setMessage('Статус изменен')->send();
+        $this->response()->success()->setMessage('Статус изменен')->send();
     }
 
     public function update(UpdateApplications $request)

@@ -10,6 +10,7 @@ use App\Utils\Match\FormMatch;
 use App\Utils\Match\ProcessCore;
 use App\Utils\Match\QualitiesMatch;
 use App\Utils\Match\TestMatch;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Builder as Query;
 use Illuminate\Support\Collection;
 
@@ -234,7 +235,11 @@ class MatchProcessorV2
 
     private function makeTotal()
     {
-        dd($this->added);
+        foreach ($this->added as $my=>$partner) {
+            $q = QuestionnaireMatch::where(function(Builder $builder) {
+
+            });
+        }
     }
 
     /**
