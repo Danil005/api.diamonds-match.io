@@ -192,7 +192,6 @@ class MatchProcessorV2
                 if ($keyPartner == $keyMe) continue;
 
                 # Проверяем, подходит ли нам данный пол или нет
-                if (!$this->isSex()) continue;
 
                 $this->currentPartnerId = $this->currentPartner['questionnaire_id'];
 
