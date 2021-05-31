@@ -1059,11 +1059,11 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
 
+        dd($myQuestionnaire->toSql());
         $questionnaires = $myQuestionnaire->get([
             'questionnaires.id', 'name', 'ethnicity', 'service_type', 'age', 'city', 'responsibility', 'questionnaires.created_at',
             'questionnaires.deleted_at'
         ]);
-        dd($questionnaires->toArray());
 
 
         foreach ($questionnaires as $key => $item) {
