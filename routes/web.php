@@ -44,6 +44,10 @@ Route::get('test1', function () {
     dd($birthday->diffInYears($now));
 });
 
+Route::get('uc', function() {
+    dd(ucfirst('овен'));
+});
+
 Route::get('fire', function () {
     event(new NotifyPushed('Появилась новая заявка', [
         'application_id' => 1,

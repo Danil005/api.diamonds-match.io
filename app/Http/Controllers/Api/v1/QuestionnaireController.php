@@ -983,6 +983,14 @@ class QuestionnaireController extends QuestionnaireUtils
         return sprintf($format, $number);
     }
 
+    private function mbUcfirst($str, $encoding='UTF-8')
+    {
+        $str = mb_ereg_replace('^[\ ]+', '', $str);
+        $str = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding).
+            mb_substr($str, 1, mb_strlen($str), $encoding);
+        return $str;
+    }
+
     public function get(GetQuestionnaire $request)
     {
         $myQuestionnaire = new Questionnaire();
@@ -1032,7 +1040,12 @@ class QuestionnaireController extends QuestionnaireUtils
             $filter = true;
             $search = $request->search;
             $myQuestionnaire = $myQuestionnaire->where(function (Builder $query) use ($search) {
-                $query->where('name', 'ILIKE', '%' . $search . '%');
+                $zodiac = array_flip($this->zodiacSigns());
+                $q = $query->where('name', 'ILIKE', '%' . $search . '%');
+
+                if( isset($zodiac[$this->mbUcfirst($search)]) ) {
+                    $q->orWhere('zodiac_signs', 'ILIKE', '%' . $zodiac[$this->mbUcfirst($search)] . '%');
+                }
             });
         }
 
