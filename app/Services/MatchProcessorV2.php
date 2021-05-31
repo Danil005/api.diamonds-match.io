@@ -239,7 +239,7 @@ class MatchProcessorV2
 
         foreach ($data as $key => $item) {
             if( in_array($key, $data) )
-                unset($data['$key']);
+                unset($data[$key]);
         }
 
         dd($data);
