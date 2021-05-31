@@ -813,7 +813,7 @@ class QuestionnaireController extends QuestionnaireUtils
         QuestionnaireAppointedDate::create($request->all());
 
         QuestionnaireHistory::create([
-            'user' => auth()->user()->name,
+            'user' => auth()->user()->id,
             'from' => 'appointment',
             'comment' => 'Свидание с ' . $withQuestionnaire->name . ' было назначено на ' . $request->date . ' в ' . $request->time .'.',
             'questionnaire_id' => $request->questionnaire_id
