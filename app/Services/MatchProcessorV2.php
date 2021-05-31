@@ -212,8 +212,8 @@ class MatchProcessorV2
 
                 # Выполнить все матчи
                 $result = $this->doMatch($this->matchFunctions);
-//
-//                # Добавляем в базу матча
+
+               # Добавляем в базу матча
                 $id = QuestionnaireMatch::create([
                     'questionnaire_id' => $result['currentMeId'],
                     'with_questionnaire_id' => $result['currentPartnerId'],
@@ -224,28 +224,17 @@ class MatchProcessorV2
                     'personal_qualities' => $result['qualities'],
                     'total' => $result['total']
                 ]);
+
+                $this->added[$this->currentMyId] = $this->currentPartnerId;
             }
         }
+
+        $this->makeTotal();
     }
 
     private function makeTotal()
     {
-        $data = [];
-        foreach ($this->added as $item) {
-            $data[] = QuestionnaireMatch::where('id', $item)->first();
-            QuestionnaireMatch::where('id', $item)->delete();
-        }
-
-        QuestionnaireMatch::create([
-            'questionnaire_id' => $data[0]['questionnaire_id'],
-            'with_questionnaire_id' => $data[0]['with_questionnaire_id'],
-            'about_me' => round(($data[0]['about_me'] + $data[1]['about_me']) / 2),
-            'appearance' => round(($data[0]['appearance'] + $data[1]['appearance']) / 2),
-            'test' => round(($data[0]['test'] + $data[1]['test']) / 2),
-            'information' => round(($data[0]['information'] + $data[1]['information']) / 2),
-            'personal_qualities' => round(($data[0]['personal_qualities'] + $data[1]['personal_qualities']) / 2),
-            'total' => round(($data[0]['total'] + $data[1]['total']) / 2)
-        ]);
+        dd($this->added);
     }
 
     /**
