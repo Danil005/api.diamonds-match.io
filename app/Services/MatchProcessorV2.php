@@ -214,7 +214,7 @@ class MatchProcessorV2
                 # Выполнить все матчи
                 $result = $this->doMatch($this->matchFunctions);
 
-               # Добавляем в базу матча
+                # Добавляем в базу матча
                 $id = QuestionnaireMatch::create([
                     'questionnaire_id' => $result['currentMeId'],
                     'with_questionnaire_id' => $result['currentPartnerId'],
@@ -226,9 +226,7 @@ class MatchProcessorV2
                     'total' => $result['total']
                 ]);
 
-                if( array_keys($this->added) != $this->currentPartnerId ) {
-                    $this->added[$this->currentMyId] = $this->currentPartnerId;
-                }
+                $this->added[$this->currentMyId] = $this->currentPartnerId;
             }
         }
 
@@ -237,8 +235,8 @@ class MatchProcessorV2
 
     private function makeTotal()
     {
-        foreach ($this->added as $my=>$partner) {
-            $q = QuestionnaireMatch::where(function(Builder $builder) {
+        foreach ($this->added as $my => $partner) {
+            $q = QuestionnaireMatch::where(function (Builder $builder) {
 
             });
         }
