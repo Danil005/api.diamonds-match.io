@@ -1043,8 +1043,17 @@ class QuestionnaireController extends QuestionnaireUtils
                 $zodiac = array_flip($this->zodiacSigns());
                 $q = $query->where('name', 'ILIKE', '%' . $search . '%');
 
-                if( isset($zodiac[$this->mbUcfirst($search)]) ) {
-                    $q->orWhere('zodiac_signs', 'ILIKE', '%' . $zodiac[$this->mbUcfirst($search)] . '%');
+                $zodiac = $this->zodiacSigns();
+
+                $find = collect($zodiac)->filter(function ($item) use ($search) {
+                    return false !== stristr($item, $search);
+                });
+
+                if( $find->isNotEmpty() ) {
+                    $find = array_flip($find->toArray());
+                    foreach ($find as $item) {
+                        $q->orWhere('zodiac_signs', 'ILIKE', '%' . $item . '%');
+                    }
                 }
             });
         }

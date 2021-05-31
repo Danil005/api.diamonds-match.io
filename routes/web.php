@@ -45,7 +45,27 @@ Route::get('test1', function () {
 });
 
 Route::get('uc', function() {
-    dd(ucfirst('овен'));
+    $zodiac = [
+        'aries' => 'Овен',
+        'calf' => 'Телец',
+        'twins' => 'Близнецы',
+        'cancer' => 'Рак',
+        'lion' => 'Лев',
+        'virgo' => 'Дева',
+        'libra' => 'Весы',
+        'scorpio' => 'Скорпион',
+        'sagittarius' => 'Стрелец',
+        'capricorn' => 'Козерог',
+        'aquarius' => 'Водолей',
+        'fish' => 'Рыба'
+    ];
+
+    $search = 'В';
+    $find = collect($zodiac)->filter(function ($item) use ($search) {
+        // replace stristr with your choice of matching function
+        return false !== stristr($item, $search);
+    });
+    $find->toArray()
 });
 
 Route::get('fire', function () {
