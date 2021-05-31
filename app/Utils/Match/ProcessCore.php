@@ -153,7 +153,7 @@ trait ProcessCore
                 if ($value == "0")
                     $my[$key] = "zero";
 
-                if ($partner[$key] == "0")
+                if (isset($partner[$key]) && $partner[$key] == "0")
                     $partner->put($key, "zero");
             }
 
