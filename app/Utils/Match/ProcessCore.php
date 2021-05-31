@@ -158,7 +158,7 @@ trait ProcessCore
             }
 
             # Вычисляем процент схожести
-            $result = $my->map(fn($item, $key) => round(similar_text::similarText($item, $partner[$key]) / 100, 2));
+            $result = $my->map(fn($item, $key) => round(similar_text::similarText($item, ($partner[$key] ?? 'undefined')) / 100, 2));
 
             # Получаем сумму процентов
             $sum = 0;
