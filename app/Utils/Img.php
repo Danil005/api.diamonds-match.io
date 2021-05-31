@@ -19,6 +19,7 @@ class Img
         if (!empty($img)) {
             $ext = explode('.', $img)[1];
             if( $ext == 'png' ) {
+                $img = \Storage::disk('public')->path(str_replace('storage/', '',$img));
                 $image = imagecreatefrompng($img);
                 $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
                 imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
@@ -26,10 +27,9 @@ class Img
                 imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
                 imagedestroy($image);
                 $quality = 50; // 0 = worst / smaller file, 100 = better / bigger file
-                imagejpeg($this->img, storage_path('app/public/pptx/temp.png'), $quality);
+                imagejpeg($image, storage_path('app/public/pptx/temp_convert.jpg'), $quality);
                 sleep(3);
-
-                $img = \Storage::disk('public')->path('pptx/temp.png');
+                $img = \Storage::disk('public')->path('pptx/temp_convert.jpg');
             }
             $this->img = imagecreatefromjpeg($img);
             $this->width = imagesx($this->img);
