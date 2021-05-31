@@ -990,7 +990,6 @@ class QuestionnaireController extends QuestionnaireUtils
         $myQuestionnaire = $myQuestionnaire->my()
             ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
-        dd($myQuestionnaire->get()->toArray());
 
         $filter = false;
         if ($request->has('is_archive')) {
