@@ -990,6 +990,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $myQuestionnaire = $myQuestionnaire->my()
             ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
+        dd($myQuestionnaire->get()->toArray());
+
         $filter = false;
         if ($request->has('is_archive')) {
             $myQuestionnaire = $myQuestionnaire->whereNotNull('questionnaires.deleted_at');
@@ -1039,7 +1041,6 @@ class QuestionnaireController extends QuestionnaireUtils
             $myQuestionnaire = $myQuestionnaire->orderBy('questionnaires.id',  $request->sort == 1 ? 'DESC' : 'ASC');
         }
 
-        dd($myQuestionnaire->get()->toArray());
 
         if (!$filter) {
             $total = Questionnaire::whereNotNull('my_personal_qualities_id')->count();
