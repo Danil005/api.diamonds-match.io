@@ -174,6 +174,7 @@ class MatchProcessorV2
         # Получаем все данные по моим данным
         $me = $this->my->get();
 
+        dd($partner, $me);
         # Начинаем искать сходства
         foreach ($me as $keyMe => $meItem) {
             # Устанавливаем текущего
@@ -192,6 +193,7 @@ class MatchProcessorV2
                 if ($keyPartner == $keyMe) continue;
 
                 # Проверяем, подходит ли нам данный пол или нет
+                if (!$this->isSex()) continue;
 
                 $this->currentPartnerId = $this->currentPartner['questionnaire_id'];
 
