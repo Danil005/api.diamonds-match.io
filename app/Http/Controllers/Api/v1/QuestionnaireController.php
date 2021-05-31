@@ -797,7 +797,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if (empty($questionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
-        $withQuestionnaire = Questionnaire::where('id', $request->with_questionnaire_id)->first();
+        $withQuestionnaire = (new Questionnaire)->my()->where('id', $request->with_questionnaire_id)->first();
         if (empty($withQuestionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
@@ -811,6 +811,13 @@ class QuestionnaireController extends QuestionnaireUtils
             $this->response()->error()->setMessage('Неверный формат времени. Необходимо: HH:MM')->send();
 
         QuestionnaireAppointedDate::create($request->all());
+
+        QuestionnaireHistory::create([
+            'user' => auth()->user()->name,
+            'from' => 'appointment',
+            'comment' => 'Свидание с ' . $withQuestionnaire->name . ' было назначено на ' . $request->date . ' в ' . $request->time .'.',
+            'questionnaire_id' => $request->questionnaire_id
+        ]);
 
         $this->response()->success()->setMessage("Дата свидания была назначена на {$request->date} в {$request->time}. Удачи!")->send();
     }
