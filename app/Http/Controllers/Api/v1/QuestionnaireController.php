@@ -1039,6 +1039,8 @@ class QuestionnaireController extends QuestionnaireUtils
             $myQuestionnaire = $myQuestionnaire->orderBy('questionnaires.id',  $request->sort == 1 ? 'DESC' : 'ASC');
         }
 
+        dd($myQuestionnaire->get()->toArray());
+
         if (!$filter) {
             $total = Questionnaire::whereNotNull('my_personal_qualities_id')->count();
         } else {
@@ -1059,7 +1061,6 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
 
-        dd($myQuestionnaire->toSql());
         $questionnaires = $myQuestionnaire->get([
             'questionnaires.id', 'name', 'ethnicity', 'service_type', 'age', 'city', 'responsibility', 'questionnaires.created_at',
             'questionnaires.deleted_at'
