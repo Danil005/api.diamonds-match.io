@@ -250,18 +250,29 @@ class MatchProcessorV2
                 $builder->where('questionnaire_id', $partner)->where('with_questionnaire_id', $my);
             });
             $qD = $q->get()->toArray();
-//            $q->delete();
-//
-//            QuestionnaireMatch::create([
-//                'questionnaire_id' => $qD[0]['questionnaire_id'],
-//                'with_questionnaire_id' => $qD[0]['with_questionnaire_id'],
-//                'about_me' => round(($qD[0]['about_me'] + $qD[1]['about_me']) / 2, 2),
-//                'appearance' => round(($qD[0]['appearance'] + $qD[1]['appearance']) / 2, 2),
-//                'test' => round(($qD[0]['test'] + $qD[1]['test']) / 2, 2),
-//                'information' => round(($qD[0]['information'] + $qD[1]['information']) / 2, 2),
-//                'personal_qualities' => round(($qD[0]['personal_qualities'] + $qD[1]['personal_qualities']) / 2, 2),
-//                'total' => round(($qD[0]['total'] + $qD[1]['total']) / 2, 2)
-//            ]);
+            $q->delete();
+
+            QuestionnaireMatch::create([
+                'questionnaire_id' => $qD[0]['questionnaire_id'],
+                'with_questionnaire_id' => $qD[0]['with_questionnaire_id'],
+                'about_me' => round(($qD[0]['about_me'] + $qD[1]['about_me']) / 2, 2),
+                'appearance' => round(($qD[0]['appearance'] + $qD[1]['appearance']) / 2, 2),
+                'test' => round(($qD[0]['test'] + $qD[1]['test']) / 2, 2),
+                'information' => round(($qD[0]['information'] + $qD[1]['information']) / 2, 2),
+                'personal_qualities' => round(($qD[0]['personal_qualities'] + $qD[1]['personal_qualities']) / 2, 2),
+                'total' => round(($qD[0]['total'] + $qD[1]['total']) / 2, 2)
+            ]);
+
+            QuestionnaireMatch::create([
+                'questionnaire_id' => $qD[1]['questionnaire_id'],
+                'with_questionnaire_id' => $qD[1]['with_questionnaire_id'],
+                'about_me' => round(($qD[0]['about_me'] + $qD[1]['about_me']) / 2, 2),
+                'appearance' => round(($qD[0]['appearance'] + $qD[1]['appearance']) / 2, 2),
+                'test' => round(($qD[0]['test'] + $qD[1]['test']) / 2, 2),
+                'information' => round(($qD[0]['information'] + $qD[1]['information']) / 2, 2),
+                'personal_qualities' => round(($qD[0]['personal_qualities'] + $qD[1]['personal_qualities']) / 2, 2),
+                'total' => round(($qD[0]['total'] + $qD[1]['total']) / 2, 2)
+            ]);
         }
     }
 
