@@ -1040,19 +1040,42 @@ class QuestionnaireController extends QuestionnaireUtils
             $filter = true;
             $search = $request->search;
             $myQuestionnaire = $myQuestionnaire->where(function (Builder $query) use ($search) {
-                $zodiac = array_flip($this->zodiacSigns());
                 $q = $query->where('name', 'ILIKE', '%' . $search . '%');
 
                 $zodiac = $this->zodiacSigns();
+                $ethnicity = [
+                    'no_matter' => 'Не важно',
+                    'caucasoid' => 'Европеоид',
+                    'asian' => 'Азиат',
+                    'dark_skinned' => 'Темнокожий',
+                    'hispanic' => 'Латиноамериканец',
+                    'indian' => 'Индиец',
+                    'native_middle_east' => 'Выходец из стран Ближнего Востока',
+                    'mestizo' => 'Метис, родители принадлежат к разным расам',
+                    'native_american' => 'Представитель коренного населения Америки',
+                    'islands' => 'Представитель коренного населения островов | Тихого Океана / Австралии / Абориген',
+                    'other' => 'Другие'
+                ];
 
-                $find = collect($zodiac)->filter(function ($item) use ($search) {
+                $findZodiac = collect($zodiac)->filter(function ($item) use ($search) {
                     return false !== stristr($item, $search);
                 });
 
-                if( $find->isNotEmpty() ) {
-                    $find = array_flip($find->toArray());
-                    foreach ($find as $item) {
+                $findEthnicity = collect($ethnicity)->filter(function ($item) use ($search) {
+                    return false !== stristr($item, $search);
+                });
+
+                if( $findZodiac->isNotEmpty() ) {
+                    $findZodiac = array_flip($findZodiac->toArray());
+                    foreach ($findZodiac as $item) {
                         $q->orWhere('zodiac_signs', 'ILIKE', '%' . $item . '%');
+                    }
+                }
+
+                if( $findEthnicity->isNotEmpty() ) {
+                    $findEthnicity = array_flip($findEthnicity->toArray());
+                    foreach ($findEthnicity as $item) {
+                        $q->orWhere('ethnicity', 'ILIKE', '%' . $item . '%');
                     }
                 }
             });
