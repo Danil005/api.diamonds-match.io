@@ -44,6 +44,14 @@ require __DIR__.'/../vendor/autoload.php';
 |
 */
 
+function generateNumbers(): array
+{
+    $numbers = [];
+    for ($i = 0; $i < 101; $i++) $numbers[] = $i;
+    return $numbers;
+}
+
+
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
