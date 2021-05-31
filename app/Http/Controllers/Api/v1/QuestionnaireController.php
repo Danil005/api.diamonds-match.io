@@ -797,7 +797,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if (empty($questionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
-        $withQuestionnaire = (new Questionnaire)->my()->where('id', $request->with_questionnaire_id)->first();
+        $withQuestionnaire = (new Questionnaire)->my()->where('questionnaires.id', $request->with_questionnaire_id)->first();
         if (empty($withQuestionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
