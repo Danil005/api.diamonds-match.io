@@ -174,7 +174,7 @@ class MatchProcessorV2
         # Получаем все данные по моим данным
         $me = $this->my->get();
 
-        dd($partner, $me);
+        dd($partner->count(), $me->count());
         # Начинаем искать сходства
         foreach ($me as $keyMe => $meItem) {
             # Устанавливаем текущего
@@ -236,10 +236,10 @@ class MatchProcessorV2
         $this->questionnaire = $questionnaire;
 
         # Получаем модель запроса для моих данных
-        $this->my = $this->questionnaire->my(true)->whereNotNull('my_appearance_id');
+        $this->my = $this->questionnaire->my(true)->whereNotNull('partner_appearance_id');
 
         # Получаем модель запроса для партнеров
-        $this->partner = $this->questionnaire->partner(true)->whereNotNull('my_appearance_id');
+        $this->partner = $this->questionnaire->partner(true)->whereNotNull('partner_appearance_id');
 
         # Выполнить обработчик
         $this->handler();
