@@ -65,7 +65,7 @@ Route::get('uc', function() {
         // replace stristr with your choice of matching function
         return false !== stristr($item, $search);
     });
-    $find->toArray()
+    $find->toArray();
 });
 
 Route::get('fire', function () {
