@@ -235,6 +235,15 @@ class MatchProcessorV2
 
     private function makeTotal()
     {
+        $data = $this->added;
+
+        foreach ($data as $key => $item) {
+            if( in_array($key, $data) )
+                unset($data['$key']);
+        }
+
+        dd($data);
+
         foreach ($this->added as $my => $partner) {
             $q = QuestionnaireMatch::where(function (Builder $builder) {
 
