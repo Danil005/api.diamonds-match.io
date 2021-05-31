@@ -236,6 +236,7 @@ class MatchProcessorV2
 
         # Получаем модель запроса для моих данных
         $this->my = $this->questionnaire->my(true)->whereNotNull('questionnaires.partner_appearance_id');
+        dd($this->my->get()->toArray());
 
         # Получаем модель запроса для партнеров
         $this->partner = $this->questionnaire->partner(true)->whereNotNull('questionnaires.partner_appearance_id');
