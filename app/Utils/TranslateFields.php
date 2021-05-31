@@ -106,10 +106,10 @@ trait TranslateFields
 
         $data = match ($lang) {
             "ru" => [
-                'any' => 'Любая',
-                'big' => 'Большая',
-                'middle' => 'Средняя',
-                'small' => 'Маленькая',
+                'any' => 'Любые',
+                'big' => 'Большие',
+                'middle' => 'Средние',
+                'small' => 'Маленькие',
             ],
             default => [
                 'any' => 'Any',

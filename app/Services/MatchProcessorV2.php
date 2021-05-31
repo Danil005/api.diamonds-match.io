@@ -212,8 +212,8 @@ class MatchProcessorV2
 
                 # Выполнить все матчи
                 $result = $this->doMatch($this->matchFunctions);
-
-                # Добавляем в базу матча
+//
+//                # Добавляем в базу матча
                 $id = QuestionnaireMatch::create([
                     'questionnaire_id' => $result['currentMeId'],
                     'with_questionnaire_id' => $result['currentPartnerId'],
@@ -224,8 +224,6 @@ class MatchProcessorV2
                     'personal_qualities' => $result['qualities'],
                     'total' => $result['total']
                 ]);
-
-                $this->added[] = $id;
             }
         }
     }
