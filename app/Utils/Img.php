@@ -19,8 +19,13 @@ class Img
         if (!empty($img)) {
             $ext = explode('.', $img)[1];
             if( $ext == 'png' ) {
+                $_im = $img;
                 $img = \Storage::disk('public')->path(str_replace('storage/', '',$img));
-                $image = imagecreatefrompng($img);
+                try {
+                    $image = imagecreatefrompng($img);
+                } catch (\Exception) {
+                    $image = imagecreatefrompng($_im);
+                }
                 $bg = imagecreatetruecolor(imagesx($image), imagesy($image));
                 imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
                 imagealphablending($bg, TRUE);
