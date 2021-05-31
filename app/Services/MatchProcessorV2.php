@@ -174,7 +174,6 @@ class MatchProcessorV2
         # Получаем все данные по моим данным
         $me = $this->my->get();
 
-        dd($partner->count(), $me->count());
         # Начинаем искать сходства
         foreach ($me as $keyMe => $meItem) {
             # Устанавливаем текущего
