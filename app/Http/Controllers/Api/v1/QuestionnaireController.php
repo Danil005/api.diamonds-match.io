@@ -1196,7 +1196,6 @@ class QuestionnaireController extends QuestionnaireUtils
             $myInformation = QuestionnaireMyInformation::where('id', $with_questionnaire->my_information_id)->first();
             $q = QuestionnaireMailing::where('questionnaire_id', $item->questionnaire_id)->where('added_questionnaire_id', $with_questionnaire->id)->exists();
 
-            dd($myInformation);
             $result[] = [
                 'questionnaire_id' => (int)$request->questionnaire_id,
                 'with_questionnaire_id' => $with_questionnaire->id,
