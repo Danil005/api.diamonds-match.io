@@ -186,7 +186,7 @@ class ApplicationsController extends Controller
 
     public function startWork(StartWorkApplications $applications)
     {
-        Applications::where('id', $applications->id)->update([
+        Applications::where('id', $applications->id)->orWhere('questionnaire_id', $applications->id)->update([
             'status' => 1,
             'responsibility' => Auth::user()->id.','.Auth::user()->name,
         ]);
