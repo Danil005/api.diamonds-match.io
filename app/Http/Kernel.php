@@ -4,6 +4,14 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+function generateNumbers(): array
+{
+    $numbers = [];
+    for ($i = 0; $i < 101; $i++) $numbers[] = $i;
+    return $numbers;
+}
+
+
 class Kernel extends HttpKernel
 {
     /**
