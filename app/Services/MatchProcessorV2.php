@@ -227,7 +227,6 @@ class MatchProcessorV2
 
                 $this->added[] = $id;
             }
-            $this->makeTotal();
         }
     }
 
