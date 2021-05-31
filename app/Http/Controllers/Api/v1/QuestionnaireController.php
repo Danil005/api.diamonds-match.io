@@ -380,6 +380,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'responsibility' => null,
             'link' => null,
             'link_active' => true,
+            'from' => 'Сайт, кнопка',
             'email' => $request->has('email') ? $request->email : null,
             'phone' => $request->has('phone') ? $request->phone : null
         ]);
