@@ -1057,11 +1057,22 @@ class QuestionnaireController extends QuestionnaireUtils
                     'other' => 'Другие'
                 ];
 
+                $smoking = [
+                    'dont_smoking' => 'Не курю',
+                    'rarely' => 'Редко',
+                    'smoking' => 'Курю',
+                    'no_matter' => 'Не важно'
+                ];
+
                 $findZodiac = collect($zodiac)->filter(function ($item) use ($search) {
                     return false !== stristr($item, $search);
                 });
 
                 $findEthnicity = collect($ethnicity)->filter(function ($item) use ($search) {
+                    return false !== stristr($item, $search);
+                });
+
+                $findSmoking = collect($ethnicity)->filter(function ($item) use ($search) {
                     return false !== stristr($item, $search);
                 });
 
@@ -1076,6 +1087,13 @@ class QuestionnaireController extends QuestionnaireUtils
                     $findEthnicity = array_flip($findEthnicity->toArray());
                     foreach ($findEthnicity as $item) {
                         $q->orWhere('ethnicity', 'ILIKE', '%' . $item . '%');
+                    }
+                }
+
+                if( $findSmoking->isNotEmpty() ) {
+                    $findSmoking = array_flip($findSmoking->toArray());
+                    foreach ($findSmoking as $item) {
+                        $q->orWhere('smoking', 'ILIKE', '%' . $item . '%');
                     }
                 }
             });
