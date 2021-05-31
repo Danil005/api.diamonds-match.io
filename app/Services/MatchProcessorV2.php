@@ -235,10 +235,10 @@ class MatchProcessorV2
         $this->questionnaire = $questionnaire;
 
         # Получаем модель запроса для моих данных
-        $this->my = $this->questionnaire->my(true)->whereNotNull('partner_appearance_id');
+        $this->my = $this->questionnaire->my(true)->whereNotNull('questionnaires.partner_appearance_id');
 
         # Получаем модель запроса для партнеров
-        $this->partner = $this->questionnaire->partner(true)->whereNotNull('partner_appearance_id');
+        $this->partner = $this->questionnaire->partner(true)->whereNotNull('questionnaires.partner_appearance_id');
 
         # Выполнить обработчик
         $this->handler();
