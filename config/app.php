@@ -1,12 +1,5 @@
 <?php
 
-function generateNumbers(): array
-{
-    $numbers = [];
-    for ($i = 0; $i < 101; $i++) $numbers[] = $i;
-    return $numbers;
-}
-
 return [
 
     /*
