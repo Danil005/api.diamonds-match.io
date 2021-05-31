@@ -147,31 +147,23 @@ class ApplicationsController extends Controller
             ]);
         }
 
-        $isLink = false;
-        if($request->status == 3) {
-            $isLink = true;
-            if( empty($application->link) ) {
-                $sign = md5(Str::random(16));
-                $questionnaire = Questionnaire::create([
-                    'sign' => $sign
-                ]);
+        if( empty($application->link) ) {
+            $sign = md5(Str::random(16));
+            $questionnaire = Questionnaire::create([
+                'sign' => $sign
+            ]);
 
-                SignQuestionnaire::create([
-                    'application_id' => $request->id,
-                    'questionnaire_id' => $questionnaire->id,
-                    'sign' => $sign,
-                    'active' => true
-                ]);
+            SignQuestionnaire::create([
+                'application_id' => $request->id,
+                'questionnaire_id' => $questionnaire->id,
+                'sign' => $sign,
+                'active' => true
+            ]);
 
-                Applications::where('id', $request->id)->update([
-                    'link' => env('APP_QUESTIONNAIRE_URL').'/sign/'.$sign,
-                    'link_active' => true,
-                    'questionnaire_id' => $questionnaire->id
-                ]);
-            }
-        } else {
             Applications::where('id', $request->id)->update([
-                'link_active' => false
+                'link' => env('APP_QUESTIONNAIRE_URL').'/sign/'.$sign,
+                'link_active' => true,
+                'questionnaire_id' => $questionnaire->id
             ]);
         }
 
@@ -180,7 +172,7 @@ class ApplicationsController extends Controller
         ]);
 
         $this->response()->success()->setMessage('Статус изменен')->setData([
-            'link' => $isLink ? $application->link : null
+            'link' => $application->link ?? null
         ])->send();
     }
 
