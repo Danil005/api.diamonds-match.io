@@ -242,12 +242,15 @@ class MatchProcessorV2
                 unset($data[$key]);
         }
 
-        dd($data);
 
-        foreach ($this->added as $my => $partner) {
-            $q = QuestionnaireMatch::where(function (Builder $builder) {
-
+        foreach ($data as $my => $partner) {
+            $q = QuestionnaireMatch::where(function (Builder $builder) use($my, $partner) {
+                $builder->where('questionnaire_id', $my)->where('with_questionnaire_id', $partner);
+            })->orWhere(function(Builder $builder) use ($my, $partner) {
+                $builder->where('questionnaire_id', $partner)->where('with_questionnaire_id', $my);
             });
+
+            dd($q->get()->toArray());
         }
     }
 
