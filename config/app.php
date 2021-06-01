@@ -67,7 +67,7 @@ return [
                 'zodiac_signs' => [
                     'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
                     'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',
-                    'fish'
+                    'fish', 'no_matter'
                 ],
                 'height' => ['type:integer|double', 'type:integer|double'],
                 'weight' => ['type:integer|double', 'type:integer|double'],
