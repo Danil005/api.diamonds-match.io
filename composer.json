@@ -22,6 +22,8 @@
         "laravel/passport": "^10.1",
         "laravel/tinker": "^2.5",
         "manuwhat/similar-text": "dev-master",
+        "menarasolutions/geographer": "^0.3.10",
+        "menarasolutions/geographer-ru": "^0.2.2",
         "phpoffice/phppresentation": "^0.9.0",
         "propaganistas/laravel-phone": "^4.3",
         "setasign/fpdf": "^1.8",

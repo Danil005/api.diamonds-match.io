@@ -9,7 +9,7 @@ use App\Models\Countries;
 use App\Models\Langs;
 use App\Utils\Response;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
+
 
 class UtilsController extends Controller
 {
@@ -17,13 +17,20 @@ class UtilsController extends Controller
 
     public function getCities(\App\Http\Requests\Utils\Cities $request)
     {
+
         $data = $request->all();
 
         $cities = Cities::where(function(Builder $query) use ($data){
 
             $query->where('title_ru', 'ILIKE', '%'.$data['title'].'%');
 
-        })->limit(25)->get(['title_ru', 'title_en']);
+        })->limit(25);
+
+       if( $request->has('country_id') ) {
+           $cities->where('country_id', $request->country_id);
+       }
+
+        $cities->get(['title_ru', 'title_en']);
 
         $result = [];
         $dup = [];
@@ -48,14 +55,14 @@ class UtilsController extends Controller
                 $query->where('title_ru', 'ILIKE', '%' . $data['title'] . '%')
                     ->orWhere('title_en', 'ILIKE', '%' . $data['title'] . '%');
 
-            })->limit(5)->get(['title_ru', 'title_en']);
+            })->limit(5)->get(['title_ru', 'title_en', 'country_id']);
         } else {
-            $countries = Countries::get(['title_ru', 'title_en']);
+            $countries = Countries::get(['title_ru', 'title_en', 'country_id']);
         }
         $result = [];
 
         foreach ($countries as $key=>$item) {
-            $result[] = ['value_ru' => $item['title_ru'], 'value_en' => $item['title_en']];
+            $result[] = ['value_ru' => $item['title_ru'], 'value_en' => $item['title_en'], 'country_id' => $item['country_id']];
         }
 
         $this->response()->success()->setMessage('Страны получены')->setData($result)->send();

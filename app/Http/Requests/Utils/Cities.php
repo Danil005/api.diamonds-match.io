@@ -24,7 +24,8 @@ class Cities extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string'
+            'title' => 'required|string',
+            'country_id' => 'integer|nullable'
         ];
     }
 }
