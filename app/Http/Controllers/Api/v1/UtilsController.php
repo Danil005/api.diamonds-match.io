@@ -27,7 +27,7 @@ class UtilsController extends Controller
         })->limit(25);
 
        if( $request->has('country_id') ) {
-           $cities->where('country_id', $request->country_id);
+           $cities->where('country_id', (int)$request->country_id);
        }
 
         $cities->get(['title_ru', 'title_en']);
