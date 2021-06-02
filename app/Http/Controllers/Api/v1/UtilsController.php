@@ -17,20 +17,17 @@ class UtilsController extends Controller
 
     public function getCities(\App\Http\Requests\Utils\Cities $request)
     {
-
         $data = $request->all();
 
         $cities = Cities::where(function(Builder $query) use ($data){
-
             $query->where('title_ru', 'ILIKE', '%'.$data['title'].'%');
-
         })->limit(25);
 
        if( $request->has('country_id') ) {
            $cities->where('country_id', (int)$request->country_id);
        }
 
-        $cities->get(['title_ru', 'title_en']);
+        $cities = $cities->get(['title_ru', 'title_en']);
 
         $result = [];
         $dup = [];
