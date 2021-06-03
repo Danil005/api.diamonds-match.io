@@ -345,7 +345,11 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'live_city') {
-                $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+                if( is_array($myInformation['live_country']) ) {
+                    $myInformation['city'] = $myInformation['live_country']['label'] . ', ' . $information;
+                } else {
+                    $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+                }
             }
 
             if ($key == 'place_birth') {
@@ -371,70 +375,70 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
 # Заносим все в базу данных
-        $partnerAppearance = QuestionnairePartnerAppearance::create($partnerAppearance);
-        $personalQualitiesPartner = QuestionnairePersonalQualitiesPartner::create($personalQualitiesPartner);
-        $partnerInformation = QuestionnairePartnerInformation::create($partnerInformation);
-        $test = QuestionnaireTest::create($test);
-        $myAppearance = QuestionnaireMyAppearance::create($myAppearance);
-        $myPersonalQualities = QuestionnaireMyPersonalQualities::create($myPersonalQualities);
-        $myInformation = QuestionnaireMyInformation::create($myInformation);
-
-        $application = Applications::create([
-            'client_name' => $myInformation->name,
-            'service_type' => 'free',
-            'status' => 0,
-            'questionnaire_id' => null,
-            'responsibility' => null,
-            'link' => null,
-            'link_active' => true,
-            'from' => 'Сайт, кнопка',
-            'email' => $request->has('email') ? $request->email : null,
-            'phone' => $request->has('phone') ? $request->phone : null
-        ]);
-
-# Объединяем ответы в общую базу
-        $questionnaire = Questionnaire::create([
-            'partner_appearance_id' => $partnerAppearance->id,
-            'personal_qualities_partner_id' => $personalQualitiesPartner->id,
-            'partner_information_id' => $partnerInformation->id,
-            'test_id' => $test->id,
-            'my_appearance_id' => $myAppearance->id,
-            'my_personal_qualities_id' => $myPersonalQualities->id,
-            'my_information_id' => $myInformation->id
-        ]);
-
-        $sign = md5(\Illuminate\Support\Str::random(16));
-
-        SignQuestionnaire::create([
-            'application_id' => $application->id,
-            'questionnaire_id' => $questionnaire->id,
-            'sign' => $sign,
-            'active' => true
-        ]);
-        $link = env('APP_QUESTIONNAIRE_URL') . '/sign/' . $sign;
-        Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
-        Applications::where('id', $application->id)->update(['link' => $link, 'questionnaire_id' => $questionnaire->id]);
-
-
-        $this->createNotify('application', 'Появилась новая заявка.', [
-            'application_id' => $application->id,
-        ]);
-
-        $this->createNotify('questionnaire', 'Появилась новая анкета.', [
-            'questionnaire_id' => $questionnaire->id,
-        ]);
-
-
-        event(new NotifyPushed('Появилась новая заявка', [
-            'application_id' => $application->id,
-        ]));
-
-        event(new NotifyPushed('Появилась новая анкета', [
-            'questionnaire_id' => $questionnaire->id,
-        ]));
+//        $partnerAppearance = QuestionnairePartnerAppearance::create($partnerAppearance);
+//        $personalQualitiesPartner = QuestionnairePersonalQualitiesPartner::create($personalQualitiesPartner);
+//        $partnerInformation = QuestionnairePartnerInformation::create($partnerInformation);
+//        $test = QuestionnaireTest::create($test);
+//        $myAppearance = QuestionnaireMyAppearance::create($myAppearance);
+//        $myPersonalQualities = QuestionnaireMyPersonalQualities::create($myPersonalQualities);
+//        $myInformation = QuestionnaireMyInformation::create($myInformation);
+//
+//        $application = Applications::create([
+//            'client_name' => $myInformation->name,
+//            'service_type' => 'free',
+//            'status' => 0,
+//            'questionnaire_id' => null,
+//            'responsibility' => null,
+//            'link' => null,
+//            'link_active' => true,
+//            'from' => 'Сайт, кнопка',
+//            'email' => $request->has('email') ? $request->email : null,
+//            'phone' => $request->has('phone') ? $request->phone : null
+//        ]);
+//
+//# Объединяем ответы в общую базу
+//        $questionnaire = Questionnaire::create([
+//            'partner_appearance_id' => $partnerAppearance->id,
+//            'personal_qualities_partner_id' => $personalQualitiesPartner->id,
+//            'partner_information_id' => $partnerInformation->id,
+//            'test_id' => $test->id,
+//            'my_appearance_id' => $myAppearance->id,
+//            'my_personal_qualities_id' => $myPersonalQualities->id,
+//            'my_information_id' => $myInformation->id
+//        ]);
+//
+//        $sign = md5(\Illuminate\Support\Str::random(16));
+//
+//        SignQuestionnaire::create([
+//            'application_id' => $application->id,
+//            'questionnaire_id' => $questionnaire->id,
+//            'sign' => $sign,
+//            'active' => true
+//        ]);
+//        $link = env('APP_QUESTIONNAIRE_URL') . '/sign/' . $sign;
+//        Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
+//        Applications::where('id', $application->id)->update(['link' => $link, 'questionnaire_id' => $questionnaire->id]);
+//
+//
+//        $this->createNotify('application', 'Появилась новая заявка.', [
+//            'application_id' => $application->id,
+//        ]);
+//
+//        $this->createNotify('questionnaire', 'Появилась новая анкета.', [
+//            'questionnaire_id' => $questionnaire->id,
+//        ]);
+//
+//
+//        event(new NotifyPushed('Появилась новая заявка', [
+//            'application_id' => $application->id,
+//        ]));
+//
+//        event(new NotifyPushed('Появилась новая анкета', [
+//            'questionnaire_id' => $questionnaire->id,
+//        ]));
 
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->setData([
-            'link_questionnaire' => $link
+            'link_questionnaire' => 1
         ])->send();
     }
 
