@@ -286,15 +286,18 @@ class QuestionnaireController extends QuestionnaireUtils
 
             $liveCountry = '';
             if ($key == 'live_place') {
-                foreach ($information as $country) {
-                    $liveCountry .= $country . ',';
+                if( isset($information) ) {
+                    foreach ($information as $country) {
+                        $liveCountry .= $country . ',';
+                    }
+                    $partnerInformation['city'] = trim($liveCountry, ',');
+                } else {
+                    $partnerInformation['city'] = '';
                 }
-                $partnerInformation['city'] = trim($liveCountry, ',');
             }
 
             if ($key == 'place_birth') {
                 $place_birth = '';
-
                 if (isset($partnerInformation[$key][0])) {
                     foreach ($partnerInformation[$key] as $item) {
                         $place_birth .= $item . ',';

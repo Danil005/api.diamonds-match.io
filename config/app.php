@@ -62,7 +62,6 @@ return [
             ],
             'partner_information' => [
                 'age' => ['type:integer', 'type:integer'],
-                'live_place' => 'array(string)',
                 'zodiac_signs' => [
                     'aries', 'calf', 'twins', 'cancer', 'lion', 'virgo',
                     'libra', 'scorpio', 'sagittarius', 'capricorn', 'aquarius',
@@ -70,11 +69,10 @@ return [
                 ],
                 'height' => ['type:integer|double', 'type:integer|double'],
                 'weight' => ['type:integer|double', 'type:integer|double'],
-                'marital_status' => ['one', 'divorced', 'widow'],
-                'languages' => 'array(string|integer)',
+                'marital_status' => ['one', 'divorced', 'widow', null],
                 'moving_country' => 'boolean',
                 'moving_city' => 'boolean',
-                'children' => 'boolean',
+                'children' => ['true', 'false', null],
                 'children_count' => [...generateNumbers(), '!required'],
                 'children_desire' => ['yes', 'no', 'maybe'],
                 'smoking' => ['dont_smoking', 'rarely', 'smoking', 'no_matter'],
