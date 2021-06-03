@@ -54,7 +54,7 @@ class QuestionnaireController extends QuestionnaireUtils
     {
         # Сохраняем все данные
         $data = [];
-        if( !$request->has('sign') || $request->sign == null )
+        if (!$request->has('sign') || $request->sign == null)
             $this->response()->error()->setMessage('SIGN должна быть задана')->send();
 
 
@@ -144,7 +144,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myInformation['age'] = $birthday->diffInYears($now);
             }
 
-            if( $key == 'countries_was' || $key == 'countries_dream') {
+            if ($key == 'countries_was' || $key == 'countries_dream') {
                 $myInformation[$key] = implode(',', $information);
             }
 
@@ -171,7 +171,7 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'place_birth') {
-                if( is_string($information) ) {
+                if (is_string($information)) {
                     $myInformation[$key] = $information;
                 } else {
                     $myInformation[$key] = implode(',', $information);
@@ -182,11 +182,11 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myInformation[$key] = (int)$myInformation[$key];
             }
 
-            if( $key == 'countries_was' ) {
+            if ($key == 'countries_was') {
                 $myInformation[$key] = implode(',', $information);
             }
 
-            if( $key == 'countries_dream' ) {
+            if ($key == 'countries_dream') {
                 $myInformation[$key] = implode(',', $information);
             }
         }
@@ -216,7 +216,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $resp = Applications::where('questionnaire_id', $q->id)->first(['responsibility']);
 
-        $this->createNotify('questionnaire', 'Ваш клиент '.$myInformation->name.' заполнил анкету.', [
+        $this->createNotify('questionnaire', 'Ваш клиент ' . $myInformation->name . ' заполнил анкету.', [
             'questionnaire_id' => $q->id,
             'employee' => $resp != null ? explode(',', $resp['responsibility'])[0] : null
         ]);
@@ -271,22 +271,26 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'languages') {
-                $langs = new Langs();
-                foreach ($information as $item) {
-                    $langs = $langs->orWhere('code', $item);
-                }
-                $langs = $langs->get()->toArray();
+                if (isset($information)) {
+                    $langs = new Langs();
+                    foreach ($information as $item) {
+                        $langs = $langs->orWhere('code', $item);
+                    }
+                    $langs = $langs->get()->toArray();
 
-                $temp = '';
-                foreach ($langs as $item) {
-                    $temp .= $item['nameRU'] . ',';
+                    $temp = '';
+                    foreach ($langs as $item) {
+                        $temp .= $item['nameRU'] . ',';
+                    }
+                    $partnerInformation[$key] = trim($temp, ',');
+                } else {
+                    $partnerInformation[$key] = null;
                 }
-                $partnerInformation[$key] = trim($temp, ',');
             }
 
             $liveCountry = '';
             if ($key == 'live_place') {
-                if( isset($information) ) {
+                if (isset($information)) {
                     foreach ($information as $country) {
                         $liveCountry .= $country . ',';
                     }
@@ -318,7 +322,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myInformation['age'] = $birthday->diffInYears($now);
             }
 
-            if( $key == 'countries_was' || $key == 'countries_dream') {
+            if ($key == 'countries_was' || $key == 'countries_dream') {
                 $myInformation[$key] = implode(',', $information);
             }
 
@@ -345,7 +349,7 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'place_birth') {
-                if( is_string($information) ) {
+                if (is_string($information)) {
                     $myInformation[$key] = $information;
                 } else {
                     $myInformation[$key] = implode(',', $information);
@@ -356,17 +360,17 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myInformation[$key] = (int)$myInformation[$key];
             }
 
-            if( $key == 'countries_was' ) {
+            if ($key == 'countries_was') {
                 $myInformation[$key] = implode(',', $information);
             }
 
-            if( $key == 'countries_dream' ) {
+            if ($key == 'countries_dream') {
                 $myInformation[$key] = implode(',', $information);
             }
         }
 
 
-        # Заносим все в базу данных
+# Заносим все в базу данных
         $partnerAppearance = QuestionnairePartnerAppearance::create($partnerAppearance);
         $personalQualitiesPartner = QuestionnairePersonalQualitiesPartner::create($personalQualitiesPartner);
         $partnerInformation = QuestionnairePartnerInformation::create($partnerInformation);
@@ -388,7 +392,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'phone' => $request->has('phone') ? $request->phone : null
         ]);
 
-        # Объединяем ответы в общую базу
+# Объединяем ответы в общую базу
         $questionnaire = Questionnaire::create([
             'partner_appearance_id' => $partnerAppearance->id,
             'personal_qualities_partner_id' => $personalQualitiesPartner->id,
@@ -437,15 +441,16 @@ class QuestionnaireController extends QuestionnaireUtils
     /**
      * @param View $request
      */
-    public function view(View $request)
+    public
+    function view(View $request)
     {
 
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
 
-        if(empty($questionnaire))
-           $this->response()->error()->setMessage("Анкета не существует")->setData(["error" => 404])->send();
+        if (empty($questionnaire))
+            $this->response()->error()->setMessage("Анкета не существует")->setData(["error" => 404])->send();
 
         $application = Applications::withTrashed()->where('questionnaire_id', $request->id)->first();
 
@@ -548,118 +553,118 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['my_appearance']['sex'] = $result['my_appearance']['sex'] === 'female' ? 'Женщина' : 'Мужчина';
 
 
-        foreach ($result['my_information'] as $key=>$item) {
-            if( $key == 'smoking' ) {
+        foreach ($result['my_information'] as $key => $item) {
+            if ($key == 'smoking') {
                 $result['my_information']['smoking'] = $this->smoking($result['my_information']['smoking'], 'male');
             }
 
-            if( $key == 'alcohol' ) {
+            if ($key == 'alcohol') {
                 $result['my_information']['alcohol'] = $this->alcohol($result['my_information']['alcohol'], 'male');
             }
 
-            if( $key == 'religion' ) {
+            if ($key == 'religion') {
                 $result['my_information']['religion'] = $this->religion($result['my_information']['religion'], 'male');
             }
 
-            if( $key == 'sport' ) {
+            if ($key == 'sport') {
                 $result['my_information']['sport'] = $this->sport($result['my_information']['sport'], 'male');
             }
 
-            if( $key == 'education' ) {
+            if ($key == 'education') {
                 $result['my_information']['education'] = $this->education($result['my_information']['education'], 'male');
             }
 
-            if( $key == 'work' ) {
+            if ($key == 'work') {
                 $result['my_information']['work'] = $this->work($result['my_information']['work'], 'male');
             }
 
-            if( $key == 'pets' ) {
+            if ($key == 'pets') {
                 $result['my_information']['pets'] = $this->pets($result['my_information']['pets'], 'male');
             }
 
-            if( $key == 'films_or_books' ) {
+            if ($key == 'films_or_books') {
                 $result['my_information']['films_or_books'] = $this->fm($result['my_information']['films_or_books'], 'male');
             }
 
-            if( $key == 'relax' ) {
+            if ($key == 'relax') {
                 $result['my_information']['relax'] = $this->relax($result['my_information']['relax'], 'male');
             }
 
-            if( $key == 'sleep' ) {
+            if ($key == 'sleep') {
                 $result['my_information']['sleep'] = $this->sleep($result['my_information']['sleep'], 'male');
             }
 
-            if( $key == 'clubs' ) {
+            if ($key == 'clubs') {
                 $result['my_information']['clubs'] = $this->clubs($result['my_information']['clubs'], 'male');
             }
 
-            if( $key == 'salary' ) {
+            if ($key == 'salary') {
                 $result['my_information']['salary'] = $this->salary($result['my_information']['salary']);
             }
 
-            if( $key == 'marital_status' ) {
+            if ($key == 'marital_status') {
                 $result['my_information']['marital_status'] = $this->maritalStatus($result['my_information']['marital_status'], $result['my_appearance']['sex']);
             }
 
-            if( $key == 'children_desire' ) {
+            if ($key == 'children_desire') {
                 $result['my_information']['children_desire'] = $this->childrenDesire($result['my_information']['children_desire'], $result['my_appearance']['sex']);
             }
         }
 
-        foreach ($result['partner_information'] as $key=>$item) {
-            if( $key == 'smoking' ) {
+        foreach ($result['partner_information'] as $key => $item) {
+            if ($key == 'smoking') {
                 $result['partner_information']['smoking'] = $this->smoking($result['partner_information']['smoking'], 'male');
             }
 
-            if( $key == 'alcohol' ) {
+            if ($key == 'alcohol') {
                 $result['partner_information']['alcohol'] = $this->alcohol($result['partner_information']['alcohol'], 'male');
             }
 
-            if( $key == 'religion' ) {
+            if ($key == 'religion') {
                 $result['partner_information']['religion'] = $this->religion($result['partner_information']['religion'], 'male');
             }
 
-            if( $key == 'sport' ) {
+            if ($key == 'sport') {
                 $result['partner_information']['sport'] = $this->sport($result['partner_information']['sport'], 'male');
             }
 
-            if( $key == 'education' ) {
+            if ($key == 'education') {
                 $result['partner_information']['education'] = $this->education($result['partner_information']['education'], 'male');
             }
 
-            if( $key == 'work' ) {
+            if ($key == 'work') {
                 $result['partner_information']['work'] = $this->work($result['partner_information']['work'], 'male');
             }
 
-            if( $key == 'pets' ) {
+            if ($key == 'pets') {
                 $result['partner_information']['pets'] = $this->pets($result['partner_information']['pets'], 'male');
             }
 
-            if( $key == 'films_or_books' ) {
+            if ($key == 'films_or_books') {
                 $result['partner_information']['films_or_books'] = $this->fm($result['partner_information']['films_or_books'], 'male');
             }
 
-            if( $key == 'relax' ) {
+            if ($key == 'relax') {
                 $result['partner_information']['relax'] = $this->relax($result['partner_information']['relax'], 'male');
             }
 
-            if( $key == 'sleep' ) {
+            if ($key == 'sleep') {
                 $result['partner_information']['sleep'] = $this->sleep($result['partner_information']['sleep'], 'male');
             }
 
-            if( $key == 'clubs' ) {
+            if ($key == 'clubs') {
                 $result['partner_information']['clubs'] = $this->clubs($result['partner_information']['clubs'], 'male');
             }
 
-            if( $key == 'salary' ) {
+            if ($key == 'salary') {
                 $result['partner_information']['salary'] = $this->salary($result['partner_information']['salary']);
             }
 
-            if( $key == 'marital_status' ) {
+            if ($key == 'marital_status') {
                 $result['partner_information']['marital_status'] = $this->maritalStatus($result['partner_information']['marital_status'], $result['my_appearance']['sex']);
             }
 
-            if( $key == 'children_desire' ) {
+            if ($key == 'children_desire') {
                 $result['partner_information']['children_desire'] = $this->childrenDesire($result['partner_information']['children_desire'], $result['my_appearance']['sex']);
             }
         }
@@ -677,7 +682,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Анкета получена')->setData($result)->send();
     }
 
-    public function uploadPhoto(UploadPhotoQuestionnaire $request)
+    public
+    function uploadPhoto(UploadPhotoQuestionnaire $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -701,7 +707,8 @@ class QuestionnaireController extends QuestionnaireUtils
         ])->send();
     }
 
-    public function deletePhoto(DeletePhotoQuestionnaire $request)
+    public
+    function deletePhoto(DeletePhotoQuestionnaire $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -716,7 +723,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Фотография была удалена')->send();
     }
 
-    public function uploadFile(FilesQuestionnaire $request)
+    public
+    function uploadFile(FilesQuestionnaire $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -760,7 +768,8 @@ class QuestionnaireController extends QuestionnaireUtils
         ])->send();
     }
 
-    public function openFile(OpenFilesQuestionnaire $request)
+    public
+    function openFile(OpenFilesQuestionnaire $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -778,7 +787,8 @@ class QuestionnaireController extends QuestionnaireUtils
         }, $file['name']);
     }
 
-    public function deleteFile(DeleteFilesQuestionnaire $request)
+    public
+    function deleteFile(DeleteFilesQuestionnaire $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -795,7 +805,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Файл был удалена')->send();
     }
 
-    public function makeDate(MakeDateQuestionnaire $request)
+    public
+    function makeDate(MakeDateQuestionnaire $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -819,14 +830,15 @@ class QuestionnaireController extends QuestionnaireUtils
         QuestionnaireHistory::create([
             'user' => auth()->user()->id,
             'from' => 'appointment',
-            'comment' => 'Свидание с ' . $withQuestionnaire->name . ' было назначено на ' . $request->date . ' в ' . $request->time .'.',
+            'comment' => 'Свидание с ' . $withQuestionnaire->name . ' было назначено на ' . $request->date . ' в ' . $request->time . '.',
             'questionnaire_id' => $request->questionnaire_id
         ]);
 
         $this->response()->success()->setMessage("Дата свидания была назначена на {$request->date} в {$request->time}. Удачи!")->send();
     }
 
-    public function getMakeDate(Request $request)
+    public
+    function getMakeDate(Request $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -840,7 +852,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Доступные свидания')->setData($matching)->send();
     }
 
-    public function viewMatch(Request $request)
+    public
+    function viewMatch(Request $request)
     {
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
@@ -878,7 +891,7 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($myAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if(  $item == null ) continue;
+            if ($item == null) continue;
 
             if ($item == $partnerAppearance[$key] && $item != null && $partnerAppearance[$key] != null) {
                 $requirements['my'][$key] = true;
@@ -900,7 +913,7 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($partnerAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if(  $item == null ) continue;
+            if ($item == null) continue;
 
             if ($item == $myAppearance[$key]) {
                 $requirements['partner'][$key] = true;
@@ -932,7 +945,6 @@ class QuestionnaireController extends QuestionnaireUtils
                 $qualities['my'][] = $this->personalQuality($key, $a['sex']);
             }
         }
-
 
 
         $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
@@ -979,22 +991,25 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Доступные свидания')->setData($result)->send();
     }
 
-    private function declOfNum($number, $titles)
+    private
+    function declOfNum($number, $titles)
     {
         $cases = array(2, 0, 1, 1, 1, 2);
         $format = $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
         return sprintf($format, $number);
     }
 
-    private function mbUcfirst($str, $encoding='UTF-8')
+    private
+    function mbUcfirst($str, $encoding = 'UTF-8')
     {
         $str = mb_ereg_replace('^[\ ]+', '', $str);
-        $str = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding).
+        $str = mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding) .
             mb_substr($str, 1, mb_strlen($str), $encoding);
         return $str;
     }
 
-    public function get(GetQuestionnaire $request)
+    public
+    function get(GetQuestionnaire $request)
     {
         $myQuestionnaire = new Questionnaire();
 
@@ -1015,7 +1030,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         if ($request->has('to_age') || $request->has('from_age')) {
             $filter = true;
-            $myQuestionnaire = $myQuestionnaire->whereBetween('age', [(int)$request->from_age == null ? -100 : (int)$request->from_age, (int)$request->to_age == null ? 1000 : (int) $request->to_age]);
+            $myQuestionnaire = $myQuestionnaire->whereBetween('age', [(int)$request->from_age == null ? -100 : (int)$request->from_age, (int)$request->to_age == null ? 1000 : (int)$request->to_age]);
         }
 
         if ($request->has('country')) {
@@ -1079,21 +1094,21 @@ class QuestionnaireController extends QuestionnaireUtils
                     return false !== stristr($item, $search);
                 });
 
-                if( $findZodiac->isNotEmpty() ) {
+                if ($findZodiac->isNotEmpty()) {
                     $findZodiac = array_flip($findZodiac->toArray());
                     foreach ($findZodiac as $item) {
                         $q->orWhere('zodiac_signs', 'ILIKE', '%' . $item . '%');
                     }
                 }
 
-                if( $findEthnicity->isNotEmpty() ) {
+                if ($findEthnicity->isNotEmpty()) {
                     $findEthnicity = array_flip($findEthnicity->toArray());
                     foreach ($findEthnicity as $item) {
                         $q->orWhere('ethnicity', 'ILIKE', '%' . $item . '%');
                     }
                 }
 
-                if( $findSmoking->isNotEmpty() ) {
+                if ($findSmoking->isNotEmpty()) {
                     $findSmoking = array_flip($findSmoking->toArray());
                     foreach ($findSmoking as $item) {
                         $q->orWhere('smoking', 'ILIKE', '%' . $item . '%');
@@ -1102,8 +1117,8 @@ class QuestionnaireController extends QuestionnaireUtils
             });
         }
 
-        if($request->has('sort')) {
-            $myQuestionnaire = $myQuestionnaire->orderBy('questionnaires.id',  $request->sort == 1 ? 'DESC' : 'ASC');
+        if ($request->has('sort')) {
+            $myQuestionnaire = $myQuestionnaire->orderBy('questionnaires.id', $request->sort == 1 ? 'DESC' : 'ASC');
         }
 
 
@@ -1171,7 +1186,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Данные получены')->setData($result)->send();
     }
 
-    public function getHistory(Request $request)
+    public
+    function getHistory(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
@@ -1194,7 +1210,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Успешно найдено')->setData($history)->send();
     }
 
-    public function addHistory(Request $request)
+    public
+    function addHistory(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
@@ -1213,7 +1230,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('История обновлена')->setData($history)->send();
     }
 
-    public function removeHistory(Request $request)
+    public
+    function removeHistory(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
@@ -1227,7 +1245,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('История удалена')->setData($history)->send();
     }
 
-    public function getMatch(Request $request)
+    public
+    function getMatch(Request $request)
     {
         $result = [];
 
@@ -1283,7 +1302,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Подходящие анкеты')->setData($result)->setAdditional($pagination ?? [])->send();
     }
 
-    public function addQuestionnaireMalling(Request $request)
+    public
+    function addQuestionnaireMalling(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
@@ -1299,7 +1319,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Анкета добавлена в рассылку')->send();
     }
 
-    public function removeQuestionnaireMalling(Request $request)
+    public
+    function removeQuestionnaireMalling(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
@@ -1312,7 +1333,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Анкета была удалена из рассылки')->send();
     }
 
-    public function setStatus(Request $request)
+    public
+    function setStatus(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
@@ -1339,7 +1361,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Статус изменен')->send();
     }
 
-    public function createPresentation(Request $request)
+    public
+    function createPresentation(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
@@ -1352,13 +1375,14 @@ class QuestionnaireController extends QuestionnaireUtils
         $create = (new PptxCreator())->create(new Questionnaire(), $request->questionnaire_id);
 
         $this->response()->success()->setMessage('Презентация была создана')->setData([
-           'download_link' => env('APP_URL').'/storage/questionnaire'.explode('/questionnaire', $create)[1]
+            'download_link' => env('APP_URL') . '/storage/questionnaire' . explode('/questionnaire', $create)[1]
         ])->send();
     }
 
-    public function sign(Request $request)
+    public
+    function sign(Request $request)
     {
-        if( !$request->has('sign') )
+        if (!$request->has('sign'))
             $this->response()->error()->setMessage('Вы не указали SIGN хеш.')->send();
 
         $exist = SignQuestionnaire::where('sign', $request->sign)->exists();
