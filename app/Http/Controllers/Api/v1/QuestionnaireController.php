@@ -41,6 +41,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Jenssegers\Date\Date;
 use SoareCostin\FileVault\Facades\FileVault;
@@ -395,6 +396,12 @@ class QuestionnaireController extends QuestionnaireUtils
             'email' => $request->has('email') ? $request->email : null,
             'phone' => $request->has('phone') ? $request->phone : null
         ]);
+
+        if( $request->has('email') ) {
+            Mail::to($request->email)->send(new \App\Mail\SendPrice(
+                name: $myInformation->name
+            ));
+        }
 
 # Объединяем ответы в общую базу
         $questionnaire = Questionnaire::create([

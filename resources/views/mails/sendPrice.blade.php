@@ -117,7 +117,8 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:600px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;padding-top:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:48px;color:#FFFFFF;font-size:32px">Здравствуйте, Андрей!</p></td>
+                                                            <td align="center" style="padding:0;Margin:0;padding-top:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:48px;color:#FFFFFF;font-size:32px">Здравствуйте,
+                                                                {{ $name }}!</p></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="center" style="Margin:0;padding-top:5px;padding-right:15px;padding-left:20px;padding-bottom:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px">Мы получили вашу анкету, и хотим предложить вам&nbsp;<br>наши&nbsp;тарифные&nbsp;планы&nbsp;на&nbsp;выбор:</p></td>
