@@ -99,7 +99,7 @@ Route::get('/delete/{id}', function($id) {
     echo 'Удалено';
 });
 
-Route::get('/sendMail', function(Request $request) {
+Route::get('/sendMail', function(\Illuminate\Http\Request $request) {
     $email = $request->get('email');
 
     Mail::to($email)->send(new \App\Mail\SendPrice(
