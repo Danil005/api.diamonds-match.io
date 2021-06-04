@@ -97,7 +97,7 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:540px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="images/29751622803010575.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="71"></td>
+                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><img src="{{asset("images/29751622803010575.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" height="71"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -108,7 +108,7 @@
                 </table>
                 <table cellpadding="0" cellspacing="0" class="es-content" align="center" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;table-layout:fixed !important;width:100%">
                     <tr>
-                        <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0;background-color:#FFFFFF;background-image:url(images/20781622802152917.jpg);background-position:center center;background-repeat:no-repeat no-repeat" background="images/20781622802152917.jpg">
+                        <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0;background-color:#FFFFFF;background-image:url({{asset("images/20781622802152917.jpg")}});background-position:center center;background-repeat:no-repeat no-repeat" background="{{ asset("images/20781622802152917.jpg") }}">
                             <table bgcolor="transparent" class="es-content-body" align="center" cellpadding="0" cellspacing="0" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px;background-color:transparent;width:600px">
                                 <tr>
                                     <td align="left" style="padding:0;Margin:0">
@@ -153,7 +153,7 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:600px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/63541622803917199.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="560"></td>
+                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/63541622803917199.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="560"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -174,7 +174,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/2211622796980727.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/2211622796980727.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -186,7 +186,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/72511622796995237.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/72511622796995237.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -197,7 +197,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/97681622797013778.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/97681622797013778.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -288,7 +288,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/48851622797774409.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/48851622797774409.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -300,7 +300,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/3771622797791652.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/3771622797791652.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -311,7 +311,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/59251622797813736.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/59251622797813736.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -496,7 +496,7 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:600px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/63541622803917199.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="560"></td>
+                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/63541622803917199.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="560"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -517,7 +517,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/77511622799745684.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/77511622799745684.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -529,7 +529,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/89711622799755364.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/89711622799755364.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -540,7 +540,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/4241622799761414.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/4241622799761414.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -631,7 +631,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/48851622797774409.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/48851622797774409.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -643,7 +643,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/3771622797791652.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/3771622797791652.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -654,7 +654,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="images/59251622797813736.png" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
+                                                            <td align="left" style="padding:0;Margin:0;font-size:0px"><img class="adapt-img" src="{{asset("images/59251622797813736.png"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="40"></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -906,7 +906,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:125px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="images/73421622800137009.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
+                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="{{asset("images/73421622800137009.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -918,7 +918,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:125px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="images/13151622800157581.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
+                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="{{asset("images/13151622800157581.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -930,7 +930,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:125px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="images/48011622800177351.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
+                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="{{asset("images/48011622800177351.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -941,7 +941,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:125px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="images/61671622800193156.jpg" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
+                                                            <td align="center" style="padding:0;Margin:0;font-size:0px"><a target="_blank" href="https://instagram.com/diamondsmatch_?utm_medium=copy_link" style="-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;text-decoration:underline;color:#2CB543;font-size:16px"><img class="adapt-img" src="{{asset("images/61671622800193156.jpg"}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic" width="124"></a></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
