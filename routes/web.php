@@ -1,9 +1,11 @@
 <?php
 
 use App\Events\NotifyPushed;
+use App\Mail\CreateEmployee;
 use App\Models\User;
 use Carbon\Carbon;
 use Dejurin\GoogleTranslateForFree;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
@@ -78,6 +80,31 @@ Route::get('match', function () {
     $match = new \App\Services\MatchProcessorV2();
 
     $match->start(new \App\Models\Questionnaire);
+});
+
+Route::get('/delete/{id}', function($id) {
+    $q = \App\Models\Questionnaire::where('id', $id);
+
+    \App\Models\QuestionnaireMyAppearance::where('id', $q->my_appearance_id)->delete();
+    \App\Models\QuestionnaireMyInformation::where('id', $q->my_information_id)->delete();
+    \App\Models\QuestionnaireMyPersonalQualities::where('id', $q->my_personal_qualities_id)->delete();
+    \App\Models\QuestionnairePartnerInformation::where('id', $q->partner_information_id)->delete();
+    \App\Models\QuestionnairePartnerAppearance::where('id', $q->partner_appearance_id)->delete();
+    \App\Models\QuestionnairePersonalQualitiesPartner::where('id', $q->personal_qualities_partner_id)->delete();
+    \App\Models\QuestionnaireAppointedDate::where('questionnaire_id', $q->id)->delete();
+    \App\Models\QuestionnaireMatch::where('questionnaire_id', $q->id)->delete();
+    \App\Models\QuestionnaireFiles::where('questionnaire_id', $q->id)->delete();
+    \App\Models\QuestionnaireUploadPhoto::where('questionnaire_id', $q->id)->delete();
+
+    echo 'Удалено';
+});
+
+Route::get('/sendMail', function(Request $request) {
+    $email = $request->get('email');
+
+    Mail::to($email)->send(new \App\Mail\SendPrice(
+        name: 'Данил'
+    ));
 });
 
 Route::get('pass', function () {
