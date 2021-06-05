@@ -210,7 +210,8 @@ trait TranslateFields
                 'sagittarius' => 'Стрелец',
                 'capricorn' => 'Козерог',
                 'aquarius' => 'Водолей',
-                'fish' => 'Рыба'
+                'fish' => 'Рыба',
+                'no_matter' => 'Не важно'
             ];
         }
 
@@ -226,7 +227,8 @@ trait TranslateFields
             'sagittarius' => 'Sagittarius',
             'capricorn' => 'Capricorn',
             'aquarius' => 'Aquarius',
-            'fish' => 'Fish'
+            'fish' => 'Fish',
+            'no_matter' => 'No Matter'
         ];
     }
 

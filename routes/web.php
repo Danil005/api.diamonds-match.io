@@ -101,9 +101,10 @@ Route::get('/delete/{id}', function($id) {
 
 Route::get('/sendMail', function(\Illuminate\Http\Request $request) {
     $email = $request->get('email');
+    $name = $request->get('name');
 
     Mail::to($email)->send(new \App\Mail\SendPrice(
-        name: 'Данил'
+        name: $name ?? 'Тест'
     ));
 });
 
