@@ -664,7 +664,7 @@ trait TranslateFields
         }
     }
 
-    public function maritalStatus(string $quality, string $sex = 'male')
+    public function maritalStatus(?string $quality = null, string $sex = 'male')
     {
         $lang = Cache::get('lang');
 
