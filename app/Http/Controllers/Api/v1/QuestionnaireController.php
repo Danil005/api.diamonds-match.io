@@ -1544,9 +1544,9 @@ class QuestionnaireController extends QuestionnaireUtils
         ])->send();
     }
 
-    public function getSlide(Request $request, $slide)
+    public function getSlide(Request $request, $slide, $questionnaireId)
     {
-        (new PptxCreator())->getSlide($request, $slide);
+        (new PptxCreator())->getSlide($slide, $questionnaireId);
     }
 
     public

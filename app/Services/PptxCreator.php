@@ -48,7 +48,6 @@ class PptxCreator
 
     public function getSlide($slide, $questionnaireId)
     {
-        dd($slide, $questionnaireId);
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
 
