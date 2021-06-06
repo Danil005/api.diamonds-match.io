@@ -204,6 +204,7 @@ class PptxCreator
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaireId)->get(['id', 'path']);
         $result['photos'] = $photos;
+        dd($photos);
 
         echo view('pdf.slide' . $slide, ['q' => $result, 'class' => $this]);
     }
