@@ -48,12 +48,11 @@ class PptxCreator
 
     public function getSlide($slide, $questionnaireId)
     {
-        dd($slide, $questionnaireId);
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
 
         if ($questionnaire == null)
-            return false;
+            return 'Презентация не найдена';
         return view('pdf.slide' . $slide, ['q' => $questionnaire]);
     }
 }
