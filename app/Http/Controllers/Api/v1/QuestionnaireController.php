@@ -1537,16 +1537,37 @@ class QuestionnaireController extends QuestionnaireUtils
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
-//
-//        sleep(10);
-//        $this->response()->setMessage('Презентация была создана')->setData([
-//            'download_link' => 'https://google.com/',
-//        ])->send();
 
-        $create = (new PptxCreator())->create(new Questionnaire(), $request->questionnaire_id);
+        $connection = ssh2_connect('45.141.79.57', 22);
+        ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
+
+        for($i = 1; $i <= 5; $i++ ) {
+            $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/'.$i.' /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg');
+            stream_set_blocking($stream, true);
+            stream_get_contents($stream);
+        }
+        for($i = 1; $i <= 5; $i++ ) {
+            $stream = ssh2_exec(
+                $connection,
+                'convert /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg'
+            );
+            stream_set_blocking($stream, true);
+            stream_get_contents($stream);
+        }
+
+        $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg'
+            .' /var/www/html/storage/app/public/pptx/generate/s3.jpg'
+            .' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
+
+        $stream = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/storage/app/public/pptx/generate/presentation.pdf');
+        stream_set_blocking($stream, true);
+        $stream_out = ssh2_fetch_stream( $stream, SSH2_STREAM_STDIO );
+
+        $path = Storage::disk('public')->path('/pptx/generate/presentation.pdf');
+
 
         $this->response()->success()->setMessage('Презентация была создана')->setData([
-            'download_link' => env('APP_URL') . '/storage/questionnaire' . explode('/questionnaire', $create)[1]
+            'download_link' => env('APP_URL') . $path
         ])->send();
     }
 
