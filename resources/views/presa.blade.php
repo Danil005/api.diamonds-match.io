@@ -18,9 +18,8 @@
 {{--            Позвольте нам создать их!--}}
 {{--        </div>--}}
 {{--    </div>--}}
-    <div class="page" id="hello">
-        <img src="{{ asset('assets/img/BackgroundPage.jpg') }}" class="transparent-background" alt="transparent"/>
-        <img src="{{ asset('assets/img/White.png') }}" class="transparent-background"  style="opacity: 0.7;" alt="transparent"/>
+    <div class="page background" id="hello">
+        <img src="{{ asset('assets/img/White.png') }}" class="transparent-background" alt="transparent"/>
 
         <div>
             <img src="{{ asset('assets/img/Logo.png') }}" class="logo-right" alt="Logo"/>
