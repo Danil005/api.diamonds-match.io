@@ -101,7 +101,7 @@ Route::get('/generate', function () {
 
     $slides = '/var/www/html/public/pptx/generate/s1.jpg /var/www/html/public/pptx/generate/s2.jpg /var/www/html/public/pptx/generate/s3.jpg';
     $slides .= ' /var/www/html/public/pptx/generate/s4.jpg /var/www/html/public/pptx/generate/s5.jpg';
-    $stream = ssh2_exec($connection, 'convert '.$slides.' result.pdf');
+    $stream = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/public/pptx/generate/result.pdf');
 });
 
 Route::get('convert', function() {
