@@ -188,6 +188,18 @@ class PptxCreator
             }
         }
 
+        $moving = [];
+
+        if ($questionnaire['moving_country']) {
+            $moving[] = 'В другую страну';
+        }
+
+        if ($questionnaire['moving_city']) {
+            $moving[] = 'В другой город';
+        }
+
+        $result['moving'] = empty($moving) ? 'Все равно' : implode(', ', $moving);
+
 
         echo view('pdf.slide' . $slide, ['q' => $result, 'class' => $this]);
     }

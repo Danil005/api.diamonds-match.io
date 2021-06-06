@@ -30,15 +30,15 @@
                 </tr>
                 <tr>
                     <td class="left">Место проживание:</td>
-                    <td class="right">{{ $live ?? '----' }}</td>
+                    <td class="right">{{ $q['city'] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left">Город рождения:</td>
-                    <td class="right">{{ $birth_place ?? '----' }}</td>
+                    <td class="right">{{ $q['place_birth'] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left">Рассматриваете ли приезд:</td>
-                    <td class="right">{{ $moving ?? '----' }}</td>
+                    <td class="right">{{ ($q['moving']) ?? '----' }}</td>
                 </tr>
             </table>
         </div>
