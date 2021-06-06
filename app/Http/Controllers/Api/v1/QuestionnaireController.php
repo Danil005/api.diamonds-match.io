@@ -582,7 +582,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $country_was = explode(',',$result['my_information']['countries_was']);
             $place = new Countries();
             foreach ($country_was as $item) {
-                $place->orWhere('title_en', 'ILIKE', $place);
+                $place->orWhere('title_en', 'ILIKE', $item);
             }
             $place = $place->get(['title_ru']);
             if( $place != null )
