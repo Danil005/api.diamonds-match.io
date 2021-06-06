@@ -1291,16 +1291,17 @@ class QuestionnaireController extends QuestionnaireUtils
             $questionnaires[$key]['time'] = $time;
             $questionnaires[$key]['timestamp'] = $timestamp;
             $questionnaires[$key]['ethnicity'] = $this->ethnicity($questionnaires[$key]['ethnicity']);
+            if (isset($questionnaires[$key]['city'])) {
+                $place = $questionnaires[$key]['city'];
+                $place = Countries::where('title_en', 'ILIKE', $place)->first();
+                if ($place != null)
+                    $questionnaires[$key]['city'] = $place['title_ru'];
+            }
         }
 
         $result['questionnaires'] = $questionnaires->toArray();
 
-        if (isset($result['questionnaires']['city'])) {
-            $place = $result['questionnaires']['city'];
-            $place = Countries::where('title_en', 'ILIKE', $place)->first();
-            if ($place != null)
-                $result['questionnaires']['city'] = $place['title_ru'];
-        }
+
 
         $this->response()->success()->setMessage('Данные получены')->setData($result)->send();
     }
