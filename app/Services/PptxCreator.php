@@ -48,7 +48,7 @@ class PptxCreator
         $path = Storage::disk('public')->path('/pptx/generate/'.$id.'/presentation.pdf');
     }
 
-    public function getSlide($slide, $questionnaireId): mixed
+    public function getSlide($slide, $questionnaireId)
     {
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
