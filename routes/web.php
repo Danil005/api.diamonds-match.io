@@ -83,6 +83,7 @@ Route::get('/getSlide/{slide}', function($slide) {
 });
 
 Route::get('/generate', function () {
+    error_reporting(-1);
     $connection = ssh2_connect('45.141.79.57', 22);
     ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
 
