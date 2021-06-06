@@ -108,16 +108,27 @@ Route::get('/generate', function () {
 
 //
 //
-//    $stream6 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s1.jpg');
-//    $stream7 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s2.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s2.jpg');
-//    $stream8 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s3.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s3.jpg');
-//    $stream9 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s4.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s4.jpg');
-//    $stream10 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s5.jpg');
-//
-//    $slides = '/var/www/html/public/pptx/generate/s1.jpg /var/www/html/public/pptx/generate/s2.jpg /var/www/html/public/pptx/generate/s3.jpg';
-//    $slides .= ' /var/www/html/public/pptx/generate/s4.jpg /var/www/html/public/pptx/generate/s5.jpg';
-//    $stream11 = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/public/pptx/generate/result.pdf');
-//
+    $stream6 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/1.jpg');
+    stream_set_blocking($stream6, true);
+    stream_get_contents($stream6);
+
+    $stream7 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s2.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s2.jpg');
+    stream_set_blocking($stream7, true);
+    stream_get_contents($stream7);
+    $stream8 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s3.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s3.jpg');
+    stream_set_blocking($stream8, true);
+    stream_get_contents($stream8);
+    $stream9 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s4.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s4.jpg');
+    stream_set_blocking($stream9, true);
+    stream_get_contents($stream9);
+    $stream10 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s5.jpg');
+    stream_set_blocking($stream10, true);
+    stream_get_contents($stream10);
+
+    $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
+    $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
+    $stream11 = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/storage/app/public/pptx/generate/result.pdf');
+
 //    dd((bool)$stream1, (bool)$stream2, (bool)$stream3, (bool)$stream4, (bool)$stream5, (bool)$stream6, (bool)$stream7, (bool)$stream8, (bool)$stream9, (bool)$stream10, (bool)$stream11);
     echo 'Генерация завершена';
 });
