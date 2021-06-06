@@ -348,7 +348,7 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'live_city') {
-                if( is_array($myInformation['live_country']) ) {
+                if (is_array($myInformation['live_country'])) {
                     $myInformation['city'] = $myInformation['live_country']['label'] . ', ' . $information;
                 } else {
                     $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
@@ -376,7 +376,7 @@ class QuestionnaireController extends QuestionnaireUtils
             }
         }
 
-        if( $request->has('temp_id')  ) {
+        if ($request->has('temp_id')) {
 
         }
 
@@ -402,7 +402,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'phone' => $request->has('phone') ? $request->phone : null
         ]);
 
-        if( $request->has('email') ) {
+        if ($request->has('email')) {
             Mail::to($request->email)->send(new \App\Mail\SendPrice(
                 name: $myInformation->name
             ));
@@ -431,7 +431,7 @@ class QuestionnaireController extends QuestionnaireUtils
         Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
         Applications::where('id', $application->id)->update(['link' => $link, 'questionnaire_id' => $questionnaire->id]);
 
-        if( $request->has('temp_photo_id') ) {
+        if ($request->has('temp_photo_id')) {
             $files = Storage::files('public/questionnaire/temp/photo_' . $request->temp_photo_id);
             foreach ($files as $item) {
                 Storage::move($item, str_replace(
@@ -475,18 +475,17 @@ class QuestionnaireController extends QuestionnaireUtils
 
     public function uploadClientPhoto(Request $request)
     {
-        if( !$request->has('temp_id') )
+        if (!$request->has('temp_id'))
             $this->response()->error()->setMessage('Временное ID должно существовать')->send();
 
-        if( !$request->has('photo') )
+        if (!$request->has('photo'))
             $this->response()->error()->setMessage('Вы должны указать массив фотографий или один элемент')->send();
 
         $temp_id = $request->temp_id;
         $photo = $request->photo;
 
 
-
-        if( !is_array($photo) ) {
+        if (!is_array($photo)) {
             $path = 'public/questionnaire/temp/photo_' . $temp_id;
 
             $upload = $photo->storePubliclyAs($path, md5(Str::random(16)) . '.' . $photo->getClientOriginalExtension());
@@ -564,30 +563,31 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['my_information']['zodiac_signs'] = $zodiac[$result['my_information']['zodiac_signs']];
 
         $result['my_information']['age'] = $this->years($result['my_information']['age']);
-        $city = explode(',',$result['my_information']['city']);
+        $city = explode(',', $result['my_information']['city']);
         $c = $city;
         $city = Countries::where('title_en', 'ILIKE', $city[0])->first();
-        if( $city != null ) {
+        if ($city != null) {
             $result['my_information']['city'] = $city['title_ru'] . (isset($c[1]) ? ', ' . $c[1] : '');
         }
 
-        if( isset($result['my_information']['place_birth']) ) {
+        if (isset($result['my_information']['place_birth'])) {
             $place = $result['my_information']['place_birth'];
             $place = Countries::where('title_en', 'ILIKE', $place)->first();
-            if( $place != null )
+            if ($place != null)
                 $result['my_information']['place_birth'] = $place['title_ru'];
         }
 
-        if( isset($result['my_information']['countries_was']) ) {
-            $country_was = explode(',',$result['my_information']['countries_was']);
+        if (isset($result['my_information']['countries_was'])) {
+            $country_was = explode(',', $result['my_information']['countries_was']);
             $place = new Countries();
             foreach ($country_was as $item) {
                 $place = $place->orWhere('title_en', 'ILIKE', $item);
             }
             $place = $place->get(['title_ru'])->toArray();
-            dd($place);
-            if( $place != null )
-                $result['my_information']['countries_was'] = implode(', ', $place->toArray());
+            $res = '';
+            if ($place != null)
+                foreach ($place as $item) $res .= ', ' . $item;
+            $result['my_information']['countries_was'] = implode(', ', trim($res, ','));
         }
         $result['partner_information']['age'] = $this->years(explode(',', $result['partner_information']['age']));
 
