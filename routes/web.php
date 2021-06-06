@@ -89,27 +89,22 @@ Route::get('/generate', function () {
     $stream1 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/1 /var/www/html/storage/app/public/pptx/generate/s1.jpg');
     stream_set_blocking($stream1, true);
     stream_get_contents($stream1);
-    echo $stream1;
 
-    $stream2 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/2 /var/www/html/public/pptx/generate/s2.jpg');
+    $stream2 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/2 /var/www/html/storage/app/public/pptx/generate/s2.jpg');
     stream_set_blocking($stream2, true);
     stream_get_contents($stream2);
-    echo $stream2;
 
-    $stream3 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/3 /var/www/html/public/pptx/generate/s3.jpg');
+    $stream3 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/3 /var/www/html/storage/app/public/pptx/generate/s3.jpg');
     stream_set_blocking($stream3, true);
     stream_get_contents($stream3);
-    echo $stream3;
 
-    $stream4 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/4 /var/www/html/public/pptx/generate/s4.jpg');
+    $stream4 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/4 /var/www/html/storage/app/public/pptx/generate/s4.jpg');
     stream_set_blocking($stream4, true);
     stream_get_contents($stream4);
-    echo $stream4;
 
-    $stream5 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/5 /var/www/html/public/pptx/generate/s5.jpg');
+    $stream5 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/5 /var/www/html/storage/app/public/pptx/generate/s5.jpg');
     stream_set_blocking($stream5, true);
     stream_get_contents($stream5);
-    echo $stream5;
 
 //
 //
