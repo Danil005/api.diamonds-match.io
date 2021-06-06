@@ -1,6 +1,6 @@
 html, body {
   width: 240mm;
-  height: 297mm;
+  height: 287mm;
 }
 
 @page {
@@ -19,7 +19,7 @@ html, body {
 .page {
   position: relative;
   width: 240mm;
-  min-height: 297mm;
+  max-height: 287mm;
   padding: 20mm;
   border: 1px #D3D3D3 solid;
   border-radius: 5px;
@@ -34,7 +34,7 @@ html, body {
 .page .transparent-background {
   position: absolute;
   width: 240mm;
-  min-height: 297mm;
+  max-height: 287mm;
   top: 0;
   left: 0;
   opacity: 1;
