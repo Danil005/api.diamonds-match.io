@@ -130,8 +130,8 @@ Route::get('/generate', function () {
 //    $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
     $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/result.pdf');
     stream_set_blocking($stream11, true);
-    $output = stream_get_contents($stream11);
-    dd($output);
+    $stream_out = ssh2_fetch_stream( $stream11, SSH2_STREAM_STDIO );
+    echo stream_get_contents($stream_out);
 //    dd((bool)$stream1, (bool)$stream2, (bool)$stream3, (bool)$stream4, (bool)$stream5, (bool)$stream6, (bool)$stream7, (bool)$stream8, (bool)$stream9, (bool)$stream10, (bool)$stream11);
     echo 'Генерация завершена';
 });
