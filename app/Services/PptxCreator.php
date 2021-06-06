@@ -17,7 +17,7 @@ class PptxCreator
         ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
 
         $id = $request->questionnaire_id;
-        Storage::disk('public')->makeDirectory('pptx/generate/'.$id);
+        Storage::makeDirectory('public/pptx/generate/'.$id);
         for ($i = 1; $i <= 5; $i++) {
             $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/' . $i . '/' . $id . ' /var/www/html/storage/app/public/pptx/generate/'.$id.'/s' . $i . '.jpg');
             stream_set_blocking($stream, true);
