@@ -14,7 +14,7 @@
         </div>
 
         <div class="name">{{ $q['name'] }}</div>
-        <div class="age">18 лет</div>
+        <div class="age">{{ $q['age'] }}</div>
         <div class="circle" style="height: 20px;width: 20px;"></div>
         <div class="hello">Hello!</div>
 
@@ -22,11 +22,11 @@
             <table class="info-table">
                 <tr>
                     <td class="left" style="margin-top: 50px">Страна:</td>
-                    <td class="right">{{ $country ?? '----' }}</td>
+                    <td class="right">{{ $q['city'] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left">Этичность:</td>
-                    <td class="right">{{ $ethnicity ?? '----' }}</td>
+                    <td class="right">{{ $q['ethnicity'] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left">Место проживание:</td>
