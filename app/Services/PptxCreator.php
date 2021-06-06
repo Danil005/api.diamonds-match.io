@@ -915,18 +915,6 @@ class PptxCreator
             ->setOffsetX(152.69291338764)
             ->setOffsetY(673.511811024);
 
-        $shape = $currentSlide->createRichTextShape()
-            ->setHeight(32.50393700826)
-            ->setWidth(501.16535433666)
-            ->setOffsetX(171.59055118314)
-            ->setOffsetY(664.440944882);
-        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
-
-        $textRun = $shape->createTextRun('ОТВЕТЫ НА ВОПРОСЫ');
-        $textRun->getFont()->setName('Arial')
-            ->setBold(true)
-            ->setSize(14)
-            ->setColor(new Color('FF464C53'));
 
         /**
          * Поля
@@ -939,9 +927,6 @@ class PptxCreator
             'relax' => 'Отдых:',
             'was_be_country' => 'Страны, в которых были:',
             'dream_country' => 'Страны, в которых мечтает побывать:',
-            'best_gift' => 'Лучший подарок для вас:',
-            'hobbies' => 'Хобби:',
-            'life_kredo' => 'Жизненное кредо:',
         ];
 
         $info2Cords = [
@@ -952,8 +937,6 @@ class PptxCreator
             363.59055118542,
             404.78740157961,
             470.55118110794996,
-            518.92913386443,
-            583.93700788095,
         ];
 
         $i = 0;
@@ -975,12 +958,31 @@ class PptxCreator
 
         $shape = $currentSlide->createRichTextShape()
             ->setHeight(32.50393700826)
-            ->setWidth(507.5905511811)
-            ->setOffsetX(173.1023622047)
-            ->setOffsetY(697.3228346457);
+            ->setWidth(260.03149606608)
+            ->setOffsetX(173.10236220678)
+            ->setOffsetY(494.7401574803);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun('Какие черты тебя отталкивают в людях?');
+        $textRun = $shape->createTextRun('Лучший подарок для вас:');
+        $textRun->getFont()->setName('Arial')
+            ->setBold(true)
+            ->setSize(13)
+            ->setColor(new Color('FF464C53'));
+
+        $shape = $currentSlide->createRichTextShape()
+            ->setHeight(32.50393700826)
+            ->setWidth(260.03149606608)
+            ->setOffsetX(173.10236220678)
+            ->setOffsetY(643.2755905512);
+        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+        $textRun = $shape->createTextRun('Хобби:');
+        $textRun->getFont()->setName('Arial')
+            ->setBold(true)
+            ->setSize(13)
+            ->setColor(new Color('FF464C53'));
+
+        $textRun = $shape->createTextRun('Жизненное кредо:');
         $textRun->getFont()->setName('Arial')
             ->setBold(true)
             ->setSize(13)
@@ -990,28 +992,8 @@ class PptxCreator
             ->setHeight(32.50393700826)
             ->setWidth(507.5905511811)
             ->setOffsetX(173.1023622047)
-            ->setOffsetY(823.1811023622);
+            ->setOffsetY(822.0472440945);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
-
-        $textRun = $shape->createTextRun('Как ты относишься к существенной разнице в возрасте между партнерами?');
-        $textRun->getFont()->setName('Arial')
-            ->setBold(true)
-            ->setSize(13)
-            ->setColor(new Color('FF464C53'));
-
-        $shape = $currentSlide->createRichTextShape()
-            ->setHeight(32.50393700826)
-            ->setWidth(507.5905511811)
-            ->setOffsetX(173.1023622047)
-            ->setOffsetY(945.2598425197);
-        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
-
-        $textRun = $shape->createTextRun('Как ты считаешь, какие у тебя таланты?');
-        $textRun->getFont()->setName('Arial')
-            ->setBold(true)
-            ->setSize(13)
-            ->setColor(new Color('FF464C53'));
-
 
         /**
          * Данные
@@ -1022,10 +1004,7 @@ class PptxCreator
             'book_or_films' => $this->fm($questionnaire['films_or_books']),
             'relax' => $this->relax($questionnaire['relax']),
             'was_be_country' => $questionnaire['countries_was'],
-            'dream_country' => $questionnaire['countries_dream'],
-            'best_gift' => $questionnaire['best_gift'],
-            'hobbies' => $questionnaire['hobbies'],
-            'life_kredo' => $questionnaire['kredo'],
+            'dream_country' => $questionnaire['countries_dream']
         ];
 
         $info2Cords = [
@@ -1035,9 +1014,6 @@ class PptxCreator
             309.921259843,
             363.59055118542,
             404.78740157961,
-            470.55118110794996,
-            518.92913386443,
-            583.93700788095,
         ];
 
         $i = 0;
@@ -1056,42 +1032,127 @@ class PptxCreator
 
             $i++;
         }
+        $shape = $currentSlide->createRichTextShape()
+            ->setHeight(32.50393700826)
+            ->setWidth(260.03149606608)
+            ->setOffsetX(420.66141732783)
+            ->setOffsetY(529.8897637795);
+        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+
+        $textRun = $shape->createTextRun($questionnaire['best_gift']);
+        $textRun->getFont()->setName('Arial')
+            ->setSize(13)
+            ->setColor(new Color('FF464C53'));
+
 
         $shape = $currentSlide->createRichTextShape()
             ->setHeight(32.50393700826)
-            ->setWidth(533.6692913386)
-            ->setOffsetX(173.1023622047)
-            ->setOffsetY(727.1811023622);
+            ->setWidth(260.03149606608)
+            ->setOffsetX(420.66141732783)
+            ->setOffsetY(670.1102362205);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun($questionnaire['features_repel']);
+        $textRun = $shape->createTextRun($questionnaire['hobbies']);
         $textRun->getFont()->setName('Arial')
             ->setSize(13)
             ->setColor(new Color('FF464C53'));
 
         $shape = $currentSlide->createRichTextShape()
             ->setHeight(32.50393700826)
-            ->setWidth(533.6692913386)
-            ->setOffsetX(173.1023622047)
-            ->setOffsetY(874.9606299213);
+            ->setWidth(260.03149606608)
+            ->setOffsetX(420.66141732783)
+            ->setOffsetY(851.1496062992);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun($questionnaire['age_difference']);
+        $textRun = $shape->createTextRun($questionnaire['kredo']);
         $textRun->getFont()->setName('Arial')
             ->setSize(13)
             ->setColor(new Color('FF464C53'));
 
-        $shape = $currentSlide->createRichTextShape()
-            ->setHeight(32.50393700826)
-            ->setWidth(533.6692913386)
-            ->setOffsetX(173.1023622047)
-            ->setOffsetY(972.094488189);
-        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun($questionnaire['talents']);
-        $textRun->getFont()->setName('Arial')
-            ->setSize(13)
-            ->setColor(new Color('FF464C53'));
+
+        // New Page
+//
+//        $shape = $currentSlide->createRichTextShape()
+//            ->setHeight(32.50393700826)
+//            ->setWidth(501.16535433666)
+//            ->setOffsetX(171.59055118314)
+//            ->setOffsetY(664.440944882);
+//        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+//
+//        $textRun = $shape->createTextRun('ОТВЕТЫ НА ВОПРОСЫ');
+//        $textRun->getFont()->setName('Arial')
+//            ->setBold(true)
+//            ->setSize(14)
+//            ->setColor(new Color('FF464C53'));
+//
+//        $textRun = $shape->createTextRun('Какие черты тебя отталкивают в людях?');
+//        $textRun->getFont()->setName('Arial')
+//            ->setBold(true)
+//            ->setSize(13)
+//            ->setColor(new Color('FF464C53'));
+//
+//        $shape = $currentSlide->createRichTextShape()
+//            ->setHeight(32.50393700826)
+//            ->setWidth(507.5905511811)
+//            ->setOffsetX(173.1023622047)
+//            ->setOffsetY(823.1811023622);
+//        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+//
+//        $textRun = $shape->createTextRun('Как ты относишься к существенной разнице в возрасте между партнерами?');
+//        $textRun->getFont()->setName('Arial')
+//            ->setBold(true)
+//            ->setSize(13)
+//            ->setColor(new Color('FF464C53'));
+//
+//        $shape = $currentSlide->createRichTextShape()
+//            ->setHeight(32.50393700826)
+//            ->setWidth(507.5905511811)
+//            ->setOffsetX(173.1023622047)
+//            ->setOffsetY(945.2598425197);
+//        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+//
+//        $textRun = $shape->createTextRun('Как ты считаешь, какие у тебя таланты?');
+//        $textRun->getFont()->setName('Arial')
+//            ->setBold(true)
+//            ->setSize(13)
+//            ->setColor(new Color('FF464C53'));
+//
+//        $shape = $currentSlide->createRichTextShape()
+//            ->setHeight(32.50393700826)
+//            ->setWidth(533.6692913386)
+//            ->setOffsetX(173.1023622047)
+//            ->setOffsetY(727.1811023622);
+//        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+//
+//        $textRun = $shape->createTextRun($questionnaire['features_repel']);
+//        $textRun->getFont()->setName('Arial')
+//            ->setSize(13)
+//            ->setColor(new Color('FF464C53'));
+//
+//        $shape = $currentSlide->createRichTextShape()
+//            ->setHeight(32.50393700826)
+//            ->setWidth(533.6692913386)
+//            ->setOffsetX(173.1023622047)
+//            ->setOffsetY(874.9606299213);
+//        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+//
+//        $textRun = $shape->createTextRun($questionnaire['age_difference']);
+//        $textRun->getFont()->setName('Arial')
+//            ->setSize(13)
+//            ->setColor(new Color('FF464C53'));
+//
+//        $shape = $currentSlide->createRichTextShape()
+//            ->setHeight(32.50393700826)
+//            ->setWidth(533.6692913386)
+//            ->setOffsetX(173.1023622047)
+//            ->setOffsetY(972.094488189);
+//        $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
+//
+//        $textRun = $shape->createTextRun($questionnaire['talents']);
+//        $textRun->getFont()->setName('Arial')
+//            ->setSize(13)
+//            ->setColor(new Color('FF464C53'));
 
 
 
