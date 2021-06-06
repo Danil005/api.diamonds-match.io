@@ -565,9 +565,10 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $result['my_information']['age'] = $this->years($result['my_information']['age']);
         $city = explode(',',$result['my_information']['city']);
+        $c = $city;
         $city = Countries::where('title_en', 'ILIKE', $city[0])->first();
         if( $city != null ) {
-            $result['my_information']['city'] = $city['title_ru'];
+            $result['my_information']['city'] = $city['title_ru'] . (isset($c[1]) ? ', ' . $c[1] : '');
         }
         $result['partner_information']['age'] = $this->years(explode(',', $result['partner_information']['age']));
 
