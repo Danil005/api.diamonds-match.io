@@ -583,7 +583,7 @@ class QuestionnaireController extends QuestionnaireUtils
             if ($place != null)
                 $result['my_information']['place_birth'] = $place['title_ru'];
             else
-                $result['my_information']['place_birth'] = $place1;
+                $result['my_information']['place_birth'] = explode(',',$result['my_information']['place_birth'])[1];
         }
 
         if (isset($result['my_information']['countries_was'])) {
