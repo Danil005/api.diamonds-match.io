@@ -169,7 +169,7 @@ body {
 .page .center .info-table td {
   width: 200px;
   text-align: left;
-  font-size: 15px;
+  font-size: 17px;
   vertical-align: baseline;
 }
 .page .center .info-table td.left {
@@ -208,11 +208,11 @@ body {
 }
 .page .answers .question {
   margin-top: 20px;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: bold;
 }
 .page .answers .answer {
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 5px;
 }
 
