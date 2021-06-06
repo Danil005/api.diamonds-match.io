@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('assets/pdf/main.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/pdf/main2.css') }}">
 
 <div class="book">
     <div class="page first-page" id="title">

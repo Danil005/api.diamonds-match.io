@@ -21,7 +21,6 @@ body {
   width: 210mm;
   min-height: 297mm;
   padding: 20mm;
-  margin: 10mm auto;
   border: 1px #D3D3D3 solid;
   border-radius: 5px;
   background: white;
@@ -66,7 +65,6 @@ body {
   width: 15em;
   font-size: 32px;
   text-align: center;
-  font-family: Georgia Pro Cond, serif;
   margin-top: 45px;
 }
 .page .header-last {
@@ -76,7 +74,6 @@ body {
   width: 8em;
   font-size: 45px;
   text-align: center;
-  font-family: Marianna, serif;
   margin-top: 0px;
   color: #d0951c;
 }
@@ -136,7 +133,6 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  font-family: Georgia Pro Cond, sans-serif;
   font-size: 36px;
   width: 400px;
   text-align: center;
@@ -146,7 +142,6 @@ body {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  font-family: Yu Gothic UI, sans-serif;
   font-size: 22px;
   width: 400px;
   text-align: center;
@@ -158,7 +153,6 @@ body {
   width: 8em;
   font-size: 65px;
   text-align: center;
-  font-family: Marianna, serif;
   margin-top: 40px;
   color: #d0951c;
 }
@@ -175,22 +169,21 @@ body {
 .page .center .info-table td {
   width: 200px;
   text-align: left;
-  font-size: 20px;
+  font-size: 17px;
   vertical-align: baseline;
 }
 .page .center .info-table td.left {
   text-align: left;
-  font-family: Yu Gothic UI, sans-serif;
   font-weight: bold;
 }
 .page .center .info-table td.right {
   width: 50%;
-  font-family: Yu Gothic UI, fantasy;
   overflow-wrap: normal;
   word-wrap: break-word;
   word-break: normal;
   line-break: auto;
   hyphens: manual;
+  padding-left: 30px;
 }
 .page .img-rectangle {
   border-radius: 15px;
@@ -215,13 +208,11 @@ body {
 }
 .page .answers .question {
   margin-top: 20px;
-  font-family: Yu Gothic UI, sans-serif;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: bold;
 }
 .page .answers .answer {
-  font-family: Yu Gothic UI, sans-serif;
-  font-size: 16px;
+  font-size: 13px;
   margin-top: 5px;
 }
 
@@ -1053,4 +1044,4 @@ body {
   margin-left: 100px;
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=main2.css.map */
