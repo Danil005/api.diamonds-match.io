@@ -37,6 +37,8 @@ Route::prefix('v1')->middleware(['api'])->namespace('App\Http\Controllers\Api\v1
         Route::put('questionnaire.create', 'QuestionnaireController@create');
         Route::put('questionnaire.createFromSite', 'QuestionnaireController@createFromSite');
         Route::get('questionnaire.sign', 'QuestionnaireController@sign');
+        Route::post('questionnaire.uploadClientPhoto', 'QuestionnaireController@uploadClientPhoto');
+
 
         Route::middleware('auth:api')->group(function() {
             Route::get('questionnaire.view', 'QuestionnaireController@view');
@@ -67,7 +69,6 @@ Route::prefix('v1')->middleware(['api'])->namespace('App\Http\Controllers\Api\v1
 
 
             Route::post('questionnaire.createPresentation', 'QuestionnaireController@createPresentation');
-            Route::post('questionnaire.uploadClientPhoto', 'QuestionnaireController@uploadClientPhoto');
         });
     });
 
