@@ -1064,7 +1064,7 @@ class PptxCreator
             ->setOffsetY(727.1811023622);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun($item);
+        $textRun = $shape->createTextRun($questionnaire['features_repel']);
         $textRun->getFont()->setName('Arial')
             ->setSize(13)
             ->setColor(new Color('FF464C53'));
@@ -1076,7 +1076,7 @@ class PptxCreator
             ->setOffsetY(874.9606299213);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun($item);
+        $textRun = $shape->createTextRun($questionnaire['age_difference']);
         $textRun->getFont()->setName('Arial')
             ->setSize(13)
             ->setColor(new Color('FF464C53'));
@@ -1088,7 +1088,7 @@ class PptxCreator
             ->setOffsetY(972.094488189);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun($item);
+        $textRun = $shape->createTextRun($questionnaire['talents']);
         $textRun->getFont()->setName('Arial')
             ->setSize(13)
             ->setColor(new Color('FF464C53'));
