@@ -587,7 +587,20 @@ class QuestionnaireController extends QuestionnaireUtils
             $res = '';
             if ($place != null)
                 foreach ($place as $item) $res .= ', ' . $item['title_ru'];
-            $result['my_information']['countries_was'] = trim($res, ',');
+            $result['my_information']['countries_was'] = trim($res, ', ');
+        }
+
+        if (isset($result['my_information']['countries_dream'])) {
+            $country_was = explode(',', $result['my_information']['countries_dream']);
+            $place = new Countries();
+            foreach ($country_was as $item) {
+                $place = $place->orWhere('title_en', 'ILIKE', $item);
+            }
+            $place = $place->get(['title_ru'])->toArray();
+            $res = '';
+            if ($place != null)
+                foreach ($place as $item) $res .= ', ' . $item['title_ru'];
+            $result['my_information']['countries_dream'] = trim($res, ', ');
         }
         $result['partner_information']['age'] = $this->years(explode(',', $result['partner_information']['age']));
 
