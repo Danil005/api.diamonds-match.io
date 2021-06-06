@@ -121,17 +121,14 @@ Route::get('/generate', function () {
     $stream9 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s4.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s4.jpg');
     stream_set_blocking($stream9, true);
     stream_get_contents($stream9);
-    $stream10 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s5.jpg');
-    stream_set_blocking($stream10, true);
-    stream_get_contents($stream10);
+
 
 
 //    sleep(3);
 //    $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
 //    $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
-    $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s5.jpg');
 
-//    $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/result.pdf');
+    $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/result.pdf');
     stream_set_blocking($stream11, true);
     $stream_out = ssh2_fetch_stream( $stream11, SSH2_STREAM_STDIO );
     echo stream_get_contents($stream_out);
