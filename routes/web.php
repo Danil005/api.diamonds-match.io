@@ -129,7 +129,8 @@ Route::get('/generate', function () {
 //    sleep(3);
 //    $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
 //    $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
-    $stream11= ssh2_exec($connection, "ls -l");
+    $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s5.jpg');
+
 //    $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/result.pdf');
     stream_set_blocking($stream11, true);
     $stream_out = ssh2_fetch_stream( $stream11, SSH2_STREAM_STDIO );
