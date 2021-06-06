@@ -577,6 +577,17 @@ class QuestionnaireController extends QuestionnaireUtils
             if( $place != null )
                 $result['my_information']['place_birth'] = $place['title_ru'];
         }
+
+        if( isset($result['my_information']['country_was']) ) {
+            $country_was = explode(',',$result['my_information']['country_was']);
+            $place = new Countries();
+            foreach ($country_was as $item) {
+                $place->orWhere('title_en', 'ILIKE', $place);
+            }
+            $place = $place->get(['title_ru']);
+            if( $place != null )
+                $result['my_information']['country_was'] = implode(', ', $place->toArray());
+        }
         $result['partner_information']['age'] = $this->years(explode(',', $result['partner_information']['age']));
 
         $temp = [];
