@@ -585,6 +585,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 $place = $place->orWhere('title_en', 'ILIKE', $item);
             }
             $place = $place->get(['title_ru']);
+            dd($place);
             if( $place != null )
                 $result['my_information']['countries_was'] = implode(', ', $place->toArray());
         }
