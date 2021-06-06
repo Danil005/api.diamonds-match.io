@@ -612,9 +612,9 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         if (isset($result['my_information']['place_birth'])) {
-            $place = explode(',',$result['my_information']['place_birth']);
-            $place2 = explode(',',$result['my_information']['place_birth']);
-            if( isset($place[1]) ) {
+            $place = explode(',', $result['my_information']['place_birth']);
+            $place2 = explode(',', $result['my_information']['place_birth']);
+            if (isset($place[1])) {
                 $place = $place[1];
             } else {
                 $place = $place[0];
@@ -1353,7 +1353,6 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['questionnaires'] = $questionnaires->toArray();
 
 
-
         $this->response()->success()->setMessage('Данные получены')->setData($result)->send();
     }
 
@@ -1538,37 +1537,16 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('questionnaire_id'))
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
-        $connection = ssh2_connect('45.141.79.57', 22);
-        ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
-
-        for($i = 1; $i <= 5; $i++ ) {
-            $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/'.$i.' /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg');
-            stream_set_blocking($stream, true);
-            stream_get_contents($stream);
-        }
-        for($i = 1; $i <= 5; $i++ ) {
-            $stream = ssh2_exec(
-                $connection,
-                'convert /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg'
-            );
-            stream_set_blocking($stream, true);
-            stream_get_contents($stream);
-        }
-
-        $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg'
-            .' /var/www/html/storage/app/public/pptx/generate/s3.jpg'
-            .' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
-
-        $stream = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/storage/app/public/pptx/generate/presentation.pdf');
-        stream_set_blocking($stream, true);
-        $stream_out = ssh2_fetch_stream( $stream, SSH2_STREAM_STDIO );
-
-        $path = Storage::disk('public')->path('/pptx/generate/presentation.pdf');
-
+        (new PptxCreator())->create($request);
 
         $this->response()->success()->setMessage('Презентация была создана')->setData([
-            'download_link' => env('APP_URL') . '/storage/pptx/generate/presentation.pdf'
+            'download_link' => env('APP_URL') . '/storage/pptx/generate/'.$request->questionnaire_id.'/presentation.pdf'
         ])->send();
+    }
+
+    public function getSlide(Request $request, $slide)
+    {
+        (new PptxCreator())->getSlide($request, $slide);
     }
 
     public

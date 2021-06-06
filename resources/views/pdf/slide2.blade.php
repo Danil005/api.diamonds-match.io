@@ -13,7 +13,7 @@
             <img class="personPhoto" alt="" src="{{ asset('assets/img/photo.jpg') }}">
         </div>
 
-        <div class="name">Берденникова Мария Алексеевна</div>
+        <div class="name">{{ $q['name'] }}</div>
         <div class="age">18 лет</div>
         <div class="circle" style="height: 20px;width: 20px;"></div>
         <div class="hello">Hello!</div>

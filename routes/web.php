@@ -78,9 +78,7 @@ Route::get('pdf1', function() {
    return view('presa');
 });
 
-Route::get('/getSlide/{slide}', function($slide) {
-    return view('pdf.slide'.$slide);
-});
+Route::get('/getSlide/{slide}/{questionnaireId}', 'App\Http\Controllers\Api\v1\QuestionnaireController@removeClientPhoto');
 
 Route::get('/generate', function () {
     $connection = ssh2_connect('45.141.79.57', 22);
