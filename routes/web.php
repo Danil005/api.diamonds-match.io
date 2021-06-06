@@ -97,8 +97,9 @@ Route::get('/generate', function () {
         stream_get_contents($stream);
     }
 
-    $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
-    $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
+    $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg'
+             .' /var/www/html/storage/app/public/pptx/generate/s3.jpg'
+             .' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
 
     $stream = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/storage/app/public/pptx/generate/result.pdf');
     stream_set_blocking($stream, true);
