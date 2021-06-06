@@ -14,6 +14,8 @@ use App\Http\Requests\Questionnaire\OpenFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\UploadPhotoQuestionnaire;
 use App\Http\Requests\Questionnaire\View;
 use App\Models\Applications;
+use App\Models\Cities;
+use App\Models\Countries;
 use App\Models\Langs;
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireAppointedDate;
@@ -562,6 +564,11 @@ class QuestionnaireController extends QuestionnaireUtils
         $result['my_information']['zodiac_signs'] = $zodiac[$result['my_information']['zodiac_signs']];
 
         $result['my_information']['age'] = $this->years($result['my_information']['age']);
+        $city = explode(',',$result['my_information']['city']);
+        $city = Countries::where('title_en', 'ILIKE', $city[0])->first();
+        if( $city != null ) {
+            $result['my_information']['city'] = $city['title_ru'];
+        }
         $result['partner_information']['age'] = $this->years(explode(',', $result['partner_information']['age']));
 
         $temp = [];
