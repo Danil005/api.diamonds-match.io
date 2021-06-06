@@ -39,7 +39,7 @@ class PptxCreator
         for($i = 1; $i <= 5; $i++) $slides .= '/var/www/html/storage/app/public/pptx/generate/'.$id.'/s'.$i . ' ';
         $slides = trim($slides);
 
-        $stream = ssh2_exec($connection, 'convert ' . $slides . ' /var/www/html/storage/app/public/pptx/generate/presentation.pdf');
+        $stream = ssh2_exec($connection, 'convert ' . $slides . ' /var/www/html/storage/app/public/pptx/generate/'.$id.'/presentation.pdf');
         stream_set_blocking($stream, true);
         $stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
 
