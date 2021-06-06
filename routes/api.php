@@ -67,6 +67,7 @@ Route::prefix('v1')->middleware(['api'])->namespace('App\Http\Controllers\Api\v1
 
 
             Route::post('questionnaire.createPresentation', 'QuestionnaireController@createPresentation');
+            Route::post('questionnaire.uploadClientPhoto', 'QuestionnaireController@uploadClientPhoto');
         });
     });
 

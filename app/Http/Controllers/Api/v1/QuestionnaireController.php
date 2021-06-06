@@ -374,8 +374,11 @@ class QuestionnaireController extends QuestionnaireUtils
             }
         }
 
+        if( $request->has('temp_id')  ) {
 
-# Заносим все в базу данных
+        }
+
+        # Заносим все в базу данных
         $partnerAppearance = QuestionnairePartnerAppearance::create($partnerAppearance);
         $personalQualitiesPartner = QuestionnairePersonalQualitiesPartner::create($personalQualitiesPartner);
         $partnerInformation = QuestionnairePartnerInformation::create($partnerInformation);
@@ -426,6 +429,25 @@ class QuestionnaireController extends QuestionnaireUtils
         Questionnaire::where('id', $questionnaire->id)->update(['sign' => $sign]);
         Applications::where('id', $application->id)->update(['link' => $link, 'questionnaire_id' => $questionnaire->id]);
 
+        if( $request->has('temp_photo_id') ) {
+            $files = Storage::files('public/questionnaire/temp/photo_' . $request->temp_photo_id);
+            foreach ($files as $item) {
+                Storage::move($item, str_replace(
+                    'public/questionnaire/temp/photo_' . $request->temp_photo_id,
+                    'public/questionnaire/photos/sign_' . $sign,
+                    $item));
+
+                QuestionnaireUploadPhoto::create([
+                    'questionnaire_id' => $questionnaire->id,
+                    'path' => str_replace(
+                        'public/questionnaire/temp/photo_' . $request->temp_photo_id,
+                        'storage/questionnaire/photos/sign_' . $sign,
+                        $item
+                    )
+                ]);
+            }
+            Storage::deleteDirectory('public/questionnaire/temp/photo_' . $request->temp_photo_id);
+        }
 
         $this->createNotify('application', 'Появилась новая заявка.', [
             'application_id' => $application->id,
@@ -447,6 +469,45 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->setData([
             'link_questionnaire' => $link
         ])->send();
+    }
+
+    public function uploadClientPhoto(Request $request)
+    {
+        if( !$request->has('temp_id') )
+            $this->response()->error()->setMessage('Временное ID должно существовать')->send();
+
+        if( !$request->has('photo') )
+            $this->response()->error()->setMessage('Вы должны указать массив фотографий или один элемент')->send();
+
+        $temp_id = $request->temp_id;
+        $photo = $request->photo;
+
+
+
+        if( !is_array($photo) ) {
+            $path = 'public/questionnaire/temp/photo_' . $temp_id;
+
+            $upload = $photo->storePubliclyAs($path, md5(Str::random(16)) . '.' . $photo->getClientOriginalExtension());
+
+            $path = str_replace('public/', 'storage/', $upload);
+
+            $this->response()->success()->setMessage('Файл загружен')->setData([
+                'path' => env('APP_URL') . '/' . $path,
+            ])->send();
+        } else {
+            $paths = [];
+            foreach ($photo as $item) {
+                $path = 'public/questionnaire/temp/photo_' . $temp_id;
+
+                $upload = $item->storePubliclyAs($path, md5(Str::random(16)) . '.' . $item->getClientOriginalExtension());
+
+                $paths[] = str_replace('public/', 'storage/', $upload);
+            }
+
+            $this->response()->success()->setMessage('Файл загружен')->setData([
+                'path' => $paths,
+            ])->send();
+        }
     }
 
     /**

@@ -27,6 +27,7 @@ class Create extends FormRequest
             'sign' => 'string|nullable',
             'email' => 'email|nullable',
             'phone' => 'string|nullable',
+            'temp_photo_id' => 'string|nullable',
             config('app.questionnaire.fields.partner_appearance') => 'required|array',
             config('app.questionnaire.fields.personal_qualities_partner') => 'required|array',
             config('app.questionnaire.fields.partner_information') => 'required|array',
