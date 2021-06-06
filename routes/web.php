@@ -76,6 +76,13 @@ Route::get('fire', function () {
     ]));
 });
 
+Route::get('/ssh', function() {
+    $connection = ssh2_connect('45.141.79.57', 22);
+    ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
+
+    $stream = ssh2_exec($connection, 'mkdir ~/test');
+});
+
 Route::get('match', function () {
     $match = new \App\Services\MatchProcessorV2();
 

@@ -28,7 +28,8 @@
         "propaganistas/laravel-phone": "^4.3",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-fpdf": "^2.3",
-        "soarecostin/file-vault": "^1.2"
+        "soarecostin/file-vault": "^1.2",
+      "ext-ssh2": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
