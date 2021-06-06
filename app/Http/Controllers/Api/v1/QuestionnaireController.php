@@ -547,7 +547,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('path'))
             $this->response()->error()->setMessage('Вы должны указать path фотографии')->send();
 
-        Storage::delete($request->path);
+        Storage::disk('public')->delete(str_replace('storage/', 'public/', $request->path));
 
         $this->response()->success()->setMessage('Фотография была удалена')->send();
     }
