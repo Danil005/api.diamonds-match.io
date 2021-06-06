@@ -571,7 +571,12 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         if (isset($result['my_information']['place_birth'])) {
-            $place = $result['my_information']['place_birth'];
+            $place = explode(',',$result['my_information']['place_birth']);
+            if( isset($place[1]) ) {
+                $place = $place[1];
+            } else {
+                $place = $place[0];
+            }
             $place = Countries::where('title_en', 'ILIKE', $place)->first();
             if ($place != null)
                 $result['my_information']['place_birth'] = $place['title_ru'];
