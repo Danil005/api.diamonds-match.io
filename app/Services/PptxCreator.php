@@ -82,7 +82,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $textRun = $shape->createTextRun('ПРЕДСТАВЬТЕ СЕБЕ БЕЗУПРЕЧНЫЕ ОТНОШЕНИЯ');
-        $textRun->getFont()->setName('Georgia Pro Cond')
+        $textRun->getFont()->setName('Arial')
             ->setSize(24)
             ->setColor(new Color('FF464C53'));
 
@@ -95,7 +95,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $textRun = $shape->createTextRun('Позвольте нам создать их!');
-        $textRun->getFont()->setName('Marianna')
+        $textRun->getFont()->setName('Arial')
             ->setSize(40)
             ->setColor(new Color('FFD2B690'));
 
@@ -161,8 +161,8 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $textRun = $shape->createTextRun('Hello!');
-        $textRun->getFont()->setName('Marianna')
-            ->setSize(44)
+        $textRun->getFont()->setName('Arial')
+            ->setSize(42)
             ->setColor(new Color('FFD2B690'));
 
 
@@ -174,8 +174,8 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $textRun = $shape->createTextRun($questionnaire['name']);
-        $textRun->getFont()->setName('Georgia Pro Cond')
-            ->setSize(36)
+        $textRun->getFont()->setName('Arial')
+            ->setSize(26)
             ->setColor(new Color('FF464C53'));
 
         $shape = $currentSlide->createRichTextShape()
@@ -186,7 +186,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         $textRun = $shape->createTextRun($this->years($questionnaire['age']));
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(18)
             ->setColor(new Color('FF464C53'));
 
@@ -223,7 +223,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Страна:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -236,7 +236,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Этичность:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -249,7 +249,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Место проживания:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -263,7 +263,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Город рождения:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -277,7 +277,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Рассматриваете ли приезд:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -308,7 +308,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun($myInformation['country']);
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
 
@@ -320,7 +320,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun($myInformation['ethnicity']);
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
         $shape = $currentSlide->createRichTextShape()
@@ -331,7 +331,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun($myInformation['life_in']);
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
 
@@ -343,7 +343,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun($myInformation['birth_city']);
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
 
@@ -355,7 +355,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun($myInformation['moving']);
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
 
@@ -510,7 +510,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('ОБЩИЕ ДАННЫЕ');
-        $textRun->getFont()->setName('Yu Gothic')
+        $textRun->getFont()->setName('Arial')
             ->setBold(true)
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
@@ -526,7 +526,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Знак зодиака: ');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -539,7 +539,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Рост: ');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -552,7 +552,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Вес: ');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -565,7 +565,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Телосложение: ');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -578,7 +578,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Цвет волос:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -591,7 +591,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Цвет глаз:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -604,7 +604,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Статус:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -617,7 +617,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Дети:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -631,7 +631,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Хотите ли детей:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -644,7 +644,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Курение:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -657,7 +657,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Алкоголь:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -670,7 +670,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Вероисповедание:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -683,7 +683,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Владение языки:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -707,7 +707,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('ОБРАЗОВАНИЕ И ЗДОРОВЬЕ');
-        $textRun->getFont()->setName('Yu Gothic')
+        $textRun->getFont()->setName('Arial')
             ->setBold(true)
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
@@ -721,7 +721,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Образование:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -734,7 +734,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Работа:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -747,7 +747,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Зарплата:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -760,7 +760,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Проблемы со здоровьем:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -773,7 +773,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('Аллергии:');
-        $textRun->getFont()->setName('Yu Gothic UI Light')
+        $textRun->getFont()->setName('Arial')
             ->setSize(14)
             ->setBold(true)
             ->setColor(new Color('FF464C53'));
@@ -815,7 +815,7 @@ class PptxCreator
             $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
             $textRun = $shape->createTextRun($item);
-            $textRun->getFont()->setName('Yu Gothic UI Light')
+            $textRun->getFont()->setName('Arial')
                 ->setSize(14)
                 ->setColor(new Color('FF464C53'));
 
@@ -903,7 +903,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('ИНТЕРЕСЫ');
-        $textRun->getFont()->setName('Yu Gothic')
+        $textRun->getFont()->setName('Arial')
             ->setBold(true)
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
@@ -923,7 +923,7 @@ class PptxCreator
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun('ОТВЕТЫ НА ВОПРОСЫ');
-        $textRun->getFont()->setName('Yu Gothic')
+        $textRun->getFont()->setName('Arial')
             ->setBold(true)
             ->setSize(14)
             ->setColor(new Color('FF464C53'));
@@ -972,7 +972,7 @@ class PptxCreator
             $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
             $textRun = $shape->createTextRun($item);
-            $textRun->getFont()->setName('Yu Gothic UI Light')
+            $textRun->getFont()->setName('Arial')
                 ->setBold(true)
                 ->setSize(14)
                 ->setColor(new Color('FF464C53'));
@@ -1023,7 +1023,7 @@ class PptxCreator
             $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
             $textRun = $shape->createTextRun($item);
-            $textRun->getFont()->setName('Yu Gothic UI Light')
+            $textRun->getFont()->setName('Arial')
                 ->setSize(14)
                 ->setColor(new Color('FF464C53'));
 
@@ -1033,7 +1033,6 @@ class PptxCreator
 
         $oWriterPPTX = IOFactory::createWriter($objPHPPowerPoint, 'PowerPoint2007');
         Storage::disk('public')->createDir('/questionnaire/pptx/' . $questionnaire['id']);
-
         $path = Storage::disk('public')->path('/questionnaire/pptx/' . $questionnaire['id'] . '/presentation.pptx');
         $oWriterPPTX->save($path);
 
