@@ -202,7 +202,7 @@ class PptxCreator
 
         $result['moving'] = empty($moving) ? 'Все равно' : implode(', ', $moving);
 
-        $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaireId)->get(['id', 'path']);
+        $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaireId)->get(['id', 'path'])?->toArray();
         $result['photos'] = $photos;
         dd($photos);
 
