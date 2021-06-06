@@ -97,15 +97,12 @@ Route::get('/generate', function () {
         stream_get_contents($stream);
     }
 
-
-    $connection2 = ssh2_connect('45.141.79.57', 22);
-    ssh2_auth_password($connection2, env('SSH_U'), env('SSH_P'));
     $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
     $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
 
-    $stream11 = ssh2_exec($connection2, 'convert '.$slides.' /var/www/html/storage/app/public/pptx/generate/result.pdf');
-    stream_set_blocking($stream11, true);
-    $stream_out = ssh2_fetch_stream( $stream11, SSH2_STREAM_STDIO );
+    $stream = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/storage/app/public/pptx/generate/result.pdf');
+    stream_set_blocking($stream, true);
+    $stream_out = ssh2_fetch_stream( $stream, SSH2_STREAM_STDIO );
     echo 'Генерация завершена';
 });
 
