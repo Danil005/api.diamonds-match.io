@@ -6,10 +6,16 @@ body {
     background-color: #FAFAFA;
     font: 12pt "Tahoma";
 }
+
 * {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
 }
+
+.abs {
+    position: absolute;
+}
+
 .page {
     position: relative;
     width: 210mm;
@@ -24,14 +30,17 @@ body {
     &.first-page {
         background: url("../img/BackgroundFirst.jpg") no-repeat center center;
         background-size: cover;
+        z-index: 1;
     }
+
     & .transparent-background {
         position: absolute;
         width: 210mm;
         min-height: 297mm;
-        top:0;
-        left:0;
+        top: 0;
+        left: 0;
         opacity: 1.0;
+        z-index: -1;
     }
 
     & .logo-full {
@@ -42,6 +51,16 @@ body {
         width: 205px;
         height: 100px;
         z-index: 10;
+    }
+
+    & .logo-right {
+        position: relative;
+        width: 160px;
+        height: 75px;
+        z-index: 10;
+        top: -20px;
+        right: -20px;
+        float: right;
     }
 
     & .header-first {
@@ -70,6 +89,94 @@ body {
     &.background {
         background: url("../img/BackgroundPage.jpg") no-repeat center center;
         background-size: cover;
+        z-index: 1;
+    }
+
+    & .circle {
+        position: relative;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background: #D7B88C;
+        border-radius: 50%;
+        top: 30px;
+        z-index: 2;
+    }
+
+    & .photo {
+        position: relative;
+        width: 350px;
+        height: 350px;
+        overflow: hidden;
+        border-radius: 50%;
+        margin: -250px auto 0;
+        z-index: 10;
+    }
+
+    & .personPhoto {
+        width: auto;
+        height: 100%;
+        margin: 0 auto;
+        z-index: 3;
+    }
+
+    & .name {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        font-family: Georgia Pro Cond, sans-serif;
+        font-size: 36px;
+        width: 400px;
+        text-align: center;
+        font-weight: 500;
+    }
+
+    & .age {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        font-family: Yu Gothic UI, sans-serif;
+        font-size: 22px;
+        width: 400px;
+        text-align: center;
+    }
+
+    & .hello {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 8em;
+        font-size: 65px;
+        text-align: center;
+        font-family: Marianna, serif;
+        margin-top: 40px;
+        color: #d0951c;
+    }
+
+    & .center {
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-top: auto;
+        width: 450px;
+
+        & .info-table {
+            position: relative;
+
+            & td {
+                width: 200px;
+                text-align: left;
+
+                &.left {
+
+                }
+
+                &.right {
+
+                }
+            }
+        }
     }
 }
 
@@ -84,6 +191,7 @@ body {
     size: A4;
     margin: 0;
 }
+
 @media print {
     html, body {
         width: 210mm;

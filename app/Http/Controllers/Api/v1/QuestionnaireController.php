@@ -103,30 +103,37 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'languages') {
-                $langs = new Langs();
-                foreach ($information as $item) {
-                    $langs = $langs->orWhere('code', $item);
-                }
-                $langs = $langs->get()->toArray();
+                if (isset($information)) {
+                    $langs = new Langs();
+                    foreach ($information as $item) {
+                        $langs = $langs->orWhere('code', $item);
+                    }
+                    $langs = $langs->get()->toArray();
 
-                $temp = '';
-                foreach ($langs as $item) {
-                    $temp .= $item['nameRU'] . ',';
+                    $temp = '';
+                    foreach ($langs as $item) {
+                        $temp .= $item['nameRU'] . ',';
+                    }
+                    $partnerInformation[$key] = trim($temp, ',');
+                } else {
+                    $partnerInformation[$key] = null;
                 }
-                $partnerInformation[$key] = trim($temp, ',');
             }
 
             $liveCountry = '';
             if ($key == 'live_place') {
-                foreach ($information as $country) {
-                    $liveCountry .= $country . ',';
+                if (isset($information)) {
+                    foreach ($information as $country) {
+                        $liveCountry .= $country . ',';
+                    }
+                    $partnerInformation['city'] = trim($liveCountry, ',');
+                } else {
+                    $partnerInformation['city'] = '';
                 }
-                $partnerInformation['city'] = trim($liveCountry, ',');
             }
 
             if ($key == 'place_birth') {
                 $place_birth = '';
-
                 if (isset($partnerInformation[$key][0])) {
                     foreach ($partnerInformation[$key] as $item) {
                         $place_birth .= $item . ',';
@@ -170,14 +177,18 @@ class QuestionnaireController extends QuestionnaireUtils
             }
 
             if ($key == 'live_city') {
-                $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+                if (is_array($myInformation['live_country'])) {
+                    $myInformation['city'] = $myInformation['live_country']['label'] . ', ' . $information;
+                } else {
+                    $myInformation['city'] = $myInformation['live_country'] . ', ' . $information;
+                }
             }
 
             if ($key == 'place_birth') {
                 if (is_string($information)) {
                     $myInformation[$key] = $information;
                 } else {
-                    $partnerInformation[$key] = $information['label'] ?? $information;
+                    $myInformation[$key] = implode(',', $information);
                 }
             }
 
@@ -218,6 +229,26 @@ class QuestionnaireController extends QuestionnaireUtils
         $q = Questionnaire::where('sign', $request->sign)->first();
 
         $resp = Applications::where('questionnaire_id', $q->id)->first(['responsibility']);
+
+        if ($request->has('temp_photo_id')) {
+            $files = Storage::files('public/questionnaire/temp/photo_' . $request->temp_photo_id);
+            foreach ($files as $item) {
+                Storage::move($item, str_replace(
+                    'public/questionnaire/temp/photo_' . $request->temp_photo_id,
+                    'public/questionnaire/photos/sign_' . $request->sign,
+                    $item));
+
+                QuestionnaireUploadPhoto::create([
+                    'questionnaire_id' => $q->id,
+                    'path' => str_replace(
+                        'public/questionnaire/temp/photo_' . $request->temp_photo_id,
+                        'storage/questionnaire/photos/sign_' . $request->sign,
+                        $item
+                    )
+                ]);
+            }
+            Storage::deleteDirectory('public/questionnaire/temp/photo_' . $request->temp_photo_id);
+        }
 
         $this->createNotify('questionnaire', 'Ваш клиент ' . $myInformation->name . ' заполнил анкету.', [
             'questionnaire_id' => $q->id,

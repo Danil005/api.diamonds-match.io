@@ -12,6 +12,10 @@ body {
   -moz-box-sizing: border-box;
 }
 
+.abs {
+  position: absolute;
+}
+
 .page {
   position: relative;
   width: 210mm;
@@ -26,6 +30,7 @@ body {
 .page.first-page {
   background: url("../img/BackgroundFirst.jpg") no-repeat center center;
   background-size: cover;
+  z-index: 1;
 }
 .page .transparent-background {
   position: absolute;
@@ -34,6 +39,7 @@ body {
   top: 0;
   left: 0;
   opacity: 1;
+  z-index: -1;
 }
 .page .logo-full {
   position: relative;
@@ -43,6 +49,15 @@ body {
   width: 205px;
   height: 100px;
   z-index: 10;
+}
+.page .logo-right {
+  position: relative;
+  width: 160px;
+  height: 75px;
+  z-index: 10;
+  top: -20px;
+  right: -20px;
+  float: right;
 }
 .page .header-first {
   position: relative;
@@ -68,8 +83,78 @@ body {
 .page.background {
   background: url("../img/BackgroundPage.jpg") no-repeat center center;
   background-size: cover;
+  z-index: 1;
 }
-
+.page .circle {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background: #D7B88C;
+  border-radius: 50%;
+  top: 30px;
+  z-index: 2;
+}
+.page .photo {
+  position: relative;
+  width: 350px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: -250px auto 0;
+  z-index: 10;
+}
+.page .personPhoto {
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+  z-index: 3;
+}
+.page .name {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  font-family: Georgia Pro Cond, sans-serif;
+  font-size: 36px;
+  width: 400px;
+  text-align: center;
+  font-weight: 500;
+}
+.page .age {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: Yu Gothic UI, sans-serif;
+  font-size: 22px;
+  width: 400px;
+  text-align: center;
+}
+.page .hello {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em;
+  font-size: 65px;
+  text-align: center;
+  font-family: Marianna, serif;
+  margin-top: 40px;
+  color: #d0951c;
+}
+.page .center {
+  display: block;
+  position: relative;
+  margin-left: auto;
+  margin-top: auto;
+  width: 450px;
+}
+.page .center .info-table {
+  position: relative;
+}
+.page .center .info-table td {
+  width: 200px;
+  text-align: left;
+}
 .subpage {
   padding: 1cm;
   border: 5px red solid;
