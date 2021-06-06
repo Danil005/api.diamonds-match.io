@@ -128,8 +128,11 @@ class QuestionnaireController extends QuestionnaireUtils
                 $place_birth = '';
 
                 if (isset($partnerInformation[$key][0])) {
+                    foreach ($partnerInformation[$key] as $item) {
+                        $place_birth .= $item . ',';
+                    }
 
-                    $partnerInformation[$key] = $information['label'] ?? $information;
+                    $partnerInformation[$key] = trim($place_birth, ',');
                 } else {
                     $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
                 }
@@ -174,7 +177,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 if (is_string($information)) {
                     $myInformation[$key] = $information;
                 } else {
-                    $myInformation[$key] = implode(',', $information);
+                    $partnerInformation[$key] = $information['label'] ?? $information;
                 }
             }
 
