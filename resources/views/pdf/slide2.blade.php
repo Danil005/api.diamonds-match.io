@@ -22,7 +22,7 @@
             <table class="info-table">
                 <tr>
                     <td class="left" style="margin-top: 50px">Страна:</td>
-                    <td class="right">{{ $q['city'] ?? '----' }}</td>
+                    <td class="right">{{ explode(',', $q['city'])[0] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left">Этичность:</td>
@@ -30,7 +30,7 @@
                 </tr>
                 <tr>
                     <td class="left">Место проживание:</td>
-                    <td class="right">{{ $q['city'] ?? '----' }}</td>
+                    <td class="right">{{ explode(',', $q['city'])[1] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left">Город рождения:</td>
