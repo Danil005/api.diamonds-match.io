@@ -1296,7 +1296,7 @@ class QuestionnaireController extends QuestionnaireUtils
                 $c = $city;
                 $city = Countries::where('title_en', 'ILIKE', $city[0])->first();
                 if ($city != null) {
-                    $questionnaires[$key]['city'] = $city['title_ru'] . (isset($c[1]) ? ', ' . $c[1] : '');
+                    $questionnaires[$key]['city'] = $city['title_ru'] . (isset($c[1]) ? ',' . $c[1] : '');
                 }
             }
         }
