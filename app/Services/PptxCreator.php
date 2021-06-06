@@ -1030,6 +1030,11 @@ class PptxCreator
         $path = Storage::disk('public')->path('/questionnaire/pptx/' . $questionnaire['id'] . '/presentation.pptx');
         $oWriterPPTX->save($path);
 
-        return $path;
+        $connection = ssh2_connect('45.141.79.57', 22);
+        ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
+
+        $stream = ssh2_exec($connection, 'unoconv -f pdf /var/www/html/storage/app/public/questionnaire/pptx/'.$questionnaire['id'].'/presentation.pptx');
+        sleep(2);
+        return str_replace('pptx', 'pdf', $path);
     }
 }
