@@ -169,7 +169,7 @@ body {
 .page .center .info-table td {
   width: 200px;
   text-align: left;
-  font-size: 20px;
+  font-size: 15px;
   vertical-align: baseline;
 }
 .page .center .info-table td.left {
@@ -183,6 +183,7 @@ body {
   word-break: normal;
   line-break: auto;
   hyphens: manual;
+  padding-left: 30px;
 }
 .page .img-rectangle {
   border-radius: 15px;
@@ -207,11 +208,11 @@ body {
 }
 .page .answers .question {
   margin-top: 20px;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
 }
 .page .answers .answer {
-  font-size: 16px;
+  font-size: 11px;
   margin-top: 5px;
 }
 

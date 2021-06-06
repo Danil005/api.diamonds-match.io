@@ -83,7 +83,6 @@ Route::get('/getSlide/{slide}', function($slide) {
 });
 
 Route::get('/generate', function () {
-    error_reporting(E_ALL ^ E_NOTICE); // Ignores notices and reports all other kinds
     $connection = ssh2_connect('45.141.79.57', 22);
     ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
 
@@ -125,8 +124,6 @@ Route::get('/generate', function () {
     stream_set_blocking($stream10, true);
     stream_get_contents($stream10);
 
-
-//    sleep(3);
     $connection2 = ssh2_connect('45.141.79.57', 22);
     ssh2_auth_password($connection2, env('SSH_U'), env('SSH_P'));
     $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
@@ -135,8 +132,6 @@ Route::get('/generate', function () {
     $stream11 = ssh2_exec($connection2, 'convert '.$slides.' /var/www/html/storage/app/public/pptx/generate/result.pdf');
     stream_set_blocking($stream11, true);
     $stream_out = ssh2_fetch_stream( $stream11, SSH2_STREAM_STDIO );
-    echo stream_get_contents($stream_out);
-//    dd((bool)$stream1, (bool)$stream2, (bool)$stream3, (bool)$stream4, (bool)$stream5, (bool)$stream6, (bool)$stream7, (bool)$stream8, (bool)$stream9, (bool)$stream10, (bool)$stream11);
     echo 'Генерация завершена';
 });
 

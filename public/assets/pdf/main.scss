@@ -188,7 +188,7 @@ $value: 0;
             & td {
                 width: 200px;
                 text-align: left;
-                font-size: 20px;
+                font-size: 15px;
                 vertical-align: baseline;
 
                 &.left {
@@ -203,6 +203,7 @@ $value: 0;
                     word-break: normal;
                     line-break: auto;
                     hyphens: manual;
+                    padding-left: 30px;
                 }
             }
         }
@@ -233,11 +234,11 @@ $value: 0;
 
         & .question {
             margin-top: 20px;
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
         }
         & .answer {
-            font-size: 16px;
+            font-size: 11px;
             margin-top: 5px;
         }
     }
