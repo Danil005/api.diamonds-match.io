@@ -88,7 +88,8 @@ Route::get('/generate', function () {
 
     $stream1 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/1 /var/www/html/storage/app/public/pptx/generate/s1.jpg');
     stream_set_blocking($stream1, true);
-    dd($stream1);
+    $output = stream_get_contents($stream1);
+    dd($output);
 //    $stream2 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/2 /var/www/html/public/pptx/generate/s2.jpg');
 //    $stream3 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/3 /var/www/html/public/pptx/generate/s3.jpg');
 //    $stream4 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/4 /var/www/html/public/pptx/generate/s4.jpg');
