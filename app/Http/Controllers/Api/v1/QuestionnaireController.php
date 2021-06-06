@@ -1295,6 +1295,13 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $result['questionnaires'] = $questionnaires->toArray();
 
+        if (isset($result['questionnaires']['city'])) {
+            $place = $result['questionnaires']['city'];
+            $place = Countries::where('title_en', 'ILIKE', $place)->first();
+            if ($place != null)
+                $result['questionnaires']['city'] = $place['title_ru'];
+        }
+
         $this->response()->success()->setMessage('Данные получены')->setData($result)->send();
     }
 
