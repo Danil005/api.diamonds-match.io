@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
+use Mpdf\Mpdf;
 use PhpOffice\PhpPresentation\DocumentLayout;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpPresentation\PhpPresentation;
@@ -17,7 +18,6 @@ use PhpOffice\PhpPresentation\Slide\AbstractBackground;
 use PhpOffice\PhpPresentation\Style\Alignment;
 use PhpOffice\PhpPresentation\Style\Color;
 use PhpOffice\PhpPresentation\Style\Font;
-use setasign\Fpdi\Fpdi;
 
 /*
 |--------------------------------------------------------------------------
@@ -78,6 +78,36 @@ Route::get('fire', function () {
 
 Route::get('pdf1', function() {
    return view('presa');
+});
+
+Route::get('convert', function() {
+
+    $document =  \NahidulHasan\Html2pdf\Facades\Pdf::generatePdf(view('presa'));
+    return $document;
+//    define('INVOICE_DIR', public_path('uploads/invoices'));
+//
+//    if (!is_dir(INVOICE_DIR)) {
+//        mkdir(INVOICE_DIR, 0755, true);
+//    }
+//
+//    $outputName = Str::random(10);
+//    $pdfPath = INVOICE_DIR.'/'.$outputName.'.pdf';
+//
+//
+//    File::put($pdfPath, $document);
+//
+//    $headers = [
+//        'Content-Type' => 'application/pdf',
+//        'Content-Disposition' =>  'attachment; filename="'.'filename.pdf'.'"',
+//    ];
+//
+//    return response()->download($pdfPath, 'filename.pdf', $headers);
+//    $dompdf = new DOMPDF();
+//    $dompdf->load_html(view('presa')->render());
+//    $dompdf->render();
+//
+//    $fileName = "invoice.pdf";
+//    $dompdf->stream($fileName);//DOWNLOAD PDF
 });
 
 Route::get('/ssh', function() {

@@ -93,7 +93,7 @@
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
                     <td class="left" style="margin-top: 50px">Знак зодиака:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'ОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвенОвен' }}</td>
+                    <td class="right" style="width: 300px">{{ $country ?? 'Овен' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Рост:</td>
