@@ -91,40 +91,12 @@ Route::get('/generate', function () {
         stream_set_blocking($stream, true);
         stream_get_contents($stream);
     }
-//
-//
-//    $stream2 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/2 /var/www/html/storage/app/public/pptx/generate/s2.jpg');
-//    stream_set_blocking($stream2, true);
-//    stream_get_contents($stream2);
-//
-//    $stream3 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/3 /var/www/html/storage/app/public/pptx/generate/s3.jpg');
-//    stream_set_blocking($stream3, true);
-//    stream_get_contents($stream3);
-//
-//    $stream4 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/4 /var/www/html/storage/app/public/pptx/generate/s4.jpg');
-//    stream_set_blocking($stream4, true);
-//    stream_get_contents($stream4);
-//
-//    $stream5 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/5 /var/www/html/storage/app/public/pptx/generate/s5.jpg');
-//    stream_set_blocking($stream5, true);
-//    stream_get_contents($stream5);
-//
-//    $stream6 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s1.jpg');
-//    stream_set_blocking($stream6, true);
-//    stream_get_contents($stream6);
-//
-//    $stream7 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s2.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s2.jpg');
-//    stream_set_blocking($stream7, true);
-//    stream_get_contents($stream7);
-//    $stream8 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s3.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s3.jpg');
-//    stream_set_blocking($stream8, true);
-//    stream_get_contents($stream8);
-//    $stream9 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s4.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s4.jpg');
-//    stream_set_blocking($stream9, true);
-//    stream_get_contents($stream9);
-//    $stream10 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s5.jpg');
-//    stream_set_blocking($stream10, true);
-//    stream_get_contents($stream10);
+    for($i = 1; $i <= 5; $i++ ) {
+        $stream = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s'.$i.'.jpg');
+        stream_set_blocking($stream, true);
+        stream_get_contents($stream);
+    }
+
 
     $connection2 = ssh2_connect('45.141.79.57', 22);
     ssh2_auth_password($connection2, env('SSH_U'), env('SSH_P'));
