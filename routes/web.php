@@ -103,7 +103,7 @@ Route::get('/generate', function () {
     $slides .= ' /var/www/html/public/pptx/generate/s4.jpg /var/www/html/public/pptx/generate/s5.jpg';
     $stream11 = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/public/pptx/generate/result.pdf');
 
-    dd($stream1, $stream2, $stream3, $stream4, $stream5, $stream6, $stream7, $stream8, $stream9, $stream10, $stream11);
+    dd((bool)$stream1, (bool)$stream2, (bool)$stream3, (bool)$stream4, (bool)$stream5, (bool)$stream6, (bool)$stream7, (bool)$stream8, (bool)$stream9, (bool)$stream10, (bool)$stream11);
     echo 'Генерация завершена';
 });
 
