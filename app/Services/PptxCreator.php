@@ -203,6 +203,9 @@ class PptxCreator
         $result['moving'] = empty($moving) ? 'Все равно' : implode(', ', $moving);
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaireId)->get(['id', 'path'])?->toArray();
+        foreach ($photos as $key=>$item) {
+            $photos[$key] = env('APP_URL').'/'.$item['path'];
+        }
         $result['photos'] = $photos;
 
         echo view('pdf.slide' . $slide, ['q' => $result, 'class' => $this]);
