@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Countries;
 use App\Models\Questionnaire;
+use App\Models\QuestionnaireFiles;
+use App\Models\QuestionnaireUploadPhoto;
 use App\Utils\TranslateFields;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -200,6 +202,8 @@ class PptxCreator
 
         $result['moving'] = empty($moving) ? 'Все равно' : implode(', ', $moving);
 
+        $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaireId)->get(['id', 'path']);
+        $result['photos'] = $photos;
 
         echo view('pdf.slide' . $slide, ['q' => $result, 'class' => $this]);
     }

@@ -6,14 +6,21 @@
 
         <div style="position: relative;margin-top: -40px">
             <div class="img-rectangle"
-                 style="background: url({{ asset('assets/img/photo.jpg') }}) 50% 50% no-repeat;"></div>
+                 style="background: url({{ $q['photos'][0] }}) 50% 50% no-repeat;"></div>
         </div>
         <div class="photo-square-list m-t-25">
-            <img src="{{ asset('assets/img/photo.jpg') }}" class="img-square" alt="1"/>
-            <img src="{{ asset('assets/img/photo.jpg') }}" class="img-square m-l-25" alt="2"/>
-
-            <img src="{{ asset('assets/img/photo.jpg') }}" class="img-square m-t-25" alt="3"/>
-            <img src="{{ asset('assets/img/photo.jpg') }}" class="img-square m-l-25" alt="4"/>
+            @if(isset($q['photos'][1]))
+                <img src="{{ $q['photos'][1] }}" class="img-square" alt="1"/>
+            @endif
+            @if(isset($q['photos'][2]))
+                <img src="{{ $q['photos'][2] }}" class="img-square m-l-25" alt="2"/>
+            @endif
+            @if(isset($q['photos'][3]))
+                <img src="{{ $q['photos'][3] }}" class="img-square m-t-25" alt="3"/>
+            @endif
+            @if(isset($q['photos'][4]))
+                <img src="{{ $q['photos'][4] }}" class="img-square m-l-25" alt="4"/>
+            @endif
         </div>
     </div>
 </div>
