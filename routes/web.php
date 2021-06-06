@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
-use Mpdf\Mpdf;
 use PhpOffice\PhpPresentation\DocumentLayout;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpPresentation\PhpPresentation;
@@ -18,7 +17,6 @@ use PhpOffice\PhpPresentation\Slide\AbstractBackground;
 use PhpOffice\PhpPresentation\Style\Alignment;
 use PhpOffice\PhpPresentation\Style\Color;
 use PhpOffice\PhpPresentation\Style\Font;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,8 +80,9 @@ Route::get('pdf1', function() {
 
 Route::get('convert', function() {
 
-    $document =  \NahidulHasan\Html2pdf\Facades\Pdf::generatePdf(view('presa'));
-    return $document;
+    $pdf = PDF::loadView('test');
+
+    return $pdf->download('itsolutionstuff.pdf');
 //    define('INVOICE_DIR', public_path('uploads/invoices'));
 //
 //    if (!is_dir(INVOICE_DIR)) {

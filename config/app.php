@@ -367,7 +367,7 @@ return [
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        NahidulHasan\Html2pdf\Html2pdfServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -429,7 +429,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        'Pdf'  => NahidulHasan\Html2pdf\Facades\Pdf::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
