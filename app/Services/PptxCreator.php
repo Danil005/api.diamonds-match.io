@@ -53,6 +53,6 @@ class PptxCreator
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
-        return view('pdf.slide' . $slide, ['q' => $questionnaire]);
+        return view('pdf.slide' . $slide, ['q' => $questionnaire])->render();
     }
 }
