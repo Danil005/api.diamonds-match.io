@@ -38,6 +38,7 @@ Route::prefix('v1')->middleware(['api'])->namespace('App\Http\Controllers\Api\v1
         Route::put('questionnaire.createFromSite', 'QuestionnaireController@createFromSite');
         Route::get('questionnaire.sign', 'QuestionnaireController@sign');
         Route::post('questionnaire.uploadClientPhoto', 'QuestionnaireController@uploadClientPhoto');
+        Route::post('questionnaire.removeClientPhoto', 'QuestionnaireController@removeClientPhoto');
 
 
         Route::middleware('auth:api')->group(function() {

@@ -76,6 +76,10 @@ Route::get('fire', function () {
     ]));
 });
 
+Route::get('pdf1', function() {
+   return view('presa');
+});
+
 Route::get('/ssh', function() {
     $connection = ssh2_connect('45.141.79.57', 22);
     ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));

@@ -511,6 +511,16 @@ class QuestionnaireController extends QuestionnaireUtils
         }
     }
 
+    public function removeClientPhoto(Request $request)
+    {
+        if (!$request->has('path'))
+            $this->response()->error()->setMessage('Вы должны указать path фотографии')->send();
+
+        Storage::disk('public')->delete(str_replace('storage/', 'public/', $request->path));
+
+        $this->response()->success()->setMessage('Фотография была удалена')->send();
+    }
+
     /**
      * @param View $request
      */

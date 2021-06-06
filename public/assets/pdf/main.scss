@@ -1,0 +1,102 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #FAFAFA;
+    font: 12pt "Tahoma";
+}
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.page {
+    position: relative;
+    width: 210mm;
+    min-height: 297mm;
+    padding: 20mm;
+    margin: 10mm auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+
+    &.first-page {
+        background: url("../img/BackgroundFirst.jpg") no-repeat center center;
+        background-size: cover;
+    }
+    & .transparent-background {
+        position: absolute;
+        width: 210mm;
+        min-height: 297mm;
+        top:0;
+        left:0;
+        opacity: 1.0;
+    }
+
+    & .logo-full {
+        position: relative;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 205px;
+        height: 100px;
+        z-index: 10;
+    }
+
+    & .header-first {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 15em;
+        font-size: 32px;
+        text-align: center;
+        font-family: Georgia Pro Cond, serif;
+        margin-top: 45px;
+    }
+
+    & .header-last {
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        width: 8em;
+        font-size: 45px;
+        text-align: center;
+        font-family: Marianna, serif;
+        margin-top: 0px;
+        color: #d0951c;
+    }
+
+    &.background {
+        background: url("../img/BackgroundPage.jpg") no-repeat center center;
+        background-size: cover;
+    }
+}
+
+.subpage {
+    padding: 1cm;
+    border: 5px red solid;
+    height: 257mm;
+    outline: 2cm #FFEAEA solid;
+}
+
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;
+    }
+    .page {
+        margin: 0;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        min-height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: always;
+    }
+}
