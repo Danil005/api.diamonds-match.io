@@ -1567,7 +1567,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
         $this->response()->success()->setMessage('Презентация была создана')->setData([
-            'download_link' => env('APP_URL') . $path
+            'download_link' => env('APP_URL') . '/storage/pptx/generate/presentation.pdf'
         ])->send();
     }
 
