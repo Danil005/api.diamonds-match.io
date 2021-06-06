@@ -87,23 +87,23 @@ Route::get('/generate', function () {
     ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
 
     $stream1 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/1 /var/www/html/public/pptx/generate/s1.jpg');
-    $stream2 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/2 /var/www/html/public/pptx/generate/s2.jpg');
-    $stream3 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/3 /var/www/html/public/pptx/generate/s3.jpg');
-    $stream4 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/4 /var/www/html/public/pptx/generate/s4.jpg');
-    $stream5 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/5 /var/www/html/public/pptx/generate/s5.jpg');
-
-
-    $stream6 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s1.jpg');
-    $stream7 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s2.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s2.jpg');
-    $stream8 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s3.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s3.jpg');
-    $stream9 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s4.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s4.jpg');
-    $stream10 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s5.jpg');
-
-    $slides = '/var/www/html/public/pptx/generate/s1.jpg /var/www/html/public/pptx/generate/s2.jpg /var/www/html/public/pptx/generate/s3.jpg';
-    $slides .= ' /var/www/html/public/pptx/generate/s4.jpg /var/www/html/public/pptx/generate/s5.jpg';
-    $stream11 = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/public/pptx/generate/result.pdf');
-
-    dd((bool)$stream1, (bool)$stream2, (bool)$stream3, (bool)$stream4, (bool)$stream5, (bool)$stream6, (bool)$stream7, (bool)$stream8, (bool)$stream9, (bool)$stream10, (bool)$stream11);
+//    $stream2 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/2 /var/www/html/public/pptx/generate/s2.jpg');
+//    $stream3 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/3 /var/www/html/public/pptx/generate/s3.jpg');
+//    $stream4 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/4 /var/www/html/public/pptx/generate/s4.jpg');
+//    $stream5 = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/5 /var/www/html/public/pptx/generate/s5.jpg');
+//
+//
+//    $stream6 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s1.jpg');
+//    $stream7 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s2.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s2.jpg');
+//    $stream8 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s3.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s3.jpg');
+//    $stream9 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s4.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s4.jpg');
+//    $stream10 = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s5.jpg');
+//
+//    $slides = '/var/www/html/public/pptx/generate/s1.jpg /var/www/html/public/pptx/generate/s2.jpg /var/www/html/public/pptx/generate/s3.jpg';
+//    $slides .= ' /var/www/html/public/pptx/generate/s4.jpg /var/www/html/public/pptx/generate/s5.jpg';
+//    $stream11 = ssh2_exec($connection, 'convert '.$slides.' /var/www/html/public/pptx/generate/result.pdf');
+//
+//    dd((bool)$stream1, (bool)$stream2, (bool)$stream3, (bool)$stream4, (bool)$stream5, (bool)$stream6, (bool)$stream7, (bool)$stream8, (bool)$stream9, (bool)$stream10, (bool)$stream11);
     echo 'Генерация завершена';
 });
 
