@@ -129,7 +129,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
                 if (isset($partnerInformation[$key][0])) {
 
-                    $partnerInformation[$key] = $information['label'];
+                    $partnerInformation[$key] = $information['label'] ?? $information;
                 } else {
                     $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
                 }
