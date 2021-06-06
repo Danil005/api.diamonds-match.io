@@ -128,11 +128,8 @@ class QuestionnaireController extends QuestionnaireUtils
                 $place_birth = '';
 
                 if (isset($partnerInformation[$key][0])) {
-                    foreach ($partnerInformation[$key] as $item) {
-                        $place_birth .= $item . ',';
-                    }
 
-                    $partnerInformation[$key] = trim($place_birth, ',');
+                    $partnerInformation[$key] = $information['label'];
                 } else {
                     $this->response()->error()->setMessage('Поле `place_birth` должно быть заполнено')->send();
                 }
