@@ -7,6 +7,10 @@ body {
   font: 12pt "Tahoma";
 }
 
+@page {
+  size: A4;
+  margin: 0;
+}
 * {
   box-sizing: border-box;
   -moz-box-sizing: border-box;

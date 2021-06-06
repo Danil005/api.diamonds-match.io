@@ -6,6 +6,10 @@ body {
     background-color: #FAFAFA;
     font: 12pt "Tahoma";
 }
+@page {
+    size: A4;
+    margin: 0;
+}
 $marginTop: 5;
 $value: 0;
 
