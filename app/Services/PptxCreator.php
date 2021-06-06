@@ -1035,6 +1035,6 @@ class PptxCreator
 
         $stream = ssh2_exec($connection, 'unoconv -f pdf /var/www/html/storage/app/public/questionnaire/pptx/'.$questionnaire['id'].'/presentation.pptx');
         sleep(2);
-        return str_replace('pptx', 'pdf', $path);
+        return str_replace('.pptx', '.pdf', $path);
     }
 }
