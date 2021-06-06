@@ -146,7 +146,7 @@ body {
   position: relative;
   margin-left: auto;
   margin-top: auto;
-  width: 450px;
+  width: 460px;
 }
 .page .center .info-table {
   position: relative;
@@ -154,7 +154,17 @@ body {
 .page .center .info-table td {
   width: 200px;
   text-align: left;
+  font-size: 20px;
 }
+.page .center .info-table td.left {
+  text-align: left;
+  font-family: Yu Gothic UI, sans-serif;
+  font-weight: bold;
+}
+.page .center .info-table td.right {
+  font-family: Yu Gothic UI, fantasy;
+}
+
 .subpage {
   padding: 1cm;
   border: 5px red solid;
@@ -182,6 +192,405 @@ body {
     background: initial;
     page-break-after: always;
   }
+}
+.m-t-1 {
+  margin-top: 1px;
+}
+
+.m-t-2 {
+  margin-top: 2px;
+}
+
+.m-t-3 {
+  margin-top: 3px;
+}
+
+.m-t-4 {
+  margin-top: 4px;
+}
+
+.m-t-5 {
+  margin-top: 5px;
+}
+
+.m-t-6 {
+  margin-top: 6px;
+}
+
+.m-t-7 {
+  margin-top: 7px;
+}
+
+.m-t-8 {
+  margin-top: 8px;
+}
+
+.m-t-9 {
+  margin-top: 9px;
+}
+
+.m-t-10 {
+  margin-top: 10px;
+}
+
+.m-t-11 {
+  margin-top: 11px;
+}
+
+.m-t-12 {
+  margin-top: 12px;
+}
+
+.m-t-13 {
+  margin-top: 13px;
+}
+
+.m-t-14 {
+  margin-top: 14px;
+}
+
+.m-t-15 {
+  margin-top: 15px;
+}
+
+.m-t-16 {
+  margin-top: 16px;
+}
+
+.m-t-17 {
+  margin-top: 17px;
+}
+
+.m-t-18 {
+  margin-top: 18px;
+}
+
+.m-t-19 {
+  margin-top: 19px;
+}
+
+.m-t-20 {
+  margin-top: 20px;
+}
+
+.m-t-21 {
+  margin-top: 21px;
+}
+
+.m-t-22 {
+  margin-top: 22px;
+}
+
+.m-t-23 {
+  margin-top: 23px;
+}
+
+.m-t-24 {
+  margin-top: 24px;
+}
+
+.m-t-25 {
+  margin-top: 25px;
+}
+
+.m-t-26 {
+  margin-top: 26px;
+}
+
+.m-t-27 {
+  margin-top: 27px;
+}
+
+.m-t-28 {
+  margin-top: 28px;
+}
+
+.m-t-29 {
+  margin-top: 29px;
+}
+
+.m-t-30 {
+  margin-top: 30px;
+}
+
+.m-t-31 {
+  margin-top: 31px;
+}
+
+.m-t-32 {
+  margin-top: 32px;
+}
+
+.m-t-33 {
+  margin-top: 33px;
+}
+
+.m-t-34 {
+  margin-top: 34px;
+}
+
+.m-t-35 {
+  margin-top: 35px;
+}
+
+.m-t-36 {
+  margin-top: 36px;
+}
+
+.m-t-37 {
+  margin-top: 37px;
+}
+
+.m-t-38 {
+  margin-top: 38px;
+}
+
+.m-t-39 {
+  margin-top: 39px;
+}
+
+.m-t-40 {
+  margin-top: 40px;
+}
+
+.m-t-41 {
+  margin-top: 41px;
+}
+
+.m-t-42 {
+  margin-top: 42px;
+}
+
+.m-t-43 {
+  margin-top: 43px;
+}
+
+.m-t-44 {
+  margin-top: 44px;
+}
+
+.m-t-45 {
+  margin-top: 45px;
+}
+
+.m-t-46 {
+  margin-top: 46px;
+}
+
+.m-t-47 {
+  margin-top: 47px;
+}
+
+.m-t-48 {
+  margin-top: 48px;
+}
+
+.m-t-49 {
+  margin-top: 49px;
+}
+
+.m-t-50 {
+  margin-top: 50px;
+}
+
+.m-t-51 {
+  margin-top: 51px;
+}
+
+.m-t-52 {
+  margin-top: 52px;
+}
+
+.m-t-53 {
+  margin-top: 53px;
+}
+
+.m-t-54 {
+  margin-top: 54px;
+}
+
+.m-t-55 {
+  margin-top: 55px;
+}
+
+.m-t-56 {
+  margin-top: 56px;
+}
+
+.m-t-57 {
+  margin-top: 57px;
+}
+
+.m-t-58 {
+  margin-top: 58px;
+}
+
+.m-t-59 {
+  margin-top: 59px;
+}
+
+.m-t-60 {
+  margin-top: 60px;
+}
+
+.m-t-61 {
+  margin-top: 61px;
+}
+
+.m-t-62 {
+  margin-top: 62px;
+}
+
+.m-t-63 {
+  margin-top: 63px;
+}
+
+.m-t-64 {
+  margin-top: 64px;
+}
+
+.m-t-65 {
+  margin-top: 65px;
+}
+
+.m-t-66 {
+  margin-top: 66px;
+}
+
+.m-t-67 {
+  margin-top: 67px;
+}
+
+.m-t-68 {
+  margin-top: 68px;
+}
+
+.m-t-69 {
+  margin-top: 69px;
+}
+
+.m-t-70 {
+  margin-top: 70px;
+}
+
+.m-t-71 {
+  margin-top: 71px;
+}
+
+.m-t-72 {
+  margin-top: 72px;
+}
+
+.m-t-73 {
+  margin-top: 73px;
+}
+
+.m-t-74 {
+  margin-top: 74px;
+}
+
+.m-t-75 {
+  margin-top: 75px;
+}
+
+.m-t-76 {
+  margin-top: 76px;
+}
+
+.m-t-77 {
+  margin-top: 77px;
+}
+
+.m-t-78 {
+  margin-top: 78px;
+}
+
+.m-t-79 {
+  margin-top: 79px;
+}
+
+.m-t-80 {
+  margin-top: 80px;
+}
+
+.m-t-81 {
+  margin-top: 81px;
+}
+
+.m-t-82 {
+  margin-top: 82px;
+}
+
+.m-t-83 {
+  margin-top: 83px;
+}
+
+.m-t-84 {
+  margin-top: 84px;
+}
+
+.m-t-85 {
+  margin-top: 85px;
+}
+
+.m-t-86 {
+  margin-top: 86px;
+}
+
+.m-t-87 {
+  margin-top: 87px;
+}
+
+.m-t-88 {
+  margin-top: 88px;
+}
+
+.m-t-89 {
+  margin-top: 89px;
+}
+
+.m-t-90 {
+  margin-top: 90px;
+}
+
+.m-t-91 {
+  margin-top: 91px;
+}
+
+.m-t-92 {
+  margin-top: 92px;
+}
+
+.m-t-93 {
+  margin-top: 93px;
+}
+
+.m-t-94 {
+  margin-top: 94px;
+}
+
+.m-t-95 {
+  margin-top: 95px;
+}
+
+.m-t-96 {
+  margin-top: 96px;
+}
+
+.m-t-97 {
+  margin-top: 97px;
+}
+
+.m-t-98 {
+  margin-top: 98px;
+}
+
+.m-t-99 {
+  margin-top: 99px;
+}
+
+.m-t-100 {
+  margin-top: 100px;
 }
 
 /*# sourceMappingURL=main.css.map */

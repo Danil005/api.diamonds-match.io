@@ -37,8 +37,24 @@
         <div class="center">
             <table class="info-table">
                 <tr>
-                    <td class="left">Страна: </td>
-                    <td class="right">Россия</td>
+                    <td class="left" style="margin-top: 50px">Страна: </td>
+                    <td class="right">{{ $country ?? '----' }}</td>
+                </tr>
+                <tr>
+                    <td class="left">Этичность: </td>
+                    <td class="right">{{ $ethnicity ?? '----' }}</td>
+                </tr>
+                <tr>
+                    <td class="left">Место проживание: </td>
+                    <td class="right">{{ $live ?? '----' }}</td>
+                </tr>
+                <tr>
+                    <td class="left">Город рождения: </td>
+                    <td class="right">{{ $birth_place ?? '----' }}</td>
+                </tr>
+                <tr>
+                    <td class="left">Рассматриваете ли приезд: </td>
+                    <td class="right">{{ $moving ?? '----' }}</td>
                 </tr>
             </table>
         </div>

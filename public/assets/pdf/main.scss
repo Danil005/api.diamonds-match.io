@@ -6,6 +6,7 @@ body {
     background-color: #FAFAFA;
     font: 12pt "Tahoma";
 }
+$marginTop: 5;
 
 * {
     box-sizing: border-box;
@@ -159,7 +160,7 @@ body {
         position: relative;
         margin-left: auto;
         margin-top: auto;
-        width: 450px;
+        width: 460px;
 
         & .info-table {
             position: relative;
@@ -167,13 +168,16 @@ body {
             & td {
                 width: 200px;
                 text-align: left;
+                font-size: 20px;
 
                 &.left {
-
+                    text-align: left;
+                    font-family: Yu Gothic UI, sans-serif;
+                    font-weight: bold;
                 }
 
                 &.right {
-
+                    font-family: Yu Gothic UI, fantasy;
                 }
             }
         }
@@ -206,5 +210,10 @@ body {
         box-shadow: initial;
         background: initial;
         page-break-after: always;
+    }
+}
+@for $i from 1 through 100 {
+    .m-t-#{$i} {
+        margin-top: #{$i}px;
     }
 }
