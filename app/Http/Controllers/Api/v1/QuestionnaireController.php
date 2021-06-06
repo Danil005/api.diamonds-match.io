@@ -586,7 +586,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $place = $place->get(['title_ru'])->toArray();
             $res = '';
             if ($place != null)
-                foreach ($place as $item) $res .= ', ' . $item;
+                foreach ($place as $item) $res .= ', ' . $item['title_ru'];
             $result['my_information']['countries_was'] = implode(', ', trim($res, ','));
         }
         $result['partner_information']['age'] = $this->years(explode(',', $result['partner_information']['age']));
