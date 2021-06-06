@@ -1,5 +1,5 @@
 html, body {
-    width: 210mm;
+    width: 240mm;
     height: 297mm;
 }
 @page {
@@ -20,7 +20,7 @@ $value: 0;
 
 .page {
     position: relative;
-    width: 210mm;
+    width: 240mm;
     min-height: 297mm;
     padding: 20mm;
     //margin: 10mm auto;
@@ -37,7 +37,7 @@ $value: 0;
 
     & .transparent-background {
         position: absolute;
-        width: 210mm;
+        width: 240mm;
         min-height: 297mm;
         top: 0;
         left: 0;
