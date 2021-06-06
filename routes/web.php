@@ -124,20 +124,14 @@ Route::get('/generate', function () {
     stream_set_blocking($stream10, true);
     stream_get_contents($stream10);
 
-    $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
-    $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
-    $images = explode(' ', $slides);
-    dd($images);
-
-    $pdf = new Imagick($images);
-    $pdf->setImageFormat('pdf');
-    $pdf->writeImages('combined.pdf', true);
 
 //    sleep(3);
-
-//    $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/result.pdf');
-//    stream_set_blocking($stream11, true);
-//    stream_get_contents($stream11);
+//    $slides = '/var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/s3.jpg';
+//    $slides .= ' /var/www/html/storage/app/public/pptx/generate/s4.jpg /var/www/html/storage/app/public/pptx/generate/s5.jpg';
+    $stream11 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg /var/www/html/storage/app/public/pptx/generate/s2.jpg /var/www/html/storage/app/public/pptx/generate/result.pdf');
+    stream_set_blocking($stream11, true);
+    $output = stream_get_contents($stream11);
+    dd($output);
 //    dd((bool)$stream1, (bool)$stream2, (bool)$stream3, (bool)$stream4, (bool)$stream5, (bool)$stream6, (bool)$stream7, (bool)$stream8, (bool)$stream9, (bool)$stream10, (bool)$stream11);
     echo 'Генерация завершена';
 });
