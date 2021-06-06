@@ -1292,10 +1292,12 @@ class QuestionnaireController extends QuestionnaireUtils
             $questionnaires[$key]['timestamp'] = $timestamp;
             $questionnaires[$key]['ethnicity'] = $this->ethnicity($questionnaires[$key]['ethnicity']);
             if (isset($questionnaires[$key]['city'])) {
-                $place = $questionnaires[$key]['city'];
-                $place = Countries::where('title_en', 'ILIKE', $place)->first();
-                if ($place != null)
-                    $questionnaires[$key]['city'] = $place['title_ru'];
+                $city = explode(',', $questionnaires[$key]['city']);
+                $c = $city;
+                $city = Countries::where('title_en', 'ILIKE', $city[0])->first();
+                if ($city != null) {
+                    $questionnaires[$key]['city'] = $city['title_ru'] . (isset($c[1]) ? ', ' . $c[1] : '');
+                }
             }
         }
 
