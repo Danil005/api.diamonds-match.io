@@ -993,7 +993,7 @@ class PptxCreator
             ->setOffsetY(823.1811023622);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun('Какие черты тебя отталкивают в людях?');
+        $textRun = $shape->createTextRun('Как ты относишься к существенной разнице в возрасте между партнерами?');
         $textRun->getFont()->setName('Arial')
             ->setBold(true)
             ->setSize(13)
@@ -1006,7 +1006,7 @@ class PptxCreator
             ->setOffsetY(945.2598425197);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
-        $textRun = $shape->createTextRun('Какие черты тебя отталкивают в людях?');
+        $textRun = $shape->createTextRun('Как ты считаешь, какие у тебя таланты?');
         $textRun->getFont()->setName('Arial')
             ->setBold(true)
             ->setSize(13)
@@ -1085,7 +1085,7 @@ class PptxCreator
             ->setHeight(32.50393700826)
             ->setWidth(533.6692913386)
             ->setOffsetX(173.1023622047)
-            ->setOffsetY(996.2834645669);
+            ->setOffsetY(972.094488189);
         $shape->getActiveParagraph()->getAlignment()->setHorizontal(Alignment::HORIZONTAL_LEFT);
 
         $textRun = $shape->createTextRun($item);
