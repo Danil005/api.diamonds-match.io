@@ -544,7 +544,7 @@ trait TranslateFields
             $data = [
                 'middle' => 'Среднее',
                 'college' => 'Колледж',
-                'unfinished_higher' => 'Не законченное высшее',
+                'unfinished_higher' => 'Незаконченное высшее',
                 'specialist' => 'Специалист',
                 'bachelor' => 'Бакалавриат',
                 'master' => 'Магистр',
@@ -555,7 +555,7 @@ trait TranslateFields
             $data = [
                 'middle' => 'Среднее',
                 'college' => 'Колледж',
-                'unfinished_higher' => 'Не законченное высшее',
+                'unfinished_higher' => 'Незаконченное высшее',
                 'specialist' => 'Специалист',
                 'bachelor' => 'Бакалавриат',
                 'master' => 'Магистр',
