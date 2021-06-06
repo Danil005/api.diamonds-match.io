@@ -78,6 +78,32 @@ Route::get('pdf1', function() {
    return view('presa');
 });
 
+Route::get('/getSlide/{slide}', function($slide) {
+    return view('pdf.slide'.$slide);
+});
+
+Route::get('/generate', function () {
+    $connection = ssh2_connect('45.141.79.57', 22);
+    ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
+
+    $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/1 /var/www/html/public/pptx/generate/s1.jpg');
+    $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/2 /var/www/html/public/pptx/generate/s2.jpg');
+    $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/3 /var/www/html/public/pptx/generate/s3.jpg');
+    $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/4 /var/www/html/public/pptx/generate/s4.jpg');
+    $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/5 /var/www/html/public/pptx/generate/s5.jpg');
+
+
+    $stream = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s1.jpg');
+    $stream = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s2.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s2.jpg');
+    $stream = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s3.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s3.jpg');
+    $stream = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s4.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s4.jpg');
+    $stream = ssh2_exec($connection, 'convert /var/www/html/public/pptx/generate/s5.jpg -crop 784x1119+0+0 /var/www/html/public/pptx/generate/s5.jpg');
+
+    $slides = '/var/www/html/public/pptx/generate/s1.jpg /var/www/html/public/pptx/generate/s2.jpg /var/www/html/public/pptx/generate/s3.jpg';
+    $slides .= ' /var/www/html/public/pptx/generate/s4.jpg /var/www/html/public/pptx/generate/s5.jpg';
+    $stream = ssh2_exec($connection, 'convert '.$slides.' result.pdf');
+});
+
 Route::get('convert', function() {
 
     $pdf = PDF::loadView('test');
