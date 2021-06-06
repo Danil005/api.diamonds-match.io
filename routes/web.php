@@ -108,7 +108,7 @@ Route::get('/generate', function () {
 
 //
 //
-    $stream6 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/1.jpg');
+    $stream6 = ssh2_exec($connection, 'convert /var/www/html/storage/app/public/pptx/generate/s1.jpg -crop 784x1119+0+0 /var/www/html/storage/app/public/pptx/generate/s1.jpg');
     stream_set_blocking($stream6, true);
     stream_get_contents($stream6);
 
