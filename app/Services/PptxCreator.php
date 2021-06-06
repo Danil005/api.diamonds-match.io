@@ -14,7 +14,7 @@ class PptxCreator
     public function create(Request $request)
     {
         $id = $request->questionnaire_id;
-        Storage::makeDirectory('public/pptx/generate/'.$id);
+        Storage::makeDirectory('pptx/generate/'.$id);
         sleep(2);
 
         $connection = ssh2_connect('45.141.79.57', 22);
