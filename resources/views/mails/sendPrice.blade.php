@@ -120,7 +120,8 @@
                                                             <td align="center" style="padding:0;Margin:0;padding-top:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:48px;color:#FFFFFF;font-size:32px">{{ __('mail.hello', ['name' => $name], $lang) }}!</p></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center" style="Margin:0;padding-top:5px;padding-right:15px;padding-left:20px;padding-bottom:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px">Мы получили вашу анкету, и хотим предложить вам&nbsp;<br>наши&nbsp;тарифные&nbsp;планы&nbsp;на&nbsp;выбор:</p></td>
+                                                            <td align="center" style="Margin:0;padding-top:5px;padding-right:15px;padding-left:20px;padding-bottom:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px">
+                                                                {{ __('mail.receive_mail', locale: $lang) }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -213,7 +214,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">30 000 ₽</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">{{ $pricing['v1'] }}</p></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -225,7 +226,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">160 000 ₽</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">{{ $pricing['v2'] }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -236,7 +237,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">350 000 ₽</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">{{ $pricing['v3'] }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -558,7 +559,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">100 000 ₽</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">{{ $pricing['p1'] }}</p></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -570,7 +571,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">300 000 ₽</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">{{ $pricing['p2'] }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -581,7 +582,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">500 000 ₽</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:33px;color:#131313;font-size:22px">{{ $pricing['p3'] }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
