@@ -117,8 +117,7 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:600px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0;padding-top:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:48px;color:#FFFFFF;font-size:32px">Здравствуйте,
-                                                                {{ $name }}!</p></td>
+                                                            <td align="center" style="padding:0;Margin:0;padding-top:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:48px;color:#FFFFFF;font-size:32px">{{ __('mail.hello', ['name' => $name], $lang) }}!</p></td>
                                                         </tr>
                                                         <tr>
                                                             <td align="center" style="Margin:0;padding-top:5px;padding-right:15px;padding-left:20px;padding-bottom:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px">Мы получили вашу анкету, и хотим предложить вам&nbsp;<br>наши&nbsp;тарифные&nbsp;планы&nbsp;на&nbsp;выбор:</p></td>
@@ -141,7 +140,8 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:560px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;color:#A9A9A9;font-size:12px">Тарифы VIP</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;color:#A9A9A9;font-size:12px">
+                                                                {{ __('mail.tariffs', locale: $lang) }} VIP</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -251,7 +251,8 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">1 месяц&nbsp;</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">1
+                                                                {{ __('mail.month', locale: $lang) }}&nbsp;</p></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -263,7 +264,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">6 месяцев</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">6 {{ __('mail.months', locale: $lang) }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -274,7 +275,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">12 месяцев</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">12 {{ __('mail.months', locale: $lang) }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -330,21 +331,21 @@
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Не менее 50 и не более 100 анкет
+                                                                {{ __('mail.vip.t1.v1', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                3 свидания
+                                                                {{ __('mail.vip.t1.v2', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация перед 1 свиданием
+                                                                {{ __('mail.vip.t1.v3', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                     </table></td>
@@ -360,28 +361,28 @@
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Не мене 200 и не более 300 анкет
+                                                                {{ __('mail.vip.t2.v1', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                9 свиданий
+                                                                {{ __('mail.vip.t2.v2', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация перед 1 свиданием
+                                                                {{ __('mail.vip.t2.v3', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Сессия с психологом
+                                                                {{ __('mail.vip.t2.v4', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                     </table></td>
@@ -396,35 +397,35 @@
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Более 500 анкет
+                                                                {{ __('mail.vip.t3.v1', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                20 свиданий
+                                                                {{ __('mail.vip.t3.v2', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультации перед каждым свиданием
+                                                                {{ __('mail.vip.t3.v3', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Сессия с психологом
+                                                                {{ __('mail.vip.t3.v4', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Астрологический разбор совместимости с 3-мя кандидатами
+                                                                {{ __('mail.vip.t3.v5', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                     </table></td>
@@ -440,7 +441,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">Перейти к оплате</a></span></td>
+                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">{{ __('mail.go_to_pay', locale: $lang) }}</a></span></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -452,7 +453,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">Перейти к оплате</a></span></td>
+                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">{{ __('mail.go_to_pay', locale: $lang) }}</a></span></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -463,7 +464,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">Перейти к оплате</a></span></td>
+                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">{{ __('mail.go_to_pay', locale: $lang) }}</a></span></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -484,7 +485,8 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:560px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;color:#A9A9A9;font-size:12px">Тарифы Platinum</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:18px;color:#A9A9A9;font-size:12px">
+                                                                {{ __('mail.tariffs', locale: $lang) }} Platinum</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -594,7 +596,8 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">1 месяц&nbsp;</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">1
+                                                                {{ __('mail.month', locale: $lang) }}&nbsp;</p></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -606,7 +609,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">6 месяцев</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">6 {{ __('mail.months', locale: $lang) }}&nbsp;</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -617,7 +620,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">12 месяцев</p></td>
+                                                            <td align="left" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:24px;color:#131313;font-size:12px">12 {{ __('mail.months', locale: $lang) }}&nbsp;</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -673,42 +676,42 @@
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Не менее 100 анкет
+                                                                {{ __('mail.platinum.t1.v1', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                5 свиданий
+                                                                {{ __('mail.platinum.t1.v2', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация перед 1 свиданием
+                                                                {{ __('mail.platinum.t1.v3', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация психолога
+                                                                {{ __('mail.platinum.t1.v4', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Натальная карта клиента
+                                                                {{ __('mail.platinum.t1.v5', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Общая консультация астролога по совместимости
+                                                                {{ __('mail.platinum.t1.v6', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                     </table></td>
@@ -724,49 +727,49 @@
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Не менее 500 анкет
+                                                                {{ __('mail.platinum.t2.v1', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                15 свиданий
+                                                                {{ __('mail.platinum.t2.v2', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация перед 1 свиданием
+                                                                {{ __('mail.platinum.t2.v3', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Профессиональный фотосет
+                                                                {{ __('mail.platinum.t2.v4', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация психолога
+                                                                {{ __('mail.platinum.t2.v5', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Натальная карта клиента
+                                                                {{ __('mail.platinum.t2.v6', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация астролога по совместимости с каждой из выбранных девушек
+                                                                {{ __('mail.platinum.t2.v7', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                     </table></td>
@@ -781,56 +784,56 @@
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Более 500 анкет
+                                                                {{ __('mail.platinum.t3.v1', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                30 свиданий
+                                                                {{ __('mail.platinum.t3.v2', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультации перед каждым свиданием
+                                                                {{ __('mail.platinum.t3.v3', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Профессиональный фотосет
+                                                                {{ __('mail.platinum.t3.v4', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация психолога
+                                                                {{ __('mail.platinum.t3.v5', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Натальная карта клиента
+                                                                {{ __('mail.platinum.t3.v6', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Консультация астролога по совместимости с каждой из выбранных девушек
+                                                                {{ __('mail.platinum.t3.v7', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
                                                             </td>
                                                             <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
-                                                                Услуги имиджмейкера
+                                                                {{ __('mail.platinum.t3.v8', locale: $lang) }}
                                                             </td>
                                                         </tr>
                                                     </table></td>
@@ -846,7 +849,7 @@
                                                 <td class="es-m-p0r es-m-p20b" align="center" style="padding:0;Margin:0;width:174px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">Перейти к оплате</a></span></td>
+                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">{{ __('mail.go_to_pay', locale: $lang) }}</a></span></td>
                                                         </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
@@ -858,7 +861,7 @@
                                                 <td class="es-m-p20b" align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">Перейти к оплате</a></span></td>
+                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">{{ __('mail.go_to_pay', locale: $lang) }}</a></span></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -869,7 +872,7 @@
                                                 <td align="center" style="padding:0;Margin:0;width:173px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                                                         <tr>
-                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">Перейти к оплате</a></span></td>
+                                                            <td align="center" style="padding:0;Margin:0"><span class="es-button-border" style="border-style:solid;border-color:#2CB543;background:#D1AF7B;border-width:0px;display:block;border-radius:4px;width:auto"><a href="" class="es-button" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:12px;border-style:solid;border-color:#D1AF7B;border-width:10px 20px 10px 20px;display:block;background:#D1AF7B;border-radius:4px;font-family:roboto, 'helvetica neue', helvetica, arial, sans-serif;font-weight:normal;font-style:normal;line-height:19px;width:auto;text-align:center;border-left-width:20px;border-right-width:20px">{{ __('mail.go_to_pay', locale: $lang) }}</a></span></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -893,7 +896,8 @@
                                                             <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;padding-bottom:5px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:36px;color:#131313;font-size:24px">@diamondsmatch</p></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;padding-bottom:5px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:21px;color:#131313;font-size:14px">Присоединяйтесь к нам в Instagram</p></td>
+                                                            <td align="center" class="es-m-txt-c" style="padding:0;Margin:0;padding-bottom:5px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:21px;color:#131313;font-size:14px">
+                                                                {{ __('mail.connecting_instagram', locale: $lang) }}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
@@ -963,13 +967,13 @@
                                                 <td align="center" valign="top" style="padding:0;Margin:0;width:600px">
                                                     <table cellpadding="0" cellspacing="0" width="100%" bgcolor="#f0f3fe" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:separate;border-spacing:0px;background-color:#F0F3FE;border-radius:20px" role="presentation">
                                                         <tr>
-                                                            <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#999999;font-size:12px">Номер телефона<br><a href="tel:+13234515655" style="color:#000000">+1-323-451-5655</span><br><br></p></td>
+                                                            <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#999999;font-size:12px">{{ __('mail.phone', locale: $lang) }}<br><a href="tel:+13234515655" style="color:#000000">+1-323-451-5655</a></span><br><br></p></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#999999;font-size:12px">Почта<br><a href="mailto:сontact@diamondsmatch.com" style="color:#000000">сontact@diamondsmatch.com</span></p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#999999;font-size:12px"><br></p></td>
+                                                            <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#999999;font-size:12px">{{ __('mail.phone', locale: $lang) }}<br><a href="mailto:сontact@diamondsmatch.com" style="color:#000000">сontact@diamondsmatch.com</span></a></p><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#999999;font-size:12px"><br></p></td>
                                                         </tr>
                                                         <tr>
-                                                            <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#131313;font-size:12px"><font color="#999999">Адрес<br></font><span style="color:#000000">2554 Lincoln Blvd #501, Venice,CA 90291, United&nbsp;States</span><br><br></p></td>
+                                                            <td align="center" bgcolor="#ffffff" style="padding:0;Margin:0"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:'times new roman', times, baskerville, georgia, serif;line-height:18px;color:#131313;font-size:12px"><font color="#999999">{{ __('mail.address', locale: $lang) }}<br></font><span style="color:#000000">2554 Lincoln Blvd #501, Venice,CA 90291, United&nbsp;States</span><br><br></p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>

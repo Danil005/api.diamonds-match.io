@@ -31,7 +31,8 @@ class SendPrice extends Mailable
     public function build()
     {
         return $this->from(env('MAIL_USERNAME'))->view('mails.sendPrice', [
-          'name' => $this->name
+            'name' => $this->name,
+            'lang' => 'ru'
         ])->subject('Наши тарифы');
     }
 }
