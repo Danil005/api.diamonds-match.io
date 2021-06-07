@@ -532,7 +532,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $path = str_replace('public/', 'storage/', $upload);
 
             $this->response()->success()->setMessage('Файл загружен')->setData([
-                'path' => $path,
+                'path' => env('APP_URL').'/'.$path,
             ])->send();
         } else {
             $paths = [];

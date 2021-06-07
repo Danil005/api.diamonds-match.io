@@ -32,6 +32,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('match3', function() {
+    $questionnaire = new \App\Models\Questionnaire();
+    (new \App\Services\MatchProcessorV3($questionnaire))->start($questionnaire);
+});
+
 Route::get('/online', function() {
     User::where('online', true)->update(['online' => false]);
 });
