@@ -604,7 +604,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'application' => $application,
             'histories' => $history,
             'appointed_data' => QuestionnaireAppointedDate::where('questionnaire_id', $request->id)->first(),
-            'matched_count' => QuestionnaireMatch::where('questionnaire_id', $request->id)->where('with_questionnaire_id', '!=', $request->id)->count()
+            'matched_count' => QuestionnaireMatch::where('questionnaire_id', $request->id)->where('with_questionnaire_id', '!=', $request->id)->limit(8)->count()
         ];
 
         $zodiac = $this->zodiacSigns();
