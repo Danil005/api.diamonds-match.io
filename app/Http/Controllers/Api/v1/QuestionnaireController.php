@@ -1430,7 +1430,8 @@ class QuestionnaireController extends QuestionnaireUtils
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
         $qm = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id);
-        $qm = QuestionnaireMatch::where('with_questionnaire_id', $qm->with_questionnaire_id);
+        $d = $qm->first();
+        $qm = QuestionnaireMatch::where('with_questionnaire_id', $d->with_questionnaire_id);
         $total = $qm->count();
 
         if ($request->has('page')) {
