@@ -171,7 +171,8 @@ Route::get('/sendMail', function(\Illuminate\Http\Request $request) {
     $name = $request->get('name');
 
     Mail::to($email)->send(new \App\Mail\SendPrice(
-        name: $name ?? 'Тест'
+        name: $name ?? 'Тест',
+        lang: 'en'
     ));
 });
 
