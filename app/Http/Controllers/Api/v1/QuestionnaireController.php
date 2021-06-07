@@ -1029,6 +1029,12 @@ class QuestionnaireController extends QuestionnaireUtils
             ->join('questionnaire_my_information as information', 'information.id', '=', 'q.my_information_id')
             ->first(['questionnaire_id', 'with_questionnaire_id', 'name', 'total', 'appearance', 'information', 'about_me', 'test', 'personal_qualities']);
 
+        $matching = QuestionnaireMatch::where('with_questionnaire_id', $withQuestionnaire->id)
+            ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.questionnaire_id')
+            ->join('questionnaire_my_information as information', 'information.id', '=', 'q.my_information_id')
+            ->first(['questionnaire_id', 'with_questionnaire_id', 'name', 'total', 'appearance', 'information', 'about_me', 'test', 'personal_qualities']);
+
+
         $partner = QuestionnaireMatch::where('with_questionnaire_id', $withQuestionnaire->id)
             ->join('questionnaires as q', 'q.id', '=', 'questionnaire_matches.with_questionnaire_id')
             ->join('questionnaire_my_information as information', 'information.id', '=', 'q.my_information_id')
