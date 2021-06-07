@@ -40,7 +40,7 @@ class PptxCreator
         }
 
         $slides = '';
-        for($i = 1; $i <= 5; $i++) $slides .= '/var/www/html/storage/app/public/pptx/generate/'.$id.'/s'.$i . ' ';
+        for($i = 1; $i <= 5; $i++) $slides .= '/var/www/html/storage/app/public/pptx/generate/'.$id.'/s'.$i . '.jpg ';
         $slides = trim($slides);
         echo $slides;
 
