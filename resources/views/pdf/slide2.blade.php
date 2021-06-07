@@ -10,7 +10,7 @@
 
         <div class="circle" style="height: 350px;width: 350px;"></div>
         <div class="photo">
-            <img class="personPhoto" alt="" src="{{ asset('assets/img/photo.jpg') }}">
+            <img class="personPhoto" alt="" src="{{ $q['photos'][0] }}">
         </div>
 
         <div class="name">{{ $q['name'] }}</div>
