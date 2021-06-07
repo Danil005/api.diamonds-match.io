@@ -1068,7 +1068,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($item == null) continue;
 
-            if ($item == $partnerAppearance[$key] && $item != null && $partnerAppearance[$key] != null) {
+            if ($item == $partnerAppearance[$key] || $item == 'no_matter' || $item == 'any') {
                 $requirements['my'][$key] = true;
             } else {
                 $requirements['my'][$key] = false;
@@ -1090,7 +1090,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if ($item == null) continue;
 
-            if ($item == $myAppearance[$key]) {
+            if ($item == $myAppearance[$key] || $item == 'no_matter' || $item == 'any') {
                 $requirements['partner'][$key] = true;
             } else {
                 $requirements['partner'][$key] = false;
