@@ -71,7 +71,7 @@
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Владение языками:</td>
-                    <td class="right" style="width: 300px">{{ $q['languages'] ?? 'Не указано' }}</td>
+                    <td class="right" style="width: 300px">{{ ($q['languages'] == "" ? 'Не указано' : $q['languages']) ?? 'Не указано' }}</td>
                 </tr>
             </table>
         </div>
@@ -85,24 +85,24 @@
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
                     <td class="left" style="margin-top: 50px">Образование:</td>
-                    <td class="right" style="width: 300px">{{ $q['education'] ?? 'Овен' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['education'] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Работа:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '189см' }}</td>
+                    <td class="right" style="width: 300px">{{ ($q['work'] == 'Работаю' ? $q['work'] . ', '. $q['work_name'] : $q['work']) ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Зарплата:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['salary'] ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Проблемы со здоровьем:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['health_problems'] ?? 'Нет' }}</td>
                 </tr>
 
                 <tr>
                     <td class="left" style="margin-top: 50px">Аллергия:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['allergies'] ?? 'Нет' }}</td>
                 </tr>
             </table>
         </div>
