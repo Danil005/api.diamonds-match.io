@@ -179,7 +179,7 @@ body {
   vertical-align: baseline;
 }
 .page .center .info-table td.left {
-  padding-top: 15px;
+  padding-top: 25px;
   text-align: left;
   font-family: Yu Gothic UI, sans-serif;
   font-weight: bold;
@@ -192,7 +192,7 @@ body {
   word-break: normal;
   line-break: auto;
   hyphens: manual;
-  padding-top: 15px;
+  padding-top: 25px;
   padding-left: 30px;
 }
 .page .img-rectangle {
