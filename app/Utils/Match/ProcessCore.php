@@ -76,7 +76,6 @@ trait ProcessCore
         # Получаем кол-во элементов, которые сошлись
         $result = $my->filter(fn($item, $key) => $item === $partner[$key])->count();
 
-        dd($result, $my, $partner);
 
         # Если есть поля, которые нужно проверить для совместимости
         if (!empty($similarFields)) {
@@ -86,34 +85,34 @@ trait ProcessCore
                 if (similar_text::similarText($my[$key], $partner[$key]) > 40)
                     $result += 1;
             }
-        }
 
-        # Удаляем разницу, если будет такова ситуация, когда результат больше кол-ва
-        if ($result > count($fields)) {
-            # Вычисляем разницу по модулю
-            $division = abs($result - count($fields));
-            $result -= $division;
-        }
-
-        # Доп секции
-        if( isset($partner['age']) ) {
-            $agePartner = explode(',', $partner['age']);
-            if( $my['age'] >= (int)$agePartner[0] && $my['age'] <= (int)$agePartner[1]  ) {
-                $result+=1;
+            # Удаляем разницу, если будет такова ситуация, когда результат больше кол-ва
+            if ($result > count($fields)) {
+                # Вычисляем разницу по модулю
+                $division = abs($result - count($fields));
+                $result -= $division;
             }
-        }
 
-        if( isset($partner['height']) ) {
-            $agePartner = explode(',', $partner['height']);
-            if( $my['height'] >= (float)$agePartner[0] && $my['height'] <= (float)$agePartner[1]  ) {
-                $result+=1;
+            # Доп секции
+            if( isset($partner['age']) ) {
+                $agePartner = explode(',', $partner['age']);
+                if( $my['age'] >= (int)$agePartner[0] && $my['age'] <= (int)$agePartner[1]  ) {
+                    $result+=1;
+                }
             }
-        }
 
-        if( isset($partner['weight']) ) {
-            $agePartner = explode(',', $partner['weight']);
-            if( $my['weight'] >= (int)$agePartner[0] && $my['weight'] <= (int)$agePartner[1]  ) {
-                $result+=1;
+            if( isset($partner['height']) ) {
+                $agePartner = explode(',', $partner['height']);
+                if( $my['height'] >= (float)$agePartner[0] && $my['height'] <= (float)$agePartner[1]  ) {
+                    $result+=1;
+                }
+            }
+
+            if( isset($partner['weight']) ) {
+                $agePartner = explode(',', $partner['weight']);
+                if( $my['weight'] >= (int)$agePartner[0] && $my['weight'] <= (int)$agePartner[1]  ) {
+                    $result+=1;
+                }
             }
         }
 
