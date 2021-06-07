@@ -89,7 +89,7 @@
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Работа:</td>
-                    <td class="right" style="width: 300px">{{ ($q['work'] == 'Работаю' ? $q['work'] . ', '. $q['work_name'] : $q['work']) ?? '----' }}</td>
+                    <td class="right" style="width: 300px">{{ ($q['work'] == 'Работаю' ? $q['work_name'] : $q['work']) ?? '----' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Зарплата:</td>
