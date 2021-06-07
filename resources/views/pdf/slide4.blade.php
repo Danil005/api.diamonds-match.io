@@ -46,7 +46,7 @@
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Дети:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '189см' }}</td>
+                    <td class="right" style="width: 300px">{{ ($q['children'] ? 'Есть, '.$q['children_count'] : 'Нет') ?? '189см' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Хотите ли детей:</td>
