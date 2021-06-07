@@ -1432,21 +1432,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $qm = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id);
         $total = $qm->count();
 
-        if ($request->has('page')) {
-            $limit = (int)$request->limit == 0 ? 1 : (int)$request->limit;
-            $offset = (int)$request->page - 1;
-            $offset = ($offset == 0) ? 0 : $offset + $limit;
-            $qm = $qm->offset($offset);
-            $qm = $qm->limit((int)$request->limit);
-            $total = $qm->count();
-            $pagination = [
-                'total' => $total,
-                'offset' => $offset + 1,
-                'limit' => (int)$request->limit,
-                'page_available' => ceil($total / $limit)
-            ];
-        }
-
+      
         $qm = $qm->orderBy('total', 'DESC')->get();
 
 
