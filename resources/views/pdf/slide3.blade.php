@@ -6,7 +6,7 @@
 
         <div style="position: relative;margin-top: -40px">
             <div class="img-rectangle"
-                 style="background: url({{ $q['photos'][0] }}) 50% 50% no-repeat;"></div>
+                 style="background: url({{ $q['photos'][0] }}) 30% 30% no-repeat;"></div>
         </div>
         <div class="photo-square-list m-t-25">
             @if(isset($q['photos'][1]))
