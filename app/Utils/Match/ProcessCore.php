@@ -91,13 +91,6 @@ trait ProcessCore
                     $result += 1;
             }
 
-            # Удаляем разницу, если будет такова ситуация, когда результат больше кол-ва
-            if ($result > count($fields)) {
-                # Вычисляем разницу по модулю
-                $division = abs($result - count($fields));
-                $result -= $division;
-            }
-
             # Доп секции
             if( isset($partner['age']) ) {
                 $agePartner = explode(',', $partner['age']);
@@ -119,6 +112,13 @@ trait ProcessCore
                     $result+=1;
                 }
             }
+        }
+
+        # Удаляем разницу, если будет такова ситуация, когда результат больше кол-ва
+        if ($result > count($fields)) {
+            # Вычисляем разницу по модулю
+            $division = abs($result - count($fields));
+            $result -= $division;
         }
 
         if( $count == null ) {
