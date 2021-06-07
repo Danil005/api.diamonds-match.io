@@ -78,7 +78,7 @@ class SendPrice extends Mailable
             return false !== stristr($item, $country);
         })?->first();
 
-        if( $ru || $en ) {
+        if( !empty($ru) || !empty($en) ) {
             $pricing = 'eur';
         } else if($country == 'Россия' || $country == 'россия' || $country == 'Russia') {
             $pricing = 'rub';
@@ -99,7 +99,7 @@ class SendPrice extends Mailable
         return $this->from(env('MAIL_USERNAME'))->view('mails.sendPrice', [
             'name' => $this->name,
             'lang' => $this->lang,
-            'pricing' => $this->prices[$this->pricing('США')]
+            'pricing' => $this->prices[$this->pricing('Италия')]
         ])->subject('Наши тарифы');
     }
 }
