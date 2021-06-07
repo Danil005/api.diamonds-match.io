@@ -6,6 +6,7 @@ use App\Models\Countries;
 use App\Models\Questionnaire;
 use App\Models\QuestionnaireFiles;
 use App\Models\QuestionnaireUploadPhoto;
+use App\Utils\Response;
 use App\Utils\TranslateFields;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -13,13 +14,17 @@ use Illuminate\Support\Facades\Storage;
 
 class PptxCreator
 {
-    use TranslateFields;
+    use TranslateFields, Response;
 
     public function create(Request $request)
     {
         $id = $request->questionnaire_id;
         Storage::makeDirectory('public/pptx/generate/'.$id);
-        sleep(2);
+
+        $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $id)->get(['id', 'path'])?->toArray();
+
+        if( empty($photos) )
+            $this->response()->error()->setMessage('Чтобы создать презентацию необходимо добавить хотя бы одну фотографию')->send();
 
         $connection = ssh2_connect('45.141.79.57', 22);
         ssh2_auth_password($connection, env('SSH_U'), env('SSH_P'));
