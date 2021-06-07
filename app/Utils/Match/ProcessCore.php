@@ -72,9 +72,15 @@ trait ProcessCore
 
         # Внешность партнера
         $partner = $this->currentPartner->only($fields);
+        $skip = 0;
 
         # Получаем кол-во элементов, которые сошлись
-        $result = $my->filter(function($item, $key) use($partner){
+        $result = $my->filter(function($item, $key) use($partner, &$skip){
+            if(!isset($partner[$key])) {
+                $skip+=1;
+                return false;
+            }
+
             if( $item === 'no_matter' || $partner[$key] === 'no_matter' )
                 return true;
 
@@ -119,6 +125,7 @@ trait ProcessCore
             # Вычисляем разницу по модулю
             $division = abs($result - count($fields));
             $result -= $division;
+            $result -= $skip;
         }
 
         if( $count == null ) {
