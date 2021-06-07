@@ -71,11 +71,11 @@ class SendPrice extends Mailable
         ]);
 
         $ru = collect($countriesEuropeRu)->filter(function ($item) use ($country) {
-            return false !== stristr($item->name, $country);
+            return false !== stristr($item, $country);
         })?->first();
 
         $en = collect($countriesEuropeEn)->filter(function ($item) use ($country) {
-            return false !== stristr($item->name, $country);
+            return false !== stristr($item, $country);
         })?->first();
 
         if( $ru || $en ) {
