@@ -1450,7 +1450,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $item->with_questionnaire_id)->first();
             $myInformation = QuestionnaireMyInformation::where('id', $with_questionnaire->my_information_id)->first();
             $q = QuestionnaireMailing::where('questionnaire_id', $item->questionnaire_id)->where('added_questionnaire_id', $with_questionnaire->id)->exists();
-            $qms = QuestionnaireMatch::where('with_questionnaire_id', $item->with_questionnaire_id)->first();
+            $qms = QuestionnaireMatch::where('questionnaire_id', $item->questionnaire_id)->where('with_questionnaire_id', $item->with_questionnaire_id)->first();
 
 
             $result[] = [
