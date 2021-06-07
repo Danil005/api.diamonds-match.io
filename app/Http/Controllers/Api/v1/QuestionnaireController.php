@@ -1066,9 +1066,9 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($myAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if ($item == null) continue;
+            if( $item == null || $partnerAppearance[$key] == null ) continue;
 
-            if ($item == $partnerAppearance[$key] && $item != null && $partnerAppearance[$key] != null) {
+            if ($item == $partnerAppearance[$key] || $item == 'no_matter' || $item == 'any' || $partnerAppearance[$key] == 'no_matter' || $partnerAppearance[$key] == 'any') {
                 $requirements['my'][$key] = true;
             } else {
                 $requirements['my'][$key] = false;
@@ -1088,9 +1088,10 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($partnerAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if ($item == null) continue;
+            if( $item == null || $myAppearance[$key] == null) continue;
 
-            if ($item == $myAppearance[$key]) {
+
+            if ($item == $myAppearance[$key] || $item == 'no_matter' || $item == 'any' || $myAppearance[$key] == 'no_matter' || $myAppearance[$key] == 'any') {
                 $requirements['partner'][$key] = true;
             } else {
                 $requirements['partner'][$key] = false;

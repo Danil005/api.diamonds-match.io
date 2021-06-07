@@ -400,7 +400,7 @@ class MatchProcessorV3
 
                 $appearancesResult = round(($r1 + $r2) / 2);
 
-                if( $q1->id == 29 && $q2->id == 52 )
+                if( $q1->id == 25 && $q2->id == 52 )
                     dd($appearancesResult, $r1, $r2, '1: ', $appearancesWant1, $appearancesMy1, '2:', $appearancesWant2, $appearancesMy2);
 
                     # Сравнение качеств
