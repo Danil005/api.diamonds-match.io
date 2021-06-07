@@ -230,7 +230,7 @@ class MatchProcessorV2
             }
         }
 
-//        $this->makeTotal();
+        $this->makeTotal();
     }
 
     private function makeTotal()
