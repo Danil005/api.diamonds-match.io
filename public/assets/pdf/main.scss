@@ -197,6 +197,7 @@ $value: 0;
                 vertical-align: baseline;
 
                 &.left {
+                    padding-top: 15px;
                     text-align: left;
                     font-family: Yu Gothic UI, sans-serif;
                     font-weight: bold;
@@ -210,6 +211,8 @@ $value: 0;
                     word-break: normal;
                     line-break: auto;
                     hyphens: manual;
+                    padding-top: 15px;
+                    padding-left: 30px;
                 }
             }
         }
