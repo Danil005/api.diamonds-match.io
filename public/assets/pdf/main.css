@@ -118,12 +118,13 @@ body {
 }
 .page .photo {
   position: relative;
-  width: 350px;
-  height: 350px;
-  overflow: hidden;
-  border-radius: 50%;
-  margin: -250px auto 0;
-  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .page .personPhoto {
   width: auto;
@@ -1054,17 +1055,6 @@ body {
 
 .m-l-100 {
   margin-left: 100px;
-}
-
-.page .photo img {
-  position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .page .img-rectangle {
