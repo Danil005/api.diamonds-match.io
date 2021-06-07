@@ -169,10 +169,13 @@ Route::get('/delete/{id}', function($id) {
 Route::get('/sendMail', function(\Illuminate\Http\Request $request) {
     $email = $request->get('email');
     $name = $request->get('name');
+    $country = $request->get('country');
+    $lang = $request->get('lang');
 
     Mail::to($email)->send(new \App\Mail\SendPrice(
         name: $name ?? 'Тест',
-        lang: 'en'
+        lang: $lang,
+        country: $country,
     ));
 });
 
