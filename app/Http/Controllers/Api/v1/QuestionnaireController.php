@@ -593,6 +593,10 @@ class QuestionnaireController extends QuestionnaireUtils
             $history[$key]['created_at'] = Carbon::createFromTimeString($item['created_at'])->format('j F Y');
         }
 
+        $countMatch = QuestionnaireMatch::where('questionnaire_id', $request->id)->where('with_questionnaire_id', '!=', $request->id)->count();
+        if( $countMatch >= 8 )
+            $countMatch = 8;
+
         $result = [
             'partner_appearance' => collect(QuestionnairePartnerAppearance::where('id', $questionnaire->partner_appearance_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
             'personal_qualities_partner' => collect(QuestionnairePersonalQualitiesPartner::where('id', $questionnaire->personal_qualities_partner_id)->first())->except(['id', 'created_at', 'updated_at'])->toArray(),
@@ -604,7 +608,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'application' => $application,
             'histories' => $history,
             'appointed_data' => QuestionnaireAppointedDate::where('questionnaire_id', $request->id)->first(),
-            'matched_count' => QuestionnaireMatch::where('questionnaire_id', $request->id)->where('with_questionnaire_id', '!=', $request->id)->limit(8)->count()
+            'matched_count' => $countMatch
         ];
 
         $zodiac = $this->zodiacSigns();
