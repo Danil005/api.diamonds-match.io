@@ -17,39 +17,39 @@
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Любите ли вы домашних животных:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Овен' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['pets'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Есть ли домашние животные и какие:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '189см' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['have_pets'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Книги или фильмы:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['films_or_books'] ?? '50кг' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Отдых:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Атлетическое' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['relax'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Страны, в которых были:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Блонд' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['countries_was'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Страны, в которых мечтает побывать:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Блонд' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['countries_dream'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Лучший подарок для вас:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Блонд' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['best_gift'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Хобби:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Блонд' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['hobbies'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
                     <td class="left" style="margin-top: 50px">Жизненное кредо:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Блонд' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['kredo'] ?? 'Не указано' }}</td>
                 </tr>
             </table>
         </div>
