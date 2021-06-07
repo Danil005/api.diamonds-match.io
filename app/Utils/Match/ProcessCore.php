@@ -76,6 +76,8 @@ trait ProcessCore
         # Получаем кол-во элементов, которые сошлись
         $result = $my->filter(fn($item, $key) => $item === $partner[$key])->count();
 
+        dd($result, $my, $partner);
+
         # Если есть поля, которые нужно проверить для совместимости
         if (!empty($similarFields)) {
             foreach ($similarFields as $key) {
