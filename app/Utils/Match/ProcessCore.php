@@ -74,7 +74,12 @@ trait ProcessCore
         $partner = $this->currentPartner->only($fields);
 
         # Получаем кол-во элементов, которые сошлись
-        $result = $my->filter(fn($item, $key) => $item === $partner[$key])->count();
+        $result = $my->filter(function($item, $key) use($partner){
+            if( $item === 'no_matter' || $partner[$key] === 'no_matter' )
+                return true;
+
+            return $item === $partner[$key];
+        })->count();
 
 
         # Если есть поля, которые нужно проверить для совместимости
