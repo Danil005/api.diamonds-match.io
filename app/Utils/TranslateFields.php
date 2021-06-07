@@ -673,12 +673,14 @@ trait TranslateFields
                 'one' => $this->fem($sex, '', ['Одна', 'Один']),
                 'divorced' => $this->fem($sex, '', ['Разведена', 'Разведен']),
                 'widow' => $this->fem($sex, '', ['Вдова', 'Вдов']),
+                null => 'Не задано'
             ];
         } else {
             $data = [
                 'one' => $this->fem($sex, '', ['Одна', 'Один']),
                 'divorced' => $this->fem($sex, '', ['Разведена', 'Разведен']),
                 'widow' => $this->fem($sex, '', ['Вдова', 'Вдов']),
+                null => 'Не задано'
             ];
         }
 
@@ -697,13 +699,15 @@ trait TranslateFields
             $data = [
                 'yes' => 'Да',
                 'no' => 'Нет',
-                'maybe' => 'Возможно'
+                'maybe' => 'Возможно',
+                null => 'Не задано'
             ];
         } else {
             $data = [
                 'yes' => 'Да',
                 'no' => 'Нет',
-                'maybe' => 'Возможно'
+                'maybe' => 'Возможно',
+                null => 'Не задано'
             ];
         }
 

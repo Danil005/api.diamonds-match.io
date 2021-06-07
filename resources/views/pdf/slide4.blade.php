@@ -17,23 +17,23 @@
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
                     <td class="left" style="margin-top: 50px">Знак зодиака:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Овен' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['zodiac_signs'] ?? 'Овен' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Рост:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '189см' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['height'] .'см' ?? '189см' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Вес:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['weight'] .'кг' ?? '50кг' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Телосложение:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Атлетическое' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['body_type'] ?? 'Атлетическое' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Цвет волос:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Блонд' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['hair_length'] ?? 'Блонд' }}</td>
                 </tr>
             </table>
         </div>
@@ -42,7 +42,7 @@
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
                     <td class="left" style="margin-top: 50px">Статус:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Овен' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['marital_status'] ?? 'Овен' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Дети:</td>
@@ -50,7 +50,7 @@
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Хотите ли детей:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['children_desire'] ?? '50кг' }}</td>
                 </tr>
             </table>
         </div>
