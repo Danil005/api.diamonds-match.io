@@ -1430,8 +1430,6 @@ class QuestionnaireController extends QuestionnaireUtils
             $this->response()->setMessage('ID анкеты не указан')->error()->send();
 
         $qm = QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id);
-        $d = $qm->first();
-        $qm = QuestionnaireMatch::where('with_questionnaire_id', $d->with_questionnaire_id);
         $total = $qm->count();
 
         if ($request->has('page')) {
@@ -1458,6 +1456,8 @@ class QuestionnaireController extends QuestionnaireUtils
             $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $item->with_questionnaire_id)->first();
             $myInformation = QuestionnaireMyInformation::where('id', $with_questionnaire->my_information_id)->first();
             $q = QuestionnaireMailing::where('questionnaire_id', $item->questionnaire_id)->where('added_questionnaire_id', $with_questionnaire->id)->exists();
+            $qms = QuestionnaireMatch::where('with_questionnaire_id', $item->with_questionnaire_id)->first();
+
 
             $result[] = [
                 'questionnaire_id' => (int)$request->questionnaire_id,
@@ -1466,12 +1466,12 @@ class QuestionnaireController extends QuestionnaireUtils
                 'city' => $myInformation->city,
                 'photo' => (isset($photos['path'])) ? $photos['path'] : null,
                 'match' => [
-                    'total' => round((float)$item->total),
-                    'appearance' => round((float)$item->appearance),
-                    'personal_qualities' => round((float)$item->personal_qualities),
-                    'form' => round((float)$item->information),
-                    'about_me' => round((float)$item->about_me),
-                    'test' => round((float)$item->test),
+                    'total' => round((float)$qms->total),
+                    'appearance' => round((float)$qms->appearance),
+                    'personal_qualities' => round((float)$qms->personal_qualities),
+                    'form' => round((float)$qms->information),
+                    'about_me' => round((float)$qms->about_me),
+                    'test' => round((float)$qms->test),
                 ],
                 'in_mailing' => $q
             ];
