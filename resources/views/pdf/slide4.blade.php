@@ -59,19 +59,19 @@
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
                     <td class="left" style="margin-top: 50px">Курение:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Овен' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['smoking'] ?? 'Овен' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Алкоголь:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '189см' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['alcohol'] ?? '189см' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Вероисповедание:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['religion'] ?? '50кг' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Владение языками:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? '50кг' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['languages'] ?? 'Не указано' }}</td>
                 </tr>
             </table>
         </div>
@@ -85,7 +85,7 @@
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
                     <td class="left" style="margin-top: 50px">Образование:</td>
-                    <td class="right" style="width: 300px">{{ $country ?? 'Овен' }}</td>
+                    <td class="right" style="width: 300px">{{ $q['education'] ?? 'Овен' }}</td>
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">Работа:</td>
