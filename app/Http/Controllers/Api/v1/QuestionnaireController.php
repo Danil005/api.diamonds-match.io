@@ -435,7 +435,9 @@ class QuestionnaireController extends QuestionnaireUtils
 
         if ($request->has('email')) {
             Mail::to($request->email)->send(new \App\Mail\SendPrice(
-                name: $myInformation->name
+                name: $myInformation->name,
+                lang: $request->lang ?? 'ru',
+                country: explode(',',$myInformation['city'])[0]
             ));
         }
 

@@ -13,6 +13,7 @@ class SendPrice extends Mailable
 
     private string $name = '';
     private string $lang = '';
+    private string $country = '';
 
     private array $prices = [
         'rub' => [
@@ -46,10 +47,11 @@ class SendPrice extends Mailable
      *
      * @return void
      */
-    public function __construct(string $name, string $lang = 'ru')
+    public function __construct(string $name, string $lang = 'ru', string $country = 'Россия')
     {
         $this->name = $name;
         $this->lang = $lang;
+        $this->country = $country;
     }
 
     private function pricing(string $country)
@@ -99,7 +101,7 @@ class SendPrice extends Mailable
         return $this->from(env('MAIL_USERNAME'))->view('mails.sendPrice', [
             'name' => $this->name,
             'lang' => $this->lang,
-            'pricing' => $this->prices[$this->pricing('Италия')]
+            'pricing' => $this->prices[$this->pricing($this->country)]
         ])->subject('Наши тарифы');
     }
 }
