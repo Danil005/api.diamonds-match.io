@@ -366,9 +366,8 @@ class MatchProcessorV3
             foreach ($questionnaires as $q2) {
                 if ($q1->id == $q2->id) continue;
 
-//
-//                if( !$this->validNotMatch($q1->id, $q2->id) )
-//                    continue;
+                if( !$this->validNotMatch($q1->id, $q2->id) )
+                    continue;
 
 
                 $temp_q1 = [
