@@ -1090,12 +1090,12 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($appearancesWant1 as $key=>$item) {
             if( $key == 'sex' ) continue;
 
-            if ($item === 'no_matter' || $appearancesMy2[$key] === 'no_matter') {
+            if ($item === 'no_matter' || $appearancesMy1[$key] === 'no_matter') {
                 $requirements['my'][$key] = true;
                 continue;
             }
 
-            if ($item === 'any' || $appearancesMy2[$key] === 'any') {
+            if ($item === 'any' || $appearancesMy1[$key] === 'any') {
                 $requirements['my'][$key] = true;
                 continue;
             }
