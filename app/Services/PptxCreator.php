@@ -201,14 +201,14 @@ class PptxCreator
         $moving = [];
 
         if ($questionnaire['moving_country']) {
-            $moving[] = 'В другую страну';
+            $moving[] = $questionnaire['lang'] == 'ru' ? 'В другую страну' : 'To another country';
         }
 
         if ($questionnaire['moving_city']) {
-            $moving[] = 'В другой город';
+            $moving[] = $questionnaire['lang'] == 'ru' ? 'В другую страну' : 'To another city';
         }
 
-        $result['moving'] = empty($moving) ? 'Все равно' : implode(', ', $moving);
+        $result['moving'] = empty($moving) ? ($questionnaire['lang'] == 'ru' ? 'Не важно' : 'Doesn\'t matter') : implode(', ', $moving);
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $questionnaireId)->get(['id', 'path'])?->toArray();
         foreach ($photos as $key=>$item) {

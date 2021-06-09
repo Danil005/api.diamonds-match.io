@@ -353,11 +353,11 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'have_pets' => 'Есть животные',
-                'no_pets' => 'Нет животных',
-                'love_not_home' => 'Люблю, но нет дома',
-                'not_love' => 'Не люблю',
-                'neutral' => 'Нейтрально'
+                'have_pets' => 'There are animals',
+                'no_pets' => 'No animals',
+                'love_not_home' => 'I love, but not at home',
+                'not_love' => 'I don\'t like',
+                'neutral' => 'Neutral'
             ];
         }
 
@@ -380,9 +380,9 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'film' => 'Фильмы',
-                'book' => 'Книги',
-                'film,book' => 'Книги и фильмы',
+                'film' => 'Films',
+                'book' => 'Books',
+                'film,book' => 'Books and Films',
             ];
         }
 
@@ -405,9 +405,9 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'beach' => 'Пляж',
-                'extreme' => 'Экстремальный',
-                'calm' => 'Спокойный',
+                'beach' => 'Beach',
+                'extreme' => 'Extreme',
+                'calm' => 'Calm',
             ];
         }
 
@@ -431,10 +431,10 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'dont_smoking' => 'Не курю',
-                'rarely' => 'Редко',
-                'smoking' => 'Курю',
-                'no_matter' => 'Не важно'
+                'dont_smoking' => 'I don\'t smoke',
+                'rarely' => 'Seldom',
+                'smoking' => 'I smoke',
+                'no_matter' => 'No matter'
             ];
         }
 
@@ -459,11 +459,11 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'no' => 'Не пью',
-                'rarely' => 'Редко',
-                'often' => 'Часто',
-                'very_often' => 'Очень часто',
-                'no_matter' => 'Не важно'
+                'no' => 'I don\'t drink',
+                'rarely' => 'Seldom',
+                'often' => 'Often',
+                'very_often' => 'Very often',
+                'no_matter' => 'No matter'
             ];
         }
 
@@ -491,14 +491,14 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'christianity' => 'Христианство',
-                'judaism' => 'Иудаизм',
-                'catholicism' => 'Католицизм',
-                'islam' => 'Ислам',
-                'buddhism' => 'Буддизм',
-                'atheism' => 'Атеизм',
-                'hinduism' => 'Индуизм',
-                'no_matter' => 'Не важно'
+                'christianity' => 'Christianity',
+                'judaism' => 'Judaism',
+                'catholicism' => 'Catholicism',
+                'islam' => 'Islam',
+                'buddhism' => 'Buddhism',
+                'atheism' => 'Atheism',
+                'hinduism' => 'Hinduism',
+                'no_matter' => 'No matter'
             ];
         }
 
@@ -522,10 +522,10 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'playing_sports' => 'Активно занимаюсь',
-                'sometimes' => 'Иногда',
-                'not_engaged' => 'Не занимаюсь',
-                'no_matter' => 'Не важно'
+                'playing_sports' => 'I am actively engaged in',
+                'sometimes' => 'Sometimes',
+                'not_engaged' => 'I don\'t do',
+                'no_matter' => 'No matter'
             ];
         }
 
@@ -553,14 +553,14 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'middle' => 'Среднее',
-                'college' => 'Колледж',
-                'unfinished_higher' => 'Незаконченное высшее',
-                'specialist' => 'Специалист',
-                'bachelor' => 'Бакалавриат',
-                'master' => 'Магистр',
-                'phd' => 'Доктор наук',
-                'no_matter' => 'Не важно'
+                'middle' => 'Average',
+                'college' => 'College',
+                'unfinished_higher' => 'Unfinished higher',
+                'specialist' => 'Specialist',
+                'bachelor' => 'Undergraduate',
+                'master' => 'Master',
+                'phd' => 'Ph.D',
+                'no_matter' => 'No matter'
             ];
         }
 
@@ -585,11 +585,11 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'work' => 'Работаю',
-                'temp_no_work' => 'Временно без работы',
-                'no_work' => 'Нет работы',
-                'study' => 'Учусь',
-                'pensioner' => 'Пенсионер',
+                'work' => 'Work',
+                'temp_no_work' => 'Temporarily out of work',
+                'no_work' => 'No job',
+                'study' => 'Learning',
+                'pensioner' => 'Pensioner',
             ];
         }
 
@@ -612,9 +612,9 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'owl' => 'Сова',
-                'lark' => 'Жаворонок',
-                'differently' => 'По-разному',
+                'owl' => 'Owl',
+                'lark' => 'Lark',
+                'differently' => 'Differently',
             ];
         }
 
@@ -637,9 +637,9 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'yes' => 'Да',
-                'no' => 'Нет',
-                'sometimes' => 'Иногда',
+                'yes' => 'Yes',
+                'no' => 'No',
+                'sometimes' => 'Sometimes',
             ];
         }
 
@@ -652,6 +652,9 @@ trait TranslateFields
 
     public function salary(string $salary)
     {
+        $lang = Cache::get('lang');
+        $from = $lang == 'ru' ? 'От ' : 'From ';
+        $to = $lang == 'ru' ? ' до ' : ' to ';
         $temp = $salary;
         $salary = explode(',', $salary);
 
@@ -660,7 +663,7 @@ trait TranslateFields
                 . ' до ' . number_format($salary[1], 0, '.', ' ') . $salary[2] :
                 'От ' . number_format($salary[0], 0, '.', ' ') . $salary[2];
         } catch (\Exception) {
-            return $temp == 0 ? 'Не указана' : $temp;
+            return $temp == 0 ? ($lang == 'ru' ? 'Не указано' : 'Not specified') : $temp;
         }
     }
 
@@ -677,10 +680,10 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'one' => $this->fem($sex, '', ['Одна', 'Один']),
-                'divorced' => $this->fem($sex, '', ['Разведена', 'Разведен']),
-                'widow' => $this->fem($sex, '', ['Вдова', 'Вдов']),
-                null => 'Не задано'
+                'one' => 'One',
+                'divorced' => 'Divorced',
+                'widow' => 'Widow',
+                null => 'Not set'
             ];
         }
 
@@ -704,10 +707,10 @@ trait TranslateFields
             ];
         } else {
             $data = [
-                'yes' => 'Да',
-                'no' => 'Нет',
-                'maybe' => 'Возможно',
-                null => 'Не задано'
+                'yes' => 'Yes',
+                'no' => 'No',
+                'maybe' => 'Maybe',
+                null => 'Not set'
             ];
         }
 
