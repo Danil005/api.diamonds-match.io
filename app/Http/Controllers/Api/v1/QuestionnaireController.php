@@ -1088,10 +1088,13 @@ class QuestionnaireController extends QuestionnaireUtils
         ];
 
         foreach ($appearancesWant1 as $key=>$item) {
+            if( $key == 'sex' ) continue;
             $requirements['my'][$key] = $item === $appearancesMy1[$key];
         }
 
         foreach ($appearancesWant2 as $key=>$item) {
+            if( $key == 'sex' ) continue;
+
             $requirements['partner'][$key] = $item === $appearancesMy2[$key];
         }
 
@@ -1191,21 +1194,21 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
 
-//        foreach ($qualities['my'] as $key => $item) {
-//            $qualities['my'][$key] = [
-//                'label' => $this->personalQuality($key, $a['sex']),
-//                'value' => true
-//            ];
-//            unset($qualities['my'][$key]);
-//        }
-//
-//        foreach ($qualities['partner'] as $key => $item) {
-//            $qualities['partner'][$key] = [
-//                'label' => $this->personalQuality($key, $a['sex']),
-//                'value' => true
-//            ];
-//            unset($qualities['partner'][$key]);
-//        }
+        foreach ($qualities['my'] as $key => $item) {
+            $qualities['my'][$key] = [
+                'label' => $this->personalQuality($key, $appearancesMy1['sex']),
+                'value' => true
+            ];
+            unset($qualities['my'][$key]);
+        }
+
+        foreach ($qualities['partner'] as $key => $item) {
+            $qualities['partner'][$key] = [
+                'label' => $this->personalQuality($key, $appearancesMy2['sex']),
+                'value' => true
+            ];
+            unset($qualities['partner'][$key]);
+        }
 
         $myTest = $questionnaire->my(true)->where('questionnaires.id', $request->questionnaire_id)->first(
             collect(array_keys(config('app.questionnaire.value.test')))->except([])->toArray()
