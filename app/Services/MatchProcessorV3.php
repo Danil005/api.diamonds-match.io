@@ -368,8 +368,8 @@ class MatchProcessorV3
             foreach ($questionnaires as $q2) {
                 if ($q1->id == $q2->id) continue;
 
-                if( !$this->validNotMatch($q1->id, $q2->id) )
-                    continue;
+//                if( !$this->validNotMatch($q1->id, $q2->id) )
+//                    continue;
 
 
                 $temp_q1 = [
@@ -401,116 +401,120 @@ class MatchProcessorV3
 
                 $appearancesResult = round(($r1 + $r2) / 2);
 
-
-
-                    # Сравнение качеств
-                $fields = array_keys(config('app.questionnaire.value.my_personal_qualities'));
-
-                $pqWant1 = collect($temp_q1['partner'])->only($fields);
-                $pqMy1 = collect($temp_q2['my'])->only($fields);
-
-                $pqWant2 = collect($temp_q2['partner'])->only($fields);
-                $pqMy2 = collect($temp_q1['my'])->only($fields);
-
-                $r1 = $this->pqMatch($pqMy1, $pqWant1) * 100 / 7;
-                $r2 = $this->pqMatch($pqMy2, $pqWant2) * 100 / 7;
-
-                $pqResult = round(($r1 + $r2) / 2);
-
-                # Сравнение тестов
-                $fields = array_keys(config('app.questionnaire.value.test'));
-
-                $testWant = collect($temp_q1['partner'])->only($fields);
-                $testMy = collect($temp_q2['my'])->only($fields);
-
-                $c = 0;
-                $result = [];
-                foreach ($this->testMatchArray as $key => $question) {
-                    $c++;
-                    $obj = [array_values($testWant->toArray())[$key] + 1, array_values($testMy->toArray())[$key] + 1];
-                    foreach ($question as $p => $percent) {
-                        foreach ($percent as $value) {
-                            if (($value[0] === $obj[0] && $value[1] === $obj[1]) || ($value[1] === $obj[0] && $value[0] === $obj[1]))
-                                $result[$key] = $p;
-
-                        }
-                    }
+                if( $q1->id == 69 && $q2->id == 41 ) {
+                    dd($appearancesResult, $r1, $r2, '1: ', $appearancesWant1, $appearancesMy1, '2: ', $appearancesWant2, $appearancesMy2);
                 }
-                $sum = 0;
-                foreach ($result as $item) {
-                    $sum += (float)$item;
-                }
-                $testResult = round($sum / $c * 100, 2);
 
-                # Сравнение моей информации по ключам
-                $fields = [
-                    'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion', 'age'
-                ];
 
-                $formWant1 = collect($temp_q1['partner'])->only($fields);
-                $formMy1 = collect($temp_q2['my'])->only($fields);
-
-                $formWant2 = collect($temp_q2['partner'])->only($fields);
-                $formMy2 = collect($temp_q1['my'])->only($fields);
-
-                $except = ['age'];
-
-                $r1 = $this->simpleMatch($formWant1, $formMy1, $except) * 100 / (count($fields) - count($except));
-                $r2 = $this->simpleMatch($formWant2, $formMy2, $except) * 100 / (count($fields) - count($except));
-
-                $formResult = round(($r1 + $r2) / 2);
-
-                $fields = [
-                    "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
-                ];
-
-                $formMy11 = collect($temp_q2['my'])->only($fields);
-                $formMy21 = collect($temp_q1['my'])->only($fields);
-
-                $p = 0;
-                $this->similarMatch($p, $formMy11, $formMy21);
-
-                $formResult = ($formResult + $p) / 2;
-
-                # About
-                $fields = [
-                    'education_name', 'work_name', 'health_problems',
-                    'allergies', 'have_pets', 'best_gift', 'hobbies',
-                    'kredo', 'features_repel', 'age_difference', 'films',
-                    'songs', 'ideal_weekend', 'sleep', 'doing_10', 'signature_dish',
-                    'clubs', 'best_gift_received', 'talents'
-                ];
-
-                $aboutMy1 = collect($temp_q2['my'])->only($fields);
-
-                $aboutMy2 = collect($temp_q1['my'])->only($fields);
-
-                $p1 = 0;
-                $this->similarMatch($p1, $aboutMy1, $aboutMy2);
-
-                $aboutResult = $p1;
-
-                QuestionnaireMatch::create([
-                    'questionnaire_id' => $q1->id,
-                    'with_questionnaire_id' => $q2->id,
-                    'about_me' => $aboutResult,
-                    'appearance' => $appearancesResult,
-                    'test' => $testResult,
-                    'information' => $formResult,
-                    'personal_qualities' => $pqResult,
-                    'total' => round((($aboutResult+$appearancesResult+$testResult+$formResult+$pqResult)/5), 2)
-                ]);
-
-                QuestionnaireMatch::create([
-                    'questionnaire_id' => $q2->id,
-                    'with_questionnaire_id' => $q1->id,
-                    'about_me' => $aboutResult,
-                    'appearance' => $appearancesResult,
-                    'test' => $testResult,
-                    'information' => $formResult,
-                    'personal_qualities' => $pqResult,
-                    'total' => round((($aboutResult+$appearancesResult+$testResult+$formResult+$pqResult)/5), 2)
-                ]);
+//
+//                    # Сравнение качеств
+//                $fields = array_keys(config('app.questionnaire.value.my_personal_qualities'));
+//
+//                $pqWant1 = collect($temp_q1['partner'])->only($fields);
+//                $pqMy1 = collect($temp_q2['my'])->only($fields);
+//
+//                $pqWant2 = collect($temp_q2['partner'])->only($fields);
+//                $pqMy2 = collect($temp_q1['my'])->only($fields);
+//
+//                $r1 = $this->pqMatch($pqMy1, $pqWant1) * 100 / 7;
+//                $r2 = $this->pqMatch($pqMy2, $pqWant2) * 100 / 7;
+//
+//                $pqResult = round(($r1 + $r2) / 2);
+//
+//                # Сравнение тестов
+//                $fields = array_keys(config('app.questionnaire.value.test'));
+//
+//                $testWant = collect($temp_q1['partner'])->only($fields);
+//                $testMy = collect($temp_q2['my'])->only($fields);
+//
+//                $c = 0;
+//                $result = [];
+//                foreach ($this->testMatchArray as $key => $question) {
+//                    $c++;
+//                    $obj = [array_values($testWant->toArray())[$key] + 1, array_values($testMy->toArray())[$key] + 1];
+//                    foreach ($question as $p => $percent) {
+//                        foreach ($percent as $value) {
+//                            if (($value[0] === $obj[0] && $value[1] === $obj[1]) || ($value[1] === $obj[0] && $value[0] === $obj[1]))
+//                                $result[$key] = $p;
+//
+//                        }
+//                    }
+//                }
+//                $sum = 0;
+//                foreach ($result as $item) {
+//                    $sum += (float)$item;
+//                }
+//                $testResult = round($sum / $c * 100, 2);
+//
+//                # Сравнение моей информации по ключам
+//                $fields = [
+//                    'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion', 'age'
+//                ];
+//
+//                $formWant1 = collect($temp_q1['partner'])->only($fields);
+//                $formMy1 = collect($temp_q2['my'])->only($fields);
+//
+//                $formWant2 = collect($temp_q2['partner'])->only($fields);
+//                $formMy2 = collect($temp_q1['my'])->only($fields);
+//
+//                $except = ['age'];
+//
+//                $r1 = $this->simpleMatch($formWant1, $formMy1, $except) * 100 / (count($fields) - count($except));
+//                $r2 = $this->simpleMatch($formWant2, $formMy2, $except) * 100 / (count($fields) - count($except));
+//
+//                $formResult = round(($r1 + $r2) / 2);
+//
+//                $fields = [
+//                    "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
+//                ];
+//
+//                $formMy11 = collect($temp_q2['my'])->only($fields);
+//                $formMy21 = collect($temp_q1['my'])->only($fields);
+//
+//                $p = 0;
+//                $this->similarMatch($p, $formMy11, $formMy21);
+//
+//                $formResult = ($formResult + $p) / 2;
+//
+//                # About
+//                $fields = [
+//                    'education_name', 'work_name', 'health_problems',
+//                    'allergies', 'have_pets', 'best_gift', 'hobbies',
+//                    'kredo', 'features_repel', 'age_difference', 'films',
+//                    'songs', 'ideal_weekend', 'sleep', 'doing_10', 'signature_dish',
+//                    'clubs', 'best_gift_received', 'talents'
+//                ];
+//
+//                $aboutMy1 = collect($temp_q2['my'])->only($fields);
+//
+//                $aboutMy2 = collect($temp_q1['my'])->only($fields);
+//
+//                $p1 = 0;
+//                $this->similarMatch($p1, $aboutMy1, $aboutMy2);
+//
+//                $aboutResult = $p1;
+//
+//                QuestionnaireMatch::create([
+//                    'questionnaire_id' => $q1->id,
+//                    'with_questionnaire_id' => $q2->id,
+//                    'about_me' => $aboutResult,
+//                    'appearance' => $appearancesResult,
+//                    'test' => $testResult,
+//                    'information' => $formResult,
+//                    'personal_qualities' => $pqResult,
+//                    'total' => round((($aboutResult+$appearancesResult+$testResult+$formResult+$pqResult)/5), 2)
+//                ]);
+//
+//                QuestionnaireMatch::create([
+//                    'questionnaire_id' => $q2->id,
+//                    'with_questionnaire_id' => $q1->id,
+//                    'about_me' => $aboutResult,
+//                    'appearance' => $appearancesResult,
+//                    'test' => $testResult,
+//                    'information' => $formResult,
+//                    'personal_qualities' => $pqResult,
+//                    'total' => round((($aboutResult+$appearancesResult+$testResult+$formResult+$pqResult)/5), 2)
+//                ]);
             }
         }
     }
