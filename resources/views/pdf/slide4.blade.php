@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p5') }}</td>
-                    <td class="right" style="width: 300px">{{ $q['hair_length'] ?? __('pptx.empty') }}</td>
+                    <td class="right" style="width: 300px">{{ $q['hair_color'] ?? __('pptx.empty') }}</td>
                 </tr>
             </table>
         </div>
