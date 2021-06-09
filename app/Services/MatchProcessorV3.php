@@ -402,7 +402,7 @@ class MatchProcessorV3
                 $appearancesResult = round(($r1 + $r2) / 2);
 
                 if( $q1->id == 69 && $q2->id == 41 ) {
-                    dd($appearancesResult, $r1, $r2, '1: ', $appearancesWant1, $appearancesMy2, '2: ', $appearancesWant2, $appearancesMy1);
+                    dd($appearancesResult, $r1, $r2, '1: ', $appearancesWant1, $appearancesMy1, '2: ', $appearancesWant2, $appearancesMy2, count($fields));
                 }
 
 
