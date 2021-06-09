@@ -12,10 +12,10 @@
         </div>
 
         <div class="header-first">
-            ПРЕДСТАВЬТЕ СЕБЕ БЕЗУПРЕЧНЫЕ ОТНОШЕНИЯ
+            {{ __('pptx.title1') }}
         </div>
         <div class="header-last">
-            Позвольте нам создать их!
+            {{ __('pptx.title2') }}
         </div>
     </div>
 </div>

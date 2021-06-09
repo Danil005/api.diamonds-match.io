@@ -10,45 +10,45 @@
 
         <div class="circle-title">
             <div class="circle-no-center"></div>
-            <span class="circle-text">ИНТЕРЕСЫ</span>
+            <span class="circle-text">{{ __('pptx.slide5.t1.t') }}</span>
         </div>
 
         <div class="center" style="margin-left: 100px">
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Любите ли вы домашних животных:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p1') }}</td>
                     <td class="right" style="width: 300px">{{ $q['pets'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Есть ли домашние животные и какие:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p2') }}</td>
                     <td class="right" style="width: 300px">{{ $q['have_pets'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Книги или фильмы:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p3') }}</td>
                     <td class="right" style="width: 300px">{{ $q['films_or_books'] ?? '50кг' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Отдых:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p4') }}</td>
                     <td class="right" style="width: 300px">{{ $q['relax'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Страны, в которых были:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p5') }}</td>
                     <td class="right" style="width: 300px">{{ $q['countries_was'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Страны, в которых мечтает побывать:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p6') }}</td>
                     <td class="right" style="width: 300px">{{ $q['countries_dream'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Лучший подарок для вас:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p7') }}</td>
                     <td class="right" style="width: 300px">{{ $q['best_gift'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Хобби:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p8') }}</td>
                     <td class="right" style="width: 300px">{{ $q['hobbies'] ?? 'Не указано' }}</td>
                 </tr>
                 <tr style="margin-top: 20px">
-                    <td class="left" style="margin-top: 50px">Жизненное кредо:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide5.t1.p9') }}</td>
                     <td class="right" style="width: 300px">{{ $q['kredo'] ?? 'Не указано' }}</td>
                 </tr>
             </table>
@@ -57,17 +57,17 @@
 
         <div class="circle-title">
             <div class="circle-no-center"></div>
-            <span class="circle-text">ОТВЕТЫ НА ВОПРОСЫ</span>
+            <span class="circle-text">{{ __('pptx.slide5.t2.t') }}</span>
         </div>
 
         <div class="answers">
-            <div class="question">Какие черты тебя отталкивают в людях?</div>
+            <div class="question">{{ __('pptx.slide5.t2.p1') }}</div>
             <div class="answer">{{ $q['features_repel'] }}</div>
 
-            <div class="question">Как ты относишься к существенной разнице в возрасте между партнерами?</div>
+            <div class="question">{{ __('pptx.slide5.t2.p2') }}</div>
             <div class="answer">{{ $q['age_difference'] }}</div>
 
-            <div class="question">Как ты считаешь, какие у тебя таланты?</div>
+            <div class="question">{{ __('pptx.slide5.t2.p3') }}</div>
             <div class="answer">{{ $q['talents'] }}</div>
         </div>
     </div>

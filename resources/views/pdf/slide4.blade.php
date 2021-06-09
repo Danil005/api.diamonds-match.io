@@ -10,29 +10,29 @@
 
         <div class="circle-title">
             <div class="circle-no-center"></div>
-            <span class="circle-text">ОБЩИЕ ДАННЫЕ</span>
+            <span class="circle-text">{{ __('pptx.slide4.t1.t') }}</span>
         </div>
 
         <div class="center" style="margin-left: 100px">
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
-                    <td class="left" style="margin-top: 50px">Знак зодиака:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p1') }}</td>
                     <td class="right" style="width: 300px">{{ $q['zodiac_signs'] ?? 'Овен' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Рост:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p2') }}</td>
                     <td class="right" style="width: 300px">{{ $q['height'] .'см' ?? '189см' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Вес:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p3') }}</td>
                     <td class="right" style="width: 300px">{{ $q['weight'] .'кг' ?? '50кг' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Телосложение:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p4') }}</td>
                     <td class="right" style="width: 300px">{{ $q['body_type'] ?? 'Атлетическое' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Цвет волос:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p5') }}</td>
                     <td class="right" style="width: 300px">{{ $q['hair_length'] ?? 'Блонд' }}</td>
                 </tr>
             </table>
@@ -41,15 +41,15 @@
         <div class="center" style="margin-left: 100px;margin-top: 50px">
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
-                    <td class="left" style="margin-top: 50px">Статус:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p6') }}</td>
                     <td class="right" style="width: 300px">{{ $q['marital_status'] ?? 'Овен' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Дети:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p7') }}</td>
                     <td class="right" style="width: 300px">{{ ($q['children'] ? 'Есть, '.$q['children_count'] : 'Нет') ?? '189см' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Хотите ли детей:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p8') }}</td>
                     <td class="right" style="width: 300px">{{ $q['children_desire'] ?? '50кг' }}</td>
                 </tr>
             </table>
@@ -58,19 +58,19 @@
         <div class="center" style="margin-left: 100px;margin-top: 50px">
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
-                    <td class="left" style="margin-top: 50px">Курение:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p9') }}</td>
                     <td class="right" style="width: 300px">{{ $q['smoking'] ?? 'Овен' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Алкоголь:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p10') }}</td>
                     <td class="right" style="width: 300px">{{ $q['alcohol'] ?? '189см' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Вероисповедание:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p11') }}</td>
                     <td class="right" style="width: 300px">{{ $q['religion'] ?? '50кг' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Владение языками:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t1.p12') }}</td>
                     <td class="right" style="width: 300px">{{ ($q['languages'] == "" ? 'Не указано' : $q['languages']) ?? 'Не указано' }}</td>
                 </tr>
             </table>
@@ -78,30 +78,30 @@
 
         <div class="circle-title">
             <div class="circle-no-center"></div>
-            <span class="circle-text">ОБРАЗОВАНИЕ И ЗДОРОВЬЕ</span>
+            <span class="circle-text">{{ __('pptx.slide4.t2.t') }}</span>
         </div>
 
         <div class="center" style="margin-left: 100px;margin-top: 30px">
             <table class="info-table" style="table-layout: fixed; width: 450px">
                 <tr>
-                    <td class="left" style="margin-top: 50px">Образование:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t2.p1') }}</td>
                     <td class="right" style="width: 300px">{{ $q['education'] ?? '----' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Работа:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t2.p2') }}</td>
                     <td class="right" style="width: 300px">{{ ($q['work'] == 'Работаю' ? $q['work_name'] : $q['work']) ?? '----' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Зарплата:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t2.p3') }}</td>
                     <td class="right" style="width: 300px">{{ $q['salary'] ?? '----' }}</td>
                 </tr>
                 <tr>
-                    <td class="left" style="margin-top: 50px">Проблемы со здоровьем:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t2.p4') }}</td>
                     <td class="right" style="width: 300px">{{ $q['health_problems'] ?? 'Нет' }}</td>
                 </tr>
 
                 <tr>
-                    <td class="left" style="margin-top: 50px">Аллергия:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide4.t2.p5') }}</td>
                     <td class="right" style="width: 300px">{{ $q['allergies'] ?? 'Нет' }}</td>
                 </tr>
             </table>

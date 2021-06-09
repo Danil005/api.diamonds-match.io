@@ -407,7 +407,7 @@ class MatchProcessorV3
 
 
 //
-                    # Сравнение качеств
+                # Сравнение качеств
                 $fields = array_keys(config('app.questionnaire.value.my_personal_qualities'));
 
                 $pqWant1 = collect($temp_q1['partner'])->only($fields);
@@ -420,6 +420,10 @@ class MatchProcessorV3
                 $r2 = $this->pqMatch($pqMy2, $pqWant2) * 100 / 7;
 
                 $pqResult = round(($r1 + $r2) / 2);
+
+                if( $q1->id == 69 && $q2->id == 41 ) {
+                    dd($pqResult, $r1, $r2, '1: ', $pqWant1, $pqMy1, '2: ', $pqWant2, $pqMy2, count($fields));
+                }
 
                 # Сравнение тестов
                 $fields = array_keys(config('app.questionnaire.value.test'));

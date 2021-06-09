@@ -16,28 +16,28 @@
         <div class="name">{{ $q['name'] }}</div>
         <div class="age">{{ $q['age'] }}</div>
         <div class="circle" style="height: 20px;width: 20px;"></div>
-        <div class="hello">Hello!</div>
+        <div class="hello"></div>
 
         <div class="center">
             <table class="info-table">
                 <tr>
-                    <td class="left" style="margin-top: 50px">Страна:</td>
+                    <td class="left" style="margin-top: 50px">{{ __('pptx.slide2.p1') }}</td>
                     <td class="right">{{ explode(',', $q['city'])[0] ?? '----' }}</td>
                 </tr>
                 <tr>
-                    <td class="left">Этичность:</td>
+                    <td class="left">{{ __('pptx.slide2.p2') }}</td>
                     <td class="right">{{ $q['ethnicity'] ?? '----' }}</td>
                 </tr>
                 <tr>
-                    <td class="left">Место проживание:</td>
+                    <td class="left">{{ __('pptx.slide2.p3') }}</td>
                     <td class="right">{{ explode(',', $q['city'])[1] ?? '----' }}</td>
                 </tr>
                 <tr>
-                    <td class="left">Город рождения:</td>
+                    <td class="left">{{ __('pptx.slide2.p4') }}</td>
                     <td class="right">{{ $q['place_birth'] ?? '----' }}</td>
                 </tr>
                 <tr>
-                    <td class="left">Рассматриваете ли приезд:</td>
+                    <td class="left">{{ __('pptx.slide2.p5') }}</td>
                     <td class="right">{{ ($q['moving']) ?? '----' }}</td>
                 </tr>
             </table>
