@@ -1629,6 +1629,11 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('questionnaire_id'))
             $this->response()->error()->setMessage('Вы не указали ID анкеты')->send();
 
+        Questionnaire::where('id', $request->questionnaire_id)->delete();
+        # Переносим в архив матчи
+        QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)
+            ->orWhere('with_questionnaire_id', $request->questionnaire_id)->delete();
 
+        $this->response()->success()->setMessage('Анкета была перенесена в архив')->send();
     }
 }
