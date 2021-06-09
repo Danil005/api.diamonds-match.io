@@ -1148,7 +1148,6 @@ class QuestionnaireController extends QuestionnaireUtils
             'partner' => $res2?->toArray()
         ];
 
-        dd($qualities);
 
 
         foreach ($qualities['my'] as $key => $item) {
