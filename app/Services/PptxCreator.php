@@ -95,32 +95,6 @@ class PptxCreator
                 $result['place_birth'] = $place2[1] ?? $place2[0];
         }
 
-//        if (isset($result['countries_was'])) {
-//            $country_was = explode(',', $result['countries_was']);
-//            $place = new Countries();
-//            foreach ($country_was as $item) {
-//                $place = $place->orWhere($lang == 'ru' ? 'title_ru' : 'title_en', 'ILIKE', $item);
-//            }
-//            $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
-//            $res = '';
-//            if ($place != null)
-//                foreach ($place as $item) $res .= ', ' . $item[$lang == 'ru' ? 'title_ru' : 'title_en'];
-//            $result['countries_was'] = trim($res, ', ');
-//        }
-//
-//        if (isset($result['countries_dream'])) {
-//            $country_was = explode(',', $result['countries_dream']);
-//            $place = new Countries();
-//            foreach ($country_was as $item) {
-//                $place = $place->orWhere($lang == 'ru' ? 'title_ru' : 'title_en', 'ILIKE', $item);
-//            }
-//            $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
-//            $res = '';
-//            if ($place != null)
-//                foreach ($place as $item) $res .= ', ' . $item[$lang == 'ru' ? 'title_ru' : 'title_en'];
-//            $result['countries_dream'] = trim($res, ', ');
-//        }
-
         $result['ethnicity'] = $this->ethnicity($result['ethnicity']);
         $result['body_type'] = $this->bodyType($result['body_type']);
 
@@ -146,10 +120,10 @@ class PptxCreator
             foreach ($country_was as $item) {
                 $place = $place->orWhere('title_en', 'ILIKE', $item);
             }
-            $place = $place->get(['title_ru'])->toArray();
+            $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
             $res = '';
             if ($place != null)
-                foreach ($place as $item) $res .= ', ' . $item['title_ru'];
+                foreach ($place as $item) $res .= ', ' . $item[$lang == 'ru' ? 'title_ru' : 'title_en'];
             $result['countries_was'] = trim($res, ', ');
         }
 
@@ -159,10 +133,10 @@ class PptxCreator
             foreach ($country_was as $item) {
                 $place = $place->orWhere('title_en', 'ILIKE', $item);
             }
-            $place = $place->get(['title_ru'])->toArray();
+            $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
             $res = '';
             if ($place != null)
-                foreach ($place as $item) $res .= ', ' . $item['title_ru'];
+                foreach ($place as $item) $res .= ', ' . $item[$lang == 'ru' ? 'title_ru' : 'title_en'];
             $result['countries_dream'] = trim($res, ', ');
         }
 
