@@ -62,6 +62,7 @@ class PptxCreator
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
         \App::setLocale($questionnaire['lang'] ?? 'ru');
         Cache::set('lang', $questionnaire['lang'] ?? 'ru');
+        $lang = $questionnaire['lang'];
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
@@ -74,9 +75,9 @@ class PptxCreator
         $result['age'] = $this->years($result['age']);
         $city = explode(',', $result['city']);
         $c = $city;
-        $city = Countries::where('title_en', 'ILIKE', $city[0])->first();
+        $city = Countries::where($lang == 'ru' ? 'title_en' : 'title_ru', 'ILIKE', $city[0])->first();
         if ($city != null) {
-            $result['city'] = $city['title_ru'] . (isset($c[1]) ? ', ' . $c[1] : '');
+            $result['city'] = $city[$lang == 'ru' ? 'title_ru' : 'title_en'] . (isset($c[1]) ? ', ' . $c[1] : '');
         }
 
         if (isset($result['place_birth'])) {
@@ -87,12 +88,57 @@ class PptxCreator
             } else {
                 $place = $place[0];
             }
-            $place = Countries::where('title_en', 'ILIKE', $place)->first();
+            $place = Countries::where($lang == 'ru' ? 'title_en' : 'title_ru', 'ILIKE', $place)->first();
             if ($place != null)
-                $result['place_birth'] = $place['title_ru'];
+                $result['place_birth'] = $place[$lang == 'ru' ? 'title_ru' : 'title_en'];
             else
                 $result['place_birth'] = $place2[1] ?? $place2[0];
         }
+
+        if (isset($result['countries_was'])) {
+            $country_was = explode(',', $result['countries_was']);
+            $place = new Countries();
+            foreach ($country_was as $item) {
+                $place = $place->orWhere($lang == 'ru' ? 'title_en' : 'title_ru', 'ILIKE', $item);
+            }
+            $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
+            $res = '';
+            if ($place != null)
+                foreach ($place as $item) $res .= ', ' . $item[$lang == 'ru' ? 'title_ru' : 'title_en'];
+            $result['countries_was'] = trim($res, ', ');
+        }
+
+        if (isset($result['countries_dream'])) {
+            $country_was = explode(',', $result['countries_dream']);
+            $place = new Countries();
+            foreach ($country_was as $item) {
+                $place = $place->orWhere($lang == 'ru' ? 'title_en' : 'title_ru', 'ILIKE', $item);
+            }
+            $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
+            $res = '';
+            if ($place != null)
+                foreach ($place as $item) $res .= ', ' . $item[$lang == 'ru' ? 'title_ru' : 'title_en'];
+            $result['countries_dream'] = trim($res, ', ');
+        }
+
+        $result['ethnicity'] = $this->ethnicity($result['ethnicity']);
+        $result['body_type'] = $this->bodyType($result['body_type']);
+
+        if (isset($result['chest']) && $result['chest'] !== null) {
+            $result['chest'] = $this->chestOrBooty($result['chest']);
+        }
+
+        if (isset($result['booty']) && $result['booty'] !== null) {
+            $result['booty'] = $this->chestOrBooty($result['booty']);
+        }
+
+        if (isset($result['hair_length']) && $result['hair_length'] !== null) {
+            $result['hair_length'] = $this->hairLength($result['hair_length']);
+        }
+
+        $result['hair_color'] = $this->hairColor($result['hair_color']);
+        $result['eye_color'] = $this->colorEye($result['eye_color']);
+        $result['sex'] = $result['sex'] === 'female' ? 'Женщина' : 'Мужчина';
 
         if (isset($result['countries_was'])) {
             $country_was = explode(',', $result['countries_was']);
@@ -119,26 +165,6 @@ class PptxCreator
                 foreach ($place as $item) $res .= ', ' . $item['title_ru'];
             $result['countries_dream'] = trim($res, ', ');
         }
-
-        $result['ethnicity'] = $this->ethnicity($result['ethnicity']);
-        $result['body_type'] = $this->bodyType($result['body_type']);
-
-        if (isset($result['chest']) && $result['chest'] !== null) {
-            $result['chest'] = $this->chestOrBooty($result['chest']);
-        }
-
-        if (isset($result['booty']) && $result['booty'] !== null) {
-            $result['booty'] = $this->chestOrBooty($result['booty']);
-        }
-
-        if (isset($result['hair_length']) && $result['hair_length'] !== null) {
-            $result['hair_length'] = $this->hairLength($result['hair_length']);
-        }
-
-        $result['hair_color'] = $this->hairColor($result['hair_color']);
-        $result['eye_color'] = $this->colorEye($result['eye_color']);
-        $result['sex'] = $result['sex'] === 'female' ? 'Женщина' : 'Мужчина';
-
 
         foreach ($result as $key => $item) {
             if ($key == 'smoking') {
