@@ -99,7 +99,7 @@ class PptxCreator
             $country_was = explode(',', $result['countries_was']);
             $place = new Countries();
             foreach ($country_was as $item) {
-                $place = $place->orWhere($lang == 'ru' ? 'title_en' : 'title_ru', 'ILIKE', $item);
+                $place = $place->orWhere($lang == 'ru' ? 'title_ru' : 'title_en', 'ILIKE', $item);
             }
             $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
             $res = '';
@@ -112,7 +112,7 @@ class PptxCreator
             $country_was = explode(',', $result['countries_dream']);
             $place = new Countries();
             foreach ($country_was as $item) {
-                $place = $place->orWhere($lang == 'ru' ? 'title_en' : 'title_ru', 'ILIKE', $item);
+                $place = $place->orWhere($lang == 'ru' ? 'title_ru' : 'title_en', 'ILIKE', $item);
             }
             $place = $place->get([$lang == 'ru' ? 'title_ru' : 'title_en'])->toArray();
             $res = '';
