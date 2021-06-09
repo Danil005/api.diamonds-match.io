@@ -34,6 +34,7 @@ use App\Models\QuestionnaireUploadPhoto;
 use App\Models\SignQuestionnaire;
 use App\Models\User;
 use App\Services\PptxCreator;
+use App\Utils\Match\TestMatch;
 use App\Utils\QuestionnaireUtils;
 use App\Utils\TranslateFields;
 use Carbon\Carbon;
@@ -51,7 +52,7 @@ use Str;
 
 class QuestionnaireController extends QuestionnaireUtils
 {
-    use TranslateFields;
+    use TranslateFields, TestMatch;
 
     public function create(Create $request)
     {
@@ -258,7 +259,7 @@ class QuestionnaireController extends QuestionnaireUtils
         Mail::to($request->email)->send(new \App\Mail\SendPrice(
             name: $myInformation->name,
             lang: $request->lang ?? 'ru',
-            country: explode(',',$myInformation['city'])[0]
+            country: explode(',', $myInformation['city'])[0]
         ));
 
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->send();
@@ -443,7 +444,7 @@ class QuestionnaireController extends QuestionnaireUtils
             Mail::to($request->email)->send(new \App\Mail\SendPrice(
                 name: $myInformation->name,
                 lang: $request->lang ?? 'ru',
-                country: explode(',',$myInformation['city'])[0]
+                country: explode(',', $myInformation['city'])[0]
             ));
         }
 
@@ -532,7 +533,7 @@ class QuestionnaireController extends QuestionnaireUtils
             $path = str_replace('public/', 'storage/', $upload);
 
             $this->response()->success()->setMessage('Файл загружен')->setData([
-                'path' => env('APP_URL').'/'.$path,
+                'path' => env('APP_URL') . '/' . $path,
             ])->send();
         } else {
             $paths = [];
@@ -555,7 +556,7 @@ class QuestionnaireController extends QuestionnaireUtils
         if (!$request->has('path'))
             $this->response()->error()->setMessage('Вы должны указать path фотографии')->send();
 
-        $path = str_replace(env('APP_URL').'/', '', str_replace('storage/', '', $request->path));
+        $path = str_replace(env('APP_URL') . '/', '', str_replace('storage/', '', $request->path));
         Storage::disk('public')->delete($path);
 
         $this->response()->success()->setMessage('Фотография была удалена')->send();
@@ -594,7 +595,7 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         $countMatch = QuestionnaireMatch::where('questionnaire_id', $request->id)->where('with_questionnaire_id', '!=', $request->id)->count();
-        if( $countMatch >= 8 )
+        if ($countMatch >= 8)
             $countMatch = 8;
 
         $result = [
@@ -1029,6 +1030,18 @@ class QuestionnaireController extends QuestionnaireUtils
     public
     function viewMatch(Request $request)
     {
+        $headers = request()->headers;
+
+        if( Cache::get('lang') == null ) {
+            Cache::add('lang', 'ru');
+        }
+
+        if( $headers->has('x-lang') ) {
+            Cache::set('lang', $headers->get('x-lang'));
+        } else {
+            Cache::set('lang', 'ru');
+        }
+
         $questionnaire = Questionnaire::where('id', $request->questionnaire_id)->first();
         if (empty($questionnaire))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
@@ -1066,7 +1079,7 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($myAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if( $item == null || $partnerAppearance[$key] == null ) continue;
+            if ($item == null || $partnerAppearance[$key] == null) continue;
 
             if ($item == $partnerAppearance[$key] || $item == 'no_matter' || $item == 'any' || $partnerAppearance[$key] == 'no_matter' || $partnerAppearance[$key] == 'any') {
                 $requirements['my'][$key] = true;
@@ -1088,7 +1101,7 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($partnerAppearance as $key => $item) {
             if ($key == 'sex') continue;
 
-            if( $item == null || $myAppearance[$key] == null) continue;
+            if ($item == null || $myAppearance[$key] == null) continue;
 
 
             if ($item == $myAppearance[$key] || $item == 'no_matter' || $item == 'any' || $myAppearance[$key] == 'no_matter' || $myAppearance[$key] == 'any') {
@@ -1099,49 +1112,95 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
 
-        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
-            [
-                ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
-                ...['personal_qualities.sport']
-            ]
-        )->toArray();
+        $collection = collect(array_keys(config('app.questionnaire.value.my_personal_qualities')));
 
-        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first([
-            ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
-            ...['personal_qualities.sport']
-        ])->toArray();
+        $fields = $collection->map(function ($value) {
+            return 'personal_qualities.' . $value;
+        })->toArray();
+
+        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
+        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
+
+        $myAppearance = collect($myAppearance)->filter(function ($item, $key) {
+            return $item === true;
+        });
+
+        $res1 = collect($myAppearance)->filter(function ($item, $key) use ($partnerAppearance) {
+            return $item === $partnerAppearance[$key];
+        });
+
+
+        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
+        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
+
+        $myAppearance = collect($myAppearance)->filter(function ($item, $key) {
+            return $item === true;
+        });
+
+        $res2 = collect($myAppearance)->filter(function ($item, $key) use ($partnerAppearance) {
+            return $item === $partnerAppearance[$key];
+        });
+
 
         $qualities = [
-            'my' => [],
-            'partner' => []
+            'my' => $res1?->toArray(),
+            'partner' => $res2?->toArray()
         ];
 
-        foreach ($myAppearance as $key => $item) {
-            if ($myAppearance[$key] == $partnerAppearance[$key]) {
-                $qualities['my'][] = $this->personalQuality($key, $a['sex']);
-            }
+
+        foreach ($qualities['my'] as $key => $item) {
+            $qualities['my'][] = $this->personalQuality($key, $a['sex']);
+            unset($qualities['my'][$key]);
         }
 
+        foreach ($qualities['partner'] as $key => $item) {
+            $qualities['partner'][] = $this->personalQuality($key, $a['sex']);
+            unset($qualities['partner'][$key]);
+        }
 
-        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
-            [
-                ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
-                ...['personal_qualities.sport']
-            ]
+        $myTest = $questionnaire->my(true)->where('questionnaires.id', $request->questionnaire_id)->first(
+            collect(array_keys(config('app.questionnaire.value.test')))->except([])->toArray()
         )->toArray();
 
-        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first([
-            ...collect(array_keys(config('app.questionnaire.value.my_personal_qualities')))->except([12])->toArray(),
-            ...['personal_qualities.sport']
-        ])->toArray();
+        $partnerTest = $questionnaire->partner(true)->where('questionnaires.id', $withQuestionnaire->id)->first(
+            collect(array_keys(config('app.questionnaire.value.test')))->except([])->toArray()
+        )->toArray();
 
-
-        foreach ($partnerAppearance as $key => $item) {
-            if ($partnerAppearance[$key] == $myAppearance[$key]) {
-                $qualities['partner'][] = $this->personalQuality($key, $a['sex']);
+        $c = 0;
+        $testResult = [];
+        foreach ($this->matchGraph as $key => $question) {
+            $c++;
+            $obj = [array_values($myTest)[$key] + 1, array_values($partnerTest)[$key] + 1];
+            foreach ($question as $p => $percent) {
+                foreach ($percent as $value) {
+                    if (($value[0] === $obj[0] && $value[1] === $obj[1]) || ($value[1] === $obj[0] && $value[0] === $obj[1]))
+                        $testResult[$key] = (float)$p;
+                }
             }
         }
 
+
+        $c = 0;
+        foreach ($testResult as $key => $item) {
+            if ($key != $c) $testResult[$c] = 0;
+            $c++;
+        }
+        $testResult = array_values($testResult);
+
+        $keys = array_keys(config('app.questionnaire.value.test'));
+        foreach ($testResult as $key => $item) {
+            $testResult[$keys[$key]] = $item;
+            unset($testResult[$key]);
+        }
+
+        $collection = collect(array_keys(config('app.questionnaire.value.partner_information')));
+
+        $collection = $collection->map(function ($value) {
+            return 'information.' . $value;
+        })->toArray();
+        $partnerInformation = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
+            $collection
+        )->toArray();
 
         $rs = $matching?->toArray();
 
@@ -1158,6 +1217,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'matching' => $rs,
             'requirements' => $requirements,
             'qualities' => $qualities,
+            'test' => $testResult,
+            'partnerInformation' => $partnerInformation,
             'names' => [
                 'me' => $matching->name,
                 'partner' => $partner->name
@@ -1543,7 +1604,7 @@ class QuestionnaireController extends QuestionnaireUtils
         (new PptxCreator())->create($request);
 
         $this->response()->success()->setMessage('Презентация была создана')->setData([
-            'download_link' => env('APP_URL') . '/storage/pptx/generate/'.$request->questionnaire_id.'/presentation.pdf'
+            'download_link' => env('APP_URL') . '/storage/pptx/generate/' . $request->questionnaire_id . '/presentation.pdf'
         ])->send();
     }
 
@@ -1561,5 +1622,13 @@ class QuestionnaireController extends QuestionnaireUtils
         $exist = SignQuestionnaire::where('sign', $request->sign)->exists();
 
         $this->response()->success()->setMessage('Валидация')->setData(['exist' => $exist])->send();
+    }
+
+    public function archive(Request $request)
+    {
+        if (!$request->has('questionnaire_id'))
+            $this->response()->error()->setMessage('Вы не указали ID анкеты')->send();
+
+
     }
 }
