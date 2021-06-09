@@ -59,7 +59,7 @@ class PptxCreator
     {
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
-        \App::setLocale($questionnaire->lang ?? 'ru');
+        \App::setLocale($questionnaire['lang'] ?? 'ru');
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
