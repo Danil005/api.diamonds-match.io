@@ -1033,11 +1033,11 @@ class QuestionnaireController extends QuestionnaireUtils
     {
         $headers = request()->headers;
 
-        if( Cache::get('lang') == null ) {
+        if (Cache::get('lang') == null) {
             Cache::add('lang', 'ru');
         }
 
-        if( $headers->has('x-lang') ) {
+        if ($headers->has('x-lang')) {
             Cache::set('lang', $headers->get('x-lang'));
         } else {
             Cache::set('lang', 'ru');
@@ -1122,11 +1122,11 @@ class QuestionnaireController extends QuestionnaireUtils
         $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
         $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
 
-        $myAppearance = collect($myAppearance)->filter(function ($item, $key) {
+        $myAppearanceTrue = collect($myAppearance)->filter(function ($item, $key) {
             return $item === true;
         });
 
-        $res1 = collect($myAppearance)->filter(function ($item, $key) use ($partnerAppearance) {
+        $res1 = collect($myAppearanceTrue)->filter(function ($item, $key) use ($partnerAppearance) {
             return $item === $partnerAppearance[$key];
         });
 
@@ -1134,11 +1134,11 @@ class QuestionnaireController extends QuestionnaireUtils
         $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
         $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
 
-        $myAppearance = collect($myAppearance)->filter(function ($item, $key) {
+        $myAppearanceTrue = collect($myAppearance)->filter(function ($item, $key) {
             return $item === true;
         });
 
-        $res2 = collect($myAppearance)->filter(function ($item, $key) use ($partnerAppearance) {
+        $res2 = collect($myAppearanceTrue)->filter(function ($item, $key) use ($partnerAppearance) {
             return $item === $partnerAppearance[$key];
         });
 
@@ -1148,14 +1148,22 @@ class QuestionnaireController extends QuestionnaireUtils
             'partner' => $res2?->toArray()
         ];
 
+        dd($qualities);
+
 
         foreach ($qualities['my'] as $key => $item) {
-            $qualities['my'][] = $this->personalQuality($key, $a['sex']);
+            $qualities['my'][$key] = [
+                'label' => $this->personalQuality($key, $a['sex']),
+                'value' => true
+            ];
             unset($qualities['my'][$key]);
         }
 
         foreach ($qualities['partner'] as $key => $item) {
-            $qualities['partner'][] = $this->personalQuality($key, $a['sex']);
+            $qualities['partner'][$key] = [
+                'label' => $this->personalQuality($key, $a['sex']),
+                'value' => true
+            ];
             unset($qualities['partner'][$key]);
         }
 
@@ -1251,14 +1259,13 @@ class QuestionnaireController extends QuestionnaireUtils
     {
         $myQuestionnaire = new Questionnaire();
 
+        if ($request->has('is_archive')) {
+            $myQuestionnaire = $myQuestionnaire::withTrashed()->whereNotNull('questionnaires.deleted_at');
+        }
+
         $myQuestionnaire = $myQuestionnaire->my()
             ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
-
-        $filter = false;
-        if ($request->has('is_archive')) {
-            $myQuestionnaire = $myQuestionnaire->whereNotNull('questionnaires.deleted_at');
-        }
 
 
         if ($request->has('sex')) {
