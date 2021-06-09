@@ -10,6 +10,7 @@ use App\Utils\Response;
 use App\Utils\TranslateFields;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
 class PptxCreator
@@ -60,6 +61,7 @@ class PptxCreator
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
         \App::setLocale($questionnaire['lang'] ?? 'ru');
+        Cache::set('lang', $questionnaire['lang'] ?? 'ru');
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
@@ -216,5 +218,6 @@ class PptxCreator
 
         echo view('pdf.slide' . $slide, ['q' => $result, 'class' => $this]);
         \App::setLocale('ru');
+        Cache::set('lang', 'ru');
     }
 }
