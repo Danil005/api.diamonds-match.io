@@ -1089,13 +1089,34 @@ class QuestionnaireController extends QuestionnaireUtils
 
         foreach ($appearancesWant1 as $key=>$item) {
             if( $key == 'sex' ) continue;
-            $requirements['my'][$key] = $item === $appearancesMy1[$key];
+
+            if ($item === 'no_matter' || $appearancesMy2[$key] === 'no_matter') {
+                $requirements['my'][$key] = true;
+                continue;
+            }
+
+            if ($item === 'any' || $appearancesMy2[$key] === 'any') {
+                $requirements['my'][$key] = true;
+                continue;
+            }
+
+            $requirements['my'][$key] = $item == $appearancesMy1[$key];
         }
 
         foreach ($appearancesWant2 as $key=>$item) {
             if( $key == 'sex' ) continue;
 
-            $requirements['partner'][$key] = $item === $appearancesMy2[$key];
+            if ($item === 'no_matter' || $appearancesMy2[$key] === 'no_matter') {
+                $requirements['partner'][$key] = true;
+                continue;
+            }
+
+            if ($item === 'any' || $appearancesMy2[$key] === 'any') {
+                $requirements['partner'][$key] = true;
+                continue;
+            }
+
+            $requirements['partner'][$key] = $item == $appearancesMy2[$key];
         }
 
 
@@ -1250,6 +1271,7 @@ class QuestionnaireController extends QuestionnaireUtils
         $collection = $collection->map(function ($value) {
             return 'information.' . $value;
         })->toArray();
+
         $partnerInformation = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
             $collection
         )->toArray();
