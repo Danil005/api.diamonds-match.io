@@ -1267,6 +1267,9 @@ class QuestionnaireController extends QuestionnaireUtils
             ->join('applications as a', 'a.questionnaire_id', '=', 'questionnaires.id');
 
 
+        $filter = false;
+
+
 
         if ($request->has('sex')) {
             $filter = true;
