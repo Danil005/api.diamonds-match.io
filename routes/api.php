@@ -45,6 +45,7 @@ Route::prefix('v1')->middleware(['api'])->namespace('App\Http\Controllers\Api\v1
             Route::get('questionnaire.view', 'QuestionnaireController@view');
             Route::delete('questionnaire.archive', 'QuestionnaireController@archive');
             Route::post('questionnaire.unarchive', 'QuestionnaireController@unarchive');
+            Route::delete('questionnaire.forceDelete', 'QuestionnaireController@forceDelete');
 
             Route::post('questionnaire.uploadPhoto', 'QuestionnaireController@uploadPhoto');
             Route::delete('questionnaire.deletePhoto', 'QuestionnaireController@deletePhoto');

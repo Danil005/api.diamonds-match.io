@@ -1645,6 +1645,19 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Анкета была перенесена в архив')->send();
     }
 
+    public function deleteForce(Request $request)
+    {
+        if (!$request->has('questionnaire_id'))
+            $this->response()->error()->setMessage('Вы не указали ID анкеты')->send();
+
+        Questionnaire::where('id', $request->questionnaire_id)->forceDelete();
+        # Переносим в архив матчи
+        QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)
+            ->orWhere('with_questionnaire_id', $request->questionnaire_id)->forceDelete();
+
+        $this->response()->success()->setMessage('Анкета была удалена навсегда')->send();
+    }
+
     public function unarchive(Request $request)
     {
         if (!$request->has('questionnaire_id'))
