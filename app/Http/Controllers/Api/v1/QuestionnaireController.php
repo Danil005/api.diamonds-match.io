@@ -1087,8 +1087,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'partner' => []
         ];
 
-        foreach ($appearancesWant1 as $key=>$item) {
-            if( $key == 'sex' ) continue;
+        foreach ($appearancesWant1 as $key => $item) {
+            if ($key == 'sex') continue;
 
             if ($item === 'no_matter' || $appearancesMy1[$key] === 'no_matter') {
                 $requirements['my'][$key] = true;
@@ -1103,8 +1103,8 @@ class QuestionnaireController extends QuestionnaireUtils
             $requirements['my'][$key] = $item == $appearancesMy1[$key];
         }
 
-        foreach ($appearancesWant2 as $key=>$item) {
-            if( $key == 'sex' ) continue;
+        foreach ($appearancesWant2 as $key => $item) {
+            if ($key == 'sex') continue;
 
             if ($item === 'no_matter' || $appearancesMy2[$key] === 'no_matter') {
                 $requirements['partner'][$key] = true;
@@ -1126,7 +1126,6 @@ class QuestionnaireController extends QuestionnaireUtils
 //        $r2 = $this->simpleMatch($appearancesMy2, $appearancesWant2) * 100 / count($fields);
 //
 //        $appearancesResult = round(($r1 + $r2) / 2);
-
 
 
 //        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
@@ -1191,9 +1190,10 @@ class QuestionnaireController extends QuestionnaireUtils
             return $item === true;
         });
 
-        $res1 = collect($myAppearanceTrue)->filter(function ($item, $key) use ($partnerAppearance) {
-            return $item === $partnerAppearance[$key];
-        });
+        $res1 = [];
+        foreach ($myAppearanceTrue as $key => $item) {
+            $res1[$key] = $item === $partnerAppearance[$key];
+        }
 
 
         $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
@@ -1203,32 +1203,33 @@ class QuestionnaireController extends QuestionnaireUtils
             return $item === true;
         });
 
-        $res2 = collect($myAppearanceTrue)->filter(function ($item, $key) use ($partnerAppearance) {
-            return $item === $partnerAppearance[$key];
-        });
+        $res2 = [];
+        foreach ($myAppearanceTrue as $key => $item) {
+            $res2[$key] = $item === $partnerAppearance[$key];
+        }
+
+        foreach ($res2 as $key => $value) {
+            if(!in_array($key, $res1)) unset($res2[$key]);
+        }
 
 
         $qualities = [
-            'my' => $res1?->toArray(),
-            'partner' => $res2?->toArray()
+            'my' => $res1,
+            'partner' => $res2
         ];
-
-
 
         foreach ($qualities['my'] as $key => $item) {
             $qualities['my'][$key] = [
                 'label' => $this->personalQuality($key, $appearancesMy1['sex']),
-                'value' => true
+                'value' => $item
             ];
-            unset($qualities['my'][$key]);
         }
 
         foreach ($qualities['partner'] as $key => $item) {
             $qualities['partner'][$key] = [
                 'label' => $this->personalQuality($key, $appearancesMy2['sex']),
-                'value' => true
+                'value' => $item
             ];
-            unset($qualities['partner'][$key]);
         }
 
         $myTest = $questionnaire->my(true)->where('questionnaires.id', $request->questionnaire_id)->first(
