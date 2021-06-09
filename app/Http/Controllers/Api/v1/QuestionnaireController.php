@@ -570,7 +570,7 @@ class QuestionnaireController extends QuestionnaireUtils
     {
 
         $questionnaire = new Questionnaire();
-        $questionnaire = $questionnaire->where('id', $request->id)
+        $questionnaire = $questionnaire::withTrashed()->where('id', $request->id)
             ->whereNotNUll('partner_appearance_id')->first();
 
         if (empty($questionnaire))
