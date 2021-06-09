@@ -1064,54 +1064,96 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $questionnaire = new Questionnaire();
 
-        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
-            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-        )->toArray();
+        $temp_q1 = [
+            'my' => $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first()?->toArray(),
+            'partner' => $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first()?->toArray(),
+        ];
+        $temp_q2 = [
+            'my' => $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first()?->toArray(),
+            'partner' => $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first()?->toArray(),
+        ];
 
-        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
-            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-        )->toArray();
+        # Матч внешность
+        $fields = array_keys(config('app.questionnaire.value.partner_appearance'));
+
+        $appearancesWant1 = collect($temp_q1['partner'])->only($fields);
+        $appearancesMy1 = collect($temp_q2['my'])->only($fields);
+
+        $appearancesWant2 = collect($temp_q2['partner'])->only($fields);
+        $appearancesMy2 = collect($temp_q1['my'])->only($fields);
 
         $requirements = [
             'my' => [],
             'partner' => []
         ];
 
-        foreach ($myAppearance as $key => $item) {
-            if ($key == 'sex') continue;
-
-            if ($item == null || $partnerAppearance[$key] == null) continue;
-
-            if ($item == $partnerAppearance[$key] || $item == 'no_matter' || $item == 'any' || $partnerAppearance[$key] == 'no_matter' || $partnerAppearance[$key] == 'any') {
-                $requirements['my'][$key] = true;
-            } else {
-                $requirements['my'][$key] = false;
-            }
+        foreach ($appearancesWant1 as $key=>$item) {
+            $requirements['my'][$key] = $item === $appearancesMy1[$key];
         }
 
-
-        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
-            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-        )->toArray();
-
-        $a = $myAppearance;
-        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first(
-            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-        )->toArray();
-
-        foreach ($partnerAppearance as $key => $item) {
-            if ($key == 'sex') continue;
-
-            if ($item == null || $myAppearance[$key] == null) continue;
-
-
-            if ($item == $myAppearance[$key] || $item == 'no_matter' || $item == 'any' || $myAppearance[$key] == 'no_matter' || $myAppearance[$key] == 'any') {
-                $requirements['partner'][$key] = true;
-            } else {
-                $requirements['partner'][$key] = false;
-            }
+        foreach ($appearancesWant2 as $key=>$item) {
+            $requirements['partner'][$key] = $item === $appearancesMy2[$key];
         }
 
+//        dd($requirements);
+//
+//        dd('q1: ', $appearancesWant1, $appearancesMy1, 'q2: ', $appearancesWant2, $appearancesMy2);
+
+//        $r1 = $this->simpleMatch($appearancesMy1, $appearancesWant1) * 100 / count($fields);
+//        $r2 = $this->simpleMatch($appearancesMy2, $appearancesWant2) * 100 / count($fields);
+//
+//        $appearancesResult = round(($r1 + $r2) / 2);
+
+
+
+//        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
+//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
+//        )->toArray();
+//
+//        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
+//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
+//        )->toArray();
+//
+//        $requirements = [
+//            'my' => [],
+//            'partner' => []
+//        ];
+//
+//        foreach ($myAppearance as $key => $item) {
+//            if ($key == 'sex') continue;
+//
+//            if ($item == null || $partnerAppearance[$key] == null) continue;
+//
+//            if ($item == $partnerAppearance[$key] || $item == 'no_matter' || $item == 'any' || $partnerAppearance[$key] == 'no_matter' || $partnerAppearance[$key] == 'any') {
+//                $requirements['my'][$key] = true;
+//            } else {
+//                $requirements['my'][$key] = false;
+//            }
+//        }
+//
+//
+//        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
+//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
+//        )->toArray();
+//
+//        $a = $myAppearance;
+//        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first(
+//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
+//        )->toArray();
+//
+//        foreach ($partnerAppearance as $key => $item) {
+//            if ($key == 'sex') continue;
+//
+//            if ($item == null || $myAppearance[$key] == null) continue;
+//
+//
+//            if ($item == $myAppearance[$key] || $item == 'no_matter' || $item == 'any' || $myAppearance[$key] == 'no_matter' || $myAppearance[$key] == 'any') {
+//                $requirements['partner'][$key] = true;
+//            } else {
+//                $requirements['partner'][$key] = false;
+//            }
+//        }
+//
 
         $collection = collect(array_keys(config('app.questionnaire.value.my_personal_qualities')));
 
@@ -1150,21 +1192,21 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
 
-        foreach ($qualities['my'] as $key => $item) {
-            $qualities['my'][$key] = [
-                'label' => $this->personalQuality($key, $a['sex']),
-                'value' => true
-            ];
-            unset($qualities['my'][$key]);
-        }
-
-        foreach ($qualities['partner'] as $key => $item) {
-            $qualities['partner'][$key] = [
-                'label' => $this->personalQuality($key, $a['sex']),
-                'value' => true
-            ];
-            unset($qualities['partner'][$key]);
-        }
+//        foreach ($qualities['my'] as $key => $item) {
+//            $qualities['my'][$key] = [
+//                'label' => $this->personalQuality($key, $a['sex']),
+//                'value' => true
+//            ];
+//            unset($qualities['my'][$key]);
+//        }
+//
+//        foreach ($qualities['partner'] as $key => $item) {
+//            $qualities['partner'][$key] = [
+//                'label' => $this->personalQuality($key, $a['sex']),
+//                'value' => true
+//            ];
+//            unset($qualities['partner'][$key]);
+//        }
 
         $myTest = $questionnaire->my(true)->where('questionnaires.id', $request->questionnaire_id)->first(
             collect(array_keys(config('app.questionnaire.value.test')))->except([])->toArray()
