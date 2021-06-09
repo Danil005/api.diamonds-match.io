@@ -609,7 +609,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'application' => $application,
             'histories' => $history,
             'appointed_data' => QuestionnaireAppointedDate::where('questionnaire_id', $request->id)->first(),
-            'matched_count' => $countMatch
+            'matched_count' => $countMatch,
+            'deleted_at' => $questionnaire->deleted_at
         ];
 
         $zodiac = $this->zodiacSigns();
