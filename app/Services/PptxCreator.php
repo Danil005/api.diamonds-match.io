@@ -59,6 +59,7 @@ class PptxCreator
     {
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
+        \App::setLocale($questionnaire->lang ?? 'ru');
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
@@ -214,5 +215,6 @@ class PptxCreator
         $result['photos'] = $photos;
 
         echo view('pdf.slide' . $slide, ['q' => $result, 'class' => $this]);
+        \App::setLocale('ru');
     }
 }

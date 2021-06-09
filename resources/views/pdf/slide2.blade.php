@@ -22,23 +22,23 @@
             <table class="info-table">
                 <tr>
                     <td class="left" style="margin-top: 50px">{{ __('pptx.slide2.p1') }}</td>
-                    <td class="right">{{ explode(',', $q['city'])[0] ?? '----' }}</td>
+                    <td class="right">{{ explode(',', $q['city'])[0] ?? __('pptx.empty') }}</td>
                 </tr>
                 <tr>
                     <td class="left">{{ __('pptx.slide2.p2') }}</td>
-                    <td class="right">{{ $q['ethnicity'] ?? '----' }}</td>
+                    <td class="right">{{ $q['ethnicity'] ?? __('pptx.empty') }}</td>
                 </tr>
                 <tr>
                     <td class="left">{{ __('pptx.slide2.p3') }}</td>
-                    <td class="right">{{ explode(',', $q['city'])[1] ?? '----' }}</td>
+                    <td class="right">{{ explode(',', $q['city'])[1] ?? __('pptx.empty') }}</td>
                 </tr>
                 <tr>
                     <td class="left">{{ __('pptx.slide2.p4') }}</td>
-                    <td class="right">{{ $q['place_birth'] ?? '----' }}</td>
+                    <td class="right">{{ $q['place_birth'] ?? __('pptx.empty') }}</td>
                 </tr>
                 <tr>
                     <td class="left">{{ __('pptx.slide2.p5') }}</td>
-                    <td class="right">{{ ($q['moving']) ?? '----' }}</td>
+                    <td class="right">{{ ($q['moving']) ?? __('pptx.empty') }}</td>
                 </tr>
             </table>
         </div>

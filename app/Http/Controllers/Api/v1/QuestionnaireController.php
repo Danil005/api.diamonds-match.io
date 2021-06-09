@@ -224,7 +224,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'test_id' => $test->id,
             'my_appearance_id' => $myAppearance->id,
             'my_personal_qualities_id' => $myPersonalQualities->id,
-            'my_information_id' => $myInformation->id
+            'my_information_id' => $myInformation->id,
+            'lang' => $request->lang ?? 'ru'
         ]);
 
         $q = Questionnaire::where('sign', $request->sign)->first();
@@ -456,7 +457,8 @@ class QuestionnaireController extends QuestionnaireUtils
             'test_id' => $test->id,
             'my_appearance_id' => $myAppearance->id,
             'my_personal_qualities_id' => $myPersonalQualities->id,
-            'my_information_id' => $myInformation->id
+            'my_information_id' => $myInformation->id,
+            'lang' => $request->lang ?? 'ru'
         ]);
 
         $sign = md5(\Illuminate\Support\Str::random(16));
@@ -1209,7 +1211,7 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($res2 as $key => $value) {
-            if(!in_array($key, $res1)) unset($res2[$key]);
+            if (!in_array($key, $res1)) unset($res2[$key]);
         }
 
 
