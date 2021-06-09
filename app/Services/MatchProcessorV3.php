@@ -421,7 +421,7 @@ class MatchProcessorV3
 
                 $pqResult = round(($r1 + $r2) / 2);
 
-                if( $q1->id == 69 && $q2->id == 41 ) {
+                if( $q1->id == 25 && $q2->id == 37 ) {
                     dd($pqResult, $r1, $r2, '1: ', $pqWant1, $pqMy1, '2: ', $pqWant2, $pqMy2, count($fields));
                 }
 
