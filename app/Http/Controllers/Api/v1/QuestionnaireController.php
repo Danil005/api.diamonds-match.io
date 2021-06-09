@@ -1220,14 +1220,14 @@ class QuestionnaireController extends QuestionnaireUtils
 
         foreach ($qualities['my'] as $key => $item) {
             $qualities['my'][$key] = [
-                'label' => $this->personalQuality($key, $appearancesMy1['sex']),
+                'label' => $this->personalQuality($key, $appearancesMy2['sex']),
                 'value' => $item
             ];
         }
 
         foreach ($qualities['partner'] as $key => $item) {
             $qualities['partner'][$key] = [
-                'label' => $this->personalQuality($key, $appearancesMy2['sex']),
+                'label' => $this->personalQuality($key, $appearancesMy1['sex']),
                 'value' => $item
             ];
         }
