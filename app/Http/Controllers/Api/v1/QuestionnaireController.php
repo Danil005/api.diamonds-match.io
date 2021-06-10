@@ -1238,12 +1238,12 @@ class QuestionnaireController extends QuestionnaireUtils
         $pqWant2 = $pqWant2->toArray();
 
         foreach ($pqWant1_False->toArray() as $key => $item) {
-            if (!in_array($key, array_keys($pqWant1)))
+            if (!in_array($key, array_keys($pqWant2)))
                 $pqWant1[$key] = $item;
         }
 
         foreach ($pqWant2_False->toArray() as $key => $item) {
-            if (!in_array($key, array_keys($pqWant2)))
+            if (!in_array($key, array_keys($pqWant1)))
                 $pqWant2[$key] = $item;
         }
 
