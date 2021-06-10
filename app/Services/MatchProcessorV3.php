@@ -401,11 +401,8 @@ class MatchProcessorV3
             foreach ($questionnaires as $q2) {
                 if ($q1->id == $q2->id) continue;
 
-                if( $q1->id != 63 && $q2->id != 29 )
+                if (!$this->validNotMatch($q1->id, $q2->id))
                     continue;
-
-//                if (!$this->validNotMatch($q1->id, $q2->id))
-//                    continue;
 
 
 
@@ -583,28 +580,28 @@ class MatchProcessorV3
                 $this->similarMatch($p1, $aboutMy1, $aboutMy2);
 
                 $aboutResult = ($p1 + $p) / 2;
-//
-//                QuestionnaireMatch::create([
-//                    'questionnaire_id' => $q1->id,
-//                    'with_questionnaire_id' => $q2->id,
-//                    'about_me' => $aboutResult,
-//                    'appearance' => $appearancesResult,
-//                    'test' => $testResult,
-//                    'information' => $formResult,
-//                    'personal_qualities' => $pqResult,
-//                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
-//                ]);
-//
-//                QuestionnaireMatch::create([
-//                    'questionnaire_id' => $q2->id,
-//                    'with_questionnaire_id' => $q1->id,
-//                    'about_me' => $aboutResult,
-//                    'appearance' => $appearancesResult,
-//                    'test' => $testResult,
-//                    'information' => $formResult,
-//                    'personal_qualities' => $pqResult,
-//                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
-//                ]);
+
+                QuestionnaireMatch::create([
+                    'questionnaire_id' => $q1->id,
+                    'with_questionnaire_id' => $q2->id,
+                    'about_me' => $aboutResult,
+                    'appearance' => $appearancesResult,
+                    'test' => $testResult,
+                    'information' => $formResult,
+                    'personal_qualities' => $pqResult,
+                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
+                ]);
+
+                QuestionnaireMatch::create([
+                    'questionnaire_id' => $q2->id,
+                    'with_questionnaire_id' => $q1->id,
+                    'about_me' => $aboutResult,
+                    'appearance' => $appearancesResult,
+                    'test' => $testResult,
+                    'information' => $formResult,
+                    'personal_qualities' => $pqResult,
+                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
+                ]);
             }
         }
     }
