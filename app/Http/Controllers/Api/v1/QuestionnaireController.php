@@ -1180,10 +1180,10 @@ class QuestionnaireController extends QuestionnaireUtils
             return $item !== $_pqMy1[$key];
         });
         $_pqWant2 = $_pqWant2->filter(function ($item, $key) {
-            return $item !== true;
+            return $item !== true && $item !== null;
         });
         $pqWant2_False = $_pqWant2->filter(function ($item, $key) use ($_pqMy2) {
-            return $item !== $_pqMy2[$key];
+            return $item !== $_pqMy2[$key] && $item !== null;
         });
 
 
