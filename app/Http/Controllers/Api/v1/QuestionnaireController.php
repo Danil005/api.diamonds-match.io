@@ -1168,7 +1168,7 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $res2 = [];
         foreach ($myAppearanceTrue as $key => $item) {
-            $res2[$key] = $item === $partnerAppearance[$key];
+            $res2[$key] = $item === $partnerAppearance[$key] || $item === null || $partnerAppearance[$key] === null;
         }
 
 
