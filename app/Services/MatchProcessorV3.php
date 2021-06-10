@@ -397,8 +397,8 @@ class MatchProcessorV3
             foreach ($questionnaires as $q2) {
                 if ($q1->id == $q2->id) continue;
 
-//                if (!$this->validNotMatch($q1->id, $q2->id))
-//                    continue;
+                if (!$this->validNotMatch($q1->id, $q2->id))
+                    continue;
 
 
 
@@ -482,8 +482,7 @@ class MatchProcessorV3
 
                 # Сравнение моей информации по ключам
                 $fields = [
-                    'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion', 'age',
-                    "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
+                    'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion', 'age'
                 ];
 
                 $formWant1 = collect($temp_q1['partner'])->only($fields);
@@ -499,58 +498,35 @@ class MatchProcessorV3
                 if ($formMy1['age'] >= $between[0] && $formMy1['age'] <= $between[1]) {
                     $age = 1;
                 }
-                $r1 = ($this->simpleMatch($formWant1, $formMy1, $except, function: function ($key, $item, $second) {
-                            $result = null;
-                            if ($key == 'countries_was' || $key == 'countries_dream') {
-                                $myCountries = $this->country($item);
-                                $partnerCountries = $this->country($second[$key]);
-                                $result = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
-                            }
-                            return $result;
-                        }) + $age) * 100 / (count($fields) - count($except) + 1);
+                $r1 = ($this->simpleMatch($formWant1, $formMy1, $except) + $age) * 100 / (count($fields) - count($except) + 1);
 
                 $between = explode(',', $formWant2['age']);
                 $age = 0;
                 if ($formMy2['age'] >= $between[0] && $formMy2['age'] <= $between[1]) {
                     $age = 1;
                 }
-                $r2 = ($this->simpleMatch($formWant2, $formMy2, $except, function: function ($key, $item, $second) {
-                            $result = null;
-                            if ($key == 'countries_was' || $key == 'countries_dream') {
-                                $myCountries = $this->country($item);
-                                $partnerCountries = $this->country($second[$key]);
-                                $result = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
-                            }
-                            return $result;
-                        }) + $age) * 100 / (count($fields) - count($except) + 1);
+                $r2 = ($this->simpleMatch($formWant2, $formMy2, $except) + $age) * 100 / (count($fields) - count($except) + 1);
 
                 $formResult = round(($r1 + $r2) / 2);
-                if( $q1->id == 69 && $q2->id == 41 ) {
-                    dd($formResult, $r1, $r2, '1:', $formMy1, $formWant1, '2:', $formMy2, $formWant2);
-                }
-//                    dd($pqResult, $r1, $r2, '1: ', $pqWant1, $pqMy1, $this->pqMatch($pqMy1, $pqWant1),  '2: ', $pqWant2, $pqMy2, $this->pqMatch($pqMy2, $pqWant2));
-//                }
 
-//                $fields = [
-//                    "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
-//                ];
-//
-//                $formMy11 = collect($temp_q2['my'])->only($fields);
-//                $formMy21 = collect($temp_q1['my'])->only($fields);
-//
-//
-//                $p = 0;
-//                $p = $this->simpleMatch($formMy11, $formMy21, function: function ($key, $item, $second) {
-//                        $result = null;
-//                        if ($key == 'countries_was' || $key == 'countries_dream') {
-//                            $myCountries = $this->country($item);
-//                            $partnerCountries = $this->country($second[$key]);
-//                            $result = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
-//                        }
-//                        return $result;
-//                    }) * 100 / count($fields);
-//
-//                $formResult = ($formResult + $p) / 2;
+                $fields = [
+                    "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
+                ];
+
+                $formMy11 = collect($temp_q2['my'])->only($fields);
+                $formMy21 = collect($temp_q1['my'])->only($fields);
+
+
+                $p = 0;
+                $p = $this->simpleMatch($formMy11, $formMy21, function: function ($key, $item, $second) {
+                        $result = null;
+                        if ($key == 'countries_was' || $key == 'countries_dream') {
+                            $myCountries = $this->country($item);
+                            $partnerCountries = $this->country($second[$key]);
+                            $result = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
+                        }
+                        return $result;
+                    }) * 100 / count($fields);
 
                 # About
                 $fields = [
@@ -568,29 +544,29 @@ class MatchProcessorV3
                 $p1 = 0;
                 $this->similarMatch($p1, $aboutMy1, $aboutMy2);
 
-                $aboutResult = $p1;
+                $aboutResult = ($p1 + $p) / 2;
 
-//                QuestionnaireMatch::create([
-//                    'questionnaire_id' => $q1->id,
-//                    'with_questionnaire_id' => $q2->id,
-//                    'about_me' => $aboutResult,
-//                    'appearance' => $appearancesResult,
-//                    'test' => $testResult,
-//                    'information' => $formResult,
-//                    'personal_qualities' => $pqResult,
-//                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
-//                ]);
-//
-//                QuestionnaireMatch::create([
-//                    'questionnaire_id' => $q2->id,
-//                    'with_questionnaire_id' => $q1->id,
-//                    'about_me' => $aboutResult,
-//                    'appearance' => $appearancesResult,
-//                    'test' => $testResult,
-//                    'information' => $formResult,
-//                    'personal_qualities' => $pqResult,
-//                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
-//                ]);
+                QuestionnaireMatch::create([
+                    'questionnaire_id' => $q1->id,
+                    'with_questionnaire_id' => $q2->id,
+                    'about_me' => $aboutResult,
+                    'appearance' => $appearancesResult,
+                    'test' => $testResult,
+                    'information' => $formResult,
+                    'personal_qualities' => $pqResult,
+                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
+                ]);
+
+                QuestionnaireMatch::create([
+                    'questionnaire_id' => $q2->id,
+                    'with_questionnaire_id' => $q1->id,
+                    'about_me' => $aboutResult,
+                    'appearance' => $appearancesResult,
+                    'test' => $testResult,
+                    'information' => $formResult,
+                    'personal_qualities' => $pqResult,
+                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
+                ]);
             }
         }
     }
