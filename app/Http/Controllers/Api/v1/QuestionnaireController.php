@@ -1303,60 +1303,60 @@ class QuestionnaireController extends QuestionnaireUtils
             "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
         ];
 
-        $formMy11 = collect($temp_q2['my'])->only($fields);
-        $formMy21 = collect($temp_q1['my'])->only($fields);
-
-        foreach ($formMy11 as $key => $item) {
-            if( $key == 'countries_was' || $key == 'countries_dream' ) {
-                $myCountries = $this->country($item);
-                $partnerCountries = $this->country($formMy21[$key]);
-                $forms['my'][$key] = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
-                continue;
-            }
-
-            if ($item === 'no_matter' || $formMy21[$key] === 'no_matter') {
-                $forms['partner'][$key] = true;
-                continue;
-            }
-
-            if ($item === 'any' || $formMy21[$key] === 'any') {
-                $forms['partner'][$key] = true;
-                continue;
-            }
-
-            if( $key == 'children' ) {
-                $forms['partner'][$key] = $item && $formMy21[$key];
-                continue;
-            }
-
-            $forms['my'][$key] = $item == $formMy21[$key];
-        }
-
-        foreach ($formMy21 as $key => $item) {
-            if( $key == 'countries_was' || $key == 'countries_dream' ) {
-                $myCountries = $this->country($item);
-                $partnerCountries = $this->country($formMy11[$key]);
-                $forms['partner'][$key] = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
-                continue;
-            }
-
-            if ($item === 'no_matter' || $formMy11[$key] === 'no_matter') {
-                $forms['partner'][$key] = true;
-                continue;
-            }
-
-            if ($item === 'any' || $formMy11[$key] === 'any') {
-                $forms['partner'][$key] = true;
-                continue;
-            }
-
-            if( $key == 'children' ) {
-                $forms['partner'][$key] = $item && $formMy11[$key];
-                continue;
-            }
-
-            $forms['partner'][$key] = $item == $formMy11[$key];
-        }
+//        $formMy11 = collect($temp_q2['my'])->only($fields);
+//        $formMy21 = collect($temp_q1['my'])->only($fields);
+//
+//        foreach ($formMy11 as $key => $item) {
+//            if( $key == 'countries_was' || $key == 'countries_dream' ) {
+//                $myCountries = $this->country($item);
+//                $partnerCountries = $this->country($formMy21[$key]);
+//                $forms['my'][$key] = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
+//                continue;
+//            }
+//
+//            if ($item === 'no_matter' || $formMy21[$key] === 'no_matter') {
+//                $forms['partner'][$key] = true;
+//                continue;
+//            }
+//
+//            if ($item === 'any' || $formMy21[$key] === 'any') {
+//                $forms['partner'][$key] = true;
+//                continue;
+//            }
+//
+//            if( $key == 'children' ) {
+//                $forms['partner'][$key] = $item && $formMy21[$key];
+//                continue;
+//            }
+//
+//            $forms['my'][$key] = $item == $formMy21[$key];
+//        }
+//
+//        foreach ($formMy21 as $key => $item) {
+//            if( $key == 'countries_was' || $key == 'countries_dream' ) {
+//                $myCountries = $this->country($item);
+//                $partnerCountries = $this->country($formMy11[$key]);
+//                $forms['partner'][$key] = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
+//                continue;
+//            }
+//
+//            if ($item === 'no_matter' || $formMy11[$key] === 'no_matter') {
+//                $forms['partner'][$key] = true;
+//                continue;
+//            }
+//
+//            if ($item === 'any' || $formMy11[$key] === 'any') {
+//                $forms['partner'][$key] = true;
+//                continue;
+//            }
+//
+//            if( $key == 'children' ) {
+//                $forms['partner'][$key] = $item && $formMy11[$key];
+//                continue;
+//            }
+//
+//            $forms['partner'][$key] = $item == $formMy11[$key];
+//        }
 
 //        $p = 0;
 //        $p = $this->simpleMatch($formMy11, $formMy21, function: function ($key, $item, $second) {
