@@ -1149,27 +1149,43 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $fields = array_keys(config('app.questionnaire.value.my_personal_qualities'));
 
-        $pqWant1 = collect($temp_q1['partner'])->only($fields);
-        $pqMy1 = collect($temp_q2['my'])->only($fields);
+        $_pqWant1 = collect($temp_q1['partner'])->only($fields);
+        $_pqMy1 = collect($temp_q2['my'])->only($fields);
 
-        $pqWant2 = collect($temp_q2['partner'])->only($fields);
-        $pqMy2 = collect($temp_q1['my'])->only($fields);
+        $_pqWant2 = collect($temp_q2['partner'])->only($fields);
+        $_pqMy2 = collect($temp_q1['my'])->only($fields);
 
-        $pqWant1 = $pqWant1->filter(function ($item, $key) {
+        $pqWant1 = $_pqWant1->filter(function ($item, $key) {
             return $item === true;
         });
 
-        $pqWant1 = $pqWant1->filter(function ($item, $key) use ($pqMy1) {
-            return $item === $pqMy1[$key];
+        $pqWant1 = $pqWant1->filter(function ($item, $key) use ($_pqMy1) {
+            return $item === $_pqMy1[$key];
         });
 
-        $pqWant2 = $pqWant2->filter(function ($item, $key) {
+
+        $pqWant2 = $_pqWant2->filter(function ($item, $key) {
             return $item === true;
         });
 
-        $pqWant2 = $pqWant2->filter(function ($item, $key) use ($pqMy2) {
-            return $item === $pqMy2[$key];
+        $pqWant2 = $pqWant2->filter(function ($item, $key) use ($_pqMy2) {
+            return $item === $_pqMy2[$key];
         });
+
+
+        $_pqWant1 = $_pqWant2->filter(function ($item, $key) {
+            return $item !== true;
+        });
+        $pqWant1_False = $_pqWant1->filter(function ($item, $key) use ($_pqMy1) {
+            return $item !== $_pqMy1[$key];
+        });
+        $_pqWant2 = $_pqWant2->filter(function ($item, $key) {
+            return $item !== true;
+        });
+        $pqWant2_False = $_pqWant2->filter(function ($item, $key) use ($_pqMy2) {
+            return $item !== $_pqMy2[$key];
+        });
+
 
 //
 //        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
@@ -1211,6 +1227,25 @@ class QuestionnaireController extends QuestionnaireUtils
 //
 //        }
 
+        $collection = collect(array_keys(config('app.questionnaire.value.personal_qualities_partner')));
+
+        $res1 = [];
+        $res2 = [];
+
+//        dd($pqWant1->toArray(), $pqWant1_False->toArray(), $pqWant2->toArray(), $pqWant2_False->toArray());
+
+        $pqWant1 = $pqWant1->toArray();
+        $pqWant2 = $pqWant2->toArray();
+
+        foreach ($pqWant1_False->toArray() as $key => $item) {
+            if (!in_array($key, array_keys($pqWant1)))
+                $pqWant1[$key] = $item;
+        }
+
+        foreach ($pqWant2_False->toArray() as $key => $item) {
+            if (!in_array($key, array_keys($pqWant2)))
+                $pqWant2[$key] = $item;
+        }
 
         $qualities = [
             'my' => $pqWant1,
