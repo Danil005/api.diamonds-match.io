@@ -1234,18 +1234,23 @@ class QuestionnaireController extends QuestionnaireUtils
 
 //        dd($pqWant1->toArray(), $pqWant1_False->toArray(), $pqWant2->toArray(), $pqWant2_False->toArray());
 
-        $pqWant1 = $pqWant1->toArray();
-        $pqWant2 = $pqWant2->toArray();
-
-        foreach ($pqWant1_False->toArray() as $key => $item) {
-            if (!in_array($key, array_keys($pqWant1)))
-                $pqWant1[$key] = $item;
-        }
-
-        foreach ($pqWant2_False->toArray() as $key => $item) {
-            if (!in_array($key, array_keys($pqWant2)))
-                $pqWant2[$key] = $item;
-        }
+//        $pqWant1 = $pqWant1->toArray();
+//        $pqWant2 = $pqWant2->toArray();
+//        dd($pqWant2_False,$pqWant2);
+//
+//        foreach ($pqWant1_False->toArray() as $key => $item) {
+//            if (!in_array($key, array_keys($pqWant1)))
+//                $pqWant1[$key] = $item;
+//        }
+//
+//        foreach ($pqWant2_False->toArray() as $key => $item) {
+//            if (!in_array($key, array_keys($pqWant2)))
+//                $pqWant2[$key] = $item;
+//        }
+//
+//        foreach ($pqWant2 as $key=>$item) {
+//            dd($pqWant2);
+//        }
 
         $qualities = [
             'my' => $pqWant1,
