@@ -1147,34 +1147,74 @@ class QuestionnaireController extends QuestionnaireUtils
             return 'personal_qualities.' . $value;
         })->toArray();
 
-        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
-        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
+        $fields = array_keys(config('app.questionnaire.value.my_personal_qualities'));
 
-        $myAppearanceTrue = collect($myAppearance)->filter(function ($item, $key) {
+        $pqWant1 = collect($temp_q1['partner'])->only($fields);
+        $pqMy1 = collect($temp_q2['my'])->only($fields);
+
+        $pqWant2 = collect($temp_q2['partner'])->only($fields);
+        $pqMy2 = collect($temp_q1['my'])->only($fields);
+
+        $pqWant1 = $pqWant1->filter(function ($item, $key) {
             return $item === true;
         });
 
-        $res1 = [];
-        foreach ($myAppearanceTrue as $key => $item) {
-            $res1[$key] = $item === $partnerAppearance[$key];
-        }
+        $pqWant1 = $pqWant1->filter(function ($item, $key) use ($pqMy1) {
+            return $item === $pqMy1[$key];
+        });
 
-        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
-        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
-
-        $myAppearanceTrue = collect($myAppearance)->filter(function ($item, $key) {
+        $pqWant2 = $pqWant2->filter(function ($item, $key) {
             return $item === true;
         });
 
-        $res2 = [];
-        foreach ($myAppearanceTrue as $key => $item) {
-            $res2[$key] = $item === $partnerAppearance[$key] || $item === null || $partnerAppearance[$key] === null;
-        }
+        $pqWant2 = $pqWant2->filter(function ($item, $key) use ($pqMy2) {
+            return $item === $pqMy2[$key];
+        });
+
+//
+//        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
+//        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
+//
+//        $myAppearanceTrue = collect($myAppearance)->filter(function ($item, $key) {
+//            return $item === true;
+//        });
+//
+//        $res1 = [];
+//        foreach ($myAppearanceTrue as $key => $item) {
+//            $res1[$key] = $item === $partnerAppearance[$key];
+//        }
+//
+//        $collection = collect(array_keys(config('app.questionnaire.value.my_personal_qualities')));
+//
+//        $fields = $collection->map(function ($value) {
+//            return 'personal_qualities.' . $value;
+//        })->toArray();
+//        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
+//        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
+//
+//        $myAppearanceTrue = collect($myAppearance)->filter(function ($item, $key) {
+//            return $item === true;
+//        });
+//
+//        $myAppearanceTrue->filter(function ($item, $key) use ($partnerAppearance) {
+//            return $item === $partnerAppearance[$key];
+//        })->count();
+//
+//        $res2 = [];
+//        foreach ($myAppearanceTrue as $key => $item) {
+//            $res2[$key] = $item === $partnerAppearance[$key];
+//        }
+//        dd($res2, $myAppearanceTrue);
+//        $r3 = [];
+//        $field1 = collect(array_keys(config('app.questionnaire.value.personal_qualities_partner')));
+//        foreach ($field1 as $item) {
+//
+//        }
 
 
         $qualities = [
-            'my' => $res1,
-            'partner' => $res2
+            'my' => $pqWant1,
+            'partner' => $pqWant2
         ];
 
         foreach ($qualities['my'] as $key => $item) {

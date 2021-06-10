@@ -401,6 +401,9 @@ class MatchProcessorV3
             foreach ($questionnaires as $q2) {
                 if ($q1->id == $q2->id) continue;
 
+                if( $q1->id != 63 && $q2->id != 29 )
+                    continue;
+
 //                if (!$this->validNotMatch($q1->id, $q2->id))
 //                    continue;
 
@@ -455,9 +458,9 @@ class MatchProcessorV3
 
                 $pqResult = round(($r1 + $r2) / 2);
 
-//                if( $q1->id == 25 && $q2->id == 37 ) {
-//                    dd($pqResult, $r1, $r2, '1: ', $pqWant1, $pqMy1, $this->pqMatch($pqMy1, $pqWant1),  '2: ', $pqWant2, $pqMy2, $this->pqMatch($pqMy2, $pqWant2));
-//                }
+                if( $q1->id == 63 && $q2->id == 29 ) {
+                    dd($pqResult, $r1, $r2, '1: ', $pqWant1, $pqMy1, $this->pqMatch($pqMy1, $pqWant1),  '2: ', $pqWant2, $pqMy2, $this->pqMatch($pqMy2, $pqWant2));
+                }
 
                 # Сравнение тестов
                 $fields = array_keys(config('app.questionnaire.value.test'));
