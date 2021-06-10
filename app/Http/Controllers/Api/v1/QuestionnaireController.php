@@ -8,6 +8,7 @@ use App\Http\Requests\Questionnaire\Create;
 use App\Http\Requests\Questionnaire\DeleteFilesQuestionnaire;
 use App\Http\Requests\Questionnaire\DeletePhotoQuestionnaire;
 use App\Http\Requests\Questionnaire\FilesQuestionnaire;
+use App\Http\Requests\Questionnaire\ForceDeleteQuestionnaire;
 use App\Http\Requests\Questionnaire\GetQuestionnaire;
 use App\Http\Requests\Questionnaire\MakeDateQuestionnaire;
 use App\Http\Requests\Questionnaire\OpenFilesQuestionnaire;
@@ -1822,11 +1823,8 @@ class QuestionnaireController extends QuestionnaireUtils
     }
 
     public
-    function deleteForce(Request $request)
+    function deleteForce(ForceDeleteQuestionnaire $request)
     {
-        if (!$request->has('questionnaire_id'))
-            $this->response()->error()->setMessage('Вы не указали ID анкеты')->send();
-
         Questionnaire::where('id', $request->questionnaire_id)->forceDelete();
         # Переносим в архив матчи
         QuestionnaireMatch::where('questionnaire_id', $request->questionnaire_id)
