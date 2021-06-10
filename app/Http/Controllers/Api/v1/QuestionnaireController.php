@@ -1030,6 +1030,20 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Доступные свидания')->setData($matching)->send();
     }
 
+    private function country(string $countryWas): array
+    {
+        $country_was = explode(',', $countryWas);
+        $place = new Countries();
+        foreach ($country_was as $item) {
+            $place = $place->orWhere('title_en', 'ILIKE', $item)->orWhere('title_ru', 'ILIKE', $item);
+        }
+        $place = $place->get(['title_ru'])->toArray();
+        $res = '';
+        if ($place != null)
+            foreach ($place as $item) $res .= ', ' . $item['title_ru'];
+        return explode(', ', trim($res, ', '));
+    }
+
     public
     function viewMatch(Request $request)
     {
@@ -1292,6 +1306,27 @@ class QuestionnaireController extends QuestionnaireUtils
         $formMy11 = collect($temp_q2['my'])->only($fields);
         $formMy21 = collect($temp_q1['my'])->only($fields);
 
+        foreach ($formMy11 as $key => $item) {
+            if( $key == 'countries_was' || $key == 'countries_dream' ) {
+                $myCountries = $this->country($item);
+                $partnerCountries = $this->country($formMy21[$key]);
+                $forms['my'][$key] = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
+                continue;
+            }
+
+            $forms['my'][$key] = $item == $formMy21[$key];
+        }
+
+        foreach ($formMy21 as $key => $item) {
+            if( $key == 'countries_was' || $key == 'countries_dream' ) {
+                $myCountries = $this->country($item);
+                $partnerCountries = $this->country($formMy11[$key]);
+                $forms['partner'][$key] = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
+                continue;
+            }
+
+            $forms['partner'][$key] = $item == $formMy11[$key];
+        }
 
 //        $p = 0;
 //        $p = $this->simpleMatch($formMy11, $formMy21, function: function ($key, $item, $second) {
