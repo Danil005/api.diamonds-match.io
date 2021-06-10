@@ -1174,16 +1174,16 @@ class QuestionnaireController extends QuestionnaireUtils
 
 
         $_pqWant1 = $_pqWant2->filter(function ($item, $key) {
-            return $item !== true;
+            return $item != true;
         });
         $pqWant1_False = $_pqWant1->filter(function ($item, $key) use ($_pqMy1) {
-            return $item !== $_pqMy1[$key];
+            return $item != $_pqMy1[$key];
         });
         $_pqWant2 = $_pqWant2->filter(function ($item, $key) {
-            return $item !== true && $item !== null;
+            return $item != true;
         });
         $pqWant2_False = $_pqWant2->filter(function ($item, $key) use ($_pqMy2) {
-            return $item !== $_pqMy2[$key] && $item !== null;
+            return $item != $_pqMy2[$key];
         });
 
 
@@ -1234,20 +1234,20 @@ class QuestionnaireController extends QuestionnaireUtils
 
 //        dd($pqWant1->toArray(), $pqWant1_False->toArray(), $pqWant2->toArray(), $pqWant2_False->toArray());
 
-//        $pqWant1 = $pqWant1->toArray();
-//        $pqWant2 = $pqWant2->toArray();
+        $pqWant1 = $pqWant1->toArray();
+        $pqWant2 = $pqWant2->toArray();
 //        dd($pqWant2_False,$pqWant2);
-//
-//        foreach ($pqWant1_False->toArray() as $key => $item) {
-//            if (!in_array($key, array_keys($pqWant1)))
-//                $pqWant1[$key] = $item;
-//        }
-//
-//        foreach ($pqWant2_False->toArray() as $key => $item) {
-//            if (!in_array($key, array_keys($pqWant2)))
-//                $pqWant2[$key] = $item;
-//        }
-//
+
+        foreach ($pqWant1_False->toArray() as $key => $item) {
+            if (!in_array($key, array_keys($pqWant1)))
+                $pqWant1[$key] = $item;
+        }
+
+        foreach ($pqWant2_False->toArray() as $key => $item) {
+            if (!in_array($key, array_keys($pqWant2)))
+                $pqWant2[$key] = $item;
+        }
+
 //        foreach ($pqWant2 as $key=>$item) {
 //            dd($pqWant2);
 //        }
