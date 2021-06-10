@@ -488,7 +488,7 @@ class MatchProcessorV3
                 $fields = [
                     'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion',
                     'age', 'zodiac_signs', 'height', 'weight', 'marital_status', 'moving_country',
-                    'moving_city', 'children_desire'
+                    'moving_city'
                 ];
 
                 $formWant1 = collect($temp_q1['partner'])->only($fields);

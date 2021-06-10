@@ -1255,12 +1255,14 @@ class QuestionnaireController extends QuestionnaireUtils
 
             if( $key == 'height' ) {
                 $between = explode(',', $item);
+
                 $forms['my'][$key] = $formMy1[$key] >= $between[0] && $formMy1[$key] <= $between[1];
                 continue;
             }
 
             if( $key == 'weight' ) {
                 $between = explode(',', $item);
+
                 $forms['my'][$key] = $formMy1[$key] >= $between[0] && $formMy1[$key] <= $between[1];
                 continue;
             }
