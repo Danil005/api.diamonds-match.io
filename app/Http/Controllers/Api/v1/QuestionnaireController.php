@@ -1121,64 +1121,6 @@ class QuestionnaireController extends QuestionnaireUtils
             $requirements['partner'][$key] = $item == $appearancesMy2[$key];
         }
 
-
-//        dd('q1: ', $appearancesWant1, $appearancesMy1, 'q2: ', $appearancesWant2, $appearancesMy2);
-
-//        $r1 = $this->simpleMatch($appearancesMy1, $appearancesWant1) * 100 / count($fields);
-//        $r2 = $this->simpleMatch($appearancesMy2, $appearancesWant2) * 100 / count($fields);
-//
-//        $appearancesResult = round(($r1 + $r2) / 2);
-
-
-//        $myAppearance = $questionnaire->my()->where('questionnaires.id', $request->questionnaire_id)->first(
-//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-//        )->toArray();
-//
-//        $partnerAppearance = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
-//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-//        )->toArray();
-//
-//        $requirements = [
-//            'my' => [],
-//            'partner' => []
-//        ];
-//
-//        foreach ($myAppearance as $key => $item) {
-//            if ($key == 'sex') continue;
-//
-//            if ($item == null || $partnerAppearance[$key] == null) continue;
-//
-//            if ($item == $partnerAppearance[$key] || $item == 'no_matter' || $item == 'any' || $partnerAppearance[$key] == 'no_matter' || $partnerAppearance[$key] == 'any') {
-//                $requirements['my'][$key] = true;
-//            } else {
-//                $requirements['my'][$key] = false;
-//            }
-//        }
-//
-//
-//        $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first(
-//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-//        )->toArray();
-//
-//        $a = $myAppearance;
-//        $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first(
-//            collect(array_keys(config('app.questionnaire.value.partner_appearance')))->except([])->toArray()
-//        )->toArray();
-//
-//        foreach ($partnerAppearance as $key => $item) {
-//            if ($key == 'sex') continue;
-//
-//            if ($item == null || $myAppearance[$key] == null) continue;
-//
-//
-//            if ($item == $myAppearance[$key] || $item == 'no_matter' || $item == 'any' || $myAppearance[$key] == 'no_matter' || $myAppearance[$key] == 'any') {
-//                $requirements['partner'][$key] = true;
-//            } else {
-//                $requirements['partner'][$key] = false;
-//            }
-//        }
-//
-
         $collection = collect(array_keys(config('app.questionnaire.value.my_personal_qualities')));
 
         $fields = $collection->map(function ($value) {
@@ -1196,7 +1138,6 @@ class QuestionnaireController extends QuestionnaireUtils
         foreach ($myAppearanceTrue as $key => $item) {
             $res1[$key] = $item === $partnerAppearance[$key];
         }
-
 
         $myAppearance = $questionnaire->partner()->where('questionnaires.id', $request->questionnaire_id)->first($fields);
         $partnerAppearance = $questionnaire->my()->where('questionnaires.id', $withQuestionnaire->id)->first($fields);
