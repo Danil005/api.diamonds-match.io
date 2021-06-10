@@ -18,7 +18,7 @@ class Got extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->isAdmin();
+        return $this->isManager();
     }
 
     /**
