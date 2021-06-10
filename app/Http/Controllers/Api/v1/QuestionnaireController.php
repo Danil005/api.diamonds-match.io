@@ -1210,15 +1210,101 @@ class QuestionnaireController extends QuestionnaireUtils
             unset($testResult[$key]);
         }
 
-        $collection = collect(array_keys(config('app.questionnaire.value.partner_information')));
+        # Сравнение моей информации по ключам
+        $fields = [
+            'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion', 'age'
+        ];
 
-        $collection = $collection->map(function ($value) {
-            return 'information.' . $value;
-        })->toArray();
+        $formWant1 = collect($temp_q1['partner'])->only($fields);
+        $formMy1 = collect($temp_q2['my'])->only($fields);
 
-        $partnerInformation = $questionnaire->partner()->where('questionnaires.id', $withQuestionnaire->id)->first(
-            $collection
-        )->toArray();
+        $formWant2 = collect($temp_q2['partner'])->only($fields);
+        $formMy2 = collect($temp_q1['my'])->only($fields);
+
+        $except = ['age'];
+//        $r1 = ($this->simpleMatch($formWant1, $formMy1, $except) + $age) * 100 / (count($fields) - count($except) + 1);
+
+
+//        $r2 = ($this->simpleMatch($formWant2, $formMy2, $except) + $age) * 100 / (count($fields) - count($except) + 1);
+
+        $forms = [
+            'my' => [],
+            'partner' => []
+        ];
+
+        foreach ($formWant1 as $key => $item) {
+            if( $key == 'age' ) {
+                $between = explode(',', $item);
+                $forms['my'][$key] = $formMy1[$key] >= $between[0] && $formMy1[$key] <= $between[1];
+                continue;
+            }
+            $ch1[] = $item;
+            if ($item === 'no_matter' || $formMy1[$key] === 'no_matter') {
+                $forms['my'][$key] = true;
+                continue;
+            }
+
+            if ($item === 'any' || $formMy1[$key] === 'any') {
+                $forms['my'][$key] = true;
+                continue;
+            }
+
+            if( $key == 'children' ) {
+                $forms['my'][$key] = $item && $formMy1[$key];
+                continue;
+            }
+
+            $forms['my'][$key] = $item == $formMy1[$key];
+        }
+
+        foreach ($formWant2 as $key => $item) {
+            if( $key == 'age' ) {
+                $between = explode(',', $item);
+                $forms['partner'][$key] = $formMy2[$key] >= (int)$between[0] && $formMy2[$key] <= (int)$between[1];
+                continue;
+            }
+
+            $ch2[] = $item;
+            if ($item === 'no_matter' || $formMy2[$key] === 'no_matter') {
+                $forms['partner'][$key] = true;
+                continue;
+            }
+
+            if ($item === 'any' || $formMy2[$key] === 'any') {
+                $forms['partner'][$key] = true;
+                continue;
+            }
+
+            if( $key == 'children' ) {
+                $forms['partner'][$key] = $item && $formMy2[$key];
+                continue;
+            }
+
+            $forms['partner'][$key] = $item == $formMy2[$key];
+        }
+
+//        $formResult = round(($r1 + $r2) / 2);
+
+        $fields = [
+            "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
+        ];
+
+        $formMy11 = collect($temp_q2['my'])->only($fields);
+        $formMy21 = collect($temp_q1['my'])->only($fields);
+
+
+//        $p = 0;
+//        $p = $this->simpleMatch($formMy11, $formMy21, function: function ($key, $item, $second) {
+//                $result = null;
+//                if ($key == 'countries_was' || $key == 'countries_dream') {
+//                    $myCountries = $this->country($item);
+//                    $partnerCountries = $this->country($second[$key]);
+//                    $result = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
+//                }
+//                return $result;
+//            }) * 100 / count($fields);
+
+//        $formResult = ($formResult + $p) / 2;
 
         $rs = $matching?->toArray();
 
@@ -1236,7 +1322,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'requirements' => $requirements,
             'qualities' => $qualities,
             'test' => $testResult,
-            'partnerInformation' => $partnerInformation,
+            'partnerInformation' => $forms,
             'names' => [
                 'me' => $matching->name,
                 'partner' => $partner->name
