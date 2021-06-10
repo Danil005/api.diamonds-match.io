@@ -296,6 +296,10 @@ class MatchProcessorV3
                 if ($res != null)
                     return $res;
             }
+
+            if($item === null || $second[$key] === null)
+                return true;
+
             if ($item === 'no_matter' || $second[$key] === 'no_matter')
                 return true;
 
@@ -482,7 +486,9 @@ class MatchProcessorV3
 
                 # Сравнение моей информации по ключам
                 $fields = [
-                    'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion', 'age'
+                    'sport', 'children', 'children_desire', 'smoking', 'alcohol', 'religion',
+                    'age', 'zodiac_signs', 'height', 'weight', 'marital_status', 'moving_country',
+                    'moving_city', 'children_desire'
                 ];
 
                 $formWant1 = collect($temp_q1['partner'])->only($fields);
@@ -491,21 +497,47 @@ class MatchProcessorV3
                 $formWant2 = collect($temp_q2['partner'])->only($fields);
                 $formMy2 = collect($temp_q1['my'])->only($fields);
 
-                $except = ['age'];
+                $except = ['age', 'height', 'weight'];
 
                 $between = explode(',', $formWant1['age']);
                 $age = 0;
                 if ($formMy1['age'] >= $between[0] && $formMy1['age'] <= $between[1]) {
                     $age = 1;
                 }
-                $r1 = ($this->simpleMatch($formWant1, $formMy1, $except) + $age) * 100 / (count($fields) - count($except) + 1);
+
+                $between = explode(',', $formWant1['height']);
+                $height = 0;
+                if ($formMy1['height'] >= $between[0] && $formMy1['height'] <= $between[1]) {
+                    $height = 1;
+                }
+
+                $between = explode(',', $formWant1['weight']);
+                $weight = 0;
+                if ($formMy1['weight'] >= $between[0] && $formMy1['weight'] <= $between[1]) {
+                    $weight = 1;
+                }
+
+                $r1 = ($this->simpleMatch($formWant1, $formMy1, $except) + $age + $weight + $height) * 100 / (count($fields) - count($except) + 3);
 
                 $between = explode(',', $formWant2['age']);
                 $age = 0;
                 if ($formMy2['age'] >= $between[0] && $formMy2['age'] <= $between[1]) {
                     $age = 1;
                 }
-                $r2 = ($this->simpleMatch($formWant2, $formMy2, $except) + $age) * 100 / (count($fields) - count($except) + 1);
+
+                $between = explode(',', $formWant2['height']);
+                $height = 0;
+                if ($formMy2['height'] >= $between[0] && $formMy2['height'] <= $between[1]) {
+                    $height = 1;
+                }
+
+                $between = explode(',', $formWant2['weight']);
+                $weight = 0;
+                if ($formMy2['weight'] >= $between[0] && $formMy2['weight'] <= $between[1]) {
+                    $weight = 1;
+                }
+
+                $r2 = ($this->simpleMatch($formWant2, $formMy2, $except) + $age + $height + $weight) * 100 / (count($fields) - count($except) + 3);
 
                 $formResult = round(($r1 + $r2) / 2);
 
