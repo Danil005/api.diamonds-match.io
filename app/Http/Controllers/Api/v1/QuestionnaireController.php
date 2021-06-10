@@ -1239,12 +1239,12 @@ class QuestionnaireController extends QuestionnaireUtils
 
         foreach ($pqWant1_False->toArray() as $key => $item) {
             if (!in_array($key, array_keys($pqWant1)))
-                $pqWant2[$key] = $item;
+                $pqWant1[$key] = $item;
         }
 
         foreach ($pqWant2_False->toArray() as $key => $item) {
             if (!in_array($key, array_keys($pqWant2)))
-                $pqWant1[$key] = $item;
+                $pqWant2[$key] = $item;
         }
 
         $qualities = [
