@@ -397,8 +397,8 @@ class MatchProcessorV3
             foreach ($questionnaires as $q2) {
                 if ($q1->id == $q2->id) continue;
 
-                if (!$this->validNotMatch($q1->id, $q2->id))
-                    continue;
+//                if (!$this->validNotMatch($q1->id, $q2->id))
+//                    continue;
 
 
 
@@ -525,6 +525,11 @@ class MatchProcessorV3
                         }) + $age) * 100 / (count($fields) - count($except) + 1);
 
                 $formResult = round(($r1 + $r2) / 2);
+                if( $q1->id == 69 && $q2->id == 41 ) {
+                    dd($formResult, $r1, $r2, '1:', $formMy1, $formWant1, '2:', $formMy2, $formWant2);
+                }
+//                    dd($pqResult, $r1, $r2, '1: ', $pqWant1, $pqMy1, $this->pqMatch($pqMy1, $pqWant1),  '2: ', $pqWant2, $pqMy2, $this->pqMatch($pqMy2, $pqWant2));
+//                }
 
 //                $fields = [
 //                    "education", "work", "salary", "pets", "films_or_books", "relax", "countries_was", "countries_dream", "sleep", "clubs",
@@ -565,27 +570,27 @@ class MatchProcessorV3
 
                 $aboutResult = $p1;
 
-                QuestionnaireMatch::create([
-                    'questionnaire_id' => $q1->id,
-                    'with_questionnaire_id' => $q2->id,
-                    'about_me' => $aboutResult,
-                    'appearance' => $appearancesResult,
-                    'test' => $testResult,
-                    'information' => $formResult,
-                    'personal_qualities' => $pqResult,
-                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
-                ]);
-
-                QuestionnaireMatch::create([
-                    'questionnaire_id' => $q2->id,
-                    'with_questionnaire_id' => $q1->id,
-                    'about_me' => $aboutResult,
-                    'appearance' => $appearancesResult,
-                    'test' => $testResult,
-                    'information' => $formResult,
-                    'personal_qualities' => $pqResult,
-                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
-                ]);
+//                QuestionnaireMatch::create([
+//                    'questionnaire_id' => $q1->id,
+//                    'with_questionnaire_id' => $q2->id,
+//                    'about_me' => $aboutResult,
+//                    'appearance' => $appearancesResult,
+//                    'test' => $testResult,
+//                    'information' => $formResult,
+//                    'personal_qualities' => $pqResult,
+//                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
+//                ]);
+//
+//                QuestionnaireMatch::create([
+//                    'questionnaire_id' => $q2->id,
+//                    'with_questionnaire_id' => $q1->id,
+//                    'about_me' => $aboutResult,
+//                    'appearance' => $appearancesResult,
+//                    'test' => $testResult,
+//                    'information' => $formResult,
+//                    'personal_qualities' => $pqResult,
+//                    'total' => round((($aboutResult + $appearancesResult + $testResult + $formResult + $pqResult) / 5), 2)
+//                ]);
             }
         }
     }

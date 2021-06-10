@@ -1314,6 +1314,21 @@ class QuestionnaireController extends QuestionnaireUtils
                 continue;
             }
 
+            if ($item === 'no_matter' || $formMy21[$key] === 'no_matter') {
+                $forms['partner'][$key] = true;
+                continue;
+            }
+
+            if ($item === 'any' || $formMy21[$key] === 'any') {
+                $forms['partner'][$key] = true;
+                continue;
+            }
+
+            if( $key == 'children' ) {
+                $forms['partner'][$key] = $item && $formMy21[$key];
+                continue;
+            }
+
             $forms['my'][$key] = $item == $formMy21[$key];
         }
 
@@ -1322,6 +1337,21 @@ class QuestionnaireController extends QuestionnaireUtils
                 $myCountries = $this->country($item);
                 $partnerCountries = $this->country($formMy11[$key]);
                 $forms['partner'][$key] = count(array_intersect_assoc($myCountries, $partnerCountries)) > 0;
+                continue;
+            }
+
+            if ($item === 'no_matter' || $formMy11[$key] === 'no_matter') {
+                $forms['partner'][$key] = true;
+                continue;
+            }
+
+            if ($item === 'any' || $formMy11[$key] === 'any') {
+                $forms['partner'][$key] = true;
+                continue;
+            }
+
+            if( $key == 'children' ) {
+                $forms['partner'][$key] = $item && $formMy11[$key];
                 continue;
             }
 
