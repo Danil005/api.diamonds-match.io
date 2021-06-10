@@ -1044,6 +1044,11 @@ class QuestionnaireController extends QuestionnaireUtils
         return explode(', ', trim($res, ', '));
     }
 
+    private function snakeToCamel($input)
+    {
+        return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $input))));
+    }
+
     public
     function viewMatch(Request $request)
     {
@@ -1166,8 +1171,6 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
 
-
-
         $qualities = [
             'my' => $res1,
             'partner' => $res2
@@ -1247,20 +1250,20 @@ class QuestionnaireController extends QuestionnaireUtils
         ];
 
         foreach ($formWant1 as $key => $item) {
-            if( $key == 'age' ) {
+            if ($key == 'age') {
                 $between = explode(',', $item);
                 $forms['my'][$key] = $formMy1[$key] >= $between[0] && $formMy1[$key] <= $between[1];
                 continue;
             }
 
-            if( $key == 'height' ) {
+            if ($key == 'height') {
                 $between = explode(',', $item);
 
                 $forms['my'][$key] = $formMy1[$key] >= $between[0] && $formMy1[$key] <= $between[1];
                 continue;
             }
 
-            if( $key == 'weight' ) {
+            if ($key == 'weight') {
                 $between = explode(',', $item);
 
                 $forms['my'][$key] = $formMy1[$key] >= $between[0] && $formMy1[$key] <= $between[1];
@@ -1283,8 +1286,8 @@ class QuestionnaireController extends QuestionnaireUtils
                 continue;
             }
 
-            if( $key == 'children' ) {
-                $forms['my'][$key] = $item && $formMy1[$key];
+            if ($key == 'children') {
+                $forms['my'][$key] = $item === $formMy1[$key];
                 continue;
             }
 
@@ -1292,19 +1295,19 @@ class QuestionnaireController extends QuestionnaireUtils
         }
 
         foreach ($formWant2 as $key => $item) {
-            if( $key == 'age' ) {
+            if ($key == 'age') {
                 $between = explode(',', $item);
                 $forms['partner'][$key] = $formMy2[$key] >= (int)$between[0] && $formMy2[$key] <= (int)$between[1];
                 continue;
             }
 
-            if( $key == 'height' ) {
+            if ($key == 'height') {
                 $between = explode(',', $item);
                 $forms['partner'][$key] = $formMy2[$key] >= (int)$between[0] && $formMy2[$key] <= (int)$between[1];
                 continue;
             }
 
-            if( $key == 'weight' ) {
+            if ($key == 'weight') {
                 $between = explode(',', $item);
                 $forms['partner'][$key] = $formMy2[$key] >= (int)$between[0] && $formMy2[$key] <= (int)$between[1];
                 continue;
@@ -1326,8 +1329,8 @@ class QuestionnaireController extends QuestionnaireUtils
                 continue;
             }
 
-            if( $key == 'children' ) {
-                $forms['partner'][$key] = $item && $formMy2[$key];
+            if ($key == 'children') {
+                $forms['partner'][$key] = $item === $formMy2[$key];
                 continue;
             }
 
@@ -1347,6 +1350,39 @@ class QuestionnaireController extends QuestionnaireUtils
         $fields = [...$fields1, ...$fields2];
         $aboutMy2 = collect($temp_q1['my'])->only($fields);
 
+        foreach ($aboutMy2 as $key => $item) {
+            if (in_array($key, $fields1)) {
+                if ($key == 'films_or_books') {
+                    $aboutMy2[$key] = $this->fm($item);
+                } elseif ($key == 'countries_was') {
+                    $country_was = explode(',', $aboutMy2['countries_was']);
+                    $place = new Countries();
+                    foreach ($country_was as $item1) {
+                        $place = $place->orWhere('title_en', 'ILIKE', $item1);
+                    }
+                    $place = $place->get(['title_ru'])->toArray();
+                    $res = '';
+                    if ($place != null)
+                        foreach ($place as $item1) $res .= ', ' . $item1['title_ru'];
+                    $aboutMy2['countries_was'] = trim($res, ', ');
+                } elseif ($key == 'countries_dream') {
+                    $country_was = explode(',', $aboutMy2['countries_dream']);
+                    $place = new Countries();
+                    foreach ($country_was as $item1) {
+                        $place = $place->orWhere('title_en', 'ILIKE', $item1);
+                    }
+                    $place = $place->get(['title_ru'])->toArray();
+                    $res = '';
+                    if ($place != null)
+                        foreach ($place as $item1) $res .= ', ' . $item1['title_ru'];
+                    $aboutMy2['countries_dream'] = trim($res, ', ');
+
+                } else {
+                    $aboutMy2[$key] = $this->{$this->snakeToCamel($key)}($item);
+                }
+            }
+        }
+
         $rs = $matching?->toArray();
 
         $rs['total'] = round($rs['total']);
@@ -1364,7 +1400,7 @@ class QuestionnaireController extends QuestionnaireUtils
             'qualities' => $qualities,
             'test' => $testResult,
             'partnerInformation' => $forms,
-            'aboutMe' => '',
+            'aboutMe' => $aboutMy2,
             'names' => [
                 'me' => $matching->name,
                 'partner' => $partner->name
@@ -1754,7 +1790,8 @@ class QuestionnaireController extends QuestionnaireUtils
         ])->send();
     }
 
-    public function getSlide(Request $request, $slide, $questionnaireId)
+    public
+    function getSlide(Request $request, $slide, $questionnaireId)
     {
         (new PptxCreator())->getSlide($slide, $questionnaireId);
     }
@@ -1770,7 +1807,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Валидация')->setData(['exist' => $exist])->send();
     }
 
-    public function archive(Request $request)
+    public
+    function archive(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->error()->setMessage('Вы не указали ID анкеты')->send();
@@ -1783,7 +1821,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Анкета была перенесена в архив')->send();
     }
 
-    public function deleteForce(Request $request)
+    public
+    function deleteForce(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->error()->setMessage('Вы не указали ID анкеты')->send();
@@ -1796,7 +1835,8 @@ class QuestionnaireController extends QuestionnaireUtils
         $this->response()->success()->setMessage('Анкета была удалена навсегда')->send();
     }
 
-    public function unarchive(Request $request)
+    public
+    function unarchive(Request $request)
     {
         if (!$request->has('questionnaire_id'))
             $this->response()->error()->setMessage('Вы не указали ID анкеты')->send();
