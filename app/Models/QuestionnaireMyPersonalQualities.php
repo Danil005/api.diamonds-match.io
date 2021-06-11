@@ -11,10 +11,10 @@ class QuestionnaireMyPersonalQualities extends Model
 
     protected $fillable = [
         'calm', 'energetic', 'indifferent_life',
-        'live_in_moment', 'pragmatic', 'ambitious', 'modest', 'self', 'need_support',
+        'live_in_moment', 'pragmatic', 'ambitious', 'modest',
         'housewifely', 'lover_going_out', 'home', 'adventuress', 'rational',
         'aristocratic', 'strong-willed', 'soft', 'lark', 'owl', 'humanitarian', 'mathematical',
-        'mature', 'sport', 'simple', 'indifferent_sport', 'cautious', 'extrovert', 'open',
-        'infantile', 'introvert'
+        'mature', 'simple', 'cautious', 'extrovert', 'open',
+        'infantile', 'introvert', 'spiteful', 'compliant'
     ];
 }

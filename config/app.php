@@ -47,10 +47,8 @@ return [
                 ['calm', 'energetic', null],
                 ['live_in_moment', 'pragmatic', null],
                 ['ambitious', 'modest', null],
-                ['self', 'need_support', null],
                 ['housewifely', 'indifferent_life', null],
                 ['aristocratic', 'simple', null],
-                ['sport', 'indifferent_sport', null],
                 ['lover_going_out', 'home', null],
                 ['adventuress', 'rational', null],
                 ['strong-willed', 'soft', null],
@@ -59,6 +57,7 @@ return [
                 ['open', 'cautious', null],
                 ['extrovert', 'introvert', null],
                 ['infantile', 'mature', null],
+                ['spiteful', 'compliant', null]
             ],
             'partner_information' => [
                 'age' => ['type:integer', 'type:integer'],
@@ -123,14 +122,10 @@ return [
                 'pragmatic' => 'boolean',
                 'ambitious' => 'boolean',
                 'modest' => 'boolean',
-                'self' => 'boolean',
-                'need_support' => 'boolean',
                 'housewifely' => 'boolean',
                 'indifferent_life' => 'boolean',
                 'aristocratic' => 'boolean',
                 'simple' => 'boolean',
-                'sport' => 'boolean',
-                'indifferent_sport' => 'boolean',
                 'lover_going_out' => 'boolean',
                 'home' => 'boolean',
                 'adventuress' => 'boolean',
@@ -147,6 +142,8 @@ return [
                 'introvert' => 'boolean',
                 'infantile' => 'boolean',
                 'mature' => 'boolean',
+                'spiteful' => 'boolean',
+                'compliant' => 'boolean'
             ],
             'my_information' => [
                 'name' => 'string',
@@ -197,7 +194,8 @@ return [
                 'signature_dish' => 'string',
                 'clubs' => ['yes', 'no', 'sometimes'],
                 'best_gift_received' => 'string',
-                'talents' => 'string'
+                'talents' => 'string',
+                'skype' => 'string'
             ]
         ]
     ],
