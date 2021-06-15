@@ -195,7 +195,7 @@ return [
                 'clubs' => ['yes', 'no', 'sometimes'],
                 'best_gift_received' => 'string',
                 'talents' => 'string',
-//                'skype' => 'string'
+                'skype' => 'string'
             ]
         ]
     ],
