@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "09799cccb816f4ac7e0912976495452e",
+    "content-hash": "bcfed02fdb3fd8b5b486e13d7fabb73c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -587,6 +587,60 @@
                 "source": "https://github.com/fideloper/TrustedProxy/tree/4.4.1"
             },
             "time": "2020-10-22T13:48:01+00:00"
+        },
+        {
+            "name": "fiks/yoo-kassa-laravel",
+            "version": "0.0.12-alpha",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Danil005/YooKassa-Laravel.git",
+                "reference": "fd10c73e7a7abbcf7754db33c3d1298793eacef4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Danil005/YooKassa-Laravel/zipball/fd10c73e7a7abbcf7754db33c3d1298793eacef4",
+                "reference": "fd10c73e7a7abbcf7754db33c3d1298793eacef4",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0.1",
+                "yoomoney/yookassa-sdk-php": "^2.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.18"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fiks\\YooKassa\\YooKassaServiceProvider"
+                    ],
+                    "aliases": {
+                        "YooKassa": "Fiks\\YooKassa\\YooKassaFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fiks\\YooKassa\\": "./src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Danil Sidorenko",
+                    "email": "danilsidorenko00@gmail.com"
+                }
+            ],
+            "description": "YooKassa Laravel Packagist",
+            "support": {
+                "issues": "https://github.com/Danil005/YooKassa-Laravel/issues",
+                "source": "https://github.com/Danil005/YooKassa-Laravel/tree/0.0.12-alpha"
+            },
+            "time": "2021-06-21T13:21:24+00:00"
         },
         {
             "name": "firebase/php-jwt",
@@ -6933,6 +6987,63 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "yoomoney/yookassa-sdk-php",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yoomoney/yookassa-sdk-php.git",
+                "reference": "8d62f9d56b2ed926ac299775faa02effa100fbb2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yoomoney/yookassa-sdk-php/zipball/8d62f9d56b2ed926ac299775faa02effa100fbb2",
+                "reference": "8d62f9d56b2ed926ac299775faa02effa100fbb2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.3.0",
+                "psr/log": "^1.0"
+            },
+            "require-dev": {
+                "ext-xml": "*",
+                "mockery/mockery": "^0.9.9",
+                "phpunit/phpunit": "^4.8.35 || ^5.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "YooKassa\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "YooMoney",
+                    "email": "cms@yoomoney.ru"
+                }
+            ],
+            "description": "This is a developer tool for integration with YooMoney.",
+            "homepage": "https://yookassa.ru/developers/api",
+            "keywords": [
+                "api",
+                "payments",
+                "sdk",
+                "yookassa",
+                "yoomoney"
+            ],
+            "support": {
+                "issues": "https://github.com/yoomoney/yookassa-sdk-php/issues",
+                "source": "https://github.com/yoomoney/yookassa-sdk-php/tree/2.1.2"
+            },
+            "time": "2021-06-02T13:58:05+00:00"
         }
     ],
     "packages-dev": [
@@ -10650,6 +10761,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "fiks/yoo-kassa-laravel": 15,
         "manuwhat/similar-text": 20
     },
     "prefer-stable": true,

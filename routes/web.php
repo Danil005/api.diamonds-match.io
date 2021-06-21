@@ -33,7 +33,11 @@ Route::get('/', function () {
 });
 
 Route::get('/payment', function() {
-    dd(request()->all());
+    $request = request()->all();
+
+    YooKassa::checkPayment($request['uniq_id'], function($response, $invoice) {
+
+    });
 });
 
 Route::get('/createTestPayment', function() {
