@@ -36,6 +36,10 @@ Route::get('/payment', function(Request $request) {
     dd($request->all());
 });
 
+Route::get('/createTestPayment', function() {
+    YooKassa::createPayment(1, 'RUB', 'Test Description');
+});
+
 Route::get('match3', function() {
     $questionnaire = new \App\Models\Questionnaire();
     (new \App\Services\MatchProcessorV3($questionnaire))->start($questionnaire);

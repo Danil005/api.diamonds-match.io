@@ -16,7 +16,7 @@ class CreateYookassa extends Migration
         Schema::create(env('YOOKASSA_DATABASE_TABLE_NAME', 'yookassa'), function (Blueprint $table) {
             $table->id();
             # UserID from Users table
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger(env('YOOKASSA_DATABASE_FIELD_FOREIGN', 'user_id'))->nullable();
 
             # PaymentID from YooKassa
             $table->string('payment_id');
