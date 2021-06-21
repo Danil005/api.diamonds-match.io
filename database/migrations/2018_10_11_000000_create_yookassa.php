@@ -41,9 +41,9 @@ class CreateYookassa extends Migration
             $table->foreign(
                 env('YOOKASSA_DATABASE_FIELD_FOREIGN', 'user_id')
             )->references(
-                env('YOOKASSA_DATABASE_FIELD_ON', 'users')
-            )->on(
                 env('YOOKASSA_DATABASE_FIELD_REFERENCES', 'id')
+            )->on(
+                env('YOOKASSA_DATABASE_FIELD_ON', 'users')
             )->onDelete(
                 env('YOOKASSA_DATABASE_FIELD_ON_DELETE', 'cascade')
             );
