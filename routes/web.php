@@ -32,8 +32,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/payment', function(Request $request) {
-    dd($request->all());
+Route::get('/payment', function() {
+    dd(request()->all());
 });
 
 Route::get('/createTestPayment', function() {
