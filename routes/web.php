@@ -32,6 +32,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/payment', function(Request $request) {
+    dd($request->all());
+});
+
 Route::get('match3', function() {
     $questionnaire = new \App\Models\Questionnaire();
     (new \App\Services\MatchProcessorV3($questionnaire))->start($questionnaire);
