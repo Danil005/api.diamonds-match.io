@@ -37,7 +37,7 @@ Route::get('/payment', function(Request $request) {
 });
 
 Route::get('/createTestPayment', function() {
-    YooKassa::createPayment(1, 'RUB', 'Test Description');
+    dd(YooKassa::createPayment(1, 'RUB', 'Test Description')->responseAndDatabase());
 });
 
 Route::get('match3', function() {
