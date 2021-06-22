@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bcfed02fdb3fd8b5b486e13d7fabb73c",
+    "content-hash": "709595206ae10b1e6e0bc4a9fda9e274",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -590,16 +590,16 @@
         },
         {
             "name": "fiks/yoo-kassa-laravel",
-            "version": "0.0.12-alpha",
+            "version": "0.0.15-alpha",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Danil005/YooKassa-Laravel.git",
-                "reference": "fd10c73e7a7abbcf7754db33c3d1298793eacef4"
+                "reference": "5f6fcedfe45d2c5f2d2712d43290b82996ffd30d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Danil005/YooKassa-Laravel/zipball/fd10c73e7a7abbcf7754db33c3d1298793eacef4",
-                "reference": "fd10c73e7a7abbcf7754db33c3d1298793eacef4",
+                "url": "https://api.github.com/repos/Danil005/YooKassa-Laravel/zipball/5f6fcedfe45d2c5f2d2712d43290b82996ffd30d",
+                "reference": "5f6fcedfe45d2c5f2d2712d43290b82996ffd30d",
                 "shasum": ""
             },
             "require": {
@@ -638,9 +638,9 @@
             "description": "YooKassa Laravel Packagist",
             "support": {
                 "issues": "https://github.com/Danil005/YooKassa-Laravel/issues",
-                "source": "https://github.com/Danil005/YooKassa-Laravel/tree/0.0.12-alpha"
+                "source": "https://github.com/Danil005/YooKassa-Laravel/tree/0.0.15-alpha"
             },
-            "time": "2021-06-21T13:21:24+00:00"
+            "time": "2021-06-22T08:39:42+00:00"
         },
         {
             "name": "firebase/php-jwt",

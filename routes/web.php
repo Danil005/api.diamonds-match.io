@@ -32,6 +32,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/setWebhook', function() {
+    $request = request();
+    $hook = $request?->hook;
+
+    YooKassa::webhook()->addWebhook($hook);
+    dd(YooKassa::webhook()->getWebhooks());
+});
+
 Route::get('/payment', function() {
     $request = request()->all();
 

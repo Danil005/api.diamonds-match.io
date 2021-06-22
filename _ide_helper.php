@@ -15054,6 +15054,17 @@
                         /** @var \Fiks\YooKassa\YooKassaApi $instance */
                         return $instance->checkPayment($uniq_id, $success, $failed);
         }
+                    /**
+         * Webhook settings
+         *
+         * @return \Fiks\YooKassa\Payment\WebhookPayment 
+         * @static 
+         */ 
+        public static function webhook()
+        {
+                        /** @var \Fiks\YooKassa\YooKassaApi $instance */
+                        return $instance->webhook();
+        }
          
     }
      
