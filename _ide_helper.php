@@ -15065,6 +15065,17 @@
                         /** @var \Fiks\YooKassa\YooKassaApi $instance */
                         return $instance->webhook();
         }
+                    /**
+         * Oauth YooKassa
+         *
+         * @return \Fiks\YooKassa\Oauth 
+         * @static 
+         */ 
+        public static function oauth()
+        {
+                        /** @var \Fiks\YooKassa\YooKassaApi $instance */
+                        return $instance->oauth();
+        }
          
     }
      
