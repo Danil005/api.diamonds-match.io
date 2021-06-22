@@ -48,6 +48,10 @@ Route::get('/payment', function() {
     });
 });
 
+Route::get('/yookassa/callback', function() {
+    YooKassa::webhook()->read(request());
+});
+
 Route::get('/createTestPayment', function() {
     dd(YooKassa::createPayment(1, 'RUB', 'Test Description')->responseAndDatabase());
 });
