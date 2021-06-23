@@ -15008,6 +15008,18 @@
      */ 
         class YooKassaFacade {
                     /**
+         * Finish Payment
+         *
+         * @param string $payment_id
+         * @param $response
+         * @static 
+         */ 
+        public static function finishPayment($payment_id, $response)
+        {
+                        /** @var \Fiks\YooKassa\YooKassaApi $instance */
+                        return $instance->finishPayment($payment_id, $response);
+        }
+                    /**
          * Create Payment
          *
          * @param float $sum

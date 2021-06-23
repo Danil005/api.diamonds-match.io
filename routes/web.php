@@ -31,21 +31,24 @@ use PhpOffice\PhpPresentation\Style\Font;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/payment', function() {
-    $request = request()->all();
-
-    YooKassa::checkPayment($request['uniq_id'], function($response, $invoice) {
-
-    });
-});
-Route::any('/yookassa/callback', function() {
-    YooKassa::webhook()->read(request());
-});
-
-Route::get('/createTestPayment', function() {
-    dd(YooKassa::createPayment(1, 'RUB', 'Test Description')->responseAndDatabase());
-});
+//
+//Route::get('/payment', function() {
+//    $request = request()->all();
+//
+//    YooKassa::checkPayment($request['uniq_id'], function($response, $invoice) {
+//
+//    });
+//});
+//Route::any('/yookassa/callback', function() {
+//    YooKassa::webhook()->read(request());
+//});
+//
+//Route::get('/createTestPayment', function() {
+//    YooKassa::webhook()->callback()->success(function($payment, $invoice) {
+//        Storage::disk('public')->put('payment/test.txt', 'test');
+//    });
+//    dd(YooKassa::createPayment(1, 'RUB', 'Test Description')->responseAndDatabase());
+//});
 
 Route::get('match3', function() {
     $questionnaire = new \App\Models\Questionnaire();
