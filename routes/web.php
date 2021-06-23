@@ -52,7 +52,7 @@ Route::get('yookassa/oauth', function() {
    return YooKassa::oauth()->redirect();
 });
 
-Route::get('/yookassa/callback', function() {
+Route::any('/yookassa/callback', function() {
     YooKassa::webhook()->read(request());
 });
 
