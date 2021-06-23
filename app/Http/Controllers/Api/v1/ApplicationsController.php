@@ -19,6 +19,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use YooKassa;
 
 class ApplicationsController extends Controller
 {
@@ -220,5 +221,14 @@ class ApplicationsController extends Controller
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
         $this->response()->success()->setMessage('Данные анкеты')->setData($application)->send();
+    }
+
+    public function createPayment(Request $request)
+    {
+        $id = $request->id;
+        $sum = $request->sum;
+        $currency = $request->sum;
+
+//        YooKassa::createPayment((float)$sum, )
     }
 }
