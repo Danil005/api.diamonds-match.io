@@ -47,7 +47,9 @@ Route::get('/createTestPayment', function() {
     YooKassa::webhook()->callback()->success(function($payment, $invoice) {
         Storage::disk('public')->put('payment/test.txt', 'test');
     });
-    dd(YooKassa::createPayment(1, 'RUB', 'Test Description')->responseAndDatabase());
+    return redirect()->to(
+        YooKassa::createPayment(1, 'RUB', 'Test Description')->response()->getConfirmation()->getConfirmationUrl()
+    )->send();
 });
 
 Route::get('match3', function() {
