@@ -34,7 +34,7 @@ class ApplicationsController extends Controller
 
         $data['service_type'] = $service_type;
 
-        if (Auth::check()) {
+        if(Auth::check()) {
             $data['responsibility'] = Auth::user()->id . ',' . Auth::user()->name;
         }
 
@@ -45,7 +45,14 @@ class ApplicationsController extends Controller
 
     private function declOfNum($number, $titles)
     {
-        $cases = array(2, 0, 1, 1, 1, 2);
+        $cases = [
+            2,
+            0,
+            1,
+            1,
+            1,
+            2
+        ];
         $format = $titles[($number % 100 > 4 && $number % 100 < 20) ? 2 : $cases[min($number % 10, 5)]];
         return sprintf($format, $number);
     }
@@ -54,70 +61,79 @@ class ApplicationsController extends Controller
     {
         $applications = new Applications();
 
-        if( $request->has('archive_only') ) {
+        if($request->has('archive_only')) {
             $applications = $applications->withTrashed()->whereNotNull('applications.deleted_at');
         }
 
-        if( $request->has('responsibility_id') ) {
+        if($request->has('responsibility_id')) {
             $user = User::where('id', $request->responsibility_id)->first();
 
-            if( empty($user) )
+            if(empty($user))
                 $this->response()->error()->setMessage('Сотрудник не найден')->send();
 
 
-            $applications = $applications->where('responsibility', $user->id.','.$user->name);
+            $applications = $applications->where('responsibility', $user->id . ',' . $user->name);
         }
 
-        if ($request->has('search')) {
+        if($request->has('search')) {
             $search = $request->search;
-            $applications = $applications->where(function (Builder $query) use ($search) {
-                $query->where('responsibility', 'ILIKE', '%' . $search . '%')
-                    ->orWhere('client_name', 'ILIKE', '%' . $search . '%')
-                    ->orWhere('phone', 'ILIKE', '%' . $search . '%')
-                    ->orWhere('email', 'ILIKE', '%' . $search . '%');
+            $applications = $applications->where(function(Builder $query) use ($search) {
+                $query->where('responsibility', 'ILIKE', '%' . $search . '%')->orWhere('client_name', 'ILIKE', '%' . $search . '%')->orWhere('phone', 'ILIKE', '%' . $search . '%')->orWhere('email', 'ILIKE', '%' . $search . '%');
             });
         }
 
         $applications = $applications->get();
         $result = [];
 
-        foreach ($applications as $key => $application) {
+        foreach($applications as $key => $application) {
             $time = Carbon::createFromTimeString($application['created_at']);
 
             $now = Carbon::now();
             $then = Carbon::createFromTimeString($application['created_at']);
             $diff = $now->diff($then);
 
-            $titles_hours = ['%d час назад', '%d часа назад', '%d часов назад'];
-            $titles_min = ['%d минуту назад', '%d минуты назад', '%d минут назад'];
+            $titles_hours = [
+                '%d час назад',
+                '%d часа назад',
+                '%d часов назад'
+            ];
+            $titles_min = [
+                '%d минуту назад',
+                '%d минуты назад',
+                '%d минут назад'
+            ];
 
 
-            if ($diff->days == 0) {
-                if( $diff->h == 0 ) {
+            if($diff->days == 0) {
+                if($diff->h == 0) {
                     $time = $this->declOfNum($diff->i, $titles_min);
                 } else {
                     $time = $this->declOfNum($diff->h, $titles_hours);
                 }
-            } else if ($diff->days == 1) {
+            } elseif($diff->days == 1) {
                 $time = 'вчера';
-            } else if ($diff->days == 2) {
+            } elseif($diff->days == 2) {
                 $time = 'позавчера';
             } else {
                 $time = $time->format('d.m.Y');
             }
 
             $result[] = [
-                'id' => $application['id'],
-                'status' => $application['status'],
-                'client_name' => $application['client_name'],
-                'responsibility' => $application['responsibility'] == null ? null :
-                    User::where('id', (int)explode(',', $application['responsibility'])[0])->first(['id', 'name', 'avatar', 'role']),
-                'service_type' => $application['service_type'],
-                'email' => $application['email'],
-                'phone' => $application['phone'],
-                'link' => $application['link'],
-                'link_active' => $application['link_active'],
-                'created_at' => $time,
+                'id'                   => $application['id'],
+                'status'               => $application['status'],
+                'client_name'          => $application['client_name'],
+                'responsibility'       => $application['responsibility'] == null ? null : User::where('id', (int)explode(',', $application['responsibility'])[0])->first([
+                    'id',
+                    'name',
+                    'avatar',
+                    'role'
+                ]),
+                'service_type'         => $application['service_type'],
+                'email'                => $application['email'],
+                'phone'                => $application['phone'],
+                'link'                 => $application['link'],
+                'link_active'          => $application['link_active'],
+                'created_at'           => $time,
                 'created_at_timestamp' => Carbon::createFromTimeString($application['created_at'])->timestamp
             ];
         }
@@ -126,7 +142,7 @@ class ApplicationsController extends Controller
 
         $resp = $this->response()->success()->setMessage('Данные анкет получены')->setData($result);
 
-        if( $request->has('archive_only') ) {
+        if($request->has('archive_only')) {
             $resp->setAdditional(['is_archived' => true])->send();
         } else {
             $resp->send();
@@ -137,10 +153,10 @@ class ApplicationsController extends Controller
     {
         $application = Applications::where('id', $request->id)->first();
 
-        if( $request->status != 0) {
+        if($request->status != 0) {
             $user = auth()->user();
             Applications::where('id', $request->id)->update([
-                'responsibility' => $user->id .','.$user->name
+                'responsibility' => $user->id . ',' . $user->name
             ]);
         } else {
             Applications::where('id', $request->id)->update([
@@ -148,22 +164,22 @@ class ApplicationsController extends Controller
             ]);
         }
 
-        if( empty($application->link) ) {
+        if(empty($application->link)) {
             $sign = md5(Str::random(16));
             $questionnaire = Questionnaire::create([
                 'sign' => $sign
             ]);
 
             SignQuestionnaire::create([
-                'application_id' => $request->id,
+                'application_id'   => $request->id,
                 'questionnaire_id' => $questionnaire->id,
-                'sign' => $sign,
-                'active' => true
+                'sign'             => $sign,
+                'active'           => true
             ]);
 
             Applications::where('id', $request->id)->update([
-                'link' => env('APP_QUESTIONNAIRE_URL').'/sign/'.$sign,
-                'link_active' => true,
+                'link'             => env('APP_QUESTIONNAIRE_URL') . '/sign/' . $sign,
+                'link_active'      => true,
                 'questionnaire_id' => $questionnaire->id
             ]);
         }
@@ -180,8 +196,8 @@ class ApplicationsController extends Controller
     public function startWork(StartWorkApplications $applications)
     {
         Applications::where('id', $applications->id)->orWhere('questionnaire_id', $applications->id)->update([
-            'status' => 1,
-            'responsibility' => Auth::user()->id.','.Auth::user()->name,
+            'status'         => 1,
+            'responsibility' => Auth::user()->id . ',' . Auth::user()->name,
         ]);
 
         $this->response()->success()->setMessage('Статус изменен')->send();
@@ -212,12 +228,12 @@ class ApplicationsController extends Controller
 
     public function view(Request $request)
     {
-        if( !$request->has('id') )
+        if(!$request->has('id'))
             $this->response()->error()->setMessage('ID-не указан')->send();
 
         $application = Applications::where('id', (int)$request->id)->first();
 
-        if( empty($application) )
+        if(empty($application))
             $this->response()->error()->setMessage('Анкета не найдена')->send();
 
         $this->response()->success()->setMessage('Данные анкеты')->setData($application)->send();
@@ -225,10 +241,40 @@ class ApplicationsController extends Controller
 
     public function createPayment(Request $request)
     {
-        $id = $request->id;
-        $sum = $request->sum;
-        $currency = $request->sum;
+        if(!$request->has('application_id'))
+            $this->response()->error()->setMessage('ID-заявки не задан')->send();
 
-//        YooKassa::createPayment((float)$sum, )
+        $exist = Applications::where('id', $request->application_id)->exists();
+
+        if( !$exist )
+            $this->response()->error()->setMessage('Заявка не была найдена')->send();
+
+        if( !$request->has('sum') )
+            $this->response()->error()->setMessage('Сумма к оплате не задана')->send();
+
+        if( !$request->has('currency') )
+            $this->response()->error()->setMessage('Валюта к оплате не задана')->send();
+
+        if( !$request->has('type') )
+            $this->response()->error()->setMessage('Тип платежный системы не задан')->send();
+
+        $paymentExist = ['yookassa'];
+
+        if( in_array($request->type, $paymentExist) )
+            $this->response()->error()->setMessage('Такого типа платежной системы не существует. Доступные: ' . implode(', ', $paymentExist))->send();
+
+        $id = $request->application_id;
+        $sum = $request->sum;
+        $currency = $request->currency;
+        $type = $request->type;
+        if($type == 'yookassa') {
+            $response = YooKassa::createPayment((float)$sum, $currency, 'Payment order', $id)->response();
+
+            $this->response()->success()->setMessage('Платеж создан')->setData([
+                'url' => $response->getConfirmation()->getConfirmationUrl()
+            ])->send();
+        }
+
+        $this->response()->error()->setMessage('Платежная система не найдена')->send();
     }
 }

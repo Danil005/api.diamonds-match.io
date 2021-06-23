@@ -78,6 +78,7 @@ Route::prefix('v1')->middleware(['api'])->namespace('App\Http\Controllers\Api\v1
 
     Route::prefix('applications')->group(function() {
         Route::put('applications.createFromOthers', 'ApplicationsController@create');
+        Route::post('applications.createPayment', 'ApplicationsController@createPayment');
 
         Route::middleware('auth:api')->group(function() {
             Route::put('applications.create', 'ApplicationsController@create');

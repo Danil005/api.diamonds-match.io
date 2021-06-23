@@ -1958,4 +1958,5 @@ class QuestionnaireController extends QuestionnaireUtils
 
         $this->response()->success()->setMessage('Анкета была перенесена из архива')->send();
     }
+
 }
