@@ -43,12 +43,12 @@ Route::get('/', function () {
 //    YooKassa::webhook()->read(request());
 //});
 //
-//Route::get('/createTestPayment', function() {
-//    YooKassa::webhook()->callback()->success(function($payment, $invoice) {
-//        Storage::disk('public')->put('payment/test.txt', 'test');
-//    });
-//    dd(YooKassa::createPayment(1, 'RUB', 'Test Description')->responseAndDatabase());
-//});
+Route::get('/createTestPayment', function() {
+    YooKassa::webhook()->callback()->success(function($payment, $invoice) {
+        Storage::disk('public')->put('payment/test.txt', 'test');
+    });
+    dd(YooKassa::createPayment(1, 'RUB', 'Test Description')->responseAndDatabase());
+});
 
 Route::get('match3', function() {
     $questionnaire = new \App\Models\Questionnaire();
