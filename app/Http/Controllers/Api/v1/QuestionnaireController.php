@@ -217,6 +217,18 @@ class QuestionnaireController extends QuestionnaireUtils
         $myPersonalQualities = QuestionnaireMyPersonalQualities::create($myPersonalQualities);
         $myInformation = QuestionnaireMyInformation::create($myInformation);
 
+        Storage::disk('public')->append('logs/questionnaire.txt', json_encode([
+            '$partnerAppearance' => $partnerAppearance,
+            '$personalQualitiesPartner' => $personalQualitiesPartner,
+            '$partnerInformation' => $partnerInformation,
+            '$test' => $test,
+            '$myAppearance' => $myAppearance,
+            '$myPersonalQualities' => $myPersonalQualities,
+            '$myInformation' => $myInformation,
+            'time' => Carbon::now()->format('H:i:s'),
+            'date' => Carbon::now()->format('d.m.Y')
+        ]));
+
         # Объединяем ответы в общую базу
         Questionnaire::where('sign', $request->sign)->update([
             'partner_appearance_id' => $partnerAppearance->id,
@@ -428,6 +440,18 @@ class QuestionnaireController extends QuestionnaireUtils
         $myAppearance = QuestionnaireMyAppearance::create($myAppearance);
         $myPersonalQualities = QuestionnaireMyPersonalQualities::create($myPersonalQualities);
         $myInformation = QuestionnaireMyInformation::create($myInformation);
+
+        Storage::disk('public')->append('logs/questionnaire.txt', json_encode([
+            '$partnerAppearance' => $partnerAppearance,
+            '$personalQualitiesPartner' => $personalQualitiesPartner,
+            '$partnerInformation' => $partnerInformation,
+            '$test' => $test,
+            '$myAppearance' => $myAppearance,
+            '$myPersonalQualities' => $myPersonalQualities,
+            '$myInformation' => $myInformation,
+            'time' => Carbon::now()->format('H:i:s'),
+            'date' => Carbon::now()->format('d.m.Y')
+        ]));
 
         $application = Applications::create([
             'client_name' => $myInformation->name,
