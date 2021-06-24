@@ -196,11 +196,11 @@ return [
                 'best_gift_received' => 'string',
                 'talents' => 'string',
                 'skype' => 'string',
-//                'about_us' => ['ads', 'friends', 'messages_forum', 'manager'],
-//                'about_us_ads' => ['telegram', 'instagram', 'facebook', 'yandex.google', null],
-//                'about_us_friends' => 'string',
-//                'about_us_manager' => ['mila', 'lidia', 'natalia', 'kamila', null],
-//                'about_us_forum' => 'string'
+                'about_us' => ['ads', 'friends', 'messages_forum', 'manager'],
+                'about_us_ads' => ['telegram', 'instagram', 'facebook', 'yandex.google', null],
+                'about_us_friends' => 'string',
+                'about_us_manager' => ['mila', 'lidia', 'natalia', 'kamila', null],
+                'about_us_forum' => 'string'
             ]
         ]
     ],
