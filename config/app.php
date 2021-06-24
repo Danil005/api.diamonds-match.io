@@ -195,7 +195,11 @@ return [
                 'clubs' => ['yes', 'no', 'sometimes'],
                 'best_gift_received' => 'string',
                 'talents' => 'string',
-                'skype' => 'string'
+                'skype' => 'string',
+                'about_us' => 'string',
+                'about_us_ads' => 'string',
+                'about_us_friends' => 'string',
+                'about_us_manager' => 'string'
             ]
         ]
     ],

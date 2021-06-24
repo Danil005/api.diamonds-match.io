@@ -19,6 +19,7 @@ class QuestionnaireMyInformation extends Model
         'best_gift', 'hobbies', 'kredo', 'features_repel', 'age_difference',
         'films', 'songs', 'ideal_weekend', 'sleep', 'doing_10', 'signature_dish',
         'clubs', 'best_gift_received', 'talents', 'name', 'birthday',
-        'work_name', 'education_name', 'skype'
+        'work_name', 'education_name', 'skype', 'about_us',
+        'about_us_ads', 'about_us_friends', 'about_us_manager'
     ];
 }
