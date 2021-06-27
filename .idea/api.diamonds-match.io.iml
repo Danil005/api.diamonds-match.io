@@ -159,6 +159,10 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/menarasolutions/geographer-ru" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/nahidulhasan/html2pdf" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/jeremeamia/superclosure" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paypal/rest-api-sdk-php" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/srmklive/paypal" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paypal/paypal-checkout-sdk" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/paypal/paypalhttp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

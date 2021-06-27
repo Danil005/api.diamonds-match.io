@@ -26,11 +26,15 @@
         "menarasolutions/geographer": "^0.3.10",
         "menarasolutions/geographer-ru": "^0.2.2",
         "nahidulhasan/html2pdf": "^1.4",
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "paypal/rest-api-sdk-php": "^1.14",
         "phpoffice/phppresentation": "^0.9.0",
         "propaganistas/laravel-phone": "^4.3",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi-fpdf": "^2.3",
-        "soarecostin/file-vault": "^1.2"
+        "soarecostin/file-vault": "^1.2",
+        "srmklive/paypal": "~3.0",
+      "ext-http": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",

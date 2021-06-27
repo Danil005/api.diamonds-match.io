@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
+use PayPalCheckoutSdk\Core\PayPalHttpClient;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
+use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
 use PhpOffice\PhpPresentation\DocumentLayout;
 use PhpOffice\PhpPresentation\IOFactory;
 use PhpOffice\PhpPresentation\PhpPresentation;
@@ -50,6 +53,26 @@ Route::get('/createTestPayment', function() {
     return redirect()->to(
         YooKassa::createPayment(1, 'RUB', 'Test Description')->response()->getConfirmation()->getConfirmationUrl()
     )->send();
+});
+
+Route::get('/paypal/order', function() {
+    $clientId = env('PAYPAL_CLIENT_ID');
+    $clientSecret = env('PAYPAL_SECRET');
+
+    $environment = new SandboxEnvironment($clientId, $clientSecret);
+    $client = new PayPalHttpClient($environment);
+
+    $request = new OrdersCaptureRequest(request()->get('PayerID'));
+    $request->prefer('return=representation');
+    try {
+        // Call API with your client and get a response for your call
+        $response = $client->execute($request);
+
+        dd($response);
+    } catch(\PayPalHttp\HttpException $ex) {
+        echo $ex->statusCode;
+        print_r($ex->getMessage());
+    }
 });
 
 Route::get('match3', function() {
@@ -522,7 +545,7 @@ Route::get('pptx', function () {
 
     $ims = new \App\Utils\Img();
 
-    list($w, $s, $source_type) = getimagesize($photo);
+    [$w, $s, $source_type] = getimagesize($photo);
     $ims->create($w, $s, true);
 
     $img2 = new \App\Utils\Img($photo);

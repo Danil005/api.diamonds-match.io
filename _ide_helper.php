@@ -15552,6 +15552,39 @@
      
 }
 
+    namespace Srmklive\PayPal\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class PayPal {
+                    /**
+         * Get specific PayPal API provider object to use.
+         *
+         * @throws Exception
+         * @return \Srmklive\PayPal\Services\PayPal 
+         * @static 
+         */ 
+        public static function getProvider()
+        {
+                        return \Srmklive\PayPal\PayPalFacadeAccessor::getProvider();
+        }
+                    /**
+         * Set PayPal API Client to use.
+         *
+         * @throws \Exception
+         * @return \Srmklive\PayPal\Services\PayPal 
+         * @static 
+         */ 
+        public static function setProvider()
+        {
+                        return \Srmklive\PayPal\PayPalFacadeAccessor::setProvider();
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -18819,6 +18852,7 @@ namespace  {
             class Date extends \Jenssegers\Date\Date {}
             class Pdf extends \NahidulHasan\Html2pdf\Facades\Pdf {}
             class FileVault extends \SoareCostin\FileVault\Facades\FileVault {}
+            class PayPal extends \Srmklive\PayPal\Facades\PayPal {}
      
 }
 

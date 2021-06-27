@@ -18,7 +18,21 @@ use Auth;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use PayPal\Api\Amount;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
+use PayPalCheckoutSdk\Core\PayPalHttpClient;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
+use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use PayPalHttp\HttpException;
 use YooKassa;
 
 class ApplicationsController extends Controller
@@ -246,21 +260,24 @@ class ApplicationsController extends Controller
 
         $exist = Applications::where('id', $request->application_id)->exists();
 
-        if( !$exist )
+        if(!$exist)
             $this->response()->error()->setMessage('Заявка не была найдена')->send();
 
-        if( !$request->has('sum') )
+        if(!$request->has('sum'))
             $this->response()->error()->setMessage('Сумма к оплате не задана')->send();
 
-        if( !$request->has('currency') )
+        if(!$request->has('currency'))
             $this->response()->error()->setMessage('Валюта к оплате не задана')->send();
 
-        if( !$request->has('type') )
+        if(!$request->has('type'))
             $this->response()->error()->setMessage('Тип платежный системы не задан')->send();
 
-        $paymentExist = ['yookassa'];
+        $paymentExist = [
+            'yookassa',
+            'paypal'
+        ];
 
-        if( in_array($request->type, $paymentExist) )
+        if(!in_array($request->type, $paymentExist))
             $this->response()->error()->setMessage('Такого типа платежной системы не существует. Доступные: ' . implode(', ', $paymentExist))->send();
 
         $id = $request->application_id;
@@ -273,6 +290,46 @@ class ApplicationsController extends Controller
             $this->response()->success()->setMessage('Платеж создан')->setData([
                 'url' => $response->getConfirmation()->getConfirmationUrl()
             ])->send();
+        }
+
+        if($type == 'paypal') {
+            $clientId = env('PAYPAL_CLIENT_ID');
+            $clientSecret = env('PAYPAL_SECRET');
+
+            $environment = new SandboxEnvironment($clientId, $clientSecret);
+            $client = new PayPalHttpClient($environment);
+
+            $rq = new OrdersCreateRequest();
+            $rq->prefer('return=representation');
+            $rq->body = [
+                "intent" => "CAPTURE",
+                "purchase_units" => [[
+                                         "reference_id" => $id,
+                                         "amount" => [
+                                             "value" => "1.00",
+                                             "currency_code" => "RUB"
+                                         ]
+                                     ]],
+                "application_context" => [
+                    "cancel_url" => "https://api.diamondsmatch.org/paypal/order",
+                    "return_url" => "https://api.diamondsmatch.org/paypal/order"
+                ]
+            ];
+
+            try {
+                $response = $client->execute($rq);
+
+                foreach($response->result->links as $link) {
+                    if( $link->rel == 'approve' )
+                        $this->response()->success()->setMessage('Платеж создан')->setData([
+                            'url' => $link->href
+                        ])->send();
+                }
+            }catch (HttpException $ex) {
+                echo $ex->statusCode;
+                dd($ex->getMessage());
+            }
+
         }
 
         $this->response()->error()->setMessage('Платежная система не найдена')->send();
