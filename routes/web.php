@@ -2,6 +2,7 @@
 
 use App\Events\NotifyPushed;
 use App\Mail\CreateEmployee;
+use App\Models\PayPal;
 use App\Models\User;
 use Carbon\Carbon;
 use Dejurin\GoogleTranslateForFree;
@@ -67,8 +68,11 @@ Route::get('/paypal/order', function() {
     try {
         // Call API with your client and get a response for your call
         $response = $client->execute($request);
+        PayPal::where('order_id', request()->get('token'))->update([
+            'status' => $response->result->status
+        ]);
 
-        dd($response);
+
     } catch(\PayPalHttp\HttpException $ex) {
         echo $ex->statusCode;
         print_r($ex->getMessage());
