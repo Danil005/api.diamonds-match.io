@@ -10,6 +10,7 @@ use App\Http\Requests\Applications\StartWorkApplications;
 use App\Http\Requests\Applications\UnarchiveApplication;
 use App\Http\Requests\Applications\UpdateApplications;
 use App\Models\Applications;
+use App\Models\PayPal;
 use App\Models\Questionnaire;
 use App\Models\SignQuestionnaire;
 use App\Models\User;
@@ -302,14 +303,16 @@ class ApplicationsController extends Controller
             $rq = new OrdersCreateRequest();
             $rq->prefer('return=representation');
             $rq->body = [
-                "intent" => "CAPTURE",
-                "purchase_units" => [[
-                                         "reference_id" => $id,
-                                         "amount" => [
-                                             "value" => "1.00",
-                                             "currency_code" => "RUB"
-                                         ]
-                                     ]],
+                "intent"              => "CAPTURE",
+                "purchase_units"      => [
+                    [
+                        "reference_id" => uniqid('', false),
+                        "amount"       => [
+                            "value"         => "1.00",
+                            "currency_code" => "RUB"
+                        ]
+                    ]
+                ],
                 "application_context" => [
                     "cancel_url" => "https://api.diamondsmatch.org/paypal/order",
                     "return_url" => "https://api.diamondsmatch.org/paypal/order"
@@ -319,13 +322,27 @@ class ApplicationsController extends Controller
             try {
                 $response = $client->execute($rq);
 
+                $linked = '';
                 foreach($response->result->links as $link) {
-                    if( $link->rel == 'approve' )
-                        $this->response()->success()->setMessage('Платеж создан')->setData([
-                            'url' => $link->href
-                        ])->send();
+                    if($link->rel == 'approve') {
+                        $linked = $link->href;
+                        break;
+                    }
                 }
-            }catch (HttpException $ex) {
+
+                PayPal::create([
+                    'application_id' => $id,
+                    'order_id' => $response->result->id,
+                    'status' => $response->result->status,
+                    'currency' => $response->result->purchase_units[0]->amount->currency_code,
+                    'sum' => $response->result->purchase_units[0]->amount->value,
+                    'link' => $linked
+                ]);
+
+                $this->response()->success()->setMessage('Платеж создан')->setData([
+                    'url' => $linked
+                ])->send();
+            } catch(HttpException $ex) {
                 echo $ex->statusCode;
                 dd($ex->getMessage());
             }

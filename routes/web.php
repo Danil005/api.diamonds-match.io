@@ -62,7 +62,7 @@ Route::get('/paypal/order', function() {
     $environment = new SandboxEnvironment($clientId, $clientSecret);
     $client = new PayPalHttpClient($environment);
 
-    $request = new OrdersCaptureRequest(request()->get('PayerID'));
+    $request = new OrdersCaptureRequest(request()->get('token'));
     $request->prefer('return=representation');
     try {
         // Call API with your client and get a response for your call
