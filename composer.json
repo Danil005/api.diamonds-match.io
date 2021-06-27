@@ -34,7 +34,6 @@
         "setasign/fpdi-fpdf": "^2.3",
         "soarecostin/file-vault": "^1.2",
         "srmklive/paypal": "~3.0",
-      "ext-http": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.10",
