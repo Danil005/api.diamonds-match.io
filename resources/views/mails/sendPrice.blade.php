@@ -121,7 +121,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td align="center" style="Margin:0;padding-top:5px;padding-right:15px;padding-left:20px;padding-bottom:40px"><p style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:arial, 'helvetica neue', helvetica, sans-serif;line-height:21px;color:#FFFFFF;font-size:14px">
-                                                                {{ __('mail.receive_mail', locale: $lang) }}</p></td>
+                                                                {!! __('mail.receive_mail', locale: $lang) !!}</p></td>
                                                         </tr>
                                                     </table></td>
                                             </tr>
