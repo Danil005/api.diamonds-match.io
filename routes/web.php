@@ -224,11 +224,13 @@ Route::get('/sendMail', function(\Illuminate\Http\Request $request) {
     $name = $request->get('name');
     $country = $request->get('country');
     $lang = $request->get('lang');
+    $app_id = $request->get('app_id');
 
     Mail::to($email)->send(new \App\Mail\SendPrice(
         name: $name ?? 'Тест',
         lang: $lang,
         country: $country,
+        app_id: $app_id
     ));
 });
 
