@@ -275,7 +275,8 @@ class ApplicationsController extends Controller
 
         $paymentExist = [
             'yookassa',
-            'paypal'
+            'paypal',
+            'stripe'
         ];
 
         if(!in_array($request->type, $paymentExist))
@@ -285,6 +286,13 @@ class ApplicationsController extends Controller
         $sum = $request->sum;
         $currency = $request->currency;
         $type = $request->type;
+
+        $iso = match ($currency) {
+            'RUB' => 643,
+            'USD' => 840,
+            'EUR' => 978
+        };
+
         if($type == 'yookassa') {
             $response = YooKassa::createPayment((float)$sum, $currency, 'Payment order', $id)->response();
 
@@ -308,8 +316,8 @@ class ApplicationsController extends Controller
                     [
                         "reference_id" => uniqid('', false),
                         "amount"       => [
-                            "value"         => "1.00",
-                            "currency_code" => "RUB"
+                            "value"         => $sum,
+                            "currency_code" => $currency
                         ]
                     ]
                 ],
@@ -332,11 +340,11 @@ class ApplicationsController extends Controller
 
                 PayPal::create([
                     'application_id' => $id,
-                    'order_id' => $response->result->id,
-                    'status' => $response->result->status,
-                    'currency' => $response->result->purchase_units[0]->amount->currency_code,
-                    'sum' => $response->result->purchase_units[0]->amount->value,
-                    'link' => $linked
+                    'order_id'       => $response->result->id,
+                    'status'         => $response->result->status,
+                    'currency'       => $response->result->purchase_units[0]->amount->currency_code,
+                    'sum'            => $response->result->purchase_units[0]->amount->value,
+                    'link'           => $linked
                 ]);
 
                 $this->response()->success()->setMessage('Платеж создан')->setData([
@@ -346,7 +354,31 @@ class ApplicationsController extends Controller
                 echo $ex->statusCode;
                 dd($ex->getMessage());
             }
+        }
 
+        if($type == 'stripe') {
+            $stripe = new \Stripe\StripeClient('sk_test_51J6CsDHtIMZ16lIwJnxTGlZb6hRWIVK7WR9jt9kKdnlJ5DaVZdo3C5P9081CXtsEuUv0YF52c7quTNfDl3Yi03Kc00NqTf1MB9');
+            $res = $stripe->checkout->sessions->create([
+                'success_url'          => 'https://example.com/success',
+                'cancel_url'           => 'https://example.com/cancel',
+                'payment_method_types' => ['card'],
+                'line_items'           => [
+                    [
+                        'price_data' => [
+                            'currency'    => strtolower($currency),
+                            'unit_amount' => (float)$sum * 100,
+                            'product_data' => [
+                                'name' => 'Payment #' . $id
+                            ]
+                        ],
+                        'quantity' => 1
+                    ],
+                ],
+                'mode'                 => 'payment',
+            ]);
+            $this->response()->success()->setMessage('Платеж создан')->setData([
+                'url' => $res->url
+            ])->send();
         }
 
         $this->response()->error()->setMessage('Платежная система не найдена')->send();

@@ -56,6 +56,11 @@ Route::get('/createTestPayment', function() {
     )->send();
 });
 
+Route::get('sendPrice', function() {
+    $request = request();
+    Mail::to($request->email)->send(new \App\Mail\SendPrice(name: 'Тест', lang: $request->lang ?? 'ru', country: 'Россия'));
+});
+
 Route::get('/paypal/order', function() {
     $clientId = env('PAYPAL_CLIENT_ID');
     $clientSecret = env('PAYPAL_SECRET');

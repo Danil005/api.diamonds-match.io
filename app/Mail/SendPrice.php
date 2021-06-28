@@ -101,7 +101,8 @@ class SendPrice extends Mailable
         return $this->from(env('MAIL_USERNAME'))->view('mails.sendPrice', [
             'name' => $this->name,
             'lang' => $this->lang,
-            'pricing' => $this->prices[$this->pricing($this->country)]
+            'pricing' => $this->prices[$this->pricing($this->country)],
+            'currency' => $this->pricing($this->country)
         ])->subject('Наши тарифы');
     }
 }
