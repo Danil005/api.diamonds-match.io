@@ -58,7 +58,7 @@ Route::get('/createTestPayment', function() {
 
 Route::get('sendPrice', function() {
     $request = request();
-    Mail::to($request->email)->send(new \App\Mail\SendPrice(name: 'Тест', lang: $request->lang ?? 'ru', country: 'Россия'));
+    Mail::to($request->email)->send(new \App\Mail\SendPrice(name: 'Тест', lang: $request->lang ?? 'ru'));
 });
 
 Route::get('/paypal/order', function() {
