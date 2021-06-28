@@ -271,7 +271,12 @@ class QuestionnaireController extends QuestionnaireUtils
         ]);
 
         if( $myAppearance->sex == 'male' ) {
-            Mail::to($request->email)->send(new \App\Mail\SendPrice(name: $myInformation->name, lang: $request->lang ?? 'ru', country: explode(',', $myInformation['city'])[0]));
+            Mail::to($request->email)->send(new \App\Mail\SendPrice(
+                name: $myInformation->name,
+                lang: $request->lang ?? 'ru',
+                country: explode(',', $myInformation['city'])[0],
+                app_id: Applications::where('questionnaire_id', $q->id)->first()->id
+            ));
         }
 
         $this->response()->success()->setMessage('Мы создали анкетку и теперь начинаем подбор для вас.')->send();
@@ -466,8 +471,12 @@ class QuestionnaireController extends QuestionnaireUtils
 
         if ($request->has('email')) {
             if( $myAppearance->sex == 'male' ) {
-                Mail::to($request->email)->send(new \App\Mail\SendPrice(name: $myInformation->name, lang: $request->lang ?? 'ru', country: explode(',', $myInformation['city'])[0]));
-            }
+                Mail::to($request->email)->send(new \App\Mail\SendPrice(
+                    name: $myInformation->name,
+                    lang: $request->lang ?? 'ru',
+                    country: explode(',', $myInformation['city'])[0],
+                    app_id: $application->id
+                ));}
         }
 
 # Объединяем ответы в общую базу
