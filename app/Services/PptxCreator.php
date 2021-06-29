@@ -65,10 +65,9 @@ class PptxCreator
         $rq = \request();
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
-        \App::setLocale($questionnaire['lang'] ?? $rq->lang);
-        Cache::set('lang', $questionnaire['lang'] ?? $rq->lang);
-        $lang = $rq->lang == null ? $questionnaire['lang'] : $rq->lang;
-        dd($lang);
+        \App::setLocale($rq->lang);
+        Cache::set('lang', $rq->lang);
+        $lang = $rq->lang;
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
