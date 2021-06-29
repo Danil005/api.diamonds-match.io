@@ -17,10 +17,14 @@ class PptxCreator
 {
     use TranslateFields, Response;
 
+    protected ?string $lang = 'ru';
+
     public function create(Request $request)
     {
         $id = $request->questionnaire_id;
         Storage::makeDirectory('public/pptx/generate/'.$id);
+
+        $this->lang = $request->has('lang') ? $request->lang : 'ru';
 
         $photos = QuestionnaireUploadPhoto::where('questionnaire_id', $id)->get(['id', 'path'])?->toArray();
 
@@ -60,9 +64,9 @@ class PptxCreator
     {
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
-        \App::setLocale($questionnaire['lang'] ?? 'ru');
-        Cache::set('lang', $questionnaire['lang'] ?? 'ru');
-        $lang = $questionnaire['lang'];
+        \App::setLocale($questionnaire['lang'] ?? $this->lang);
+        Cache::set('lang', $questionnaire['lang'] ?? $this->lang);
+        $lang = $this->lang == null ? $questionnaire['lang'] : $this->lang;
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
