@@ -36,7 +36,7 @@ class PptxCreator
 
 
         for ($i = 1; $i <= 5; $i++) {
-            $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/' . $i . '/' . $id . ' /var/www/html/storage/app/public/pptx/generate/'.$id.'/s' . $i . '.jpg');
+            $stream = ssh2_exec($connection, 'wkhtmltoimage https://api.diamondsmatch.org/getSlide/' . $i . '/' . $id . '?lang='.$this->lang.' /var/www/html/storage/app/public/pptx/generate/'.$id.'/s' . $i . '.jpg');
             stream_set_blocking($stream, true);
             stream_get_contents($stream);
         }
@@ -62,11 +62,12 @@ class PptxCreator
 
     public function getSlide($slide, $questionnaireId)
     {
+        $rq = \request();
         $questionnaire = new Questionnaire();
         $questionnaire = $questionnaire->my()->where('questionnaires.id', $questionnaireId)->first()?->toArray();
-        \App::setLocale($questionnaire['lang'] ?? $this->lang);
-        Cache::set('lang', $questionnaire['lang'] ?? $this->lang);
-        $lang = $this->lang == null ? $questionnaire['lang'] : $this->lang;
+        \App::setLocale($questionnaire['lang'] ?? $rq->lang);
+        Cache::set('lang', $questionnaire['lang'] ?? $rq->lang);
+        $lang = $rq->lang == null ? $questionnaire['lang'] : $rq->lang;
 
         if ($questionnaire == null)
             return 'Презентация не найдена';
