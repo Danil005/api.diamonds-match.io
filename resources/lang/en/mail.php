@@ -19,7 +19,7 @@ return [
         ],
         't2' => [
             'v1' => 'At least 350 profiles',
-            'v2' => '18 Dates',
+            'v2' => '9 Dates',
             'v3' => 'Consultation before every date',
             'v4' => '3 consultations with a Psychologist',
             'v5' => '2 consultations with an Astrologer',
