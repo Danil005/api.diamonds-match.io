@@ -129,7 +129,7 @@ class UtilsController extends Controller
             'language' => $request->lang ?? 'ru',
             'locations' => [
                 'city_type_full' => 'город', 
-                'country" => "*" 
+                'country' => "*" 
             ]
         ]);
 
