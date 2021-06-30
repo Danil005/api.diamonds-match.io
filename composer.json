@@ -14,6 +14,7 @@
         "dejurin/php-google-translate-for-free": "^1.0",
         "fideloper/proxy": "^4.4",
         "fiks/yoo-kassa-laravel": "^0.0.30@alpha",
+        "fomvasss/laravel-dadata": "^2.2",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "intervention/image": "^2.5",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c574919526f3ed6969cfefc2cadf4e70",
+    "content-hash": "a959aefa52f1bca36b9c080aafed3e0b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -697,6 +697,73 @@
                 "source": "https://github.com/firebase/php-jwt/tree/v5.2.1"
             },
             "time": "2021-02-12T00:02:00+00:00"
+        },
+        {
+            "name": "fomvasss/laravel-dadata",
+            "version": "2.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fomvasss/laravel-dadata.git",
+                "reference": "e0136b92e26a159adf69da8a7962de5a5969d7ea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fomvasss/laravel-dadata/zipball/e0136b92e26a159adf69da8a7962de5a5969d7ea",
+                "reference": "e0136b92e26a159adf69da8a7962de5a5969d7ea",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "guzzlehttp/guzzle": ">=6.2.0",
+                "php": ">=5.5.0"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fomvasss\\Dadata\\DadataServiceProvider"
+                    ],
+                    "aliases": {
+                        "DadataSuggest": "Fomvasss\\Dadata\\Facades\\DadataSuggest",
+                        "DadataClean": "Fomvasss\\Dadata\\Facades\\DadataClean"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fomvasss\\Dadata\\": "src"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "WebWest",
+                    "role": "Company"
+                },
+                {
+                    "name": "Fomin Vasyl",
+                    "email": "fomvasss@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Dadata API client (https://dadata.ru)",
+            "keywords": [
+                "DaData",
+                "autocomplete",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/fomvasss/laravel-dadata/issues",
+                "source": "https://github.com/fomvasss/laravel-dadata/tree/2.2.2"
+            },
+            "time": "2019-11-08T07:54:56+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",

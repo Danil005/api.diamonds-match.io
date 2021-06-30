@@ -372,6 +372,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         NahidulHasan\Html2pdf\Html2pdfServiceProvider::class,
         Fiks\YooKassa\YooKassaServiceProvider::class,
+        Fomvasss\Dadata\DadataServiceProvider::class,
         /*
          * Application Service Providers...
          */

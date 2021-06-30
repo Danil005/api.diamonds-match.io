@@ -109,5 +109,6 @@ Route::prefix('v1')->middleware(['api'])->namespace('App\Http\Controllers\Api\v1
         Route::get('utils.cities', 'UtilsController@getCities');
         Route::get('utils.countries', 'UtilsController@getCountry');
         Route::get('utils.languages', 'UtilsController@getLanguage');
+        Route::get('utils.daDataCity', 'UtilsController@daDataCity');
     });
 });

@@ -15365,6 +15365,193 @@
      
 }
 
+    namespace Fomvasss\Dadata\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class DadataSuggest {
+                    /**
+         * Организация по ИНН или ОГРН
+         *
+         * @link https://dadata.ru/api/find-party/
+         * @param string $id ИНН, ОГРН, Dadata HID
+         * @param array $params Дополнительные параметры
+         * @return mixed 
+         * @static 
+         */ 
+        public static function partyById($id, $params = [])
+        {
+                        /** @var \Fomvasss\Dadata\ClientSuggest $instance */
+                        return $instance->partyById($id, $params);
+        }
+                    /**
+         * Подсказки
+         *
+         * @link https://dadata.ru/api/suggest/
+         * @param string $type
+         * @param array $fields
+         * @return bool|mixed|string 
+         * @static 
+         */ 
+        public static function suggest($type, $fields)
+        {
+                        /** @var \Fomvasss\Dadata\ClientSuggest $instance */
+                        return $instance->suggest($type, $fields);
+        }
+         
+    }
+            /**
+     * 
+     *
+     */ 
+        class DadataClean {
+                    /**
+         * Cleans address.
+         *
+         * @param string $address
+         * @return \Fomvasss\Dadata\Response\Address 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function cleanAddress($address)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->cleanAddress($address);
+        }
+                    /**
+         * Cleans phone.
+         *
+         * @param string $phone
+         * @return \Fomvasss\Dadata\Response\Phone 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function cleanPhone($phone)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->cleanPhone($phone);
+        }
+                    /**
+         * Cleans passport.
+         *
+         * @param string $passport
+         * @return \Fomvasss\Dadata\Response\Passport 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function cleanPassport($passport)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->cleanPassport($passport);
+        }
+                    /**
+         * Cleans name.
+         *
+         * @param string $name
+         * @return \Fomvasss\Dadata\Response\Name 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function cleanName($name)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->cleanName($name);
+        }
+                    /**
+         * Cleans email.
+         *
+         * @param string $email
+         * @return \Fomvasss\Dadata\Response\Email 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function cleanEmail($email)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->cleanEmail($email);
+        }
+                    /**
+         * Cleans date.
+         *
+         * @param string $date
+         * @return \Date 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function cleanDate($date)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->cleanDate($date);
+        }
+                    /**
+         * Cleans vehicle.
+         *
+         * @param string $vehicle
+         * @return \Fomvasss\Dadata\Response\Vehicle 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function cleanVehicle($vehicle)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->cleanVehicle($vehicle);
+        }
+                    /**
+         * Gets balance.
+         *
+         * @return float 
+         * @throws RuntimeException
+         * @throws InvalidArgumentException
+         * @throws GuzzleException
+         * @static 
+         */ 
+        public static function getBalance()
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->getBalance();
+        }
+                    /**
+         * Usage statistics
+         *
+         * @link https://dadata.ru/api/stat/
+         * @param string|\DateTime $date Дата, за которую возвращается статистика в формате Y-m-d
+         * @return \Fomvasss\Dadata\Response\AbstractResponse 
+         * @throws GuzzleException
+         * @throws ReflectionException
+         * @static 
+         */ 
+        public static function getStatistics($date = '')
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->getStatistics($date);
+        }
+                    /**
+         * 
+         *
+         * @param string $ip
+         * @return null|\Fomvasss\Dadata\Response\Address 
+         * @throws Exception
+         * @throws GuzzleException
+         * @static 
+         */ 
+        public static function detectAddressByIp($ip)
+        {
+                        /** @var \Fomvasss\Dadata\ClientClean $instance */
+                        return $instance->detectAddressByIp($ip);
+        }
+         
+    }
+     
+}
+
     namespace Jenssegers\Date { 
             /**
      * 
@@ -18849,6 +19036,8 @@ namespace  {
             class Image extends \Intervention\Image\Facades\Image {}
             class YooKassa extends \Fiks\YooKassa\YooKassaFacade {}
             class Flare extends \Facade\Ignition\Facades\Flare {}
+            class DadataSuggest extends \Fomvasss\Dadata\Facades\DadataSuggest {}
+            class DadataClean extends \Fomvasss\Dadata\Facades\DadataClean {}
             class Date extends \Jenssegers\Date\Date {}
             class Pdf extends \NahidulHasan\Html2pdf\Facades\Pdf {}
             class FileVault extends \SoareCostin\FileVault\Facades\FileVault {}
