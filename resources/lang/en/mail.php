@@ -2,7 +2,7 @@
 
 return [
     'hello' => 'Dear, :name',
-    'receive_mail' => 'We would like to offer you the following tariff plans::',
+    'receive_mail' => 'We would like to offer you the following tariff plans:',
     'tariffs' => 'Tariffs',
     'month' => 'Month',
     'months' => 'Month',
@@ -15,7 +15,7 @@ return [
         't1' => [
             'v1' => 'Not less than 50  profiles and not more than 100 profiles',
             'v2' => '3 Dates',
-            'v3' => 'Consultation before the first date'
+            'v3' => 'Consultation before every date'
         ],
         't2' => [
             'v1' => 'At least 350 profiles',
@@ -36,12 +36,13 @@ return [
         't1' => [
             'v1' => 'At least 200 profiles',
             'v2' => '9 Dates',
-            'v3' => 'Session with an astrologer'
+            'v3' => 'Session with an astrologer',
+            'v4' => 'Consultation before every date'
         ],
         't2' => [
             'v1' => 'At least 500 profiles',
             'v2' => '15 Dates',
-            'v3' => 'Consultation before the first date',
+            'v3' => 'Consultation before every date',
             'v4' => 'Professional photoset',
             'v5' => 'Phycologist consultation ',
             'v6' => 'Client’s natal chart',

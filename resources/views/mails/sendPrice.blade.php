@@ -701,6 +701,13 @@
                                                                 {{ __('mail.platinum.t1.v3', locale: $lang) }}
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <td align="left" style="vertical-align:top;width:20px;padding:0;Margin:0;padding-bottom:12px;font-size:0px"><img class="adapt-img" src="{{asset('images/data.png')}}" alt style="display:block;border:0;outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;" width="16">
+                                                            </td>
+                                                            <td align="left" style="padding:0;Margin:0;padding-bottom:12px;font-size: 12px;line-height: 16px;">
+                                                                {{ __('mail.platinum.t1.v4', locale: $lang) }}
+                                                            </td>
+                                                        </tr>
                                                     </table></td>
                                                 <td class="es-hidden" style="padding:0;Margin:0;width:20px"></td>
                                             </tr>
