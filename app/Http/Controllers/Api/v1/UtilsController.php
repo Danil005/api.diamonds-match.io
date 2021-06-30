@@ -141,7 +141,7 @@ class UtilsController extends Controller
             ];
         }
 
-        $rs = collect($rs)->unique('value_ru');
+        $rs = array_values(collect($rs)->unique('value_ru')->toArray());
 
         $this->response()->success()->setMessage('Города')->setData($rs)->send();
     }
