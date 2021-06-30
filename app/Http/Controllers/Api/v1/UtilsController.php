@@ -128,7 +128,8 @@ class UtilsController extends Controller
             "count"    => 5,
             'language' => $request->lang ?? 'ru',
             'locations' => [
-                'city_type_full' => 'город'
+                'city_type_full' => 'город', 
+                'country" => "*" 
             ]
         ]);
 
