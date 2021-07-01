@@ -56,6 +56,21 @@ Route::get('/createTestPayment', function() {
     )->send();
 });
 
+Route::prefix('stripe')->group(function() {
+    Route::get('success', function() {
+
+    });
+
+    Route::any('webhook', function() {
+        $request = request();
+
+        $stripe = new \Stripe\StripeClient('sk_test_51J6CsDHtIMZ16lIwJnxTGlZb6hRWIVK7WR9jt9kKdnlJ5DaVZdo3C5P9081CXtsEuUv0YF52c7quTNfDl3Yi03Kc00NqTf1MB9');
+
+        $data = $request->data->object->id;
+        $res = $stripe->paymentIntents->confirm($data);
+        echo 'ok';
+    });
+});
 
 Route::get('/paypal/order', function() {
     $clientId = env('PAYPAL_CLIENT_ID');
