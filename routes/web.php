@@ -21,6 +21,8 @@ use PhpOffice\PhpPresentation\Slide\AbstractBackground;
 use PhpOffice\PhpPresentation\Style\Alignment;
 use PhpOffice\PhpPresentation\Style\Color;
 use PhpOffice\PhpPresentation\Style\Font;
+use Stripe\Exception\InvalidRequestException;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,7 +71,11 @@ Route::prefix('stripe')->group(function() {
         $data = $request->all();
 
         if( !empty($data) ) {
-            $res = $stripe->paymentIntents->confirm($data['data']['object']['payment_intent']);
+            try {
+                $res = $stripe->paymentIntents->confirm($data['data']['object']['payment_intent']);
+            } catch(InvalidRequestException $exception) {
+
+            }
         }
         echo 'ok';
     });
