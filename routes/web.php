@@ -72,11 +72,10 @@ Route::get('/paypal/order', function() {
         PayPal::where('order_id', request()->get('token'))->update([
             'status' => $response->result->status
         ]);
-
+        return redirect()->to('https://diamondsmatch.com')->send();
 
     } catch(\PayPalHttp\HttpException $ex) {
-        echo $ex->statusCode;
-        print_r($ex->getMessage());
+        return redirect()->to('https://diamondsmatch.com')->send();
     }
 });
 
