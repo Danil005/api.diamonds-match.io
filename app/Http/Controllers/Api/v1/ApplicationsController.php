@@ -13,6 +13,7 @@ use App\Models\Applications;
 use App\Models\PayPal;
 use App\Models\Questionnaire;
 use App\Models\SignQuestionnaire;
+use App\Models\StripePayment;
 use App\Models\User;
 use App\Utils\Response;
 use Auth;
@@ -375,6 +376,12 @@ class ApplicationsController extends Controller
                     ],
                 ],
                 'mode'                 => 'payment',
+            ]);
+            StripePayment::create([
+                'sum' => (float) $sum * 100,
+                'currency' => strtolower($currency),
+                'payment_id' => $res->payment_intent,
+                'application_id' => $request->application_id
             ]);
             $this->response()->success()->setMessage('Платеж создан')->setData([
                 'url' => $res->url

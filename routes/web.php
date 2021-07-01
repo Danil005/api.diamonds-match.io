@@ -60,7 +60,11 @@ Route::get('/createTestPayment', function() {
 
 Route::prefix('stripe')->group(function() {
     Route::get('success', function() {
+        return redirect()->to('https://client.diamondsmatch.org/paySuccess')->send();
+    });
 
+    Route::get('error', function() {
+        return redirect()->to('https://client.diamondsmatch.org/payFail');
     });
 
     Route::any('webhook', function() {
@@ -72,7 +76,12 @@ Route::prefix('stripe')->group(function() {
 
         if( !empty($data) ) {
             try {
-                $res = $stripe->paymentIntents->confirm($data['data']['object']['payment_intent']);
+                $id = $data['data']['object']['payment_intent'];
+                \App\Models\StripePayment::where('payment_id', $id)->update([
+                    'paid' => $data['data']['object']['payment_status'] == 'paid'
+                ]);
+
+                $res = $stripe->paymentIntents->confirm($id);
             } catch(InvalidRequestException $exception) {
 
             }
@@ -96,10 +105,10 @@ Route::get('/paypal/order', function() {
         PayPal::where('order_id', request()->get('token'))->update([
             'status' => $response->result->status
         ]);
-        return redirect()->to('https://diamondsmatch.com')->send();
+        return redirect()->to('https://clinet.diamondsmatch.com/paySuccess')->send();
 
     } catch(\PayPalHttp\HttpException $ex) {
-        return redirect()->to('https://diamondsmatch.com')->send();
+        return redirect()->to('https://client.diamondsmatch.com/payFail')->send();
     }
 });
 

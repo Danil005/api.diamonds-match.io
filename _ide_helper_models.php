@@ -1001,6 +1001,33 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\StripePayment
+ *
+ * @property int $id
+ * @property int $application_id
+ * @property string $payment_id
+ * @property string $currency
+ * @property string $sum
+ * @property bool $paid
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment query()
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment whereApplicationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment whereCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment wherePaid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment wherePaymentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment whereSum($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|StripePayment whereUpdatedAt($value)
+ */
+	class StripePayment extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
