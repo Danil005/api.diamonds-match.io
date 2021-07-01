@@ -69,7 +69,7 @@ Route::prefix('stripe')->group(function() {
         $data = $request->all();
 
         if( !empty($data) ) {
-            $res = $stripe->paymentIntents->confirm($data['data']['object']['id']);
+            $res = $stripe->paymentIntents->confirm($data['data']['object']['payment_intent']);
         }
         echo 'ok';
     });
