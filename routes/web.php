@@ -63,7 +63,7 @@ Route::prefix('stripe')->group(function() {
         return redirect()->to('https://client.diamondsmatch.org/paySuccess')->send();
     });
 
-    Route::get('error', function() {
+    Route::get('cancel', function() {
         return redirect()->to('https://client.diamondsmatch.org/payFail');
     });
 
