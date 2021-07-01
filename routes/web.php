@@ -105,10 +105,10 @@ Route::get('/paypal/order', function() {
         PayPal::where('order_id', request()->get('token'))->update([
             'status' => $response->result->status
         ]);
-        return redirect()->to('https://clinet.diamondsmatch.com/paySuccess')->send();
+        return redirect()->to('https://clinet.diamondsmatch.org/paySuccess')->send();
 
     } catch(\PayPalHttp\HttpException $ex) {
-        return redirect()->to('https://client.diamondsmatch.com/payFail')->send();
+        return redirect()->to('https://client.diamondsmatch.org/payFail')->send();
     }
 });
 

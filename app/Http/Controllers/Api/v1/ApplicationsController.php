@@ -360,8 +360,8 @@ class ApplicationsController extends Controller
         if($type == 'stripe') {
             $stripe = new \Stripe\StripeClient('sk_test_51J6CsDHtIMZ16lIwJnxTGlZb6hRWIVK7WR9jt9kKdnlJ5DaVZdo3C5P9081CXtsEuUv0YF52c7quTNfDl3Yi03Kc00NqTf1MB9');
             $res = $stripe->checkout->sessions->create([
-                'success_url'          => 'https://api.diamondsmatch.com/stripe/success',
-                'cancel_url'           => 'https://api.diamondsmatch.com/stripe/cancel',
+                'success_url'          => 'https://api.diamondsmatch.org/stripe/success',
+                'cancel_url'           => 'https://api.diamondsmatch.org/stripe/cancel',
                 'payment_method_types' => ['card'],
                 'line_items'           => [
                     [
