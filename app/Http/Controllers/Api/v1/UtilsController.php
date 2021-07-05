@@ -128,17 +128,25 @@ class UtilsController extends Controller
             "count"    => 5,
             'language' => $request->lang ?? 'ru',
             'locations' => [
-                'city_type_full' => 'город', 
-                'country' => "*" 
+                'city_type_full' => 'город',
+                'country' => "*"
             ]
         ]);
 
         $rs = [];
-        foreach($result as $item) {
+        if( isset($result[0]) ) {
+            foreach($result as $item) {
+                $rs[] = [
+                    'value_ru'   => $item['data']['city'],
+                    'value_en'   => $item['data']['city'],
+                    'country_id' => Countries::where('title_ru', $item['data']['country'])->orWhere('title_en', $item['data']['country'])->first()?->country_id
+                ];
+            }
+        } else {
             $rs[] = [
-                'value_ru'   => $item['data']['city'],
-                'value_en'   => $item['data']['city'],
-                'country_id' => Countries::where('title_ru', $item['data']['country'])->orWhere('title_en', $item['data']['country'])->first()?->country_id
+                'value_ru'   => $result['data']['city'],
+                'value_en'   => $result['data']['city'],
+                'country_id' => Countries::where('title_ru', $result['data']['country'])->orWhere('title_en', $result['data']['country'])->first()?->country_id
             ];
         }
 
